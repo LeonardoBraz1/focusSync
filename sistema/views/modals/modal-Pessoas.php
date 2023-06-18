@@ -1,5 +1,5 @@
 <?php
-require_once('../models/conexao.php');
+require_once('../../models/conexao.php');
 
 // Obter a instância da conexão
 $conn = Conexao::getInstance();
@@ -30,6 +30,21 @@ foreach ($result as $row) {
 
 
 ?>
+
+<style>.tooltip-box {
+  display: none;
+  position: absolute;
+  background-color: #000;
+  color: #fff;
+  padding: 5px;
+  font-size: 12px;
+  margin-left: 30px;
+}
+
+.tooltip-trigger:hover + .tooltip-box {
+  display: block;
+}
+</style>
 
 <!-- Modal de Edição user -->
 <div class="modal fade" id="modalEditarUsuario" tabindex="-1" role="dialog" aria-labelledby="modalEditarUsuarioLabel" aria-hidden="true">
@@ -163,7 +178,7 @@ foreach ($result as $row) {
                         </div>
                     </div>
                     <div class="form-row">
-                    <div class="form-group col-md-6">
+                        <div class="form-group col-md-6">
                             <label for="editFuncionarioTipo">Tipo do Pix:</label>
                             <select id="editFuncionarioTipo" class="form-control">
                                 <option>Telefone</option>
@@ -182,6 +197,69 @@ foreach ($result as $row) {
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoFuncionario()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal de Edição fornecedor -->
+<div class="modal fade" id="modalEditarFornecedor" tabindex="-1" role="dialog" aria-labelledby="modalEditarFornecedorLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditarFornecedorLabel">Editar Funcionário</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulário de edição -->
+                <form id="formEditarFornecedor">
+                    <!-- Campos de edição -->
+                    <input type="hidden" id="editFornecedorId" value="">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="editFornecedorNome">Nome:</label>
+                            <input type="text" class="form-control" id="editFornecedorNome" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="editFornecedorEmail">Email:</label>
+                            <input type="email" class="form-control" id="editFornecedorEmail" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="editFornecedorTel">Telefone:</label>
+                            <input type="email" class="form-control" id="editFornecedorTel" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="editFornecedorPont">Pontuação:</label>
+                            <input type="text" class="form-control" id="editFornecedorPont" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            <label for="editFornecedorEnd">Endereço:</label>
+                            <input type="text" class="form-control" id="editFornecedorEnd" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="editFornecedorCid">Cidade:</label>
+                            <input type="text" class="form-control" id="editFornecedorCid" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editFornecedorSit">Site do Fornecedor:</label>
+                        <input type="text" class="form-control" id="editFornecedorSit" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoFornecedor()">Salvar</button>
             </div>
         </div>
     </div>
@@ -324,7 +402,7 @@ foreach ($result as $row) {
                         </div>
                     </div>
                     <div class="form-row">
-                    <div class="form-group col-md-6">
+                        <div class="form-group col-md-6">
                             <label for="novoFuncionarioTipo">Tipo do Pix:</label>
                             <select id="novoFuncionarioTipo" class="form-control">
                                 <option>Telefone</option>
@@ -460,6 +538,76 @@ foreach ($result as $row) {
 
 
 
+<!-- Modal de inserir fornecedor -->
+<div class="modal fade" id="modalInserirFornecedor" tabindex="-1" role="dialog" aria-labelledby="modalInserirFornecedorLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalInserirFornecedorLabel">Inserir Fornecedor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formInserirFornecedor">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novoFornecedorNome">Nome:</label>
+                            <input type="text" class="form-control" id="novoFornecedorNome" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novoFornecedorEmail">Email:</label>
+                            <input type="email" class="form-control" id="novoFornecedorEmail" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novoFornecedorTel">Telefone:</label>
+                            <input type="email" class="form-control" id="novoFornecedorTel" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novoFornecedorPont">Pontuação:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="novoFornecedorPont" required title="Insira a pontuação do fornecedor de acordo com a escala de avaliação">
+                                <div class="input-group-append">
+                                    <span class="input-group-text tooltip-trigger">!</span>
+                                    <div class="tooltip-box">Texto explicativo adicional</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            <label for="novoFornecedorEnd">Endereço:</label>
+                            <input type="text" class="form-control" id="novoFornecedorEnd" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novoFornecedorCid">Cidade:</label>
+                            <input type="text" class="form-control" id="novoFornecedorCid" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="novoFornecedorSit">Site do Fornecedor:</label>
+                        <input type="text" class="form-control" id="novoFornecedorSit" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirFornecedor()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <!-- Modal de deletar user -->
 <div class="modal fade" id="modalDeletar" tabindex="-1" role="dialog" aria-labelledby="modalDeletarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -510,6 +658,32 @@ foreach ($result as $row) {
 
 
 
+<!-- Modal de deletar Fornecedor -->
+<div class="modal fade" id="modalDeletarForn" tabindex="-1" role="dialog" aria-labelledby="modalDeletarFornLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-weight: 400;" class="modal-titleForn"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1em;" id="textDeletarForn"></p>
+                <p style="font-size: 1.1em;" id="textDeletarForn1"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarFornecedor()">Deletar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 <!-- Modal sucesso -->
 <div class="modal fade" id="modalSucesso" tabindex="-1" role="dialog" aria-labelledby="modalSucessoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -551,4 +725,21 @@ foreach ($result as $row) {
             </div>
         </div>
     </div>
-</div>
+
+    <script>
+        $(document).ready(function() {
+            $('.tooltip-trigger').hover(function() {
+                var tooltipText = $(this).data('tooltip');
+                $('<div class="tooltip-box">' + tooltipText + '</div>').appendTo('body');
+            }, function() {
+                $('.tooltip-box').remove();
+            }).mousemove(function(e) {
+                var mouseX = e.pageX + 20; // Define a posição horizontal da caixa de texto
+                var mouseY = e.pageY + 10; // Define a posição vertical da caixa de texto
+                $('.tooltip-box').css({
+                    top: mouseY,
+                    left: mouseX
+                });
+            });
+        });
+    </script>

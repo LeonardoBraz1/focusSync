@@ -22,7 +22,7 @@ function salvarEdicaoUsuario() {
 
   // Código AJAX para enviar os dados para o servidor
   $.ajax({
-    url: "../controllers/UsuarioController.php",
+    url: "../../controllers/UsuarioController.php",
     type: "POST",
     data: {
       id: id,
@@ -54,6 +54,12 @@ function salvarEdicaoUsuario() {
   });
   $("#modalEditarUsuario").modal("hide");
 }
+
+
+
+
+
+
 
 function editarFuncionario(id, nome, email, id_nivel, cpf, comissao, atendimento, endereco, cidade, tipoPix, pix) {
   // Preencher campos da modal
@@ -89,7 +95,7 @@ function salvarEdicaoFuncionario() {
 
   // Código AJAX para enviar os dados para o servidor
   $.ajax({
-    url: "../controllers/FuncionarioController.php",
+    url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: {
       id: id,
@@ -125,4 +131,72 @@ function salvarEdicaoFuncionario() {
     },
   });
   $("#modalEditarFuncionario").modal("hide");
+}
+
+
+
+
+
+
+function editarFornecedor(id_fornecedo, nome_fornecedo, email_fornecedo, telefone_fornecedo, pontuacao_fornecedo, endereco_fornecedo, cidade_fornecedo, site_fornecedo) {
+  // Preencher campos da modal
+  $("#editFornecedorId").val(id_fornecedo);
+  $("#editFornecedorNome").val(nome_fornecedo);
+  $("#editFornecedorEmail").val(email_fornecedo);
+  $("#editFornecedorTel").val(telefone_fornecedo);
+  $("#editFornecedorPont").val(pontuacao_fornecedo);
+  $("#editFornecedorEnd").val(endereco_fornecedo);
+  $("#editFornecedorCid").val(cidade_fornecedo);
+  $("#editFornecedorSit").val(site_fornecedo);
+
+  // Abrir modal de edição
+  $("#modalEditarFornecedor").modal("show");
+}
+
+function salvarEdicaoFornecedor() {
+  // Obter os dados da modal
+  var id_fornecedo = $("#editFornecedorId").val();
+  var nome_fornecedo = $("#editFornecedorNome").val();
+  var email_fornecedo = $("#editFornecedorEmail").val();
+  var telefone_fornecedo = $("#editFornecedorTel").val();
+  var pontuacao_fornecedo = $("#editFornecedorPont").val();
+  var endereco_fornecedo = $("#editFornecedorEnd").val();
+  var cidade_fornecedo = $("#editFornecedorCid").val();
+  var site_fornecedo = $("#editFornecedorSit").val();
+
+  // Código AJAX para enviar os dados para o servidor
+  $.ajax({
+    url: "../../controllers/FornecedorController.php",
+    type: "POST",
+    data: {
+      id_fornecedo: id_fornecedo,
+      nome_fornecedo: nome_fornecedo,
+      email_fornecedo: email_fornecedo,
+      telefone_fornecedo: telefone_fornecedo,
+      pontuacao_fornecedo: pontuacao_fornecedo,
+      endereco_fornecedo: endereco_fornecedo,
+      cidade_fornecedo: cidade_fornecedo,
+      site_fornecedo: site_fornecedo,
+      action: "editar",
+    },
+    dataType: "json",
+    success: function (response) {
+      if (response.status === "sucesso") {
+        $("#textSucesso").text("Fornecedor editado com sucesso!");
+        $("#modalSucesso").modal("show");
+
+        $("#modalSucesso").on("hidden.bs.modal", function () {
+          location.reload(); // Recarrega a página
+        });
+      } else {
+        $("#textErro").text("Não foi possivel editar esse Fornecedor");
+        $("#modalErro").modal("show");
+      }
+    },
+    error: function (xhr, status, error) {
+      $("#textErro").text("Ao enviar os dados");
+      $("#modalErro").modal("show");
+    },
+  });
+  $("#modalEditarFornecedor").modal("hide");
 }

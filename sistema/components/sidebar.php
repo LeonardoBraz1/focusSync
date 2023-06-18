@@ -1,19 +1,19 @@
  <!-- Sidebar menu-->
  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" style="width: 30px;" src="../assets/images/avatar.png" alt="User Image">
+      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" style="width: 30px;" src="../../assets/images/avatar.png" alt="User Image">
         <div>
           <p class="app-sidebar__user-name"><?php echo $_SESSION["user_nome"]; ?></p>
           <p class="app-sidebar__user-designation"><?php echo $_SESSION["user_nivel_nome"]; ?></p>
         </div>
       </div>
       <ul class="app-menu">
-        <li class="menu" id="menuDashboard" data-permissao="permissao_menuDashboard"><a class="app-menu__item" href="../views/dashboard.php"><i style="margin-right: 13px;" class="app-menu__icon fa fa-dashboard fa-lg"></i><span class="app-menu__label">Dashboard</span></a></li>
+        <li class="menu" id="menuDashboard" data-permissao="permissao_menuDashboard"><a class="app-menu__item" href="../dashboard/dashboard.php"><i style="margin-right: 13px;" class="app-menu__icon fa fa-dashboard fa-lg"></i><span class="app-menu__label">Dashboard</span></a></li>
         <li id="menuPessoas" data-permissao="permissao_menuPessoas" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 13px;" class="app-menu__icon icon fa fa-users fa-lg"></i><span class="app-menu__label">Pessoas</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li class="submenu" id="submenuUsuários" data-permissao="permissao_submenuUsuários"><a class="treeview-item" href="../views/usuario.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Usuários</a></li>
-            <li class="submenu" id="submenuFuncionários" data-permissao="permissao_submenuFuncionários"><a class="treeview-item" href="../views/funcionario.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Funcionários</a></li>
-            <li class="submenu" id="submenuFornecedores" data-permissao="permissao_submenuFornecedores"><a class="treeview-item" href="#"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Fornecedores</a></li>
+            <li class="submenu" id="submenuUsuários" data-permissao="permissao_submenuUsuários"><a class="treeview-item" href="../pessoas/usuario.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Usuários</a></li>
+            <li class="submenu" id="submenuFuncionários" data-permissao="permissao_submenuFuncionários"><a class="treeview-item" href="../pessoas/funcionario.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Funcionários</a></li>
+            <li class="submenu" id="submenuFornecedores" data-permissao="permissao_submenuFornecedores"><a class="treeview-item" href="../pessoas/fornecedores.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Fornecedores</a></li>
             <li class="submenu" id="submenuClientes" data-permissao="permissao_submenuClientes"><a class="treeview-item" href="#"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Clientes</a></li>
             <li class="submenu" id="submenuClientesRetorno" data-permissao="permissao_submenuClientesRetorno"><a class="treeview-item" href="#"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Clientes Retorno</a></li>
           </ul>

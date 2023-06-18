@@ -1,20 +1,20 @@
 <?php
 @session_start();
 
-require_once('../controllers/session.php');
-require_once('../models/conexao.php');
+require_once('../../controllers/session.php');
+require_once('../../models/conexao.php');
 
 // Obter a instância da conexão
 $conn = Conexao::getInstance();
 
-include('../components/head.php');
+include('../../components/head.php');
 ?>
 
 <body class="app sidebar-mini">
   <?php
-  include('../components/navbar.php');
+  include('../../components/navbar.php');
 
-  include('../components/sidebar.php');
+  include('../../components/sidebar.php');
   ?>
   <main class="app-content">
     <div class="row">
@@ -71,14 +71,14 @@ include('../components/head.php');
     </div>
   </main>
   <!-- Essential javascripts for application to work-->
-  <script src="../assets/js/jquery-3.3.1.min.js"></script>
-  <script src="../assets/js/popper.min.js"></script>
-  <script src="../assets/js/bootstrap.min.js"></script>
-  <script src="../assets/js/main.js"></script>
+  <script src="../../assets/js/jquery-3.3.1.min.js"></script>
+  <script src="../../assets/js/popper.min.js"></script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
+  <script src="../../assets/js/main.js"></script>
   <!-- The javascript plugin to display page loading on top-->
-  <script src="../assets/js/plugins/pace.min.js"></script>
+  <script src="../../assets/js/plugins/pace.min.js"></script>
   <!-- Page specific javascripts-->
-  <script type="text/javascript" src="../assets/js/plugins/chart.js"></script>
+  <script type="text/javascript" src="../../assets/js/plugins/chart.js"></script>
   <script type="text/javascript">
     var data = {
       labels: ["January", "February", "March", "April", "May"],

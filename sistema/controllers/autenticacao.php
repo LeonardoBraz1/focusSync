@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Redirecionar com base no cargo
         if (strtolower($_SESSION["user_nivel_nome"]) === "administrador") {
-            header("Location: ../views/dashboard.php");
+            header("Location: ../views/dashboard/dashboard.php");
             exit();
         } else {
             header("Location: ../views/outro-local.php");

@@ -16,7 +16,7 @@ $(document).ready(function () {
 
   
     $.ajax({
-      url: "../controllers/UsuarioController.php",
+      url: "../../controllers/UsuarioController.php",
       type: "POST",
       data: { email: email, action: "validarEmail" },
       success: function (response) {
@@ -48,7 +48,7 @@ $(document).ready(function () {
 
    
     $.ajax({
-      url: "../controllers/UsuarioController.php",
+      url: "../../controllers/UsuarioController.php",
       type: "POST",
       data: { nome: nome, action: "validarNome" },
       success: function (response) {
@@ -113,7 +113,7 @@ function inserirUsuario() {
   var senha = $("#novoUsuarioSenha").val();
 
   $.ajax({
-    url: "../controllers/UsuarioController.php",
+    url: "../../controllers/UsuarioController.php",
     type: "POST",
     data: {
       email: email,
@@ -165,7 +165,7 @@ $(document).ready(function () {
 
    
     $.ajax({
-      url: "../controllers/FuncionarioController.php",
+      url: "../../controllers/FuncionarioController.php",
       type: "POST",
       data: { email: email, action: "validarEmail" },
       success: function (response) {
@@ -196,7 +196,7 @@ $(document).ready(function () {
 
     
     $.ajax({
-      url: "../controllers/FuncionarioController.php",
+      url: "../../controllers/FuncionarioController.php",
       type: "POST",
       data: { nome: nome, action: "validarNome" },
       success: function (response) {
@@ -265,7 +265,7 @@ function inserirFuncionario() {
   var pix = $("#novoFuncionarioPix").val();
 
   $.ajax({
-    url: "../controllers/FuncionarioController.php",
+    url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: {
       email: email,
@@ -317,7 +317,7 @@ function btnInserirDiaSemana(id) {
   diaSemana = $("#novoDiaSemana").val();
 
   $.ajax({
-    url: "../controllers/FuncionarioController.php",
+    url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: { id: id, action: "obterHorarios" },
     success: function (response) {
@@ -338,7 +338,7 @@ function inserirDiaSemana() {
   var diaSemana = $("#novoDiaSemana").val();
 
   $.ajax({
-    url: "../controllers/FuncionarioController.php",
+    url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: {
       id: id,
@@ -368,7 +368,7 @@ function deletarDiaSemana1(id_dia) {
   var id = idFuncionario;
 
   $.ajax({
-    url: "../controllers/FuncionarioController.php",
+    url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: {
       id_dia: id_dia,
@@ -394,7 +394,7 @@ function deletarDiaSemana1(id_dia) {
 
 function atualizarTabela(id) {
   $.ajax({
-    url: "../controllers/FuncionarioController.php",
+    url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: {
       id: id,
@@ -425,7 +425,7 @@ function btnInserirServ(id) {
   serv = $("#novoServ").val();
 
   $.ajax({
-    url: "../controllers/FuncionarioController.php",
+    url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: { id: id, action: "obterServ" },
     success: function (response) {
@@ -446,7 +446,7 @@ function inserirServ() {
   var serv = $("#novoServ").val();
 
   $.ajax({
-    url: "../controllers/FuncionarioController.php",
+    url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: {
       id: id,
@@ -477,7 +477,7 @@ function deletarServ1(id_servico) {
   var id = idServ;
 
   $.ajax({
-    url: "../controllers/FuncionarioController.php",
+    url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: {
       id_servico: id_servico,
@@ -502,7 +502,7 @@ function deletarServ1(id_servico) {
 
 function atualizarTabelaServ(id) {
   $.ajax({
-    url: "../controllers/FuncionarioController.php",
+    url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: {
       id: id,
@@ -516,4 +516,57 @@ function atualizarTabelaServ(id) {
       alert("Ocorreu um erro ao obter os horários dos usuários.");
     },
   });
+}
+
+
+//    FORNECEDOR     //
+
+
+function btnInserirFornecedor() {
+  $("#modalInserirFornecedor").modal("show");
+}
+
+function inserirFornecedor() {
+  var nome_fornecedo = $("#novoFornecedorNome").val();
+  var email_fornecedo = $("#novoFornecedorEmail").val();
+  var telefone_fornecedo = $("#novoFornecedorTel").val();
+  var pontuacao_fornecedo = $("#novoFornecedorPont").val();
+  var endereco_fornecedo = $("#novoFornecedorEnd").val();
+  var cidade_fornecedo = $("#novoFornecedorCid").val();
+  var site_fornecedo = $("#novoFornecedorSit").val();
+  $.ajax({
+    url: "../../controllers/FornecedorController.php",
+    type: "POST",
+    data: {
+      nome_fornecedo: nome_fornecedo,
+      email_fornecedo: email_fornecedo,
+      telefone_fornecedo: telefone_fornecedo,
+      pontuacao_fornecedo: pontuacao_fornecedo,
+      endereco_fornecedo: endereco_fornecedo,
+      cidade_fornecedo: cidade_fornecedo,
+      site_fornecedo: site_fornecedo,
+      action: "inserir",
+    },
+    dataType: "json",
+    success: function (response) {
+      if (response.status === "sucesso") {
+        $("#textSucesso").text("Fornecedor inserido com sucesso!");
+        $("#modalSucesso").modal("show");
+
+        $("#modalSucesso").on("hidden.bs.modal", function () {
+          location.reload(); // Recarrega a página
+        });
+      } else {
+        $("#textErro").text("Não foi possível inserir esse fornecedor");
+        $("#modalErro").modal("show");
+      }
+    },
+    error: function (xhr, status, error) {
+      $("#textErro").text("Ao enviar os dados");
+      $("#modalErro").modal("show");
+    },
+  });
+
+  // Fechar a modal de inserção de funcionário
+  $("#modalInserirFuncionario").modal("hide");
 }

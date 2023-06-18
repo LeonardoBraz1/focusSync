@@ -52,7 +52,7 @@ class FuncionarioModel
 
     public function inserirFuncionario($nome, $email, $id_nivel, $cpf, $comissao, $atendimento, $endereco, $cidade, $tipoPix, $pix, $id_barbearia)
     {
-        $stmt = $this->conn->prepare("INSERT INTO usuarios (nome, email, id_nivel, cpf, comissao, atendimento, endereco, cidade, tipoPix, pix id_barbearia) VALUES (:nome, :email, :id_nivel, :cpf, :comissao, :atendimento, :endereco, :cidade, :tipoPix, :pix, :id_barbearia)");
+        $stmt = $this->conn->prepare("INSERT INTO usuarios (nome, email, id_nivel, cpf, comissao, atendimento, endereco, cidade, tipoPix, pix, id_barbearia) VALUES (:nome, :email, :id_nivel, :cpf, :comissao, :atendimento, :endereco, :cidade, :tipoPix, :pix, :id_barbearia)");
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':id_nivel', $id_nivel);
