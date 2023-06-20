@@ -134,3 +134,52 @@ function btnDeletarFornecedor() {
   });
   $("#modalDeletarForn").modal("hide");
 }
+
+
+
+
+
+
+
+function deletarCliente(id_cliente) {
+  window.deletarClienteId = id_cliente;
+
+  $(".modal-titleClien").text("Deletar Cliente");
+  $("#textDeletarClien").text(
+    "Você tem certeza de que deseja deletar este cliente?"
+  );
+  $("#textDeletarClien1").text(
+    "Esta ação não poderá ser desfeita e todos os dados associados a ele serão permanentemente removidos."
+  );
+  $("#modalDeletarClien").modal("show");
+}
+
+function btnDeletarCliente() {
+
+  var id_cliente = window.deletarClienteId;
+
+  $.ajax({
+    url: "../../controllers/ClienteController.php",
+    type: "POST",
+    data: { id_cliente: id_cliente, action: 'deletar' },
+    dataType: "json",
+    success: function (response) {
+      if (response.status === "sucesso") {
+        $("#textSucesso").text("Cliente deletado com sucesso!");
+        $("#modalSucesso").modal("show");
+
+        $("#modalSucesso").on("hidden.bs.modal", function () {
+          location.reload(); 
+        });
+      } else {
+        $("#textErro").text("Não foi possivel deletar esse cliente");
+        $("#modalErro").modal("show");
+      }
+    },
+    error: function (xhr, status, error) {
+      $("#textErro").text("Ao enviar os dados");
+      $("#modalErro").modal("show");
+    },
+  });
+  $("#modalDeletarClien").modal("hide");
+}

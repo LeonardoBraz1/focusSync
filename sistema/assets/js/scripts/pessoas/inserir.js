@@ -570,3 +570,50 @@ function inserirFornecedor() {
   // Fechar a modal de inserção de funcionário
   $("#modalInserirFuncionario").modal("hide");
 }
+
+
+
+
+//    FORNECEDOR     //
+
+
+function btnInserirCliente() {
+  $("#modalInserirCliente").modal("show");
+}
+
+function inserirCliente() {
+  var nome_cliente = $("#novoClienteNome").val();
+  var email_cliente = $("#novoClienteEmail").val();
+  var telefone_cliente = $("#novoClienteTel").val();
+  $.ajax({
+    url: "../../controllers/ClienteController.php",
+    type: "POST",
+    data: {
+      nome_cliente: nome_cliente,
+      email_cliente: email_cliente,
+      telefone_cliente: telefone_cliente,
+      action: "inserir",
+    },
+    dataType: "json",
+    success: function (response) {
+      if (response.status === "sucesso") {
+        $("#textSucesso").text("Cliente inserido com sucesso!");
+        $("#modalSucesso").modal("show");
+
+        $("#modalSucesso").on("hidden.bs.modal", function () {
+          location.reload(); // Recarrega a página
+        });
+      } else {
+        $("#textErro").text("Não foi possível inserir esse cliente");
+        $("#modalErro").modal("show");
+      }
+    },
+    error: function (xhr, status, error) {
+      $("#textErro").text("Ao enviar os dados");
+      $("#modalErro").modal("show");
+    },
+  });
+
+  // Fechar a modal de inserção de funcionário
+  $("#modalInserirCliente").modal("hide");
+}

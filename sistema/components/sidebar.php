@@ -14,7 +14,7 @@
             <li class="submenu" id="submenuUsuários" data-permissao="permissao_submenuUsuários"><a class="treeview-item" href="../pessoas/usuario.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Usuários</a></li>
             <li class="submenu" id="submenuFuncionários" data-permissao="permissao_submenuFuncionários"><a class="treeview-item" href="../pessoas/funcionario.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Funcionários</a></li>
             <li class="submenu" id="submenuFornecedores" data-permissao="permissao_submenuFornecedores"><a class="treeview-item" href="../pessoas/fornecedores.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Fornecedores</a></li>
-            <li class="submenu" id="submenuClientes" data-permissao="permissao_submenuClientes"><a class="treeview-item" href="#"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Clientes</a></li>
+            <li class="submenu" id="submenuClientes" data-permissao="permissao_submenuClientes"><a class="treeview-item" href="../pessoas/clientes.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Clientes</a></li>
             <li class="submenu" id="submenuClientesRetorno" data-permissao="permissao_submenuClientesRetorno"><a class="treeview-item" href="#"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Clientes Retorno</a></li>
           </ul>
         </li>

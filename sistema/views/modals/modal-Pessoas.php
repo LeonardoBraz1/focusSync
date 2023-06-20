@@ -31,19 +31,20 @@ foreach ($result as $row) {
 
 ?>
 
-<style>.tooltip-box {
-  display: none;
-  position: absolute;
-  background-color: #000;
-  color: #fff;
-  padding: 5px;
-  font-size: 12px;
-  margin-left: 30px;
-}
+<style>
+    .tooltip-box {
+        display: none;
+        position: absolute;
+        background-color: #000;
+        color: #fff;
+        padding: 5px;
+        font-size: 12px;
+        margin-left: 30px;
+    }
 
-.tooltip-trigger:hover + .tooltip-box {
-  display: block;
-}
+    .tooltip-trigger:hover+.tooltip-box {
+        display: block;
+    }
 </style>
 
 <!-- Modal de Edição user -->
@@ -76,10 +77,15 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editUsuarioAti">Ativo:</label>
-                            <select id="editUsuarioAti" class="form-control">
-                                <option selected>Sim</option>
-                                <option>Não</option>|
-                            </select>
+                            <div class="input-group">
+                                <select id="editUsuarioAti" class="form-control">
+                                    <option>Sim</option>
+                                    <option>Não</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se essa opção estiver definida como 'Não', o usuário não terá permissão para fazer login no sistema.">!</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editUsuarioNivel">Cargo:</label>
@@ -157,14 +163,24 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioCom">Comissão:</label>
-                            <input type="text" class="form-control" id="editFuncionarioCom" required>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="editFuncionarioCom" required placeholder="100%">
+                                <div class="input-group-append">
+                                    <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definida em cada.">!</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioAten">Atendimento:</label>
-                            <select id="editFuncionarioAten" class="form-control">
-                                <option>Sim</option>
-                                <option>Não</option>
-                            </select>
+                            <div class="input-group">
+                                <select id="editFuncionarioAten" class="form-control">
+                                    <option>Sim</option>
+                                    <option>Não</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se o funcionário estiver disponível para prestar serviços, selecione 'Sim' nessa opção para que o nome dele seja exibido aos clientes para agendamento.">!</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row">
@@ -237,7 +253,12 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFornecedorPont">Pontuação:</label>
-                            <input type="text" class="form-control" id="editFornecedorPont" required>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="editFornecedorPont" required placeholder="0 a 100">
+                                <div class="input-group-append">
+                                    <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Essa pontuação representa uma medida da confiabilidade e satisfação geral com os produtos ou serviços oferecidos pelo fornecedor.">!</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row">
@@ -260,6 +281,47 @@ foreach ($result as $row) {
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoFornecedor()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal de Edição Cliente -->
+<div class="modal fade" id="modalEditarCliente" tabindex="-1" role="dialog" aria-labelledby="modalEditarClienteLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditarClienteLabel">Editar Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditarCliente">
+                    <input type="hidden" id="editClienteId" value="">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="editClienteNome">Nome:</label>
+                            <input type="text" class="form-control" id="editClienteNome" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="editClienteEmail">Email:</label>
+                            <input type="email" class="form-control" id="editClienteEmail" required>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label for="editClienteTel">Telefone:</label>
+                            <input type="email" class="form-control" id="editClienteTel" required>
+                        </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoCliente()">Salvar</button>
             </div>
         </div>
     </div>
@@ -300,10 +362,15 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoUsuarioAti">Ativo:</label>
-                            <select id="novoUsuarioAti" class="form-control">
-                                <option selected>Sim</option>
-                                <option>Não</option>|
-                            </select>
+                            <div class="input-group">
+                                <select id="novoUsuarioAti" class="form-control">
+                                    <option>Sim</option>
+                                    <option>Não</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se essa opção estiver definida como 'Não', o usuário não terá permissão para fazer login no sistema.">!</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoUsuarioNivel">Cargo:</label>
@@ -381,14 +448,24 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioCom">Comissão:</label>
-                            <input type="text" class="form-control" id="novoFuncionarioCom" required>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="novoFuncionarioCom" required placeholder="100%">
+                                <div class="input-group-append">
+                                    <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definido em cada.">!</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioAten">Atendimento:</label>
-                            <select id="novoFuncionarioAten" class="form-control">
-                                <option>Sim</option>
-                                <option>Não</option>
-                            </select>
+                            <div class="input-group">
+                                <select id="novoFuncionarioAten" class="form-control">
+                                    <option>Sim</option>
+                                    <option>Não</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se o funcionário estiver disponível para prestar serviços, selecione 'Sim' nessa opção para que o nome dele seja exibido aos clientes para agendamento.">!</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row">
@@ -569,10 +646,9 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorPont">Pontuação:</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="novoFornecedorPont" required title="Insira a pontuação do fornecedor de acordo com a escala de avaliação">
+                                <input type="text" class="form-control" id="novoFornecedorPont" placeholder="0 a 100">
                                 <div class="input-group-append">
-                                    <span class="input-group-text tooltip-trigger">!</span>
-                                    <div class="tooltip-box">Texto explicativo adicional</div>
+                                    <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Essa pontuação representa uma medida da confiabilidade e satisfação geral com os produtos ou serviços oferecidos pelo fornecedor.">!</span>
                                 </div>
                             </div>
                         </div>
@@ -597,6 +673,50 @@ foreach ($result as $row) {
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirFornecedor()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- Modal de inserir Cliente -->
+<div class="modal fade" id="modalInserirCliente" tabindex="-1" role="dialog" aria-labelledby="modalInserirClienteLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalInserirClienteLabel">Inserir Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formInserirCliente">
+                    <input type="hidden" id="novoClienteId" value="">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novoClienteNome">Nome:</label>
+                            <input type="text" class="form-control" id="novoClienteNome" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novoClienteEmail">Email:</label>
+                            <input type="email" class="form-control" id="novoClienteEmail" required>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label for="novoClienteTel">Telefone:</label>
+                            <input type="email" class="form-control" id="novoClienteTel" required>
+                        </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirCliente()">Salvar</button>
             </div>
         </div>
     </div>
@@ -675,6 +795,33 @@ foreach ($result as $row) {
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarFornecedor()">Deletar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal de deletar Fornecedor -->
+<div class="modal fade" id="modalDeletarClien" tabindex="-1" role="dialog" aria-labelledby="modalDeletarClienLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-weight: 400;" class="modal-titleClien"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1em;" id="textDeletarClien"></p>
+                <p style="font-size: 1.1em;" id="textDeletarClien1"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarCliente()">Deletar</button>
             </div>
         </div>
     </div>

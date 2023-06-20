@@ -200,3 +200,57 @@ function salvarEdicaoFornecedor() {
   });
   $("#modalEditarFornecedor").modal("hide");
 }
+
+
+
+
+function editarCliente(id_cliente, nome_cliente, email_cliente, telefone_cliente) {
+  // Preencher campos da modal
+  $("#editClienteId").val(id_cliente);
+  $("#editClienteNome").val(nome_cliente);
+  $("#editClienteEmail").val(email_cliente);
+  $("#editClienteTel").val(telefone_cliente);
+
+  // Abrir modal de edição
+  $("#modalEditarCliente").modal("show");
+}
+
+function salvarEdicaoCliente() {
+  // Obter os dados da modal
+  var id_cliente = $("#editClienteId").val();
+  var nome_cliente = $("#editClienteNome").val();
+  var email_cliente = $("#editClienteEmail").val();
+  var telefone_cliente = $("#editClienteTel").val();
+
+  // Código AJAX para enviar os dados para o servidor
+  $.ajax({
+    url: "../../controllers/ClienteController.php",
+    type: "POST",
+    data: {
+      id_cliente: id_cliente,
+      nome_cliente: nome_cliente,
+      email_cliente: email_cliente,
+      telefone_cliente: telefone_cliente,
+      action: "editar",
+    },
+    dataType: "json",
+    success: function (response) {
+      if (response.status === "sucesso") {
+        $("#textSucesso").text("Cliente editado com sucesso!");
+        $("#modalSucesso").modal("show");
+
+        $("#modalSucesso").on("hidden.bs.modal", function () {
+          location.reload(); // Recarrega a página
+        });
+      } else {
+        $("#textErro").text("Não foi possivel editar esse Cliente");
+        $("#modalErro").modal("show");
+      }
+    },
+    error: function (xhr, status, error) {
+      $("#textErro").text("Ao enviar os dados");
+      $("#modalErro").modal("show");
+    },
+  });
+  $("#modalEditarCliente").modal("hide");
+}
