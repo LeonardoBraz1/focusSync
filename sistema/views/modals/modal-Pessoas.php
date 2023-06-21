@@ -218,7 +218,6 @@ foreach ($result as $row) {
     </div>
 </div>
 
-
 <!-- Modal de Edição fornecedor -->
 <div class="modal fade" id="modalEditarFornecedor" tabindex="-1" role="dialog" aria-labelledby="modalEditarFornecedorLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -249,7 +248,7 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editFornecedorTel">Telefone:</label>
-                            <input type="email" class="form-control" id="editFornecedorTel" required>
+                            <input type="text" class="form-control phone" id="editFornecedorTel" required  placeholder="(00) 00000-0000">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFornecedorPont">Pontuação:</label>
@@ -285,6 +284,9 @@ foreach ($result as $row) {
         </div>
     </div>
 </div>
+
+
+
 
 
 
