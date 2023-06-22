@@ -18,7 +18,7 @@
             <li class="submenu" id="submenuClientesRetorno" data-permissao="permissao_submenuClientesRetorno"><a class="treeview-item" href="../pessoas/clienteRetorno.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Clientes Retorno</a></li>
           </ul>
         </li>
-        <li id="menucadastro" data-permissao="permissao_menucadastro" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 13px;" class="app-menu__icon icon fa fa-users fa-lg"></i><span class="app-menu__label">Cadastro</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li id="menucadastro" data-permissao="permissao_menucadastro" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 23px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i><span class="app-menu__label">Cadastro</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li class="submenu" id="submenuUsuários1" data-permissao="permissao_submenuUsuários"><a class="treeview-item" href="../cadastro/servicos.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Serviços</a></li>
             <li class="submenu" id="submenuFuncionários1" data-permissao="permissao_submenuFuncionários"><a class="treeview-item" href="../cadastro/funcionario.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Funcionários</a></li>

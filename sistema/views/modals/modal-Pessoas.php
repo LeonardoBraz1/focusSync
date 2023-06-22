@@ -164,7 +164,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioCom">Comissão:</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="editFuncionarioCom" required placeholder="100%">
+                                <input type="number" min="0" max="100" step="1" class="form-control" id="editFuncionarioCom" required placeholder="100%">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definida em cada.">!</span>
                                 </div>
@@ -253,7 +253,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="editFornecedorPont">Pontuação:</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="editFornecedorPont" required placeholder="0 a 100">
+                                <input type="number" min="0" max="100" step="1" class="form-control" id="editFornecedorPont" required placeholder="0 a 100">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Essa pontuação representa uma medida da confiabilidade e satisfação geral com os produtos ou serviços oferecidos pelo fornecedor.">!</span>
                                 </div>
@@ -317,7 +317,7 @@ foreach ($result as $row) {
                     </div>
                         <div class="form-group">
                             <label for="editClienteTel">Telefone:</label>
-                            <input type="email" class="form-control" id="editClienteTel" required>
+                            <input type="text" class="form-control" id="editClienteTel" required>
                         </div>
                 </form>
             </div>
@@ -451,7 +451,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioCom">Comissão:</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="novoFuncionarioCom" required placeholder="100%">
+                                <input type="number" min="0" max="100" step="1" class="form-control" id="novoFuncionarioCom" required placeholder="100%">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definido em cada.">!</span>
                                 </div>
@@ -643,12 +643,12 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorTel">Telefone:</label>
-                            <input type="email" class="form-control" id="novoFornecedorTel" required>
+                            <input type="tel" class="form-control" id="novoFornecedorTel" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorPont">Pontuação:</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="novoFornecedorPont" placeholder="0 a 100">
+                                <input type="number" min="0" max="100" step="1" class="form-control" id="novoFornecedorPont" placeholder="0 a 100">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Essa pontuação representa uma medida da confiabilidade e satisfação geral com os produtos ou serviços oferecidos pelo fornecedor.">!</span>
                                 </div>
@@ -712,7 +712,7 @@ foreach ($result as $row) {
                     </div>
                         <div class="form-group">
                             <label for="novoClienteTel">Telefone:</label>
-                            <input type="email" class="form-control" id="novoClienteTel" required>
+                            <input type="tel" class="form-control" id="novoClienteTel" required>
                         </div>
                 </form>
             </div>
@@ -807,7 +807,7 @@ foreach ($result as $row) {
 
 
 
-<!-- Modal de deletar Fornecedor -->
+<!-- Modal de deletar cliente -->
 <div class="modal fade" id="modalDeletarClien" tabindex="-1" role="dialog" aria-labelledby="modalDeletarClienLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

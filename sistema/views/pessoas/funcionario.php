@@ -56,7 +56,7 @@ include('../../components/head.php');
                                                 <td>' . $row['nome_nivel'] . '</td>
                                                 <td>' . $row['cpf'] . '</td>
                                                 <td>' . $formattedDate . '</td>
-                                                <td>' . $row['comissao'] . '</td>
+                                                <td>' . $row['comissao'] . '%</td>
                                                 <td style="display: flex; justify-content: center; align-item: center; gap: 7px;">
                                                     <label style="cursor: pointer;" for="btnEditarFunc-' . $row['id'] . '"><i title="Editar" class="icon fa fa-solid fa-edit fa-lg" style="color: #023ea7;"></i></label>
                                                     <input style="display: none;" type="button" class="btnEditarFunc"  onclick="editarFuncionario(' . $row['id'] . ', \'' . $row['nome'] . '\', \'' . $row['email'] . '\', \'' . $row['id_nivel'] . '\', \'' . $row['cpf'] . '\', \'' . $row['comissao'] . '\', \'' . $row['atendimento'] . '\', \'' . $row['endereco'] . '\', \'' . $row['cidade'] . '\', \'' . $row['tipoPix'] . '\', \'' . $row['pix'] . '\')" id="btnEditarFunc-' . $row['id'] . '">

@@ -1,0 +1,43 @@
+
+function deletarServico(id_servico) {
+    window.deletarServicoId = id_servico;
+  
+    $(".modal-titleServico").text("Deletar Serviço");
+    $("#textDeletarServico").text(
+      "Você tem certeza de que deseja deletar este serviço?"
+    );
+    $("#textDeletarServico1").text(
+      "Esta ação não poderá ser desfeita e todos os dados associados a ele serão permanentemente removidos."
+    );
+    $("#modalDeletarServico").modal("show");
+  }
+  
+  function btnDeletarServico() {
+  
+    var id_servico = window.deletarServicoId;
+  
+    $.ajax({
+      url: "../../controllers/ServicoController.php",
+      type: "POST",
+      data: { id_servico: id_servico, action: 'deletar' },
+      dataType: "json",
+      success: function (response) {
+        if (response.status === "sucesso") {
+          $("#textSucesso").text("Serviço deletado com sucesso!");
+          $("#modalSucesso").modal("show");
+  
+          $("#modalSucesso").on("hidden.bs.modal", function () {
+            location.reload(); 
+          });
+        } else {
+          $("#textErro").text("Não foi possivel deletar esse serviço");
+          $("#modalErro").modal("show");
+        }
+      },
+      error: function (xhr, status, error) {
+        $("#textErro").text("Ao enviar os dados");
+        $("#modalErro").modal("show");
+      },
+    });
+    $("#modalDeletarServico").modal("hide");
+  }
