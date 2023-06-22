@@ -31,7 +31,7 @@ include('../../components/head.php');
                                 <thead>
                                     <tr>
                                         <th style="display: none;">id</th>
-                                        <th>Name</th>
+                                        <th>Nome</th>
                                         <th>Email</th>
                                         <th>Telefone</th>
                                         <th>Cadastro</th>
