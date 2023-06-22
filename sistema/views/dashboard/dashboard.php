@@ -10,7 +10,7 @@ $conn = Conexao::getInstance();
 include('../../components/head.php');
 ?>
 
-  <link id="pagestyle" href="../../assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+<link id="pagestyle" href="../../assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
 
 <body class="app sidebar-mini">
   <?php
@@ -20,7 +20,6 @@ include('../../components/head.php');
   ?>
 
   <main class="app-content">
-
     <div class="py-4">
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -93,25 +92,16 @@ include('../../components/head.php');
         </div>
       </div>
     </div>
-
     <div class="row">
-      <div class="col-md-6">
-        <div class="tile">
-          <h3 class="tile-title">Monthly Sales</h3>
-          <div class="embed-responsive embed-responsive-16by9">
-            <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="tile">
-          <h3 class="tile-title">Support Requests</h3>
-          <div class="embed-responsive embed-responsive-16by9">
-            <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
-          </div>
+    <div class="col-md-6" style="width: 100%;">
+      <div class="tile">
+        <h3 class="tile-title">Vendas e Despesas Diárias</h3>
+        <div class="embed-responsive embed-responsive-16by9">
+          <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
         </div>
       </div>
     </div>
+  </div>
   </main>
   <!-- Essential javascripts for application to work-->
   <script src="../../assets/js/jquery-3.3.1.min.js"></script>
@@ -123,52 +113,65 @@ include('../../components/head.php');
   <!-- Page specific javascripts-->
   <script type="text/javascript" src="../../assets/js/plugins/chart.js"></script>
   <script type="text/javascript">
-    var data = {
-      labels: ["January", "February", "March", "April", "May"],
-      datasets: [{
-          label: "My First dataset",
+     var data = {
+      labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"],
+      datasets: [
+        {
+          label: "Vendas Diárias",
           fillColor: "rgba(220,220,220,0.2)",
           strokeColor: "rgba(220,220,220,1)",
           pointColor: "rgba(220,220,220,1)",
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(220,220,220,1)",
-          data: [65, 59, 80, 81, 56]
+          data: [100, 150, 120, 180, 200, 160, 190, 110, 140, 170, 130, 150, 180, 190, 120, 160, 190, 100, 150, 180, 200, 160, 190, 110, 140, 170, 130, 150, 180, 190, 120]
         },
         {
-          label: "My Second dataset",
+          label: "Despesas Diárias",
           fillColor: "rgba(151,187,205,0.2)",
           strokeColor: "rgba(151,187,205,1)",
           pointColor: "rgba(151,187,205,1)",
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(151,187,205,1)",
-          data: [28, 48, 40, 19, 86]
+          data: [80, 100, 90, 110, 130, 95, 105, 75, 85, 115, 105, 80, 95, 105, 90, 100, 120, 80, 100, 90, 110, 130, 95, 105, 75, 85, 115, 105, 80, 95, 105]
         }
       ]
     };
-    var pdata = [{
-        value: 300,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Complete"
+
+    var options = {
+      responsive: true,
+      scales: {
+        xAxes: [{
+          display: true,
+          scaleLabel: {
+            display: true,
+            labelString: 'Dia do Mês'
+          }
+        }],
+        yAxes: [{
+          display: true,
+          scaleLabel: {
+            display: true,
+            labelString: 'Valor'
+          },
+          ticks: {
+            beginAtZero: true,
+            stepSize: 50
+          }
+        }]
       },
-      {
-        value: 50,
-        color: "#F7464A",
-        highlight: "#FF5A5E",
-        label: "In-Progress"
+      legend: {
+        display: true,
+        labels: {
+          fontColor: 'black'
+        }
       }
-    ]
+    };
 
-    var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-    var lineChart = new Chart(ctxl).Line(data);
+    var ctx = $("#lineChartDemo").get(0).getContext("2d");
+    var lineChart = new Chart(ctx).Line(data, options);
 
-    var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-    var pieChart = new Chart(ctxp).Pie(pdata);
-  </script>
-  <!-- Google analytics script-->
-  <script type="text/javascript">
     if (document.location.hostname == 'pratikborsadiya.in') {
       (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
@@ -184,6 +187,7 @@ include('../../components/head.php');
       ga('create', 'UA-72504830-1', 'auto');
       ga('send', 'pageview');
     }
+
   </script>
 </body>
 
