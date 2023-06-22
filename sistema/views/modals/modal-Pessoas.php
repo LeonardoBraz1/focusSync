@@ -30,6 +30,8 @@ foreach ($result as $row) {
 
 
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 
 <style>
     .tooltip-box {
@@ -58,19 +60,17 @@ foreach ($result as $row) {
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Formulário de edição -->
                 <form id="formEditarUsuario">
-                    <!-- Campos de edição -->
                     <input type="hidden" id="editUsuarioId" value="">
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editUsuarioNome">Nome:</label>
-                            <input type="text" class="form-control" id="editUsuarioNome" required>
+                            <input type="text" class="form-control" id="editUsuarioNome" required placeholder="Nome">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editUsuarioEmail">Email:</label>
-                            <input type="email" class="form-control" id="editUsuarioEmail" required>
+                            <input type="email" class="form-control" id="editUsuarioEmail" required placeholder="exemplo@gmail.com">
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="editUsuarioAti">Ativo:</label>
                             <div class="input-group">
-                                <select id="editUsuarioAti" class="form-control">
+                                <select id="editUsuarioAti" class="form-control" placeholder="Selecionar">
                                     <option>Sim</option>
                                     <option>Não</option>
                                 </select>
@@ -89,7 +89,7 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editUsuarioNivel">Cargo:</label>
-                            <select id="editUsuarioNivel" class="form-control">
+                            <select id="editUsuarioNivel" class="form-control" placeholder="Selecionar">
                                 <?php
                                 foreach ($nivels as $nivel) {
                                     echo '<option value="' . $nivel['id_nivel'] . '">' . $nivel['nome_nivel'] . '</option>';
@@ -100,7 +100,7 @@ foreach ($result as $row) {
                     </div>
                     <div class="form-group">
                         <label for="editUsuarioSenha">Senha:</label>
-                        <input type="text" class="form-control" id="editUsuarioSenha" required>
+                        <input type="text" class="form-control" id="editUsuarioSenha" required placeholder="Senha">
                     </div>
                 </form>
             </div>
@@ -136,18 +136,18 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioEmail">Email:</label>
-                            <input type="email" class="form-control" id="editFuncionarioEmail" required>
+                            <input type="email" class="form-control" id="editFuncionarioEmail" required placeholder="exemplo@gmail.com">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioNome">Nome:</label>
-                            <input type="text" class="form-control" id="editFuncionarioNome" required>
+                            <input type="text" class="form-control" id="editFuncionarioNome" required placeholder="Nome">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioNivel">Cargo:</label>
-                            <select id="editFuncionarioNivel" class="form-control">
+                            <select id="editFuncionarioNivel" class="form-control" placeholder="=Selecionar">
                                 <?php
                                 foreach ($nivels as $nivel) {
                                     echo '<option value="' . $nivel['id_nivel'] . '">' . $nivel['nome_nivel'] . '</option>';
@@ -157,14 +157,14 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioCpf">CPF:</label>
-                            <input type="text" class="form-control" id="editFuncionarioCpf" required>
+                            <input type="text" class="form-control" id="editFuncionarioCpf" required placeholder="000.000.000-00">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="editFuncionarioCom">Comissão:</label>
+                            <label for="editFuncionarioCom">Comissão: (%)</label>
                             <div class="input-group">
-                                <input type="number" min="0" max="100" step="1" class="form-control" id="editFuncionarioCom" required placeholder="100%">
+                                <input type="text" class="form-control" id="editFuncionarioCom" required placeholder="100%">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definida em cada.">!</span>
                                 </div>
@@ -173,7 +173,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioAten">Atendimento:</label>
                             <div class="input-group">
-                                <select id="editFuncionarioAten" class="form-control">
+                                <select id="editFuncionarioAten" class="form-control" placeholder="Selecionar">
                                     <option>Sim</option>
                                     <option>Não</option>
                                 </select>
@@ -186,17 +186,17 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioEnd">Endereço:</label>
-                            <input type="text" class="form-control" id="editFuncionarioEnd" required>
+                            <input type="text" class="form-control" id="editFuncionarioEnd" required placeholder="rua xxx Nº 123">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioCid">Cidade:</label>
-                            <input type="text" class="form-control" id="editFuncionarioCid" required>
+                            <input type="text" class="form-control" id="editFuncionarioCid" required placeholder="Cidade">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioTipo">Tipo do Pix:</label>
-                            <select id="editFuncionarioTipo" class="form-control">
+                            <select id="editFuncionarioTipo" class="form-control" placeholder="Selecionar">
                                 <option>Telefone</option>
                                 <option>CPF</option>
                                 <option>Email</option>
@@ -205,7 +205,7 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioPix">Pix:</label>
-                            <input type="text" class="form-control" id="editFuncionarioPix" required>
+                            <input type="text" class="form-control" id="editFuncionarioPix" required placeholder="Pix">
                         </div>
                     </div>
                 </form>
@@ -237,11 +237,11 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editFornecedorNome">Nome:</label>
-                            <input type="text" class="form-control" id="editFornecedorNome" required>
+                            <input type="text" class="form-control" id="editFornecedorNome" required placeholder="Nome">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFornecedorEmail">Email:</label>
-                            <input type="email" class="form-control" id="editFornecedorEmail" required>
+                            <input type="email" class="form-control" id="editFornecedorEmail" required placeholder="exemplo@gmail.com">
                         </div>
                     </div>
 
@@ -264,16 +264,16 @@ foreach ($result as $row) {
 
                         <div class="form-group col-md-6">
                             <label for="editFornecedorEnd">Endereço:</label>
-                            <input type="text" class="form-control" id="editFornecedorEnd" required>
+                            <input type="text" class="form-control" id="editFornecedorEnd" required placeholder="Rua x Nº 123">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFornecedorCid">Cidade:</label>
-                            <input type="text" class="form-control" id="editFornecedorCid" required>
+                            <input type="text" class="form-control" id="editFornecedorCid" required placeholder="Cidade">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="editFornecedorSit">Site do Fornecedor:</label>
-                        <input type="text" class="form-control" id="editFornecedorSit" required>
+                        <input type="text" class="form-control" id="editFornecedorSit" required placeholder="www.exemplo.com">
                     </div>
                 </form>
             </div>
@@ -308,16 +308,16 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editClienteNome">Nome:</label>
-                            <input type="text" class="form-control" id="editClienteNome" required>
+                            <input type="text" class="form-control" id="editClienteNome" required placeholder="Nome">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editClienteEmail">Email:</label>
-                            <input type="email" class="form-control" id="editClienteEmail" required>
+                            <input type="email" class="form-control" id="editClienteEmail" required placeholder="exemplo@gmail.com">
                         </div>
                     </div>
                         <div class="form-group">
                             <label for="editClienteTel">Telefone:</label>
-                            <input type="text" class="form-control" id="editClienteTel" required>
+                            <input type="email" class="form-control" id="editClienteTel" required>
                         </div>
                 </form>
             </div>
@@ -351,12 +351,12 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoUsuarioNome">Nome:</label>
-                            <input type="text" class="form-control nome-input-user" id="novoUsuarioNome" required>
+                            <input type="text" class="form-control nome-input-user" id="novoUsuarioNome" required placeholder="Nome">
                             <p class="error-message-user" id="nomeErrorUser"></p>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoUsuarioEmail">Email:</label>
-                            <input type="email" class="form-control email-input-user" id="novoUsuarioEmail" required>
+                            <input type="email" class="form-control email-input-user" id="novoUsuarioEmail" required placeholder="exemplo@gmail.com">
                             <p class="error-message-user" id="emailErrorUser"></p>
                         </div>
                     </div>
@@ -365,7 +365,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="novoUsuarioAti">Ativo:</label>
                             <div class="input-group">
-                                <select id="novoUsuarioAti" class="form-control">
+                                <select id="novoUsuarioAti" class="form-control" placeholder="Selecionar">
                                     <option>Sim</option>
                                     <option>Não</option>
                                 </select>
@@ -376,7 +376,7 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoUsuarioNivel">Cargo:</label>
-                            <select id="novoUsuarioNivel" class="form-control">
+                            <select id="novoUsuarioNivel" class="form-control" placeholder="Selecionar">
                                 <?php
                                 foreach ($nivels as $nivel) {
                                     echo '<option value="' . $nivel['id_nivel'] . '">' . $nivel['nome_nivel'] . '</option>';
@@ -387,7 +387,7 @@ foreach ($result as $row) {
                     </div>
                     <div class="form-group">
                         <label for="novoUsuarioSenha">Senha:</label>
-                        <input type="text" class="form-control" id="novoUsuarioSenha" required>
+                        <input type="text" class="form-control" id="novoUsuarioSenha" required placeholder="Senha">
                     </div>
                 </form>
             </div>
@@ -421,12 +421,12 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioNome">Nome:</label>
-                            <input type="text" class="form-control nome-input-funcionario" id="novoFuncionarioNome" required>
+                            <input type="text" class="form-control nome-input-funcionario" id="novoFuncionarioNome" required placeholder="Nome">
                             <p class="error-message-funcionario" id="nomeErrorFuncionario"></p>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioEmail">Email:</label>
-                            <input type="email" class="form-control email-input-funcionario" id="novoFuncionarioEmail" required>
+                            <input type="email" class="form-control email-input-funcionario" id="novoFuncionarioEmail" required placeholder="exemplo@gmail.com">
                             <p class="error-message-funcionario" id="emailErrorFuncionario"></p>
                         </div>
                     </div>
@@ -434,7 +434,7 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioNivel">Cargo:</label>
-                            <select id="novoFuncionarioNivel" class="form-control">
+                            <select id="novoFuncionarioNivel" class="form-control" placeholder="Selecionar">
                                 <?php
                                 foreach ($nivels as $nivel) {
                                     echo '<option value="' . $nivel['id_nivel'] . '">' . $nivel['nome_nivel'] . '</option>';
@@ -444,14 +444,14 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioCpf">CPF:</label>
-                            <input type="text" class="form-control" id="novoFuncionarioCpf" required>
+                            <input type="text" class="form-control" id="novoFuncionarioCpf" required placeholder="000.000.000-00">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="novoFuncionarioCom">Comissão:</label>
+                            <label for="novoFuncionarioCom">Comissão: (%)</label>
                             <div class="input-group">
-                                <input type="number" min="0" max="100" step="1" class="form-control" id="novoFuncionarioCom" required placeholder="100%">
+                                <input type="text" class="form-control" id="novoFuncionarioCom" required placeholder="100%">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definido em cada.">!</span>
                                 </div>
@@ -460,7 +460,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioAten">Atendimento:</label>
                             <div class="input-group">
-                                <select id="novoFuncionarioAten" class="form-control">
+                                <select id="novoFuncionarioAten" class="form-control" placeholder="Selecionar">
                                     <option>Sim</option>
                                     <option>Não</option>
                                 </select>
@@ -473,17 +473,17 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioEnd">Endereço:</label>
-                            <input type="text" class="form-control" id="novoFuncionarioEnd" required>
+                            <input type="text" class="form-control" id="novoFuncionarioEnd" required placeholder="Rua x Nº 123">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioCid">Cidade:</label>
-                            <input type="text" class="form-control" id="novoFuncionarioCid" required>
+                            <input type="text" class="form-control" id="novoFuncionarioCid" required placeholder="Cidade">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioTipo">Tipo do Pix:</label>
-                            <select id="novoFuncionarioTipo" class="form-control">
+                            <select id="novoFuncionarioTipo" class="form-control" placeholder="Selecionar">
                                 <option>Telefone</option>
                                 <option>CPF</option>
                                 <option>Email</option>
@@ -492,7 +492,7 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioPix">Pix:</label>
-                            <input type="text" class="form-control" id="novoFuncionarioPix" required>
+                            <input type="text" class="form-control" id="novoFuncionarioPix" required placeholder="Pix">
                         </div>
                     </div>
                 </form>
@@ -600,7 +600,7 @@ foreach ($result as $row) {
                         <tr>
                             <th scope="col" style="display: none;">#</th>
                             <th scope="col">Serviços</th>
-                            <th scope="col" style="display: flex; justify-content: center; align-item: center;">ações</th>
+                            <th scope="col" style="display: flex; justify-content: center; align-items: center;">ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -632,18 +632,18 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorNome">Nome:</label>
-                            <input type="text" class="form-control" id="novoFornecedorNome" required>
+                            <input type="text" class="form-control" id="novoFornecedorNome" required placeholder="Nome">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorEmail">Email:</label>
-                            <input type="email" class="form-control" id="novoFornecedorEmail" required>
+                            <input type="email" class="form-control" id="novoFornecedorEmail" required placeholder="exemplo@gmail.com">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorTel">Telefone:</label>
-                            <input type="tel" class="form-control" id="novoFornecedorTel" required>
+                            <input type="email" class="form-control" id="novoFornecedorTel" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorPont">Pontuação:</label>
@@ -659,16 +659,16 @@ foreach ($result as $row) {
 
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorEnd">Endereço:</label>
-                            <input type="text" class="form-control" id="novoFornecedorEnd" required>
+                            <input type="text" class="form-control" id="novoFornecedorEnd" required placeholder="Rua x Nº 123">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorCid">Cidade:</label>
-                            <input type="text" class="form-control" id="novoFornecedorCid" required>
+                            <input type="text" class="form-control" id="novoFornecedorCid" required placeholder="Cidade">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="novoFornecedorSit">Site do Fornecedor:</label>
-                        <input type="text" class="form-control" id="novoFornecedorSit" required>
+                        <input type="text" class="form-control" id="novoFornecedorSit" required placeholder="www.exemplo.com">
                     </div>
                 </form>
             </div>
@@ -703,16 +703,16 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoClienteNome">Nome:</label>
-                            <input type="text" class="form-control" id="novoClienteNome" required>
+                            <input type="text" class="form-control" id="novoClienteNome" required placeholder="Nome">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoClienteEmail">Email:</label>
-                            <input type="email" class="form-control" id="novoClienteEmail" required>
+                            <input type="email" class="form-control" id="novoClienteEmail" required placeholder="exemplo@gmail.com">
                         </div>
                     </div>
                         <div class="form-group">
                             <label for="novoClienteTel">Telefone:</label>
-                            <input type="tel" class="form-control" id="novoClienteTel" required>
+                            <input type="email" class="form-control" id="novoClienteTel" required>
                         </div>
                 </form>
             </div>
@@ -891,4 +891,8 @@ foreach ($result as $row) {
                 });
             });
         });
+    </script>
+     <script type="text/javascript">
+    $("#novoClienteTel, #novoFornecedorTel, #editClienteTel, #editFornecedorTel").mask("(00) 00000-0000");
+    $("#novoFuncionarioCpf, #editFuncionarioCpf").mask("000.000.000-00");
     </script>
