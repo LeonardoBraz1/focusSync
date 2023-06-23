@@ -157,14 +157,14 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioCpf">CPF:</label>
-                            <input type="text" class="form-control" id="editFuncionarioCpf" required placeholder="000.000.000-00">
+                            <input type="number" class="form-control" id="editFuncionarioCpf" required placeholder="000.000.000-00">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioCom">Comissão: (%)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="editFuncionarioCom" required placeholder="100%">
+                                <input type="number" min="0" max="100" step="1" class="form-control" id="editFuncionarioCom" required placeholder="100%">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definida em cada.">!</span>
                                 </div>
@@ -248,7 +248,7 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editFornecedorTel">Telefone:</label>
-                            <input type="text" class="form-control phone" id="editFornecedorTel" required  placeholder="(00) 00000-0000">
+                            <input type="number" class="form-control phone" id="editFornecedorTel" required placeholder="(00) 00000-0000">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFornecedorPont">Pontuação:</label>
@@ -315,10 +315,10 @@ foreach ($result as $row) {
                             <input type="email" class="form-control" id="editClienteEmail" required placeholder="exemplo@gmail.com">
                         </div>
                     </div>
-                        <div class="form-group">
-                            <label for="editClienteTel">Telefone:</label>
-                            <input type="email" class="form-control" id="editClienteTel" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="editClienteTel">Telefone:</label>
+                        <input type="number" class="form-control" id="editClienteTel" required>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -444,14 +444,14 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioCpf">CPF:</label>
-                            <input type="text" class="form-control" id="novoFuncionarioCpf" required placeholder="000.000.000-00">
+                            <input type="number" class="form-control" id="novoFuncionarioCpf" required placeholder="000.000.000-00">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioCom">Comissão: (%)</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="novoFuncionarioCom" required placeholder="100%">
+                                <input type="number" min="0" max="100" step="1" class="form-control" id="novoFuncionarioCom" required placeholder="100%">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definido em cada.">!</span>
                                 </div>
@@ -643,7 +643,7 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorTel">Telefone:</label>
-                            <input type="email" class="form-control" id="novoFornecedorTel" required>
+                            <input type="number" class="form-control" id="novoFornecedorTel" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorPont">Pontuação:</label>
@@ -710,10 +710,10 @@ foreach ($result as $row) {
                             <input type="email" class="form-control" id="novoClienteEmail" required placeholder="exemplo@gmail.com">
                         </div>
                     </div>
-                        <div class="form-group">
-                            <label for="novoClienteTel">Telefone:</label>
-                            <input type="email" class="form-control" id="novoClienteTel" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="novoClienteTel">Telefone:</label>
+                        <input type="number" class="form-control" id="novoClienteTel" required>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -875,7 +875,7 @@ foreach ($result as $row) {
         </div>
     </div>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
             $('.tooltip-trigger').hover(function() {
                 var tooltipText = $(this).data('tooltip');
@@ -891,8 +891,7 @@ foreach ($result as $row) {
                 });
             });
         });
-    </script>
-     <script type="text/javascript">
-    $("#novoClienteTel, #novoFornecedorTel, #editClienteTel, #editFornecedorTel").mask("(00) 00000-0000");
-    $("#novoFuncionarioCpf, #editFuncionarioCpf").mask("000.000.000-00");
+
+        $("#novoClienteTel, #novoFornecedorTel, #editClienteTel, #editFornecedorTel").mask("(00) 00000-0000");
+        $("#novoFuncionarioCpf, #editFuncionarioCpf").mask("000.000.000-00");
     </script>
