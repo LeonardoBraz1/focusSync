@@ -41,3 +41,51 @@ function deletarServico(id_servico) {
     });
     $("#modalDeletarServico").modal("hide");
   }
+
+
+
+
+
+
+function deletarCargo(id_nivel) {
+    window.deletarCargoId = id_nivel;
+  
+    $(".modal-titleCargo").text("Deletar cargo");
+    $("#textDeletarCargo").text(
+      "Você tem certeza de que deseja deletar este cargo?"
+    );
+    $("#textDeletarCargo1").text(
+      "Esta ação não poderá ser desfeita e todos os dados associados a ele serão permanentemente removidos."
+    );
+    $("#modalDeletarCargo").modal("show");
+  }
+  
+  function btnDeletarCargo() {
+  
+    var id_nivel = window.deletarCargoId;
+  
+    $.ajax({
+      url: "../../controllers/CargoController.php",
+      type: "POST",
+      data: { id_nivel: id_nivel, action: 'deletar' },
+      dataType: "json",
+      success: function (response) {
+        if (response.status === "sucesso") {
+          $("#textSucesso").text("Cargo deletado com sucesso!");
+          $("#modalSucesso").modal("show");
+  
+          $("#modalSucesso").on("hidden.bs.modal", function () {
+            location.reload(); 
+          });
+        } else {
+          $("#textErro").text("Não foi possivel deletar esse cargo");
+          $("#modalErro").modal("show");
+        }
+      },
+      error: function (xhr, status, error) {
+        $("#textErro").text("Ao enviar os dados");
+        $("#modalErro").modal("show");
+      },
+    });
+    $("#modalDeletarCargo").modal("hide");
+  }

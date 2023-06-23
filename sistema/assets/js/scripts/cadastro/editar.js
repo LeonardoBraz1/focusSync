@@ -52,4 +52,6 @@ function editarServico(id_servico, nome_servico, preco, comissao, tempo) {
     });
     $("#modalEditarServico").modal("hide");
   }
+
+
   

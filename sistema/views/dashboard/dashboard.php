@@ -93,15 +93,15 @@ include('../../components/head.php');
       </div>
     </div>
     <div class="row">
-    <div class="col-md-6" style="width: 100%;">
-      <div class="tile">
-        <h3 class="tile-title">Vendas e Despesas Diárias</h3>
-        <div style="height: 50vh;" class="embed-responsive embed-responsive-16by9">
-          <canvas style="height: 50vh;" class="embed-responsive-item" id="lineChartDemo"></canvas>
+      <div class="col-md-6" style="width: 100%;">
+        <div class="tile">
+          <h3 class="tile-title" style="font-size: 1.3em;">Faturamento e Despesas Diárias</h3>
+          <div style="height: 50vh;" class="embed-responsive embed-responsive-16by9">
+            <canvas style="height: 50vh;" class="embed-responsive-item" id="lineChartDemo"></canvas>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </main>
   <!-- Essential javascripts for application to work-->
   <script src="../../assets/js/jquery-3.3.1.min.js"></script>
@@ -113,11 +113,10 @@ include('../../components/head.php');
   <!-- Page specific javascripts-->
   <script type="text/javascript" src="../../assets/js/plugins/chart.js"></script>
   <script type="text/javascript">
-   var data = {
+    var data = {
       labels: ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"],
-      datasets: [
-        {
-          label: "Faturamento Semanal",
+      datasets: [{
+          label: "Faturamento",
           fillColor: "rgba(75,192,192,0.5)",
           strokeColor: "rgba(75,192,192,1)",
           pointColor: "rgba(75,192,192,1)",
@@ -127,7 +126,7 @@ include('../../components/head.php');
           data: [200, 400, 100, 350, 100, 300, 400]
         },
         {
-          label: "Despesas Semanais",
+          label: "Despesas",
           fillColor: "rgba(255,99,132,0.5)",
           strokeColor: "rgba(255,99,132,1)",
           pointColor: "rgba(255,99,132,1)",
@@ -155,7 +154,9 @@ include('../../components/head.php');
       pointHitDetectionRadius: 20,
       datasetStroke: true,
       datasetStrokeWidth: 2,
-      datasetFill: true
+      datasetFill: true,
+      tooltipTemplate: "<%= datasetLabel %>: R$ <%= value %>",
+      multiTooltipTemplate: "<%= datasetLabel %>: R$ <%= value %>"
     };
 
     var ctx = document.getElementById("lineChartDemo").getContext("2d");
@@ -176,7 +177,6 @@ include('../../components/head.php');
       ga('create', 'UA-72504830-1', 'auto');
       ga('send', 'pageview');
     }
-
   </script>
 </body>
 

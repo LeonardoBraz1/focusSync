@@ -1,9 +1,3 @@
-
-
-
-
-
-
 <!-- Modal de Edição serviço -->
 <div class="modal fade" id="modalEditarServico" tabindex="-1" role="dialog" aria-labelledby="modalEditarServicoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -50,12 +44,12 @@
 </div>
 
 
-<!-- Modal de Edição serviço -->
+<!-- Modal de inserir serviço -->
 <div class="modal fade" id="modalInserirServico" tabindex="-1" role="dialog" aria-labelledby="modalNovoServicoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalNovoServicoLabel">Novo Serviço</h5>
+                <h5 class="modal-title" id="modalNovoServicoLabel">NOVO Serviço</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -99,6 +93,37 @@
 
 
 
+<!-- Modal de inserir serviço -->
+<div class="modal fade" id="modalInserirCargo" tabindex="-1" role="dialog" aria-labelledby="modalNovoCargoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNovoCargoLabel">NOVO CARGO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formNovoCargo">
+                    <input type="hidden" id="novoCargoId" value="">
+                    <div class="form-group col-md-6">
+                        <label for="novoCargoNome">Cargo:</label>
+                        <input type="text" class="form-control" id="novoCargoNome" required placeholder="Cargo">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirCargo()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 
 
@@ -119,6 +144,31 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarServico()">Deletar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal de deletar cargo -->
+<div class="modal fade" id="modalDeletarCargo" tabindex="-1" role="dialog" aria-labelledby="modalDeletarCargoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-weight: 400;" class="modal-titleCargo"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1em;" id="textDeletarCargo"></p>
+                <p style="font-size: 1.1em;" id="textDeletarCargo1"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarCargo()">Deletar</button>
             </div>
         </div>
     </div>

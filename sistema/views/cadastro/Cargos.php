@@ -19,7 +19,7 @@ include('../../components/head.php');
     include('../../components/sidebar.php');
     ?>
     <main class="app-content">
-        <button onclick="btnInserirServico()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><i style="margin-right: 5px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i> NOVO SERVIÇO</button>
+        <button onclick="btnInserirCargo()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><i style="margin-right: 5px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i> NOVO SERVIÇO</button>
         <br>
         <br>
         <div class="row">
@@ -32,9 +32,6 @@ include('../../components/head.php');
                                     <tr>
                                         <th style="display: none;">id</th>
                                         <th>Nome</th>
-                                        <th>Preço</th>
-                                        <th>Comissão</th>
-                                        <th>Tempo</th>
                                         <th>Cadastro</th>
                                         <th>Acões</th>
                                     </tr>
@@ -42,22 +39,19 @@ include('../../components/head.php');
                                 <tbody">
                                     <?php
                                     try {
-                                        $stmt = $conn->prepare("SELECT * FROM servicos_barbearia WHERE id_barbearia = :barbearia_id");
+                                        $stmt = $conn->prepare("SELECT * FROM niveis_usuarios WHERE id_barbearia = :barbearia_id");
                                         $stmt->bindParam(':barbearia_id', $_SESSION["barbearia_id"]);
                                         $stmt->execute();
 
                                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                             $formattedDate = date('Y-m-d', strtotime($row['data']));
                                             echo '<tr>
-                                                <td style="display: none;">' . $row['id_servico'] . '</td>
-                                                <td>' . $row['nome_servico'] . '</td>
-                                                <td>R$ ' . $row['preco'] . '</td>
-                                                <td>' . $row['comissao'] . '%</td>
-                                                <td>' . $row['tempo'] . ' Minutos</td>
+                                                <td style="display: none;">' . $row['id_nivel'] . '</td>
+                                                <td>' . $row['nome_nivel'] . '</td>
                                                 <td>' . $formattedDate . '</td>
                                                 <td style="display: flex; justify-content: center; align-item: center; gap: 7px;">
-                                                    <label style="cursor: pointer;" for="btnDeletarServico-' . $row['id_servico'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
-                                                    <input style="display: none;" type="button" onclick="deletarServico(' . $row['id_servico'] . ')" id="btnDeletarServico-' . $row['id_servico'] . '">
+                                                    <label style="cursor: pointer;" for="btnDeletarCargo-' . $row['id_nivel'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
+                                                    <input style="display: none;" type="button" onclick="deletarCargo(' . $row['id_nivel'] . ')" id="btnDeletarCargo-' . $row['id_nivel'] . '">
                                                 </td>
                                             </tr>';
                                         }
