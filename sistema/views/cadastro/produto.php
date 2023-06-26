@@ -19,7 +19,7 @@ include('../../components/head.php');
     include('../../components/sidebar.php');
     ?>
     <main class="app-content">
-        <button onclick="btnInserirProduto()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><i style="margin-right: 5px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i> NOVO SERVIÇO</button>
+        <button onclick="btnInserirProduto()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><i style="margin-right: 5px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i> NOVO PRODUTO</button>
         <br>
         <br>
         <div class="row">
@@ -32,6 +32,11 @@ include('../../components/head.php');
                                     <tr>
                                         <th style="display: none;">id</th>
                                         <th>Nome</th>
+                                        <th>Valor Compra</th>
+                                        <th>Valor Venda</th>
+                                        <th>Estoque</th>
+                                        <th>Validade</th>
+                                        <th>Alerta Estoque</th>
                                         <th>Cadastro</th>
                                         <th>Acões</th>
                                     </tr>
@@ -39,21 +44,30 @@ include('../../components/head.php');
                                 <tbody">
                                     <?php
                                     try {
-                                        $stmt = $conn->prepare("SELECT * FROM niveis_usuarios WHERE id_barbearia = :barbearia_id");
+                                        $stmt = $conn->prepare("SELECT * FROM produtos WHERE id_barbearia = :barbearia_id");
                                         $stmt->bindParam(':barbearia_id', $_SESSION["barbearia_id"]);
                                         $stmt->execute();
 
                                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                            $formattedDate = date('Y-m-d', strtotime($row['data']));
+                                            $formattedDate = date('Y-m-d', strtotime($row['cadastro']));
+                                            $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
+                                            $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
                                             echo '<tr>
-                                                <td style="display: none;">' . $row['id_nivel'] . '</td>
-                                                <td>' . $row['nome_nivel'] . '</td>
+                                                <td style="display: none;">' . $row['id_pro'] . '</td>
+                                                <td><img src="' . $imagemSrc . '" alt="Imagem do Produto" style="max-width: 30px;">' . $row['nome_pro'] . '</td>
+                                                <td>R$ ' . $row['valor_compra'] . '</td>
+                                                <td>R$ ' . $row['valor_venda'] . '</td>
+                                                <td>' . $row['estoque'] . '</td>
+                                                <td>' . $row['validade'] . '</td>
+                                                <td>' . $row['alerta_estoque'] . '</td>
                                                 <td>' . $formattedDate . '</td>
                                                 <td style="display: flex; justify-content: center; align-item: center; gap: 7px;">
-                                                    <label style="cursor: pointer;" for="btnEditarProduto-' . $row['id_servico'] . '"><i title="Editar" class="icon fa fa-solid fa-edit fa-lg" style="color: #023ea7;"></i></label>
-                                                    <input style="display: none;" type="button" class="btnEditarProduto"  onclick="editarProduto(' . $row['id_servico'] . ', \'' . $row['nome_servico'] . '\', \'' . $row['preco'] . '\', \'' . $row['comissao'] . '\', \'' . $row['tempo'] . '\')" id="btnEditarServico-' . $row['id_servico'] . '">
-                                                    <label style="cursor: pointer;" for="btnDeletarProduto-' . $row['id_nivel'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
-                                                    <input style="display: none;" type="button" onclick="deletarProduto(' . $row['id_nivel'] . ')" id="btnDeletarProduto-' . $row['id_nivel'] . '">
+                                                    <label style="cursor: pointer;" for="btnEditarProduto-' . $row['id_pro'] . '"><i title="Editar" class="icon fa fa-solid fa-edit fa-lg" style="color: #023ea7;"></i></label>
+                                                    <input style="display: none;" type="button" class="btnEditarProduto"  onclick="editarProduto(' . $row['id_pro'] . ', \'' . $row['nome_pro'] . '\', \'' . $row['valor_compra'] . '\', \'' . $row['valor_venda'] . '\', \'' . $row['estoque'] . '\', \'' . $row['validade'] . '\', \'' . $row['alerta_estoque'] . '\', \'' . $row['descricao'] . '\', \'' . 'data:image/jpeg;base64,' . base64_encode($row['imagem']) . '\')" id="btnEditarProduto-' . $row['id_pro'] . '">
+                                                    <label style="cursor: pointer;" for="btnVerProduto-' . $row['id_pro'] . '"><i class="fa fa-solid fa-eye fa-lg" style="color: #464e46;"></i></label>
+                                                    <input style="display: none;" type="button" class="btnVerProduto"  onclick="verProduto(' . $row['id_pro'] . ', \'' . $row['nome_pro'] . '\', \'' . $row['valor_compra'] . '\', \'' . $row['valor_venda'] . '\', \'' . $row['estoque'] . '\', \'' . $row['alerta_estoque'] . '\', \'' . $row['descricao'] . '\')" id="btnEditarProduto-' . $row['id_pro'] . '">
+                                                    <label style="cursor: pointer;" for="btnDeletarProduto-' . $row['id_pro'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
+                                                    <input style="display: none;" type="button" onclick="deletarProduto(' . $row['id_pro'] . ')" id="btnDeletarProduto-' . $row['id_pro'] . '">
                                                 </td>
                                             </tr>';
                                         }
@@ -90,32 +104,6 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/inserir.js"></script>
-    <!-- Google analytics script-->
-    <script type="text/javascript">
-        if (document.location.hostname == "pratikborsadiya.in") {
-            (function(i, s, o, g, r, a, m) {
-                i["GoogleAnalyticsObject"] = r;
-                (i[r] =
-                    i[r] ||
-                    function() {
-                        (i[r].q = i[r].q || []).push(arguments);
-                    }),
-                (i[r].l = 1 * new Date());
-                (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m);
-            })(
-                window,
-                document,
-                "script",
-                "//www.google-analytics.com/analytics.js",
-                "ga"
-            );
-            ga("create", "UA-72504830-1", "auto");
-            ga("send", "pageview");
-        }
-    </script>
 </body>
 
 </html>

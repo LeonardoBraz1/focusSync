@@ -157,7 +157,7 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioCpf">CPF:</label>
-                            <input type="number" class="form-control" id="editFuncionarioCpf" required placeholder="000.000.000-00">
+                            <input type="text" class="form-control" id="editFuncionarioCpf" required placeholder="000.000.000-00">
                         </div>
                     </div>
                     <div class="form-row">
@@ -248,7 +248,7 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editFornecedorTel">Telefone:</label>
-                            <input type="number" class="form-control phone" id="editFornecedorTel" required placeholder="(00) 00000-0000">
+                            <input type="text" class="form-control phone" id="editFornecedorTel" required placeholder="(00) 00000-0000">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editFornecedorPont">Pontuação:</label>
@@ -317,7 +317,7 @@ foreach ($result as $row) {
                     </div>
                     <div class="form-group">
                         <label for="editClienteTel">Telefone:</label>
-                        <input type="number" class="form-control" id="editClienteTel" required>
+                        <input type="text" class="form-control" id="editClienteTel" required>
                     </div>
                 </form>
             </div>
@@ -444,7 +444,7 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioCpf">CPF:</label>
-                            <input type="number" class="form-control" id="novoFuncionarioCpf" required placeholder="000.000.000-00">
+                            <input type="text" class="form-control" id="novoFuncionarioCpf" required placeholder="000.000.000-00">
                         </div>
                     </div>
                     <div class="form-row">
@@ -643,7 +643,7 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorTel">Telefone:</label>
-                            <input type="number" class="form-control" id="novoFornecedorTel" required>
+                            <input type="text" class="form-control" id="novoFornecedorTel" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoFornecedorPont">Pontuação:</label>
@@ -712,7 +712,7 @@ foreach ($result as $row) {
                     </div>
                     <div class="form-group">
                         <label for="novoClienteTel">Telefone:</label>
-                        <input type="number" class="form-control" id="novoClienteTel" required>
+                        <input type="text" class="form-control" id="novoClienteTel" required>
                     </div>
                 </form>
             </div>

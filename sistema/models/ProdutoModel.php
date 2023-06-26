@@ -1,7 +1,7 @@
 <?php
 require_once 'conexao.php';
 
-class ClienteModel
+class ProdutoModel
 {
     private $conn;
 
@@ -10,13 +10,18 @@ class ClienteModel
         $this->conn = Conexao::getInstance();
     }
 
-    public function editarCliente($id_cliente, $nome_cliente, $email_cliente, $telefone_cliente)
+    public function editarProduto($id_pro, $nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem)
     {
-        $stmt = $this->conn->prepare("UPDATE clientes SET nome_cliente = :nome_cliente, email_cliente = :email_cliente, telefone_cliente = :telefone_cliente WHERE id_cliente = :id_cliente");
-        $stmt->bindParam(':nome_cliente', $nome_cliente);
-        $stmt->bindParam(':email_cliente', $email_cliente);
-        $stmt->bindParam(':telefone_cliente', $telefone_cliente);
-        $stmt->bindParam(':id_cliente', $id_cliente);
+        $stmt = $this->conn->prepare("UPDATE produtos SET nome_pro = :nome_pro, valor_compra = :valor_compra, valor_venda = :valor_venda, estoque = :estoque, validade = :validade, alerta_estoque = :alerta_estoque, descricao = :descricao, imagem = :imagem  WHERE id_pro = :id_pro");
+        $stmt->bindParam(':nome_pro', $nome_pro);
+        $stmt->bindParam(':valor_compra', $valor_compra);
+        $stmt->bindParam(':valor_venda', $valor_venda);
+        $stmt->bindParam(':estoque', $estoque);
+        $stmt->bindParam(':validade', $validade);
+        $stmt->bindParam(':alerta_estoque', $alerta_estoque);
+        $stmt->bindParam(':descricao', $descricao);
+        $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
+        $stmt->bindParam(':id_pro', $id_pro);
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
@@ -28,10 +33,10 @@ class ClienteModel
         return $response;
     }
 
-    public function deletarCliente($id_cliente)
+    public function deletarProduto($id_pro)
     {
-        $stmt = $this->conn->prepare("DELETE FROM clientes WHERE id_cliente = :id_cliente");
-        $stmt->bindParam(':id_cliente', $id_cliente);
+        $stmt = $this->conn->prepare("DELETE FROM produtos WHERE id_pro = :id_pro");
+        $stmt->bindParam(':id_pro', $id_pro);
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
@@ -43,12 +48,17 @@ class ClienteModel
         return $response;
     }
 
-    public function inserirCliente($nome_cliente, $email_cliente, $telefone_cliente, $id_barbearia)
+    public function inserirProduto($nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_barbearia)
     {
-        $stmt = $this->conn->prepare("INSERT INTO clientes (nome_cliente, email_cliente, telefone_cliente, id_barbearia) VALUES (:nome_cliente, :email_cliente, :telefone_cliente, :id_barbearia)");
-        $stmt->bindParam(':nome_cliente', $nome_cliente);
-        $stmt->bindParam(':email_cliente', $email_cliente);
-        $stmt->bindParam(':telefone_cliente', $telefone_cliente);
+        $stmt = $this->conn->prepare("INSERT INTO produtos (nome_pro, valor_compra, valor_venda, estoque, validade, alerta_estoque, descricao, imagem, id_barbearia) VALUES (:nome_pro, :valor_compra, :valor_venda, :estoque, :validade, :alerta_estoque, :descricao, :imagem, :id_barbearia)");
+        $stmt->bindParam(':nome_pro', $nome_pro);
+        $stmt->bindParam(':valor_compra', $valor_compra);
+        $stmt->bindParam(':valor_venda', $valor_venda);
+        $stmt->bindParam(':estoque', $estoque);
+        $stmt->bindParam(':validade', $validade);
+        $stmt->bindParam(':alerta_estoque', $alerta_estoque);
+        $stmt->bindParam(':descricao', $descricao);
+        $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
         $stmt->bindParam(':id_barbearia', $id_barbearia);
         $stmt->execute();
 

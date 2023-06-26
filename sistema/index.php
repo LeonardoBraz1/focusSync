@@ -32,23 +32,22 @@
         <div class="flipper">
           <div class="front">
             <form method="post" action="controllers/autenticacao.php" class="box" onsubmit="return checkStuff()">
-              <h1><img style="width: 200px; margin: 0 0 -39px 0;" src="assets/images/logo-login.png" alt="logoFocusSync"></h1>
-              <input type="text" name="username" require autocomplete="off">
+              <h1><img style="width: 200px; margin: 0 0 -35px 0;" src="assets/images/logo-login.png" alt="logoFocusSync"></h1>
+              <input type="text" name="username" require required placeholder="Digite seu email" autocomplete="off">
               <i class="typcn typcn-eye" id="eye"></i>
-              <input type="password" name="password" require id="pwd"  autocomplete="off">
+              <input type="password" name="password" require required placeholder="Digite sua senha" id="pwd"  autocomplete="off">
               <div>
                 <p class="semibold-text mb-2"><a href="#" onclick="rotateContainer()">Esqueceu sua senha?</a></p>
               </div>
               <input type="submit" value="Fazer Login" class="btn1">
             </form>
-            <a href="#" class="dnthave">Não tem uma conta? Inscrever-se</a>
           </div>
           <div class="back">
             <div id="forgot-password" class="box">
               <h1><img style="width: 200px; margin-bottom: -30px;" src="assets/images/logo-login.png" alt="logoFocusSync"></h1>
               <h1 style="color: #fff;">Redefinir Senha</h1>
               <form method="post" action="controllers/redefinir_senha.php" onsubmit="return checkEmail()">
-                <input type="text" name="email" placeholder="Email" autocomplete="off">
+                <input type="text" name="email"  required placeholder="Digite seu email" autocomplete="off">
                 <input type="submit" value="Enviar" class="btn1">
               </form>
               <p class="semibold-text mt-2"><a href="#" onclick="rotateContainer()">Voltar para o Login</a></p>

@@ -1,3 +1,4 @@
+// Serviço //
 
 function deletarServico(id_servico) {
     window.deletarServicoId = id_servico;
@@ -43,7 +44,7 @@ function deletarServico(id_servico) {
   }
 
 
-
+// Cargos //
 
 
 
@@ -88,4 +89,51 @@ function deletarCargo(id_nivel) {
       },
     });
     $("#modalDeletarCargo").modal("hide");
+  }
+
+
+  //  Produto   //
+
+
+  function deletarProduto(id_pro) {
+    window.deletarProdutoId = id_pro;
+  
+    $(".modal-titleProduto").text("Deletar Produto");
+    $("#textDeletarProduto").text(
+      "Você tem certeza de que deseja deletar este produto?"
+    );
+    $("#textDeletarProduto1").text(
+      "Esta ação não poderá ser desfeita e todos os dados associados a ele serão permanentemente removidos."
+    );
+    $("#modalDeletarProduto").modal("show");
+  }
+  
+  function btnDeletarProduto() {
+  
+    var id_pro = window.deletarProdutoId;
+  
+    $.ajax({
+      url: "../../controllers/ProdutoController.php",
+      type: "POST",
+      data: { id_pro: id_pro, action: 'deletar' },
+      dataType: "json",
+      success: function (response) {
+        if (response.status === "sucesso") {
+          $("#textSucesso").text("Produto deletado com sucesso!");
+          $("#modalSucesso").modal("show");
+  
+          $("#modalSucesso").on("hidden.bs.modal", function () {
+            location.reload(); 
+          });
+        } else {
+          $("#textErro").text("Não foi possivel deletar esse produto");
+          $("#modalErro").modal("show");
+        }
+      },
+      error: function (xhr, status, error) {
+        $("#textErro").text("Ao enviar os dados");
+        $("#modalErro").modal("show");
+      },
+    });
+    $("#modalDeletarProduto").modal("hide");
   }

@@ -25,11 +25,11 @@ include('../../components/head.php');
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                <i class="fa material-icons opacity-10">weekend</i>
+              <div class="icon icon-lg icon-shape bg-gradient-danger shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+              <img style="width: 40px; margin-top: 10px;" src="../../assets/images/contas.png" alt="">
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Today's Money</p>
+                <p class="text-sm mb-0 text-capitalize">Contas a Paga Hoje</p>
                 <h4 class="mb-0">$53k</h4>
               </div>
             </div>
@@ -42,12 +42,12 @@ include('../../components/head.php');
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">person</i>
+              <div style="background-color: #00FF7F;" class="icon icon-lg icon-shape  shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+              <img style="width: 40px; margin-top: 10px;" src="../../assets/images/faturamento.png" alt="">
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-                <h4 class="mb-0">2,300</h4>
+                <p class="text-sm mb-0 text-capitalize">R$ Faturamento da Semana</p>
+                <h4 class="mb-0">R$ 2,300</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -59,12 +59,12 @@ include('../../components/head.php');
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">person</i>
+              <div class="icon icon-lg icon-shape bg-gradient-info shadow-success text-center border-radius-xl mt-n4 position-absolute">
+              <i class="fa fa-calendar fa-lg opacity-10" style="color: #000; font-size: 2.4em;"></i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">New Clients</p>
-                <h4 class="mb-0">3,462</h4>
+                <p class="text-sm mb-0 text-capitalize">Agendamentos Dia</p>
+                <h4 class="mb-0">10</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -76,11 +76,11 @@ include('../../components/head.php');
         <div class="col-xl-3 col-sm-6">
           <div class="card">
             <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">weekend</i>
+              <div class="icon icon-lg icon-shape bg-gradient-danger shadow-info text-center border-radius-xl mt-n4 position-absolute">
+              <img style="width: 40px; margin-top: 10px;" src="../../assets/images/estoque-baixo.png" alt="">
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Sales</p>
+                <p class="text-sm mb-0 text-capitalize">Produtos Estoque baixo</p>
                 <h4 class="mb-0">$103,430</h4>
               </div>
             </div>
@@ -116,24 +116,34 @@ include('../../components/head.php');
     var data = {
       labels: ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"],
       datasets: [{
-          label: "Faturamento",
-          fillColor: "rgba(75,192,192,0.5)",
-          strokeColor: "rgba(75,192,192,1)",
-          pointColor: "rgba(75,192,192,1)",
+          label: "Serviços",
+          fillColor: "rgba(36, 217, 179, 0.3)",
+          strokeColor: "#24d9b3",
+          pointColor: "#24d9b3",
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(75,192,192,1)",
+          pointHighlightStroke: "#24d9b3",
           data: [200, 400, 100, 350, 100, 300, 400]
         },
         {
-          label: "Despesas",
-          fillColor: "rgba(255,99,132,0.5)",
-          strokeColor: "rgba(255,99,132,1)",
-          pointColor: "rgba(255,99,132,1)",
+          label: "Vendas",
+          fillColor: "rgba(	255, 56, 64,0.3)",
+          strokeColor: "rgba(	255, 56, 64)",
+          pointColor: "rgba(	255, 56, 64)",
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(255,99,132,1)",
+          pointHighlightStroke: "rgba(	255, 56, 64)",
           data: [80, 90, 90, 850, 100, 90, 90]
+        },
+        {
+          label: "Despesas",
+          fillColor: "rgba(	255, 56, 64,0.3)",
+          strokeColor: "rgba(	255, 56, 64)",
+          pointColor: "rgba(	255, 56, 64)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(	255, 56, 64)",
+          data: [20, 56, 79, 500, 100, 95, 99]
         }
       ]
     };
@@ -156,6 +166,7 @@ include('../../components/head.php');
       datasetStrokeWidth: 2,
       datasetFill: true,
       tooltipTemplate: "<%= datasetLabel %>: R$ <%= value %>",
+      multiTooltipTemplate: "<%= datasetLabel %>: R$ <%= value %>",
       multiTooltipTemplate: "<%= datasetLabel %>: R$ <%= value %>"
     };
 
