@@ -108,7 +108,7 @@ include('../../components/head.php');
   <script src="../../assets/js/popper.min.js"></script>
   <script src="../../assets/js/bootstrap.min.js"></script>
   <script src="../../assets/js/main.js"></script>
-  <!-- The javascript plugin to display page loading on top-->
+  
   <script src="../../assets/js/plugins/pace.min.js"></script>
   <!-- Page specific javascripts-->
   <script type="text/javascript" src="../../assets/js/plugins/chart.js"></script>
@@ -117,23 +117,13 @@ include('../../components/head.php');
       labels: ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"],
       datasets: [{
           label: "Serviços",
-          fillColor: "rgba(36, 217, 179, 0.3)",
-          strokeColor: "#24d9b3",
-          pointColor: "#24d9b3",
+          fillColor: "rgba(222,184,135, 0.3)",
+          strokeColor: "#DEB887",
+          pointColor: "#DEB887",
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
-          pointHighlightStroke: "#24d9b3",
-          data: [200, 400, 100, 350, 100, 300, 400]
-        },
-        {
-          label: "Vendas",
-          fillColor: "rgba(	255, 56, 64,0.3)",
-          strokeColor: "rgba(	255, 56, 64)",
-          pointColor: "rgba(	255, 56, 64)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(	255, 56, 64)",
-          data: [80, 90, 90, 850, 100, 90, 90]
+          pointHighlightStroke: "#DEB887",
+          data: [100, 200, 130, 350, 100, 150, 200]
         },
         {
           label: "Despesas",
@@ -143,7 +133,17 @@ include('../../components/head.php');
           pointStrokeColor: "#fff",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(	255, 56, 64)",
-          data: [20, 56, 79, 500, 100, 95, 99]
+          data: [20, 56, 79, 300, 90, 92, 99]
+        },
+        {
+          label: "Vendas",
+          fillColor: "rgba(36, 217, 179, 0.3)",
+          strokeColor: "#24d9b3",
+          pointColor: "#24d9b3",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "#24d9b3",
+          data: [80, 90, 90, 250, 150, 60, 70]
         }
       ]
     };
