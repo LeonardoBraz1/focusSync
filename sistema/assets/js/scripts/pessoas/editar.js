@@ -255,21 +255,3 @@ function salvarEdicaoCliente() {
   $("#modalEditarCliente").modal("hide");
 }
 
-
-function redirectToWhatsApp(userId) {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      var data = JSON.parse(xhr.responseText);
-      var phoneNumber = data.phoneNumber;
-      if (phoneNumber) {
-        window.location.href = 'https://wa.me/' + phoneNumber;
-      } else {
-        console.error('Número de telefone não encontrado.');
-      }
-    }
-  };
-  xhr.open('POST', '/getPhoneNumber.php', true);
-  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  xhr.send('userId=' + userId);
-}

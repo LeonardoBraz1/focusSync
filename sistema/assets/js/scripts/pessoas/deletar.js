@@ -45,8 +45,8 @@ function btnDeletarUsuario() {
 
 
 function deletarFuncionario(id) {
-  window.deletarUsuarioId = id;
-
+  window.deletarFuncionarioId = id;
+  console.log(id);
   $(".modal-titleF").text("Deletar funcionario");
   $("#textDeletarF").text(
     "Você tem certeza de que deseja deletar este funcionário?"
@@ -59,23 +59,23 @@ function deletarFuncionario(id) {
 
 function btnDeletarFuncionario() {
 
-  var id = window.deletarUsuarioId;
+  var id = window.deletarFuncionarioId;
 
   $.ajax({
     url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: { id: id, action: 'deletar' },
-    dataType: "json",
     success: function (response) {
+      console.log(response, id);
       if (response.status === "sucesso") {
-        $("#textSucesso").text("Usuário deletado com sucesso!");
+        $("#textSucesso").text("Funcionário deletado com sucesso!");
         $("#modalSucesso").modal("show");
 
         $("#modalSucesso").on("hidden.bs.modal", function () {
           location.reload(); 
         });
       } else {
-        $("#textErro").text("Não foi possivel deletar esse Usuário");
+        $("#textErro").text("Não foi possivel deletar esse funcionário");
         $("#modalErro").modal("show");
       }
     },

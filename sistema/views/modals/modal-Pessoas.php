@@ -128,9 +128,7 @@ foreach ($result as $row) {
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Formulário de edição -->
                 <form id="formEditarFuncionario">
-                    <!-- Campos de edição -->
                     <input type="hidden" id="editFuncionarioId" value="">
 
                     <div class="form-row">
@@ -164,7 +162,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioCom">Comissão: (%)</label>
                             <div class="input-group">
-                                <input type="number" min="0" max="100" step="1" class="form-control" id="editFuncionarioCom" required placeholder="100%">
+                                <input type="number" min="0" max="3" step="1" class="form-control" id="editFuncionarioCom" required placeholder="100%">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definida em cada.">!</span>
                                 </div>
@@ -451,7 +449,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioCom">Comissão: (%)</label>
                             <div class="input-group">
-                                <input type="number" min="0" max="100" step="1" class="form-control" id="novoFuncionarioCom" required placeholder="100%">
+                                <input type="number" min="0" max="3" step="1" class="form-control" id="novoFuncionarioCom" required placeholder="100%">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definido em cada.">!</span>
                                 </div>
@@ -892,6 +890,6 @@ foreach ($result as $row) {
             });
         });
 
-        $("#novoClienteTel, #novoFornecedorTel, #editClienteTel, #editFornecedorTel").mask("(00) 00000-0000");
+        $("#novoClienteTel, #novoFornecedorTel, #editClienteTel, #editFornecedorTel").mask("(00)00000-0000");
         $("#novoFuncionarioCpf, #editFuncionarioCpf").mask("000.000.000-00");
     </script>

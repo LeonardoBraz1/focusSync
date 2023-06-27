@@ -49,6 +49,10 @@ include('../../components/head.php');
 
                                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                             $formattedDate = date('Y-m-d', strtotime($row['cadastro']));
+                                            $formattedPhone = str_replace(array('(', ')', '-'), '', $row['telefone']);
+
+                                            $message = "Olá, estou entrando em contato através da sua barbearia.";
+                                            
                                             echo '<tr>
                                                 <td style="display: none;">' . $row['id'] . '</td>
                                                 <td>' . $row['nome'] . '</td>
@@ -64,7 +68,10 @@ include('../../components/head.php');
                                                     <input style="display: none;" type="button" onclick="deletarFuncionario(' . $row['id'] . ')" id="btnDeletarFunc-' . $row['id'] . '">
                                                     <label style="cursor: pointer;" for="btnDiaFunc-' . $row['id'] . '"><i class="fa fa-solid fa-calendar fa-lg" style="color: #6a81a9;"></i></label>
                                                     <input style="display: none; pointer-events: none; opacity: 0;" type="button" onclick="btnInserirDiaSemana(' . $row['id'] . ')" class="btnDiaFunc1" id="btnDiaFunc-' . $row['id'] . '" data-id="' . $row['id'] . '">
-                                                    <label style="cursor: pointer;" for="btnWhat-' . $row['id'] . '"><i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i></label>
+                                                    <label style="cursor: pointer;" for="btnServFunc-' . $row['id'] . '"> 
+                                                    <a href="https://api.whatsapp.com/send?phone=' . $formattedPhone . '&text=' . urlencode($message) . '" target="_blank">
+                                                        <i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i>
+                                                    </a></label>
                                                     <input style="display: none; pointer-events: none; opacity: 0;" onclick="redirectToWhatsApp(' . $row['id'] . ')" type="button" class="btnWhat" id="btnWhat-' . $row['id'] . '" data-id="' . $row['id'] . '">
                                                     <label style="cursor: pointer;" for="btnServFunc-' . $row['id'] . '"><i class="fa fa-solid fa-briefcase fa-lg" style="color: #334a70;"></i></label>
                                                     <input style="display: none; pointer-events: none; opacity: 0;" onclick="btnInserirServ(' . $row['id'] . ')" type="button" class="btnServFunc1" id="btnServFunc-' . $row['id'] . '" data-id="' . $row['id'] . '">
@@ -93,7 +100,7 @@ include('../../components/head.php');
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/main.js"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="../assets/js/plugins/pace.min.js"></script>
+    <script src="../../assets/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <!-- Data table plugin-->
     <script type="text/javascript" src="../../assets/js/plugins/jquery.dataTables.min.js"></script>
@@ -104,6 +111,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/inserir.js"></script>
+   
 </body>
 
 </html>

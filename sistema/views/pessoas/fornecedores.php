@@ -47,6 +47,10 @@ include('../../components/head.php');
 
                                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                             $formattedDate = date('Y-m-d', strtotime($row['data_cadastro']));
+                                            $formattedPhone = str_replace(array('(', ')', '-'), '', $row['telefone_fornecedo']);
+
+                                            $message = "Olá, estou entrando em contato através da sua barbearia.";
+
                                             echo '<tr>
                                                 <td style="display: none;">' . $row['id_fornecedo'] . '</td>
                                                 <td>' . $row['nome_fornecedo'] . '</td>
@@ -59,8 +63,12 @@ include('../../components/head.php');
                                                     <input style="display: none;" type="button" class="btnEditarForne"  onclick="editarFornecedor(' . $row['id_fornecedo'] . ', \'' . $row['nome_fornecedo'] . '\', \'' . $row['email_fornecedo'] . '\', \'' . $row['telefone_fornecedo'] . '\', \'' . $row['pontuacao_fornecedo'] . '\', \'' . $row['endereco_fornecedo'] . '\', \'' . $row['cidade_fornecedo'] . '\', \'' . $row['site_fornecedo'] . '\')" id="btnEditarForne-' . $row['id_fornecedo'] . '">
                                                     <label style="cursor: pointer;" for="btnDeletarForne-' . $row['id_fornecedo'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
                                                     <input style="display: none;" type="button" onclick="deletarFornecedor(' . $row['id_fornecedo'] . ')" id="btnDeletarForne-' . $row['id_fornecedo'] . '">
-                                                    <label style="cursor: pointer;" for="btnWhat1-' . $row['id_fornecedo'] . '"><i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i></label>
-                                                    <input style="display: none; pointer-events: none; opacity: 0;" onclick="redirectToWhatsApp1(' . $row['id_fornecedo'] . ')" type="button" class="btnWhat" id="btnWhat1-' . $row['id_fornecedo'] . '" data-id="' . $row['id_fornecedo'] . '">
+                                                    <input style="display: none;" type="button" onclick="deletarFornecedor(' . $row['id_fornecedo'] . ')" id="btnDeletarForne-' . $row['id_fornecedo'] . '">
+                                                    <label style="cursor: pointer;" for="btnWhat1-' . $row['id_fornecedo'] . '">
+                                                   <a href="https://api.whatsapp.com/send?phone=' . $formattedPhone . '&text=' . urlencode($message) . '" target="_blank">
+                                                            <i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i>
+                                                        </a>
+                                                    </label>
                                                 </td>
                                             </tr>';
                                         }
@@ -77,6 +85,7 @@ include('../../components/head.php');
             </div>
         </div>
     </main>
+
 
     <?php include('../modals/modal-Pessoas.php'); ?>
 
