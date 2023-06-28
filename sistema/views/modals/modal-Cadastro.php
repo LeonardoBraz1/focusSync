@@ -178,7 +178,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novoServicoCom">Comissão: (%)</label>
-                            <input type="number" min="0" max="100" step="1" class="form-control" id="novoServicoCom" required placeholder="100%">
+                            <input type="text" class="form-control" id="novoServicoCom" required placeholder="100%">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novoServicoTemp">Tempo:</label>
@@ -468,4 +468,20 @@
         });
 
         $("#editProdutoVali, #novoProdutoVali").mask("0000-00-00");
+        $("#novoServicoCom, #editServicoCom").on("input", function() {
+            var value = parseFloat($(this).val());
+            var position = $(this).get(0).selectionStart;
+            if (!isNaN(value)) {
+                if (value > 100) {
+                    $(this).val("100%");
+                } else if (value < 0) {
+                    $(this).val("0%");
+                } else {
+                    $(this).val(value + "%");
+                }
+                $(this).get(0).setSelectionRange(position, position);
+            } else {
+                $(this).val("");
+            }
+        });
     </script>

@@ -162,7 +162,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="editFuncionarioCom">Comissão: (%)</label>
                             <div class="input-group">
-                                <input type="number" min="0" max="3" step="1" class="form-control" id="editFuncionarioCom" required placeholder="100%">
+                                <input type="text" class="form-control" id="editFuncionarioCom" required placeholder="100%">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definida em cada.">!</span>
                                 </div>
@@ -449,7 +449,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="novoFuncionarioCom">Comissão: (%)</label>
                             <div class="input-group">
-                                <input type="number" min="0" max="3" step="1" class="form-control" id="novoFuncionarioCom" required placeholder="100%">
+                                <input type="text" class="form-control" id="novoFuncionarioCom" required placeholder="100%">
                                 <div class="input-group-append">
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Se você desejar atribuir uma porcentagem específica ao funcionário, basta preencher esse campo com a porcentagem correspondente. Caso contrário, deixe-o em branco e a comissão será calculada com base na porcentagem do serviço ou produto definido em cada.">!</span>
                                 </div>
@@ -874,22 +874,22 @@ foreach ($result as $row) {
     </div>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('.tooltip-trigger').hover(function() {
-                var tooltipText = $(this).data('tooltip');
-                $('<div class="tooltip-box">' + tooltipText + '</div>').appendTo('body');
-            }, function() {
-                $('.tooltip-box').remove();
-            }).mousemove(function(e) {
-                var mouseX = e.pageX + 20; // Define a posição horizontal da caixa de texto
-                var mouseY = e.pageY + 10; // Define a posição vertical da caixa de texto
-                $('.tooltip-box').css({
-                    top: mouseY,
-                    left: mouseX
-                });
-            });
-        });
-
         $("#novoClienteTel, #novoFornecedorTel, #editClienteTel, #editFornecedorTel").mask("(00)00000-0000");
         $("#novoFuncionarioCpf, #editFuncionarioCpf").mask("000.000.000-00");
+        $("#novoFuncionarioCom, #editFuncionarioCom").on("input", function() {
+            var value = parseFloat($(this).val());
+            var position = $(this).get(0).selectionStart;
+            if (!isNaN(value)) {
+                if (value > 100) {
+                    $(this).val("100%");
+                } else if (value < 0) {
+                    $(this).val("0%");
+                } else {
+                    $(this).val(value + "%");
+                }
+                $(this).get(0).setSelectionRange(position, position);
+            } else {
+                $(this).val("");
+            }
+        });
     </script>
