@@ -10,8 +10,6 @@ $conn = Conexao::getInstance();
 include('../../components/head.php');
 ?>
 
-</style>
-
 <body class="app sidebar-mini">
     <?php
     include('../../components/navbar.php');
@@ -63,8 +61,11 @@ include('../../components/head.php');
                                             $dias_sem_retorno = $intervalo->days;
 
                                             $ultimo_servico = isset($row['ultimo_servico']) ? $row['ultimo_servico'] : '-';
+                                            $formattedPhone = str_replace(array('(', ')', '-'), '', $row['telefone_cliente']);
 
-                                            echo '<tr>
+                                            $message = "Olá! Gostaríamos de agradecer pela sua preferência. Estamos entrando em contato para informar sobre nossos serviços de alta qualidade, profissionais especializados e um ambiente aconchegante para cuidar do seu visual. Ficamos à disposição para agendar um horário ou responder a qualquer dúvida que você possa ter. Agradecemos novamente pela confiança e esperamos vê-lo em breve na nossa barbearia. Tenha um ótimo dia!";
+
+                                            echo '<tr style="display: none;" class="tabela1load">
                                                   <td style="display: none;">' . $row['id_cliente'] . '</td>
                                                   <td>' . $row['nome_cliente'] . '</td>
                                                   <td>' . $row['telefone_cliente'] . '</td>
@@ -73,7 +74,10 @@ include('../../components/head.php');
                                                   <td>' . $formattedDate . '</td>
                                                   <td>' . $dias_sem_retorno . '</td>
                                                   <td style="display: flex; justify-content: center; align-item: center; gap: 7px;">
-                                                  <label style="cursor: pointer;" for="btnWhat-' . $row['id_cliente'] . '"><i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i></label>
+                                                  <label style="cursor: pointer;" for="btnWhat-' . $row['id_cliente'] . '"> 
+                                                  <a href="https://api.whatsapp.com/send?phone=' . $formattedPhone . '&text=' . urlencode($message) . '" target="_blank">
+                                                    <i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i>
+                                                  </a></label></label>
                                                   <input style="display: none; pointer-events: none; opacity: 0;" onclick="redirectToWhatsApp(' . $row['id_cliente'] . ')" type="button" class="btnWhat" id="btnWhat-' . $row['id_cliente'] . '" data-id="' . $row['id_cliente'] . '">
                                                   </td>
                                                   </tr>';
@@ -100,7 +104,7 @@ include('../../components/head.php');
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/main.js"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="../assets/js/plugins/pace.min.js"></script>
+    <script src="../../assets/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <!-- Data table plugin-->
     <script type="text/javascript" src="../../assets/js/plugins/jquery.dataTables.min.js"></script>

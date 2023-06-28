@@ -46,7 +46,7 @@ function btnDeletarUsuario() {
 
 function deletarFuncionario(id) {
   window.deletarFuncionarioId = id;
-  console.log(id);
+  
   $(".modal-titleF").text("Deletar funcionario");
   $("#textDeletarF").text(
     "Você tem certeza de que deseja deletar este funcionário?"
@@ -65,8 +65,8 @@ function btnDeletarFuncionario() {
     url: "../../controllers/FuncionarioController.php",
     type: "POST",
     data: { id: id, action: 'deletar' },
+    dataType: "json",
     success: function (response) {
-      console.log(response, id);
       if (response.status === "sucesso") {
         $("#textSucesso").text("Funcionário deletado com sucesso!");
         $("#modalSucesso").modal("show");

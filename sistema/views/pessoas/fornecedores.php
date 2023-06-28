@@ -51,7 +51,7 @@ include('../../components/head.php');
 
                                             $message = "Olá, estou entrando em contato através da sua barbearia.";
 
-                                            echo '<tr>
+                                            echo '<tr style="display: none;" class="tabela1load">
                                                 <td style="display: none;">' . $row['id_fornecedo'] . '</td>
                                                 <td>' . $row['nome_fornecedo'] . '</td>
                                                 <td>' . $row['email_fornecedo'] . '</td>
@@ -69,6 +69,7 @@ include('../../components/head.php');
                                                             <i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i>
                                                         </a>
                                                     </label>
+                                                    <input style="display: none; pointer-events: none; opacity: 0;" onclick="redirectToWhatsApp(' . $row['id_fornecedo'] . ')" type="button" class="btnWhat" id="btnWhat-' . $row['id_fornecedo'] . '" data-id="' . $row['id_fornecedo'] . '">
                                                 </td>
                                             </tr>';
                                         }

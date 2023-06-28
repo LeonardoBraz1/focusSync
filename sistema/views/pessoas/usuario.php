@@ -10,7 +10,6 @@ $conn = Conexao::getInstance();
 include('../../components/head.php');
 ?>
 
-</style>
 
 <body class="app sidebar-mini">
     <?php
@@ -47,7 +46,7 @@ include('../../components/head.php');
                                         $stmt->execute();
 
                                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                            echo '<tr>
+                                            echo '<tr style="display: none;" class="tabela1load">
                                                 <td style="display: none;">' . $row['id'] . '</td>
                                                 <td>' . $row['nome'] . '</td>
                                                 <td>' . $row['email'] . '</td>

@@ -9,9 +9,7 @@ $conn = Conexao::getInstance();
 
 include('../../components/head.php');
 ?>
-
-</style>
-
+  
 <body class="app sidebar-mini">
     <?php
     include('../../components/navbar.php');
@@ -27,7 +25,7 @@ include('../../components/head.php');
                 <div class="tile">
                     <div class="tile-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-bordered" id="sampleTable">
+                            <table id="sampleTable" class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
                                         <th style="display: none;">id</th>
@@ -39,7 +37,7 @@ include('../../components/head.php');
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody">
+                                <tbody>
                                     <?php
                                     try {
                                         $stmt = $conn->prepare("SELECT * FROM clientes WHERE id_barbearia = :barbearia_id");
@@ -48,7 +46,10 @@ include('../../components/head.php');
 
                                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                             $formattedDate = date('Y-m-d', strtotime($row['cadastro']));
-                                            echo '<tr>
+                                            $formattedPhone = str_replace(array('(', ')', '-'), '', $row['telefone_cliente']);
+
+                                            $message = "Olá! Gostaríamos de agradecer pela sua preferência. Estamos entrando em contato para informar sobre nossos serviços de alta qualidade, profissionais especializados e um ambiente aconchegante para cuidar do seu visual. Ficamos à disposição para agendar um horário ou responder a qualquer dúvida que você possa ter. Agradecemos novamente pela confiança e esperamos vê-lo em breve na nossa barbearia. Tenha um ótimo dia!";
+                                            echo '<tr style="display: none;" class="tabela1load">
                                                 <td style="display: none;">' . $row['id_cliente'] . '</td>
                                                 <td>' . $row['nome_cliente'] . '</td>
                                                 <td>' . $row['email_cliente'] . '</td>
@@ -60,7 +61,10 @@ include('../../components/head.php');
                                                     <input style="display: none;" type="button" class="btnEditarClien"  onclick="editarCliente(' . $row['id_cliente'] . ', \'' . $row['nome_cliente'] . '\', \'' . $row['email_cliente'] . '\', \'' . $row['telefone_cliente'] . '\')" id="btnEditarClien-' . $row['id_cliente'] . '">
                                                     <label style="cursor: pointer;" for="btnDeletarClien-' . $row['id_cliente'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
                                                     <input style="display: none;" type="button" onclick="deletarCliente(' . $row['id_cliente'] . ')" id="btnDeletarClien-' . $row['id_cliente'] . '">
-                                                    <label style="cursor: pointer;" for="btnWhat-' . $row['id_cliente'] . '"><i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i></label>
+                                                    <label style="cursor: pointer;" for="btnWhat-' . $row['id_cliente'] . '">
+                                                    <a href="https://api.whatsapp.com/send?phone=' . $formattedPhone . '&text=' . urlencode($message) . '" target="_blank">
+                                                        <i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i>
+                                                    </a></label>
                                                     <input style="display: none; pointer-events: none; opacity: 0;" onclick="redirectToWhatsApp(' . $row['id_cliente'] . ')" type="button" class="btnWhat" id="btnWhat-' . $row['id_cliente'] . '" data-id="' . $row['id_cliente'] . '">
                                                 </td>
                                             </tr>';
@@ -78,7 +82,6 @@ include('../../components/head.php');
             </div>
         </div>
     </main>
-
     <?php include('../modals/modal-Pessoas.php'); ?>
 
     <!-- Essential javascripts for application to work-->
@@ -87,7 +90,7 @@ include('../../components/head.php');
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/main.js"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="../assets/js/plugins/pace.min.js"></script>
+    <script src="../../assets/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <!-- Data table plugin-->
     <script type="text/javascript" src="../../assets/js/plugins/jquery.dataTables.min.js"></script>

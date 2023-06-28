@@ -10,8 +10,6 @@ $conn = Conexao::getInstance();
 include('../../components/head.php');
 ?>
 
-</style>
-
 <body class="app sidebar-mini">
     <?php
     include('../../components/navbar.php');
@@ -52,7 +50,7 @@ include('../../components/head.php');
                                             $formattedDate = date('Y-m-d', strtotime($row['cadastro']));
                                             $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
                                             $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
-                                            echo '<tr>
+                                            echo '<tr style="display: none;" class="tabela1load">
                                                 <td style="display: none;">' . $row['id_pro'] . '</td>
                                                 <td><img src="' . $imagemSrc . '" alt="Imagem do Produto" style="max-width: 30px;">' . $row['nome_pro'] . '</td>
                                                 <td>R$ ' . $row['valor_compra'] . '</td>
@@ -64,11 +62,10 @@ include('../../components/head.php');
                                                 <td style="display: flex; justify-content: center; align-item: center; gap: 7px;">
                                                     <label style="cursor: pointer;" for="btnEditarProduto-' . $row['id_pro'] . '"><i title="Editar" class="icon fa fa-solid fa-edit fa-lg" style="color: #023ea7;"></i></label>
                                                     <input style="display: none;" type="button" class="btnEditarProduto"  onclick="editarProduto(' . $row['id_pro'] . ', \'' . $row['nome_pro'] . '\', \'' . $row['valor_compra'] . '\', \'' . $row['valor_venda'] . '\', \'' . $row['estoque'] . '\', \'' . $row['validade'] . '\', \'' . $row['alerta_estoque'] . '\', \'' . $row['descricao'] . '\', \'' . 'data:image/jpeg;base64,' . base64_encode($row['imagem']) . '\')" id="btnEditarProduto-' . $row['id_pro'] . '">
-                                                    <label style="cursor: pointer;" for="btnVerProduto-' . $row['id_pro'] . '"><i class="fa fa-solid fa-eye fa-lg" style="color: #464e46;"></i></label>
-                                                    <input style="display: none;" type="button" class="btnVerProduto"  onclick="verProduto(' . $row['id_pro'] . ', \'' . $row['nome_pro'] . '\', \'' . $row['valor_compra'] . '\', \'' . $row['valor_venda'] . '\', \'' . $row['estoque'] . '\', \'' . $row['alerta_estoque'] . '\', \'' . $row['descricao'] . '\')" id="btnEditarProduto-' . $row['id_pro'] . '">
                                                     <label style="cursor: pointer;" for="btnDeletarProduto-' . $row['id_pro'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
                                                     <input style="display: none;" type="button" onclick="deletarProduto(' . $row['id_pro'] . ')" id="btnDeletarProduto-' . $row['id_pro'] . '">
-                                                </td>
+                                                    <label style="cursor: pointer;" for="btnVerProduto-' . $row['id_pro'] . '"><i class="fa fa-solid fa-eye fa-lg" style="color: #464e46;"></i></label>
+                                                    <input style="display: none;" type="button" class="btnVerProduto"  onclick="verProduto(' . $row['id_pro'] . ', \'' . $row['nome_pro'] . '\', \'' . $row['valor_compra'] . '\', \'' . $row['valor_venda'] . '\', \'' . $row['estoque'] . '\', \'' . $row['alerta_estoque'] . '\', \'' . $row['descricao'] . '\')" id="btnEditarProduto-' . $row['id_pro'] . '"></td>
                                             </tr>';
                                         }
                                     } catch (PDOException $e) {

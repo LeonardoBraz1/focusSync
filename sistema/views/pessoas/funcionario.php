@@ -10,8 +10,6 @@ $conn = Conexao::getInstance();
 include('../../components/head.php');
 ?>
 
-</style>
-
 <body class="app sidebar-mini">
     <?php
     include('../../components/navbar.php');
@@ -53,7 +51,7 @@ include('../../components/head.php');
 
                                             $message = "Olá, estou entrando em contato através da sua barbearia.";
                                             
-                                            echo '<tr>
+                                            echo '<tr style="display: none;" class="tabela1load">
                                                 <td style="display: none;">' . $row['id'] . '</td>
                                                 <td>' . $row['nome'] . '</td>
                                                 <td>' . $row['email'] . '</td>
