@@ -66,7 +66,7 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="editServicoCom">Comissão: (%)</label>
-                            <input type="text"  class="form-control" id="editServicoCom" required placeholder="100%">
+                            <input type="text" class="form-control" id="editServicoCom" required placeholder="100%">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="editServicoTemp">Tempo:</label>
