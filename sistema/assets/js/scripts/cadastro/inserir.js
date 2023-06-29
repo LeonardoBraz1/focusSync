@@ -105,6 +105,12 @@ function inserirProduto() {
   var descricao = $("#novoProdutoDesc").val();
   var imagem = $("#novoProdutoImg").attr("src");
   var id_fornecedo = $("#novoProdutoForne").val();
+
+
+  if (imagem === "") {
+    imagem = "../../assets/images/sem-foto.jpg";
+  }
+
   $.ajax({
     url: "../../controllers/ProdutoController.php",
     type: "POST",

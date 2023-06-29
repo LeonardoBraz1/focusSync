@@ -8,8 +8,8 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li class="menu" id="menuDashboard" data-permissao="permissao_menuDashboard"><a class="app-menu__item" href="../dashboard/dashboard.php"><i style="margin-right: 13px;" class="app-menu__icon fa fa-dashboard fa-lg"></i><span class="app-menu__label">Dashboard</span></a></li>
-        <li id="menuPessoas" data-permissao="permissao_menuPessoas" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 13px;" class="app-menu__icon icon fa fa-users fa-lg"></i><span class="app-menu__label">Pessoas</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="menu" id="menuDashboard" data-permissao="permissao_menuDashboard"><a class="app-menu__item" href="../dashboard/dashboard.php"><i style="margin-right: 13px;" class="app-menu__icon fa fa-dashboard fa-lg"></i><span class="app-menu__label"> Dashboard</span></a></li>
+        <li id="menuPessoas" data-permissao="permissao_menuPessoas" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 13px;" class="app-menu__icon icon fa fa-users fa-lg"></i><span class="app-menu__label"> Pessoas</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li class="submenu" id="submenuUsuários" data-permissao="permissao_submenuUsuários"><a class="treeview-item" href="../pessoas/usuario.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Usuários</a></li>
             <li class="submenu" id="submenuFuncionários" data-permissao="permissao_submenuFuncionários"><a class="treeview-item" href="../pessoas/funcionario.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Funcionários</a></li>
@@ -18,7 +18,7 @@
             <li class="submenu" id="submenuClientesRetorno" data-permissao="permissao_submenuClientesRetorno"><a class="treeview-item" href="../pessoas/clienteRetorno.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Clientes Retorno</a></li>
           </ul>
         </li>
-        <li id="menucadastro" data-permissao="permissao_menucadastro" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 23px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i><span class="app-menu__label">Cadastro</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li id="menucadastro" data-permissao="permissao_menucadastro" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 23px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i><span class="app-menu__label"> Cadastro</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li class="submenu" id="submenuServico" data-permissao="permissao_submenuServico"><a class="treeview-item" href="../cadastro/servicos.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Serviços</a></li>
             <li class="submenu" id="submenuCargo" data-permissao="permissao_submenuCargo"><a class="treeview-item" href="../cadastro/Cargos.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Cargos</a></li>
