@@ -13,14 +13,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $estoque = isset($_POST['estoque']) ? $_POST['estoque'] : '';
     $validade = isset($_POST['validade']) ? $_POST['validade'] : '';
     $alerta_estoque = isset($_POST['alerta_estoque']) ? $_POST['alerta_estoque'] : '';
-    $descricao = isset($_POST['descricao']) ? $_POST['descricao'] : '';
     $imagem = isset($_POST['imagem']) ? file_get_contents($_POST['imagem']) : '';
+    $descricao = isset($_POST['descricao']) ? $_POST['descricao'] : '';
+    $quantidade = isset($_POST['quantidade']) ? $_POST['quantidade'] : '';
+    $motivo = isset($_POST['motivo']) ? $_POST['motivo'] : '';
+    $id_fornecedo = isset($_POST['id_fornecedo']) ? $_POST['id_fornecedo'] : '';
+
 
     
     // Verifica qual ação está sendo realizada
     if ($_POST['action'] === 'editar') {
 
-        $response = $produtoModel->editarProduto($id_pro, $nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem);
+        $response = $produtoModel->editarProduto($id_pro, $nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_fornecedo);
     
     } elseif ($_POST['action'] === 'deletar') {
 
@@ -28,7 +32,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } elseif ($_POST['action'] === 'inserir') {
 
-        $response = $produtoModel->inserirProduto($nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $_SESSION["barbearia_id"]);
+        $response = $produtoModel->inserirProduto($nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_fornecedo, $_SESSION["barbearia_id"]);
+    
+    } elseif ($_POST['action'] === 'inserirSaida') {
+
+        $response = $produtoModel->inserirSaida($id_pro, $quantidade, $motivo, $_SESSION["barbearia_id"]);
+    
+    } elseif ($_POST['action'] === 'inserirEntrada') {
+
+        $response = $produtoModel->inserirEntrada($id_pro, $quantidade, $motivo, $id_fornecedo, $_SESSION["barbearia_id"]);
     
     } else {
         // Ação desconhecida

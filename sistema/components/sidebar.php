@@ -22,9 +22,10 @@
           <ul class="treeview-menu">
             <li class="submenu" id="submenuServico" data-permissao="permissao_submenuServico"><a class="treeview-item" href="../cadastro/servicos.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Serviços</a></li>
             <li class="submenu" id="submenuCargo" data-permissao="permissao_submenuCargo"><a class="treeview-item" href="../cadastro/Cargos.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Cargos</a></li>
-            <li class="submenu" id="submenuProduto" data-permissao="permissao_submenuProduto"><a class="treeview-item" href="../cadastro/produto.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Produtos</a></li>
-            <li class="submenu" id="submenuClientes1" data-permissao="permissao_submenuClientes"><a class="treeview-item" href="../cadastro/clientes.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Clientes</a></li>
-            <li class="submenu" id="submenuClientesRetorno1" data-permissao="permissao_submenuClientesRetorno"><a class="treeview-item" href="../cadastro/clienteRetorno.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Clientes Retorno</a></li>
+            <li class="submenu" id="submenuProduto" data-permissao="permissao_submenuProduto"><a class="treeview-item" href="../cadastro/produtos.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Produtos</a></li>
+            <li class="submenu" id="submenuSaida" data-permissao="permissao_submenuSaida"><a class="treeview-item" href="../cadastro/saidas.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Saída de Produtos</a></li>
+            <li class="submenu" id="submenuEntrada" data-permissao="permissao_submenuEntrada"><a class="treeview-item" href="../cadastro/entradas.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Entrada de Produtos</a></li>
+            <li class="submenu" id="submenuEstoqueBaixo" data-permissao="permissao_submenuEstoqueBaixo"><a class="treeview-item" href="../cadastro/estoqueBaixo.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Estoque Baixo</a></li>
           </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 13px;" class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Forms</span><i class="treeview-indicator fa fa-angle-right"></i></a>

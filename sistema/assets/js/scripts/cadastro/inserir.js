@@ -104,6 +104,7 @@ function inserirProduto() {
   var alerta_estoque = $("#novoProdutoAler").val();
   var descricao = $("#novoProdutoDesc").val();
   var imagem = $("#novoProdutoImg").attr("src");
+  var id_fornecedo = $("#novoProdutoForne").val();
   $.ajax({
     url: "../../controllers/ProdutoController.php",
     type: "POST",
@@ -116,6 +117,7 @@ function inserirProduto() {
       alerta_estoque: alerta_estoque,
       descricao: descricao,
       imagem: imagem,
+      id_fornecedo: id_fornecedo,
       action: "inserir",
     },
     dataType: "json",
@@ -140,4 +142,110 @@ function inserirProduto() {
 
   // Fechar a modal de inserção de funcionário
   $("#modalInserirProduto").modal("hide");
+}
+
+
+
+
+
+//   Saida Produto     //
+
+function SaidaProduto(id_pro, nome_pro) {
+  window.saidaId = id_pro;
+  document.getElementById('modalNovoSaidaLabel').innerHTML = nome_pro;
+  $("#modalInserirSaida").modal("show");
+}
+
+function inserirSaida() {
+  var quantidade = $("#novoSaidaQuant").val();
+  var motivo = $("#novoSaidaMoti").val();
+
+  var id_pro = window.saidaId;
+  $.ajax({
+    url: "../../controllers/ProdutoController.php",
+    type: "POST",
+    data: {
+      quantidade: quantidade,
+      motivo: motivo,
+      id_pro: id_pro,
+      action: "inserirSaida",
+    },
+    dataType: "json",
+    success: function (response) {
+      if (response.status === "sucesso") {
+        $("#textSucesso").text("Saida de Produto com sucesso!");
+        $("#modalSucesso").modal("show");
+
+        $("#modalSucesso").on("hidden.bs.modal", function () {
+          location.reload(); // Recarrega a página
+        });
+      } else if(response.status === "estoque_insuficiente") {
+        $("#textErro").text("Produto com estoque abaixo da quantidade de saída");
+        $("#modalErro").modal("show");
+      } else {
+        $("#textErro").text("Não foi possível fazer a saída desse produto");
+        $("#modalErro").modal("show");
+      }
+    },
+    error: function (xhr, status, error) {
+      $("#textErro").text("Ao enviar os dados");
+      $("#modalErro").modal("show");
+    },
+  });
+
+  // Fechar a modal de inserção de funcionário
+  $("#modalInserirSaida").modal("hide");
+}
+
+
+
+
+
+//   Entrada Produto     //
+
+function entradaProduto(id_pro, nome_pro, id_fornecedo) {
+  window.entradaId = id_pro;
+  window.fornecedorId = id_fornecedo;
+  document.getElementById('modalNovoEntradaLabel').innerHTML = nome_pro;
+  $("#modalInserirEntrada").modal("show");
+}
+
+function inserirEntrada() {
+  var quantidade = $("#novoEntradaQuant").val();
+  var motivo = $("#novoEntradaMoti").val();
+
+  var id_pro = window.entradaId;
+  var id_fornecedo = window.fornecedorId;
+  $.ajax({
+    url: "../../controllers/ProdutoController.php",
+    type: "POST",
+    data: {
+      quantidade: quantidade,
+      motivo: motivo,
+      id_pro: id_pro,
+      id_fornecedo: id_fornecedo,
+      action: "inserirEntrada",
+    },
+    dataType: "json",
+    success: function (response) {
+      if (response.status === "sucesso") {
+        $("#textSucesso").text("Entrada de Produto com sucesso!");
+        $("#modalSucesso").modal("show");
+
+        $("#modalSucesso").on("hidden.bs.modal", function () {
+          location.reload(); // Recarrega a página
+        });
+      } else {
+        $("#textErro").text("Não foi possível fazer a Entrada desse produto");
+        $("#modalErro").modal("show");
+      }
+    },
+    error: function (xhr, status, error) {
+      $("#textErro").text("Ao enviar os dados");
+      $("#modalErro").modal("show");
+    },
+  });
+
+  // Fechar a modal de inserção de funcionário
+  $("#modalInserirEntrada").modal("hide");
 }

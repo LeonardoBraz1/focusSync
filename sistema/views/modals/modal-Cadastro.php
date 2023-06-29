@@ -1,3 +1,20 @@
+<?php
+require_once('../../models/conexao.php');
+
+// Obter a instância da conexão
+$conn = Conexao::getInstance();
+
+$query = $conn->prepare("SELECT DISTINCT nome_fornecedo, id_fornecedo FROM fornecedores where id_barbearia = :id_barbearia");
+$query->bindParam(':id_barbearia', $_SESSION["barbearia_id"]);
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+// Armazenar os dados em um array
+$fornecedores = array();
+foreach ($result as $row) {
+    $fornecedores[] = $row;
+}
+?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 
@@ -102,15 +119,17 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="editProdutoEsto">Estoque:</label>
                             <input type="number" min="0" max="999999" step="1" class="form-control" id="editProdutoEsto" required placeholder="Quantidade">
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="editProdutoVali">Validade:</label>
                             <input type="text" class="form-control" id="editProdutoVali" required placeholder="0000-00-00">
                         </div>
-                        <div class="form-group col-md-4">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label for="editProdutoAler">Alerta Estoque:</label>
                             <div class="input-group">
                                 <input type="number" min="0" max="999999" step="1" class="form-control" id="editProdutoAler" required placeholder="Quantidade">
@@ -118,6 +137,16 @@
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Digite a quantidade desejada para receber um alerta quando o estoque ficar abaixo desse valor.">!</span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="editProdutoForne">Fornecedores:</label>
+                            <select id="editProdutoForne" class="form-control" placeholder="=Selecionar">
+                                <?php
+                                foreach ($fornecedores as $fornecedor) {
+                                    echo '<option value="' . $fornecedor['id_fornecedo'] . '">' . $fornecedor['nome_fornecedo'] . '</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -229,15 +258,17 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="novoProdutoEsto">Estoque:</label>
                             <input type="number" min="0" max="999999" step="1" class="form-control" id="novoProdutoEsto" required placeholder="Quantidade">
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="novoProdutoVali">Validade:</label>
                             <input type="text" class="form-control" id="novoProdutoVali" required placeholder="0000-00-00">
                         </div>
-                        <div class="form-group col-md-4">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label for="novoProdutoAler">Alerta Estoque:</label>
                             <div class="input-group">
                                 <input type="number" min="0" max="999999" step="1" class="form-control" id="novoProdutoAler" required placeholder="Quantidade">
@@ -245,6 +276,16 @@
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Digite a quantidade desejada para receber um alerta quando o estoque ficar abaixo desse valor.">!</span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novoProdutoForne">Fornecedores:</label>
+                            <select id="novoProdutoForne" class="form-control" placeholder="Selecionar">
+                                <?php
+                                foreach ($fornecedores as $fornecedor) {
+                                    echo '<option value="' . $fornecedor['id_fornecedo'] . '">' . $fornecedor['nome_fornecedo'] . '</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -298,6 +339,76 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirCargo()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal de inserir saida de produto -->
+<div class="modal fade" id="modalInserirSaida" tabindex="-1" role="dialog" aria-labelledby="modalNovoSaidaLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNovoSaidaLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formNovoSaida">
+                    <input type="hidden" id="novoSaidaId" value="">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="novoSaidaQuant">Quantidade Saída:</label>
+                            <input type="number" min="0" max="999999" step="1" class="form-control" id="novoSaidaQuant" required placeholder="Digite a quantidade">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novoSaidaMoti">Motivo Saída:</label>
+                            <input type="text" class="form-control" id="novoSaidaMoti" required placeholder="Digite o motivo">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirSaida()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal de inserir entrada de produto -->
+<div class="modal fade" id="modalInserirEntrada" tabindex="-1" role="dialog" aria-labelledby="modalNovoEntradaLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNovoEntradaLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formNovoEntrada">
+                    <input type="hidden" id="novoEntradaId" value="">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="novoEntradaQuant">Quantidade Entrada:</label>
+                            <input type="number" min="0" max="999999" step="1" class="form-control" id="novoEntradaQuant" required placeholder="Digite a quantidade">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novoEntradaMoti">Motivo Entrada:</label>
+                            <input type="text" class="form-control" id="novoEntradaMoti" required placeholder="Digite o motivo">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirEntrada()">Salvar</button>
             </div>
         </div>
     </div>

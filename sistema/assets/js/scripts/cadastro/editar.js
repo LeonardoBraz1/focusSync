@@ -60,7 +60,8 @@ function editarProduto(
   validade,
   alerta_estoque,
   descricao,
-  imagem
+  imagem,
+  id_fornecedo
 ) {
   // Preencher campos da modal
   $("#editProdutoId").val(id_pro);
@@ -72,6 +73,7 @@ function editarProduto(
   $("#editProdutoAler").val(alerta_estoque);
   $("#editProdutoDesc").val(descricao);
   $("#editProdutoImg").attr("src", imagem);
+  $("#editProdutoForne").val(id_fornecedo);
 
   $("#modalEditarProduto").modal("show");
 }
@@ -86,6 +88,7 @@ function salvarEdicaoProduto() {
   var alerta_estoque = $("#editProdutoAler").val();
   var descricao = $("#editProdutoDesc").val();
   var imagem = $("#editProdutoImg").attr("src");
+  var id_fornecedo = $("#editProdutoForne").val();
 
   $.ajax({
     url: "../../controllers/ProdutoController.php",
@@ -100,6 +103,7 @@ function salvarEdicaoProduto() {
       alerta_estoque: alerta_estoque,
       descricao: descricao,
       imagem: imagem,
+      id_fornecedo: id_fornecedo,
       action: "editar",
     },
     dataType: "json",

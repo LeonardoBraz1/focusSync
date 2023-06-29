@@ -10,9 +10,9 @@ class ProdutoModel
         $this->conn = Conexao::getInstance();
     }
 
-    public function editarProduto($id_pro, $nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem)
+    public function editarProduto($id_pro, $nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_fornecedo)
     {
-        $stmt = $this->conn->prepare("UPDATE produtos SET nome_pro = :nome_pro, valor_compra = :valor_compra, valor_venda = :valor_venda, estoque = :estoque, validade = :validade, alerta_estoque = :alerta_estoque, descricao = :descricao, imagem = :imagem  WHERE id_pro = :id_pro");
+        $stmt = $this->conn->prepare("UPDATE produtos SET nome_pro = :nome_pro, valor_compra = :valor_compra, valor_venda = :valor_venda, estoque = :estoque, validade = :validade, alerta_estoque = :alerta_estoque, descricao = :descricao, imagem = :imagem, id_fornecedor = :id_fornecedo  WHERE id_pro = :id_pro");
         $stmt->bindParam(':nome_pro', $nome_pro);
         $stmt->bindParam(':valor_compra', $valor_compra);
         $stmt->bindParam(':valor_venda', $valor_venda);
@@ -21,6 +21,7 @@ class ProdutoModel
         $stmt->bindParam(':alerta_estoque', $alerta_estoque);
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
+        $stmt->bindParam(':id_fornecedo', $id_fornecedo);
         $stmt->bindParam(':id_pro', $id_pro);
         $stmt->execute();
 
@@ -48,9 +49,9 @@ class ProdutoModel
         return $response;
     }
 
-    public function inserirProduto($nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_barbearia)
+    public function inserirProduto($nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_fornecedo, $id_barbearia)
     {
-        $stmt = $this->conn->prepare("INSERT INTO produtos (nome_pro, valor_compra, valor_venda, estoque, validade, alerta_estoque, descricao, imagem, id_barbearia) VALUES (:nome_pro, :valor_compra, :valor_venda, :estoque, :validade, :alerta_estoque, :descricao, :imagem, :id_barbearia)");
+        $stmt = $this->conn->prepare("INSERT INTO produtos (nome_pro, valor_compra, valor_venda, estoque, validade, alerta_estoque, descricao, imagem, id_fornecedor, id_barbearia) VALUES (:nome_pro, :valor_compra, :valor_venda, :estoque, :validade, :alerta_estoque, :descricao, :imagem, :id_fornecedo, :id_barbearia)");
         $stmt->bindParam(':nome_pro', $nome_pro);
         $stmt->bindParam(':valor_compra', $valor_compra);
         $stmt->bindParam(':valor_venda', $valor_venda);
@@ -59,6 +60,7 @@ class ProdutoModel
         $stmt->bindParam(':alerta_estoque', $alerta_estoque);
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
+        $stmt->bindParam(':id_fornecedo', $id_fornecedo);
         $stmt->bindParam(':id_barbearia', $id_barbearia);
         $stmt->execute();
 
@@ -68,6 +70,89 @@ class ProdutoModel
             $response = array("status" => "erro");
         }
 
+        return $response;
+    }
+
+    public function inserirSaida($id_pro, $quantidade, $motivo, $id_barbearia)
+    {
+        // Consulta o estoque atual do produto
+    $stmtEstoque = $this->conn->prepare("SELECT estoque FROM produtos WHERE id_pro = :id_pro");
+    $stmtEstoque->bindParam(':id_pro', $id_pro);
+    $stmtEstoque->execute();
+
+    if ($stmtEstoque->rowCount() > 0) {
+        $rowEstoque = $stmtEstoque->fetch(PDO::FETCH_ASSOC);
+        $estoqueAtual = $rowEstoque['estoque'];
+
+        // Verifica se há estoque suficiente para a saída
+        if ($estoqueAtual >= $quantidade) {
+            // Atualiza o estoque do produto
+            $novoEstoque = $estoqueAtual - $quantidade;
+            $stmtUpdateEstoque = $this->conn->prepare("UPDATE produtos SET estoque = :novoEstoque WHERE id_pro = :id_pro");
+            $stmtUpdateEstoque->bindParam(':novoEstoque', $novoEstoque);
+            $stmtUpdateEstoque->bindParam(':id_pro', $id_pro);
+            $stmtUpdateEstoque->execute();
+
+            // Insere a saída na tabela de "Saídas"
+            $stmt = $this->conn->prepare("INSERT INTO saidas (id_pro, quantidade, motivo_saida, id_barbearia) VALUES (:id_pro, :quantidade, :motivo, :id_barbearia)");
+            $stmt->bindParam(':id_pro', $id_pro);
+            $stmt->bindParam(':quantidade', $quantidade);
+            $stmt->bindParam(':motivo', $motivo);
+            $stmt->bindParam(':id_barbearia', $id_barbearia);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                $response = array("status" => "sucesso");
+            } else {
+                $response = array("status" => "erro");
+            }
+        } else {
+            // Não há estoque suficiente para a saída
+            $response = array("status" => "estoque_insuficiente");
+        }
+    } else {
+        // Produto não encontrado
+        $response = array("status" => "produto_nao_encontrado");
+    }
+        return $response;
+    }
+
+    public function inserirEntrada($id_pro, $quantidade, $motivo, $id_fornecedo, $id_barbearia)
+    {
+        // Consulta o estoque atual do produto
+    $stmtEstoque = $this->conn->prepare("SELECT estoque FROM produtos WHERE id_pro = :id_pro");
+    $stmtEstoque->bindParam(':id_pro', $id_pro);
+    $stmtEstoque->execute();
+
+    if ($stmtEstoque->rowCount() > 0) {
+        $rowEstoque = $stmtEstoque->fetch(PDO::FETCH_ASSOC);
+        $estoqueAtual = $rowEstoque['estoque'];
+
+            // Atualiza o estoque do produto
+            $novoEstoque = $estoqueAtual + $quantidade;
+            $stmtUpdateEstoque = $this->conn->prepare("UPDATE produtos SET estoque = :novoEstoque WHERE id_pro = :id_pro");
+            $stmtUpdateEstoque->bindParam(':novoEstoque', $novoEstoque);
+            $stmtUpdateEstoque->bindParam(':id_pro', $id_pro);
+            $stmtUpdateEstoque->execute();
+
+            // Insere a saída na tabela de "Saídas"
+            $stmt = $this->conn->prepare("INSERT INTO entradas (id_pro, quantidade, motivo_entrada, id_fornecedo, id_barbearia) VALUES (:id_pro, :quantidade, :motivo, :id_fornecedo, :id_barbearia)");
+            $stmt->bindParam(':id_pro', $id_pro);
+            $stmt->bindParam(':quantidade', $quantidade);
+            $stmt->bindParam(':motivo', $motivo);
+            $stmt->bindParam(':id_fornecedo', $id_fornecedo);
+            $stmt->bindParam(':id_barbearia', $id_barbearia);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                $response = array("status" => "sucesso");
+            } else {
+                $response = array("status" => "erro");
+            }
+    } else {
+        // Produto não encontrado
+        $response = array("status" => "produto_nao_encontrado");
+    }
         return $response;
     }
 }
