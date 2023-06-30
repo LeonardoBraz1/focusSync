@@ -32,7 +32,7 @@
         <div class="flipper">
           <div class="front">
             <form method="post" action="controllers/autenticacao.php" class="box" onsubmit="return checkStuff()">
-              <h1><img style="width: 200px; margin: 0 0 -35px 0;" src="assets/images/logo-login.png" alt="logoFocusSync"></h1>
+              <h1><img style="width: 300px; margin: 45px 0 37px 0;" src="assets/images/logo-login.png" alt="logoFocusSync"></h1>
               <input type="text" name="username" require required placeholder="Digite seu email" autocomplete="off">
               <i class="typcn typcn-eye" id="eye"></i>
               <input type="password" name="password" require required placeholder="Digite sua senha" id="pwd"  autocomplete="off">

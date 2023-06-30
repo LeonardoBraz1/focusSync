@@ -28,6 +28,16 @@
             <li class="submenu" id="submenuEstoqueBaixo" data-permissao="permissao_submenuEstoqueBaixo"><a class="treeview-item" href="../cadastro/estoqueBaixo.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Estoque Baixo</a></li>
           </ul>
         </li>
+        <li id="menuFinanceiro" data-permissao="permissao_menuFinanceiro" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 23px;" class="fa fa-bar-chart fa-sm" style="color: #ffffff;"></i><span class="app-menu__label"> Financeiro</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li class="submenu" id="submenuServico" data-permissao="permissao_submenuServico"><a class="treeview-item" href="../cadastro/servicos.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Serviços</a></li>
+            <li class="submenu" id="submenuCargo" data-permissao="permissao_submenuCargo"><a class="treeview-item" href="../cadastro/Cargos.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Cargos</a></li>
+            <li class="submenu" id="submenuProduto" data-permissao="permissao_submenuProduto"><a class="treeview-item" href="../cadastro/produtos.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Produtos</a></li>
+            <li class="submenu" id="submenuSaida" data-permissao="permissao_submenuSaida"><a class="treeview-item" href="../cadastro/saidas.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Saída de Produtos</a></li>
+            <li class="submenu" id="submenuEntrada" data-permissao="permissao_submenuEntrada"><a class="treeview-item" href="../cadastro/entradas.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Entrada de Produtos</a></li>
+            <li class="submenu" id="submenuEstoqueBaixo" data-permissao="permissao_submenuEstoqueBaixo"><a class="treeview-item" href="../cadastro/estoqueBaixo.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Estoque Baixo</a></li>
+          </ul>
+        </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 13px;" class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Forms</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form Components</a></li>

@@ -77,13 +77,13 @@ include('../../components/head.php');
                                                   <label style="cursor: pointer;" for="btnWhat2-' . $row['id_cliente'] . '"> 
                                                   <a href="https://api.whatsapp.com/send?phone=' . $formattedPhone . '&text=' . urlencode($message) . '" target="_blank">
                                                     <i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i>
-                                                  </a></label></label>
+                                                  </a></label>
                                                   <input style="display: none; pointer-events: none; opacity: 0;" onclick="redirectToWhatsApp(' . $row['id_cliente'] . ')" type="button" class="btnWhat" id="btnWhat2-' . $row['id_cliente'] . '" data-id="' . $row['id_cliente'] . '">
                                                   </td>
                                                   </tr>';
                                         }
                                     } catch (PDOException $e) {
-                                        echo "Erro: ";
+                                        echo "Erro: " . $e->getMessage();
                                     }
                                     $conn = null;
                                     ?>
