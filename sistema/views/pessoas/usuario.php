@@ -26,7 +26,7 @@ include('../../components/head.php');
                 <div class="tile">
                     <div class="tile-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-bordered" id="sampleTable">
+                            <table class="table table-hover table-bordered tabelaUsuarios" id="sampleTable">
                                 <thead>
                                     <tr>
                                         <th style="display: none;">id</th>
@@ -38,36 +38,8 @@ include('../../components/head.php');
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody">
-                                    <?php
-                                    try {
-                                        $stmt = $conn->prepare("SELECT usuarios.*, niveis_usuarios.nome_nivel FROM usuarios INNER JOIN niveis_usuarios ON usuarios.id_nivel = niveis_usuarios.id_nivel WHERE usuarios.id_barbearia = :barbearia_id");
-                                        $stmt->bindParam(':barbearia_id', $_SESSION["barbearia_id"]);
-                                        $stmt->execute();
-
-                                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                            echo '<tr style="display: none;" class="tabela1load">
-                                                <td style="display: none;">' . $row['id'] . '</td>
-                                                <td>' . $row['nome'] . '</td>
-                                                <td>' . $row['email'] . '</td>
-                                                <td>' . $row['nome_nivel'] . '</td>
-                                                <td>' . $row['ativo'] . '</td>
-                                                <td>' . $row['senha'] . '</td>
-                                                <td style="display: flex; justify-content: center; align-item: center; gap: 5px;">
-                                                    <label style="cursor: pointer;" for="btnEditarUser-' . $row['id'] . '"><i title="Editar" class="icon fa fa-solid fa-edit fa-lg" style="color: #023ea7;"></i></label>
-                                                    <input style="display: none;" type="button" class="btnEditarUser"  onclick="editarUsuario(' . $row['id'] . ', \'' . $row['nome'] . '\', \'' . $row['email'] . '\', \'' . $row['id_nivel'] . '\', \'' . $row['ativo'] . '\', \'' . $row['senha'] . '\')" id="btnEditarUser-' . $row['id'] . '">
-                                                    <label style="cursor: pointer;" for="btnDeletarUser-' . $row['id'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
-                                                    <input style="display: none;" type="button" onclick="deletarUsuario(' . $row['id'] . ')" id="btnDeletarUser-' . $row['id'] . '">
-                                                    <label style="cursor: pointer;" for="btnCadUser-' . $row['id'] . '"><i class="fa fa-duotone fa-lock fa-lg" style="--fa-primary-color: #12161c; --fa-secondary-color: #12213a;"></i></label>
-                                                    <input style="display: none; pointer-events: none; opacity: 0;" type="button" class="btnCadUser1" id="btnCadUser-' . $row['id'] . '" data-id="' . $row['id'] . '">
-                                                </td>
-                                            </tr>';
-                                        }
-                                    } catch (PDOException $e) {
-                                        echo "Erro:";
-                                    }
-                                    $conn = null;
-                                    ?>
+                                <tbody id="usuariosTableBody">
+                                   
                                     </tbody>
                             </table>
                         </div>
@@ -96,6 +68,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/inserir.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/pessoas/tabelas.js"></script>
 </body>
 
 </html>
