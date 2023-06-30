@@ -30,7 +30,6 @@ function obterUsuarios() {
           </tr>`;
           $(".tabelaUsuarios tbody").append(row);
         }
-
         console.log(usuario);
       },
       error: function () {

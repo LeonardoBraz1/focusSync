@@ -40,7 +40,7 @@ include('../../components/head.php');
                                 </thead>
                                 <tbody id="usuariosTableBody">
                                    
-                                    </tbody>
+                                 </tbody>
                             </table>
                         </div>
                     </div>

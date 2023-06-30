@@ -121,6 +121,6 @@ class UsuarioModel
             }
         }
     
-        return $usuarios; // Retorna o array de usuários
+        return $usuarios; 
     }
 }
