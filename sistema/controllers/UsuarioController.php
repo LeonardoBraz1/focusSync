@@ -34,6 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response = $usuarioModel->validarEmail($email);
         
+    } elseif ($_POST['action'] === 'obterUsuarios') {
+        $usuarios = $usuarioModel->obterUsuarios($_SESSION["barbearia_id"]);
+        $response = json_encode($usuarios);
     } else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");

@@ -98,5 +98,29 @@ class UsuarioModel
 
         return $response;
     }
-}
 
+    public function obterUsuarios($id_barbearia)
+    {
+        $stmt = $this->conn->prepare("SELECT usuarios.*, niveis_usuarios.nome_nivel FROM usuarios INNER JOIN niveis_usuarios ON usuarios.id_nivel = niveis_usuarios.id_nivel WHERE usuarios.id_barbearia = :barbearia_id");
+        $stmt->bindParam(':barbearia_id', $id_barbearia);
+        $stmt->execute();
+    
+        $usuarios = array(); // Array para armazenar os dados dos usuários
+    
+        if ($stmt->rowCount() > 0) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $usuario = array(
+                    'id' => $row['id'],
+                    'nome' => $row['nome'],
+                    'email' => $row['email'],
+                    'cargo' => $row['nome_nivel'],
+                    'ativo' => $row['ativo'],
+                    'senha' => $row['senha']
+                );
+                $usuarios[] = $usuario; // Adiciona o usuário ao array
+            }
+        }
+    
+        return $usuarios; // Retorna o array de usuários
+    }
+}
