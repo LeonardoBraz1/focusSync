@@ -1,3 +1,4 @@
+
 function editarUsuario(id, nome, email, id_nivel, ativo, senha) {
   // Preencher campos da modal
   $("#editUsuarioId").val(id);
@@ -39,9 +40,8 @@ function salvarEdicaoUsuario() {
         $("#textSucesso").text("Usuário editado com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
+          obterUsuarios();
+        
       } else {
         $("#textErro").text("Não foi possivel editar esse Usuário");
         $("#modalErro").modal("show");
@@ -117,9 +117,7 @@ function salvarEdicaoFuncionario() {
         $("#textSucesso").text("Funcionário editado com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
+        obterFuncionarios();
       } else {
         $("#textErro").text("Não foi possivel editar esse Funcionário");
         $("#modalErro").modal("show");
@@ -185,9 +183,7 @@ function salvarEdicaoFornecedor() {
         $("#textSucesso").text("Fornecedor editado com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
+        obterFornecedores();
       } else {
         $("#textErro").text("Não foi possivel editar esse Fornecedor");
         $("#modalErro").modal("show");
@@ -239,9 +235,7 @@ function salvarEdicaoCliente() {
         $("#textSucesso").text("Cliente editado com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
+        obterClientes();
       } else {
         $("#textErro").text("Não foi possivel editar esse Cliente");
         $("#modalErro").modal("show");

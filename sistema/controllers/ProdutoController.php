@@ -42,6 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response = $produtoModel->inserirEntrada($id_pro, $quantidade, $motivo, $id_fornecedo, $_SESSION["barbearia_id"]);
     
+    } elseif ($_POST['action'] === 'obterEntradas') {
+
+        $entradas = $produtoModel->obterEntradas($_SESSION["barbearia_id"]);
+        $response = json_encode($entradas);
+        
     } else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");

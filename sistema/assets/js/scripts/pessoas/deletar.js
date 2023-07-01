@@ -25,9 +25,7 @@ function btnDeletarUsuario() {
         $("#textSucesso").text("Usuário deletado com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); 
-        });
+        obterUsuarios();
       } else {
         $("#textErro").text("Não foi possivel deletar esse Usuário");
         $("#modalErro").modal("show");
@@ -71,9 +69,7 @@ function btnDeletarFuncionario() {
         $("#textSucesso").text("Funcionário deletado com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); 
-        });
+        obterFuncionarios();
       } else {
         $("#textErro").text("Não foi possivel deletar esse funcionário");
         $("#modalErro").modal("show");
@@ -119,9 +115,7 @@ function btnDeletarFornecedor() {
         $("#textSucesso").text("Fornecedor deletado com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); 
-        });
+        obterFornecedores();
       } else {
         $("#textErro").text("Não foi possivel deletar esse Fornecedor");
         $("#modalErro").modal("show");
@@ -168,9 +162,7 @@ function btnDeletarCliente() {
         $("#textSucesso").text("Cliente deletado com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); 
-        });
+        obterClientes();
       } else {
         $("#textErro").text("Não foi possivel deletar esse cliente");
         $("#modalErro").modal("show");

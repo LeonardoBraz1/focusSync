@@ -28,6 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response = $fornecedorModel->inserirFornecedor($nome_fornecedo, $email_fornecedo, $telefone_fornecedo, $pontuacao_fornecedo, $endereco_fornecedo, $cidade_fornecedo, $site_fornecedo, $_SESSION["barbearia_id"]);
     
+    } elseif ($_POST['action'] === 'obterFornecedores') {
+        $fornecedores = $fornecedorModel->obterFornecedores($_SESSION["barbearia_id"]);
+        $response = json_encode($fornecedores);
     } else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");

@@ -35,30 +35,8 @@ include('../../components/head.php');
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody">
-                                    <?php
-                                    try {
-                                        $stmt = $conn->prepare("SELECT * FROM niveis_usuarios WHERE id_barbearia = :barbearia_id");
-                                        $stmt->bindParam(':barbearia_id', $_SESSION["barbearia_id"]);
-                                        $stmt->execute();
-
-                                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                            $formattedDate = date('Y-m-d', strtotime($row['data']));
-                                            echo '<tr style="display: none;" class="tabela1load">
-                                                <td style="display: none;">' . $row['id_nivel'] . '</td>
-                                                <td>' . $row['nome_nivel'] . '</td>
-                                                <td>' . $formattedDate . '</td>
-                                                <td style="display: flex; justify-content: center; align-item: center; gap: 7px;">
-                                                    <label style="cursor: pointer;" for="btnDeletarCargo-' . $row['id_nivel'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
-                                                    <input style="display: none;" type="button" onclick="deletarCargo(' . $row['id_nivel'] . ')" id="btnDeletarCargo-' . $row['id_nivel'] . '">
-                                                </td>
-                                            </tr>';
-                                        }
-                                    } catch (PDOException $e) {
-                                        echo "Erro:";
-                                    }
-                                    $conn = null;
-                                    ?>
+                                <tbody id="cargosTableBody">
+                                   
                                     </tbody>
                             </table>
                         </div>
@@ -87,6 +65,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/inserir.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/cadastro/tabelas.js"></script>
     
 </body>
 

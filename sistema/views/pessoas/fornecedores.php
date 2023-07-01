@@ -38,46 +38,8 @@ include('../../components/head.php');
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody">
-                                    <?php
-                                    try {
-                                        $stmt = $conn->prepare("SELECT * from fornecedores WHERE id_barbearia = :barbearia_id");
-                                        $stmt->bindParam(':barbearia_id', $_SESSION["barbearia_id"]);
-                                        $stmt->execute();
-
-                                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                            $formattedDate = date('Y-m-d', strtotime($row['data_cadastro']));
-                                            $formattedPhone = str_replace(array('(', ')', '-'), '', $row['telefone_fornecedo']);
-
-                                            $message = "Olá, estou entrando em contato através da sua barbearia.";
-
-                                            echo '<tr style="display: none;" class="tabela1load">
-                                                <td style="display: none;">' . $row['id_fornecedo'] . '</td>
-                                                <td>' . $row['nome_fornecedo'] . '</td>
-                                                <td>' . $row['email_fornecedo'] . '</td>
-                                                <td>' . $row['telefone_fornecedo'] . '</td>
-                                                <td>' . $row['pontuacao_fornecedo'] . '</td>
-                                                <td>' . $formattedDate . '</td>
-                                                <td style="display: flex; justify-content: center; align-item: center; gap: 7px;">
-                                                    <label style="cursor: pointer;" for="btnEditarForne-' . $row['id_fornecedo'] . '"><i title="Editar" class="icon fa fa-solid fa-edit fa-lg" style="color: #023ea7;"></i></label>
-                                                    <input style="display: none;" type="button" class="btnEditarForne"  onclick="editarFornecedor(' . $row['id_fornecedo'] . ', \'' . $row['nome_fornecedo'] . '\', \'' . $row['email_fornecedo'] . '\', \'' . $row['telefone_fornecedo'] . '\', \'' . $row['pontuacao_fornecedo'] . '\', \'' . $row['endereco_fornecedo'] . '\', \'' . $row['cidade_fornecedo'] . '\', \'' . $row['site_fornecedo'] . '\')" id="btnEditarForne-' . $row['id_fornecedo'] . '">
-                                                    <label style="cursor: pointer;" for="btnDeletarForne-' . $row['id_fornecedo'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
-                                                    <input style="display: none;" type="button" onclick="deletarFornecedor(' . $row['id_fornecedo'] . ')" id="btnDeletarForne-' . $row['id_fornecedo'] . '">
-                                                    <input style="display: none;" type="button" onclick="deletarFornecedor(' . $row['id_fornecedo'] . ')" id="btnDeletarForne-' . $row['id_fornecedo'] . '">
-                                                    <label style="cursor: pointer;" for="btnWhat1-' . $row['id_fornecedo'] . '">
-                                                   <a href="https://api.whatsapp.com/send?phone=' . $formattedPhone . '&text=' . urlencode($message) . '" target="_blank">
-                                                            <i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i>
-                                                        </a>
-                                                    </label>
-                                                    <input style="display: none; pointer-events: none; opacity: 0;" onclick="redirectToWhatsApp(' . $row['id_fornecedo'] . ')" type="button" class="btnWhat" id="btnWhat-' . $row['id_fornecedo'] . '" data-id="' . $row['id_fornecedo'] . '">
-                                                </td>
-                                            </tr>';
-                                        }
-                                    } catch (PDOException $e) {
-                                        echo "Erro:";
-                                    }
-                                    $conn = null;
-                                    ?>
+                                <tbody id="fornecedoresTableBody">
+                                   
                                     </tbody>
                             </table>
                         </div>
@@ -107,6 +69,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/inserir.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/pessoas/tabelas.js"></script>
 </body>
 
 </html>

@@ -155,4 +155,31 @@ class ProdutoModel
     }
         return $response;
     }
+
+    public function obterEntradas($barbeariaId) {
+        $stmt = $this->conn->prepare("SELECT produtos.*, fornecedores.nome_fornecedo, entradas.* FROM produtos LEFT JOIN fornecedores ON produtos.id_fornecedor = fornecedores.id_fornecedo LEFT JOIN entradas ON produtos.id_pro = entradas.id_pro WHERE entradas.id_barbearia = :barbearia_id");
+        $stmt->bindParam(':barbearia_id', $barbeariaId);
+        $stmt->execute();
+
+        $entradas = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
+            $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
+           
+            $entrada = array(
+                'id_entrada' => $row['id_entrada'],
+                'imagemSrc' => $imagemSrc,
+                'nome_produto' => $row['nome_pro'],
+                'quantidade' => $row['quantidade'],
+                'motivo_entrada' => $row['motivo_entrada'],
+                'nome_fornecedor' => $row['nome_fornecedo'],
+                'data_entrada' => date('Y-m-d', strtotime($row['data_entrada']))
+            );
+
+            $entradas[] = $entrada;
+        }
+
+        return $entradas;
+    }
 }

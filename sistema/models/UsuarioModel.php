@@ -114,6 +114,7 @@ class UsuarioModel
                     'nome' => $row['nome'],
                     'email' => $row['email'],
                     'cargo' => $row['nome_nivel'],
+                    'id_nivel' => $row['id_nivel'],
                     'ativo' => $row['ativo'],
                     'senha' => $row['senha']
                 );

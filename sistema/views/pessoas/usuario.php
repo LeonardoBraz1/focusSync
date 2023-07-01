@@ -26,7 +26,7 @@ include('../../components/head.php');
                 <div class="tile">
                     <div class="tile-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-bordered tabelaUsuarios" id="sampleTable">
+                            <table class="table table-hover table-bordered" id="sampleTable">
                                 <thead>
                                     <tr>
                                         <th style="display: none;">id</th>

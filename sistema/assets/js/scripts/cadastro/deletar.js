@@ -75,9 +75,7 @@ function deletarCargo(id_nivel) {
           $("#textSucesso").text("Cargo deletado com sucesso!");
           $("#modalSucesso").modal("show");
   
-          $("#modalSucesso").on("hidden.bs.modal", function () {
-            location.reload(); 
-          });
+          obterCargos();
         } else {
           $("#textErro").text("Não foi possivel deletar esse cargo");
           $("#modalErro").modal("show");

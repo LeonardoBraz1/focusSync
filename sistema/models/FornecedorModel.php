@@ -68,4 +68,38 @@ class FornecedorModel
 
         return $response;
     }
+
+    public function obterFornecedores($id_barbearia) {
+        $stmt = $this->conn->prepare("SELECT * FROM fornecedores WHERE id_barbearia = :barbearia_id");
+        $stmt->bindParam(':barbearia_id', $id_barbearia);
+        $stmt->execute();
+
+        $fornecedores = array();
+
+        if ($stmt->rowCount() > 0) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $formattedDate = date('Y-m-d', strtotime($row['data_cadastro']));
+                $formattedPhone = str_replace(array('(', ')', '-'), '', $row['telefone_fornecedo']);
+
+                $message = "Olá, estou entrando em contato através da sua barbearia.";
+
+                $fornecedor = array(
+                    'id_fornecedo' => $row['id_fornecedo'],
+                    'nome_fornecedo' => $row['nome_fornecedo'],
+                    'email_fornecedo' => $row['email_fornecedo'],
+                    'telefone_fornecedo' => $row['telefone_fornecedo'],
+                    'pontuacao_fornecedo' => $row['pontuacao_fornecedo'],
+                    'data_cadastro' => $formattedDate,
+                    'endereco_fornecedo' => $row['endereco_fornecedo'],
+                    'cidade_fornecedo' => $row['cidade_fornecedo'],
+                    'site_fornecedo' => $row['site_fornecedo'],
+                    'telefone_fornecedo' => $formattedPhone,
+                    'message' => $message
+                );
+                $fornecedores[] = $fornecedor;
+            }
+        }
+
+        return $fornecedores;
+    }
 }

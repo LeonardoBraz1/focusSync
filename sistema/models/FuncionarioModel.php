@@ -227,4 +227,43 @@ class FuncionarioModel
 
         return $response;
     }
+
+    public function obterFuncionarios($id_barbearia)
+    {
+        $stmt = $this->conn->prepare("SELECT usuarios.*, niveis_usuarios.nome_nivel FROM usuarios INNER JOIN niveis_usuarios ON usuarios.id_nivel = niveis_usuarios.id_nivel WHERE usuarios.id_barbearia = :barbearia_id");
+        $stmt->bindParam(':barbearia_id', $id_barbearia);
+        $stmt->execute();
+
+        $funcionarios = array(); 
+
+        if ($stmt->rowCount() > 0) {
+
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $formattedDate = date('Y-m-d', strtotime($row['cadastro']));
+                $formattedPhone = '(' . substr($row['telefone'], 0, 2) . ') ' . substr($row['telefone'], 2, 5) . '-' . substr($row['telefone'], 7);               
+                $message = "Olá, estou entrando em contato através da sua barbearia.";
+                $funcionario = array(
+                    'id' => $row['id'],
+                    'nome' => $row['nome'],
+                    'email' => $row['email'],
+                    'cargo' => $row['nome_nivel'],
+                    'id_nivel' => $row['id_nivel'],
+                    'cpf' => $row['cpf'],
+                    'cadastro' => $formattedDate,
+                    'comissao' => $row['comissao'],
+                    'atendimento' => $row['atendimento'],
+                    'endereco' => $row['endereco'],
+                    'cidade' => $row['cidade'],
+                    'tipoPix' => $row['tipoPix'],
+                    'pix' => $row['pix'],
+                    'telefone' => $formattedPhone,
+                    'message' => $message
+                );
+                $funcionarios[] = $funcionario;
+            }
+        }
+
+        return $funcionarios;
+    }
 }

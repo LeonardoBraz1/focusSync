@@ -38,49 +38,8 @@ include('../../components/head.php');
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody">
-                                    <?php
-                                    try {
-                                        $stmt = $conn->prepare("SELECT usuarios.*, niveis_usuarios.nome_nivel FROM usuarios INNER JOIN niveis_usuarios ON usuarios.id_nivel = niveis_usuarios.id_nivel WHERE usuarios.id_barbearia = :barbearia_id");
-                                        $stmt->bindParam(':barbearia_id', $_SESSION["barbearia_id"]);
-                                        $stmt->execute();
-
-                                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                            $formattedDate = date('Y-m-d', strtotime($row['cadastro']));
-                                            $formattedPhone = str_replace(array('(', ')', '-'), '', $row['telefone']);
-
-                                            $message = "Olá, estou entrando em contato através da sua barbearia.";
-                                            
-                                            echo '<tr style="display: none;" class="tabela1load">
-                                                <td style="display: none;">' . $row['id'] . '</td>
-                                                <td>' . $row['nome'] . '</td>
-                                                <td>' . $row['email'] . '</td>
-                                                <td>' . $row['nome_nivel'] . '</td>
-                                                <td>' . $row['cpf'] . '</td>
-                                                <td>' . $formattedDate . '</td>
-                                                <td>' . $row['comissao'] . '%</td>
-                                                <td style="display: flex; justify-content: center; align-item: center; gap: 7px;">
-                                                    <label style="cursor: pointer;" for="btnEditarFunc-' . $row['id'] . '"><i title="Editar" class="icon fa fa-solid fa-edit fa-lg" style="color: #023ea7;"></i></label>
-                                                    <input style="display: none;" type="button" class="btnEditarFunc"  onclick="editarFuncionario(' . $row['id'] . ', \'' . $row['nome'] . '\', \'' . $row['email'] . '\', \'' . $row['id_nivel'] . '\', \'' . $row['cpf'] . '\', \'' . $row['comissao'] . '\', \'' . $row['atendimento'] . '\', \'' . $row['endereco'] . '\', \'' . $row['cidade'] . '\', \'' . $row['tipoPix'] . '\', \'' . $row['pix'] . '\')" id="btnEditarFunc-' . $row['id'] . '">
-                                                    <label style="cursor: pointer;" for="btnDeletarFunc-' . $row['id'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
-                                                    <input style="display: none;" type="button" onclick="deletarFuncionario(' . $row['id'] . ')" id="btnDeletarFunc-' . $row['id'] . '">
-                                                    <label style="cursor: pointer;" for="btnDiaFunc-' . $row['id'] . '"><i class="fa fa-solid fa-calendar fa-lg" style="color: #6a81a9;"></i></label>
-                                                    <input style="display: none; pointer-events: none; opacity: 0;" type="button" onclick="btnInserirDiaSemana(' . $row['id'] . ')" class="btnDiaFunc1" id="btnDiaFunc-' . $row['id'] . '" data-id="' . $row['id'] . '">
-                                                    <label style="cursor: pointer;" for="btnServFunc-' . $row['id'] . '"> 
-                                                    <a href="https://api.whatsapp.com/send?phone=' . $formattedPhone . '&text=' . urlencode($message) . '" target="_blank">
-                                                        <i class="fa fa-brands fa-whatsapp fa-lg" style="color: #7dd90d;"></i>
-                                                    </a></label>
-                                                    <input style="display: none; pointer-events: none; opacity: 0;" onclick="redirectToWhatsApp(' . $row['id'] . ')" type="button" class="btnWhat" id="btnWhat-' . $row['id'] . '" data-id="' . $row['id'] . '">
-                                                    <label style="cursor: pointer;" for="btnServFunc-' . $row['id'] . '"><i class="fa fa-solid fa-briefcase fa-lg" style="color: #334a70;"></i></label>
-                                                    <input style="display: none; pointer-events: none; opacity: 0;" onclick="btnInserirServ(' . $row['id'] . ')" type="button" class="btnServFunc1" id="btnServFunc-' . $row['id'] . '" data-id="' . $row['id'] . '">
-                                                </td>
-                                            </tr>';
-                                        }
-                                    } catch (PDOException $e) {
-                                        echo "Erro:";
-                                    }
-                                    $conn = null;
-                                    ?>
+                                <tbody id="funcionariosTableBody">
+                                   
                                     </tbody>
                             </table>
                         </div>
@@ -109,6 +68,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/inserir.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/pessoas/tabelas.js"></script>
    
 </body>
 

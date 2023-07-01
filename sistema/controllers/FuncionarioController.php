@@ -62,6 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response = $funcionarioModel->deletarServ($id_servico);
         
+    }  elseif ($_POST['action'] === 'obterFuncionarios') {
+        $funcionarios = $funcionarioModel->obterFuncionarios($_SESSION["barbearia_id"]);
+        $response = json_encode($funcionarios);
     } else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");

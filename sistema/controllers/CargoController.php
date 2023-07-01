@@ -18,6 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response = $cargoModel->inserirCargo($nome_nivel, $_SESSION["barbearia_id"]);
     
+    }  elseif ($_POST['action'] === 'obterCargos') {
+
+        $cargos = $cargoModel->obterCargos($_SESSION["barbearia_id"]);
+        $response = json_encode($cargos);
+        
     } else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");

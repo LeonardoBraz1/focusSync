@@ -40,4 +40,24 @@ class CargoModel
 
         return $response;
     }
+
+    public function obterCargos($barbeariaId) {
+        $stmt = $this->conn->prepare("SELECT * FROM niveis_usuarios WHERE id_barbearia = :barbearia_id");
+        $stmt->bindParam(':barbearia_id', $barbeariaId);
+        $stmt->execute();
+
+        $cargos = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $cargo = array(
+                'id_nivel' => $row['id_nivel'],
+                'nome_nivel' => $row['nome_nivel'],
+                'data' => date('Y-m-d', strtotime($row['data']))
+            );
+
+            $cargos[] = $cargo;
+        }
+
+        return $cargos;
+    }
 }

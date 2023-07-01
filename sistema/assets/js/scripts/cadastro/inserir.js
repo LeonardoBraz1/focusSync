@@ -182,9 +182,6 @@ function inserirSaida() {
         $("#textSucesso").text("Saida de Produto com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
       } else if(response.status === "estoque_insuficiente") {
         $("#textErro").text("Produto com estoque abaixo da quantidade de saída");
         $("#modalErro").modal("show");
@@ -238,9 +235,6 @@ function inserirEntrada() {
         $("#textSucesso").text("Entrada de Produto com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
       } else {
         $("#textErro").text("Não foi possível fazer a Entrada desse produto");
         $("#modalErro").modal("show");

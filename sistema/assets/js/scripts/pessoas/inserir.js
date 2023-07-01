@@ -129,9 +129,7 @@ function inserirUsuario() {
         $("#textSucesso").text("Usuário inserido com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
+        obterUsuarios();
       } else {
         $("#textErro").text("Não foi possível inserir esse usuário");
         $("#modalErro").modal("show");
@@ -286,9 +284,7 @@ function inserirFuncionario() {
         $("#textSucesso").text("Funcionário inserido com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
+        obterFuncionarios();
       } else {
         $("#textErro").text("Não foi possível inserir esse funcionário");
         $("#modalErro").modal("show");
@@ -553,9 +549,7 @@ function inserirFornecedor() {
         $("#textSucesso").text("Fornecedor inserido com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
+        obterFornecedores();
       } else {
         $("#textErro").text("Não foi possível inserir esse fornecedor");
         $("#modalErro").modal("show");
@@ -567,14 +561,13 @@ function inserirFornecedor() {
     },
   });
 
-  // Fechar a modal de inserção de funcionário
-  $("#modalInserirFuncionario").modal("hide");
+  $("#modalInserirFornecedor").modal("hide");
 }
 
 
 
 
-//    FORNECEDOR     //
+//    cliente     //
 
 
 function btnInserirCliente() {
@@ -600,9 +593,7 @@ function inserirCliente() {
         $("#textSucesso").text("Cliente inserido com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
+        obterClientes();
       } else {
         $("#textErro").text("Não foi possível inserir esse cliente");
         $("#modalErro").modal("show");

@@ -24,6 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response = $clienteModel->inserirCliente($nome_cliente, $email_cliente, $telefone_cliente, $_SESSION["barbearia_id"]);
     
+    } elseif ($_POST['action'] === 'obterClientes') {
+
+        $clientes = $clienteModel->obterClientes($_SESSION["barbearia_id"]);
+        $response = json_encode($clientes);
+
+    } elseif ($_POST['action'] === 'obterClientesRetorno') {
+
+        $obterClientesRetornos = $clienteModel->obterClientesRetorno($_SESSION["barbearia_id"]);
+        $response = json_encode($obterClientesRetornos);
+        
     } else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");
@@ -31,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo json_encode($response);
 } else {
-    // Retorna uma resposta em caso de requisição inválida
     $response = array('error' => false, 'message' => 'Requisição inválida!');
     echo json_encode($response);
 }
