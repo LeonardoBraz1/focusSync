@@ -35,34 +35,8 @@ include('../../components/head.php');
                                         <th>Cadastro</th>
                                     </tr>
                                 </thead>
-                                <tbody">
-                                    <?php
-                                    try {
-                                        $stmt = $conn->prepare("SELECT * FROM produtos  WHERE id_barbearia = :barbearia_id AND estoque < alerta_estoque");
-                                        $stmt->bindParam(':barbearia_id', $_SESSION["barbearia_id"]);
-                                        $stmt->execute();
-
-                                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                            $formattedDate = date('Y-m-d', strtotime($row['cadastro']));
-                                            $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
-                                            $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
-
-                                            echo '<tr style="display: none;" class="tabela1load">
-                                                  <td style="display: none;">' . $row['id_pro'] . '</td>
-                                                  <td><img src="' . $imagemSrc . '" alt="Imagem do Produto" style="max-width: 30px;">' . $row['nome_pro'] . '</td>
-                                                  <td>R$ ' . $row['valor_compra'] . '</td>
-                                                  <td>R$ ' . $row['valor_venda'] . '</td>
-                                                  <td>' .  $row['estoque'] . '</td>
-                                                  <td>' . $row['validade'] . '</td>
-                                                  <td>' . $row['alerta_estoque'] . '</td>
-                                                  <td>' . $formattedDate . '</td>
-                                                  </tr>';
-                                        }
-                                    } catch (PDOException $e) {
-                                        echo "Erro:";
-                                    }
-                                    $conn = null;
-                                    ?>
+                                <tbody id="produtosEstoqueTableBody">
+                                   
                                     </tbody>
                             </table>
                         </div>
@@ -91,6 +65,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/inserir.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/cadastro/tabelas/tabelaEstoqueBaixo.js"></script>
 </body>
 
 </html>

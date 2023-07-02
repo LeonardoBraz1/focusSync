@@ -27,9 +27,6 @@ function deletarServico(id_servico) {
           $("#textSucesso").text("Serviço deletado com sucesso!");
           $("#modalSucesso").modal("show");
   
-          $("#modalSucesso").on("hidden.bs.modal", function () {
-            location.reload(); 
-          });
         } else {
           $("#textErro").text("Não foi possivel deletar esse serviço");
           $("#modalErro").modal("show");
@@ -40,6 +37,7 @@ function deletarServico(id_servico) {
         $("#modalErro").modal("show");
       },
     });
+    obterServicos();
     $("#modalDeletarServico").modal("hide");
   }
 
@@ -75,7 +73,7 @@ function deletarCargo(id_nivel) {
           $("#textSucesso").text("Cargo deletado com sucesso!");
           $("#modalSucesso").modal("show");
   
-          obterCargos();
+          
         } else {
           $("#textErro").text("Não foi possivel deletar esse cargo");
           $("#modalErro").modal("show");
@@ -86,6 +84,7 @@ function deletarCargo(id_nivel) {
         $("#modalErro").modal("show");
       },
     });
+    obterCargos();
     $("#modalDeletarCargo").modal("hide");
   }
 
@@ -120,9 +119,6 @@ function deletarCargo(id_nivel) {
           $("#textSucesso").text("Produto deletado com sucesso!");
           $("#modalSucesso").modal("show");
   
-          $("#modalSucesso").on("hidden.bs.modal", function () {
-            location.reload(); 
-          });
         } else {
           $("#textErro").text("Não foi possivel deletar esse produto");
           $("#modalErro").modal("show");
@@ -133,5 +129,6 @@ function deletarCargo(id_nivel) {
         $("#modalErro").modal("show");
       },
     });
+    obterProdutos();
     $("#modalDeletarProduto").modal("hide");
   }

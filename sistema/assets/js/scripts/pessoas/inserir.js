@@ -4,17 +4,16 @@ function btnInserirUsuario() {
 }
 
 $(document).ready(function () {
-  var submitButton = $("#submit-button-user"); 
+  var submitButton = $("#submit-button-user");
 
   // Monitorar alterações no campo de email do usuário
   $(".email-input-user").on("input", function () {
     var email = $(this).val();
-    var emailErrorElement = $(this).siblings(".error-message-user"); 
+    var emailErrorElement = $(this).siblings(".error-message-user");
 
     // Limpar o conteúdo da mensagem de erro antes de fazer a validação
     emailErrorElement.text("");
 
-  
     $.ajax({
       url: "../../controllers/UsuarioController.php",
       type: "POST",
@@ -28,12 +27,12 @@ $(document).ready(function () {
           // O email é válido, não exibe a mensagem de erro
           emailErrorElement.text("");
         }
-        updateSubmitButtonStateUser(); 
+        updateSubmitButtonStateUser();
       },
       error: function (xhr, status, error) {
         // Trate os erros da chamada AJAX
         console.log("Erro na chamada AJAX:", error);
-        updateSubmitButtonStateUser(); 
+        updateSubmitButtonStateUser();
       },
     });
   });
@@ -41,12 +40,11 @@ $(document).ready(function () {
   // Monitorar alterações no campo de nome do usuário
   $(".nome-input-user").on("input", function () {
     var nome = $(this).val();
-    var nomeErrorElement = $(this).siblings(".error-message-user"); 
+    var nomeErrorElement = $(this).siblings(".error-message-user");
 
     // Limpar o conteúdo da mensagem de erro antes de fazer a validação
     nomeErrorElement.text("");
 
-   
     $.ajax({
       url: "../../controllers/UsuarioController.php",
       type: "POST",
@@ -54,43 +52,39 @@ $(document).ready(function () {
       success: function (response) {
         var parsedResponse = handleAjaxResponseUser(response);
         if (parsedResponse && parsedResponse.status === "existe") {
-        
           nomeErrorElement.text("Nome já está em uso");
         } else {
           // O nome é válido, não exibe a mensagem de erro
           nomeErrorElement.text("");
         }
-        updateSubmitButtonStateUser(); 
+        updateSubmitButtonStateUser();
       },
       error: function (xhr, status, error) {
         // Trate os erros da chamada AJAX
         console.log("Erro na chamada AJAX:", error);
-        updateSubmitButtonStateUser(); 
+        updateSubmitButtonStateUser();
       },
     });
   });
 
   // Função para atualizar o estado do botão de envio do usuário
   function updateSubmitButtonStateUser() {
-    var errorMessages = $(".error-message-user"); 
+    var errorMessages = $(".error-message-user");
     var hasErrors = false;
 
-   
     errorMessages.each(function () {
       if ($(this).text() !== "") {
         hasErrors = true;
-        return false; 
+        return false;
       }
     });
 
-    
     if (hasErrors) {
       submitButton.attr("disabled", "disabled");
     } else {
       submitButton.removeAttr("disabled");
     }
   }
-
 
   function handleAjaxResponseUser(response) {
     var parsedResponse;
@@ -129,7 +123,6 @@ function inserirUsuario() {
         $("#textSucesso").text("Usuário inserido com sucesso!");
         $("#modalSucesso").modal("show");
 
-        obterUsuarios();
       } else {
         $("#textErro").text("Não foi possível inserir esse usuário");
         $("#modalErro").modal("show");
@@ -141,6 +134,7 @@ function inserirUsuario() {
     },
   });
 
+        obterUsuarios();
   // Fechar a modal de inserção de usuário
   $("#modalInserirUsuario").modal("hide");
 }
@@ -153,15 +147,13 @@ function btnInserirFuncionario() {
 $(document).ready(function () {
   var submitButton = $("#submit-button-funcionario");
 
-  
   $(".email-input-funcionario").on("input", function () {
     var email = $(this).val();
-    var emailErrorElement = $(this).siblings(".error-message-funcionario"); 
+    var emailErrorElement = $(this).siblings(".error-message-funcionario");
 
     // Limpar o conteúdo da mensagem de erro antes de fazer a validação
     emailErrorElement.text("");
 
-   
     $.ajax({
       url: "../../controllers/FuncionarioController.php",
       type: "POST",
@@ -174,12 +166,12 @@ $(document).ready(function () {
           // O email é válido, não exibe a mensagem de erro
           emailErrorElement.text("");
         }
-        updateSubmitButtonStateFuncionario(); 
+        updateSubmitButtonStateFuncionario();
       },
       error: function (xhr, status, error) {
         // Trate os erros da chamada AJAX
         console.log("Erro na chamada AJAX:", error);
-        updateSubmitButtonStateFuncionario(); 
+        updateSubmitButtonStateFuncionario();
       },
     });
   });
@@ -187,12 +179,11 @@ $(document).ready(function () {
   // Monitorar alterações no campo de nome do funcionário
   $(".nome-input-funcionario").on("input", function () {
     var nome = $(this).val();
-    var nomeErrorElement = $(this).siblings(".error-message-funcionario"); 
+    var nomeErrorElement = $(this).siblings(".error-message-funcionario");
 
     // Limpar o conteúdo da mensagem de erro antes de fazer a validação
     nomeErrorElement.text("");
 
-    
     $.ajax({
       url: "../../controllers/FuncionarioController.php",
       type: "POST",
@@ -200,32 +191,30 @@ $(document).ready(function () {
       success: function (response) {
         var parsedResponse = handleAjaxResponseFuncionario(response);
         if (parsedResponse && parsedResponse.status === "existe") {
-         
           nomeErrorElement.text("Nome já está em uso");
         } else {
-         
           nomeErrorElement.text("");
         }
-        updateSubmitButtonStateFuncionario(); 
+        updateSubmitButtonStateFuncionario();
       },
       error: function (xhr, status, error) {
         // Trate os erros da chamada AJAX
         console.log("Erro na chamada AJAX:", error);
-        updateSubmitButtonStateFuncionario(); 
+        updateSubmitButtonStateFuncionario();
       },
     });
   });
 
   // Função para atualizar o estado do botão de envio do funcionário
   function updateSubmitButtonStateFuncionario() {
-    var errorMessages = $(".error-message-funcionario"); 
+    var errorMessages = $(".error-message-funcionario");
     var hasErrors = false;
 
     // Verifica se existem mensagens de erro
     errorMessages.each(function () {
       if ($(this).text() !== "") {
         hasErrors = true;
-        return false; 
+        return false;
       }
     });
 
@@ -284,7 +273,6 @@ function inserirFuncionario() {
         $("#textSucesso").text("Funcionário inserido com sucesso!");
         $("#modalSucesso").modal("show");
 
-        obterFuncionarios();
       } else {
         $("#textErro").text("Não foi possível inserir esse funcionário");
         $("#modalErro").modal("show");
@@ -296,13 +284,12 @@ function inserirFuncionario() {
     },
   });
 
+        obterFuncionarios();
   // Fechar a modal de inserção de funcionário
   $("#modalInserirFuncionario").modal("hide");
 }
 
-
 // dia semana//
-
 
 var idFuncionario;
 var diaSemana;
@@ -357,10 +344,7 @@ function inserirDiaSemana() {
   });
 }
 
-
-
 function deletarDiaSemana1(id_dia) {
-
   var id = idFuncionario;
 
   $.ajax({
@@ -373,7 +357,6 @@ function deletarDiaSemana1(id_dia) {
     dataType: "json",
     success: function (response) {
       if (response.status === "sucesso") {
-
         atualizarTabela(id);
       } else {
         $("#textErro").text("Não foi possível inserir esse funcionário");
@@ -386,7 +369,6 @@ function deletarDiaSemana1(id_dia) {
     },
   });
 }
-
 
 function atualizarTabela(id) {
   $.ajax({
@@ -406,11 +388,7 @@ function atualizarTabela(id) {
   });
 }
 
-
 // serviços //
-
-
-
 
 var idServ;
 var serv;
@@ -452,24 +430,20 @@ function inserirServ() {
     dataType: "json",
     success: function (response) {
       if (response.status === "sucesso") {
-        atualizarTabelaServ(id)
+        atualizarTabelaServ(id);
       } else {
         $("#textErro").text("Não foi possível inserir esse funcionário");
         $("#modalErro").modal("show");
       }
     },
     error: function (xhr, status, error) {
-      
       $("#textErro").text("Erro ao enviar os dados");
       $("#modalErro").modal("show");
     },
   });
 }
 
-
-
 function deletarServ1(id_servico) {
-
   var id = idServ;
 
   $.ajax({
@@ -482,8 +456,7 @@ function deletarServ1(id_servico) {
     dataType: "json",
     success: function (response) {
       if (response.status === "sucesso") {
-
-        atualizarTabelaServ(id)
+        atualizarTabelaServ(id);
       } else {
         $("#textErro").text("Não foi possível inserir esse funcionário");
         $("#modalErro").modal("show");
@@ -514,9 +487,7 @@ function atualizarTabelaServ(id) {
   });
 }
 
-
 //    FORNECEDOR     //
-
 
 function btnInserirFornecedor() {
   $("#modalInserirFornecedor").modal("show");
@@ -549,7 +520,6 @@ function inserirFornecedor() {
         $("#textSucesso").text("Fornecedor inserido com sucesso!");
         $("#modalSucesso").modal("show");
 
-        obterFornecedores();
       } else {
         $("#textErro").text("Não foi possível inserir esse fornecedor");
         $("#modalErro").modal("show");
@@ -561,14 +531,11 @@ function inserirFornecedor() {
     },
   });
 
+        obterFornecedores();
   $("#modalInserirFornecedor").modal("hide");
 }
 
-
-
-
 //    cliente     //
-
 
 function btnInserirCliente() {
   $("#modalInserirCliente").modal("show");
@@ -578,6 +545,7 @@ function inserirCliente() {
   var nome_cliente = $("#novoClienteNome").val();
   var email_cliente = $("#novoClienteEmail").val();
   var telefone_cliente = $("#novoClienteTel").val();
+  
   $.ajax({
     url: "../../controllers/ClienteController.php",
     type: "POST",
@@ -592,8 +560,7 @@ function inserirCliente() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Cliente inserido com sucesso!");
         $("#modalSucesso").modal("show");
-
-        obterClientes();
+        
       } else {
         $("#textErro").text("Não foi possível inserir esse cliente");
         $("#modalErro").modal("show");
@@ -604,7 +571,7 @@ function inserirCliente() {
       $("#modalErro").modal("show");
     },
   });
-
+  obterClientes();
   // Fechar a modal de inserção de funcionário
   $("#modalInserirCliente").modal("hide");
 }

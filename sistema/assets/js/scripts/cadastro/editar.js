@@ -33,9 +33,6 @@ function salvarEdicaoServico() {
         $("#textSucesso").text("Serviço editado com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
       } else {
         $("#textErro").text("Não foi possivel editar esse serviço");
         $("#modalErro").modal("show");
@@ -46,6 +43,7 @@ function salvarEdicaoServico() {
       $("#modalErro").modal("show");
     },
   });
+  obterServicos();
   $("#modalEditarServico").modal("hide");
 }
 
@@ -112,9 +110,7 @@ function salvarEdicaoProduto() {
         $("#textSucesso").text("Produto editado com sucesso!");
         $("#modalSucesso").modal("show");
 
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
+        
       } else {
         $("#textErro").text("Não foi possível editar esse produto");
         $("#modalErro").modal("show");
@@ -125,6 +121,7 @@ function salvarEdicaoProduto() {
       $("#modalErro").modal("show");
     },
   });
+  obterProdutos();
   $("#modalEditarProduto").modal("hide");
 }
 

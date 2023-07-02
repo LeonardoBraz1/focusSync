@@ -17,6 +17,9 @@ include('../../components/head.php');
     include('../../components/sidebar.php');
     ?>
     <main class="app-content">
+        <button onclick="btnInserirVenda()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><i style="margin-right: 5px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i> NOVA VENDA</button>
+        <br>
+        <br>
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
@@ -27,15 +30,18 @@ include('../../components/head.php');
                                     <tr>
                                         <th style="display: none;">id</th>
                                         <th>Nome</th>
-                                        <th>Telefone</th>
-                                        <th>Cadastro</th>
-                                        <th>ultimo_servico</th>
-                                        <th>Retorno</th>
-                                        <th>Dias sem Retorno</th>
+                                        <th>Valor Compra</th>
+                                        <th>Quantidade</th>
+                                        <th>Valor Total</th>
+                                        <th>Cliente</th>
+                                        <th>Data Venda</th>
+                                        <th>Data Pagamento</th>
+                                        <th>Fatura</th>
+                                        <th>Status</th>
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody id="clientesRetornosTableBody">
+                                <tbody id="vendasTableBody">
                                     
                                     </tbody>
                             </table>
@@ -46,7 +52,7 @@ include('../../components/head.php');
         </div>
     </main>
 
-    <?php include('../modals/modal-Pessoas.php'); ?>
+    <?php include('../modals/modal-Cadastro.php'); ?>
 
     <!-- Essential javascripts for application to work-->
     <script src="../../assets/js/jquery-3.3.1.min.js"></script>
@@ -62,10 +68,10 @@ include('../../components/head.php');
     <script type="text/javascript">
         $("#sampleTable").DataTable();
     </script>
-    <script type="text/javascript" src="../../assets/js/scripts/pessoas/editar.js"></script>
-    <script type="text/javascript" src="../../assets/js/scripts/pessoas/deletar.js"></script>
-    <script type="text/javascript" src="../../assets/js/scripts/pessoas/inserir.js"></script>
-    <script type="text/javascript" src="../../assets/js/scripts/pessoas/tabelas/tabelaClientesRetorno.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/editar.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/deletar.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/inserir.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/tabelas/tabelaVendas.js"></script>
 </body>
 
 </html>

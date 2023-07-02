@@ -32,31 +32,8 @@ include('../../components/head.php');
                                         <th>Data Saída</th>
                                     </tr>
                                 </thead>
-                                <tbody">
-                                    <?php
-                                    try {
-                                        $stmt = $conn->prepare("SELECT saidas.*, produtos.nome_pro, produtos.imagem FROM saidas left JOIN produtos ON saidas.id_pro = produtos.id_pro WHERE saidas.id_barbearia = :barbearia_id");
-                                        $stmt->bindParam(':barbearia_id', $_SESSION["barbearia_id"]);
-                                        $stmt->execute();
-
-                                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                            $formattedDate = date('Y-m-d', strtotime($row['data_saida']));
-                                            $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
-                                            $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
-
-                                            echo '<tr style="display: none;"  class="tabela1load">
-                                                  <td style="display: none;">' . $row['id_saida'] . '</td>
-                                                  <td><img src="' . $imagemSrc . '" alt="Imagem do Produto" style="max-width: 30px;">' . $row['nome_pro'] . '</td>
-                                                  <td>' . $row['quantidade'] . '</td>
-                                                  <td>' . $row['motivo_saida'] . '</td>
-                                                  <td>' . $formattedDate . '</td>
-                                                  </tr>';
-                                        }
-                                    } catch (PDOException $e) {
-                                        echo "Erro:";
-                                    }
-                                    $conn = null;
-                                    ?>
+                                <tbody id="saidasTableBody">
+                                   
                                     </tbody>
                             </table>
                         </div>
@@ -85,6 +62,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/inserir.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/cadastro/tabelas/tabelaSaidas.js"></script>
 </body>
 
 </html>

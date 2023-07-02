@@ -65,7 +65,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/inserir.js"></script>
-    <script type="text/javascript" src="../../assets/js/scripts/cadastro/tabelas.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/cadastro/tabelas/tabelaCargos.js"></script>
     
 </body>
 

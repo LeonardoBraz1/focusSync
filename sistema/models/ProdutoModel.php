@@ -76,57 +76,57 @@ class ProdutoModel
     public function inserirSaida($id_pro, $quantidade, $motivo, $id_barbearia)
     {
         // Consulta o estoque atual do produto
-    $stmtEstoque = $this->conn->prepare("SELECT estoque FROM produtos WHERE id_pro = :id_pro");
-    $stmtEstoque->bindParam(':id_pro', $id_pro);
-    $stmtEstoque->execute();
+        $stmtEstoque = $this->conn->prepare("SELECT estoque FROM produtos WHERE id_pro = :id_pro");
+        $stmtEstoque->bindParam(':id_pro', $id_pro);
+        $stmtEstoque->execute();
 
-    if ($stmtEstoque->rowCount() > 0) {
-        $rowEstoque = $stmtEstoque->fetch(PDO::FETCH_ASSOC);
-        $estoqueAtual = $rowEstoque['estoque'];
+        if ($stmtEstoque->rowCount() > 0) {
+            $rowEstoque = $stmtEstoque->fetch(PDO::FETCH_ASSOC);
+            $estoqueAtual = $rowEstoque['estoque'];
 
-        // Verifica se há estoque suficiente para a saída
-        if ($estoqueAtual >= $quantidade) {
-            // Atualiza o estoque do produto
-            $novoEstoque = $estoqueAtual - $quantidade;
-            $stmtUpdateEstoque = $this->conn->prepare("UPDATE produtos SET estoque = :novoEstoque WHERE id_pro = :id_pro");
-            $stmtUpdateEstoque->bindParam(':novoEstoque', $novoEstoque);
-            $stmtUpdateEstoque->bindParam(':id_pro', $id_pro);
-            $stmtUpdateEstoque->execute();
+            // Verifica se há estoque suficiente para a saída
+            if ($estoqueAtual >= $quantidade) {
+                // Atualiza o estoque do produto
+                $novoEstoque = $estoqueAtual - $quantidade;
+                $stmtUpdateEstoque = $this->conn->prepare("UPDATE produtos SET estoque = :novoEstoque WHERE id_pro = :id_pro");
+                $stmtUpdateEstoque->bindParam(':novoEstoque', $novoEstoque);
+                $stmtUpdateEstoque->bindParam(':id_pro', $id_pro);
+                $stmtUpdateEstoque->execute();
 
-            // Insere a saída na tabela de "Saídas"
-            $stmt = $this->conn->prepare("INSERT INTO saidas (id_pro, quantidade, motivo_saida, id_barbearia) VALUES (:id_pro, :quantidade, :motivo, :id_barbearia)");
-            $stmt->bindParam(':id_pro', $id_pro);
-            $stmt->bindParam(':quantidade', $quantidade);
-            $stmt->bindParam(':motivo', $motivo);
-            $stmt->bindParam(':id_barbearia', $id_barbearia);
-            $stmt->execute();
+                // Insere a saída na tabela de "Saídas"
+                $stmt = $this->conn->prepare("INSERT INTO saidas (id_pro, quantidade, motivo_saida, id_barbearia) VALUES (:id_pro, :quantidade, :motivo, :id_barbearia)");
+                $stmt->bindParam(':id_pro', $id_pro);
+                $stmt->bindParam(':quantidade', $quantidade);
+                $stmt->bindParam(':motivo', $motivo);
+                $stmt->bindParam(':id_barbearia', $id_barbearia);
+                $stmt->execute();
 
-            if ($stmt->rowCount() > 0) {
-                $response = array("status" => "sucesso");
+                if ($stmt->rowCount() > 0) {
+                    $response = array("status" => "sucesso");
+                } else {
+                    $response = array("status" => "erro");
+                }
             } else {
-                $response = array("status" => "erro");
+                // Não há estoque suficiente para a saída
+                $response = array("status" => "estoque_insuficiente");
             }
         } else {
-            // Não há estoque suficiente para a saída
-            $response = array("status" => "estoque_insuficiente");
+            // Produto não encontrado
+            $response = array("status" => "produto_nao_encontrado");
         }
-    } else {
-        // Produto não encontrado
-        $response = array("status" => "produto_nao_encontrado");
-    }
         return $response;
     }
 
     public function inserirEntrada($id_pro, $quantidade, $motivo, $id_fornecedo, $id_barbearia)
     {
         // Consulta o estoque atual do produto
-    $stmtEstoque = $this->conn->prepare("SELECT estoque FROM produtos WHERE id_pro = :id_pro");
-    $stmtEstoque->bindParam(':id_pro', $id_pro);
-    $stmtEstoque->execute();
+        $stmtEstoque = $this->conn->prepare("SELECT estoque FROM produtos WHERE id_pro = :id_pro");
+        $stmtEstoque->bindParam(':id_pro', $id_pro);
+        $stmtEstoque->execute();
 
-    if ($stmtEstoque->rowCount() > 0) {
-        $rowEstoque = $stmtEstoque->fetch(PDO::FETCH_ASSOC);
-        $estoqueAtual = $rowEstoque['estoque'];
+        if ($stmtEstoque->rowCount() > 0) {
+            $rowEstoque = $stmtEstoque->fetch(PDO::FETCH_ASSOC);
+            $estoqueAtual = $rowEstoque['estoque'];
 
             // Atualiza o estoque do produto
             $novoEstoque = $estoqueAtual + $quantidade;
@@ -149,16 +149,17 @@ class ProdutoModel
             } else {
                 $response = array("status" => "erro");
             }
-    } else {
-        // Produto não encontrado
-        $response = array("status" => "produto_nao_encontrado");
-    }
+        } else {
+            // Produto não encontrado
+            $response = array("status" => "produto_nao_encontrado");
+        }
         return $response;
     }
 
-    public function obterEntradas($barbeariaId) {
+    public function obterEntradas($id_barbearia)
+    {
         $stmt = $this->conn->prepare("SELECT produtos.*, fornecedores.nome_fornecedo, entradas.* FROM produtos LEFT JOIN fornecedores ON produtos.id_fornecedor = fornecedores.id_fornecedo LEFT JOIN entradas ON produtos.id_pro = entradas.id_pro WHERE entradas.id_barbearia = :barbearia_id");
-        $stmt->bindParam(':barbearia_id', $barbeariaId);
+        $stmt->bindParam(':barbearia_id', $id_barbearia);
         $stmt->execute();
 
         $entradas = array();
@@ -166,7 +167,7 @@ class ProdutoModel
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
             $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
-           
+
             $entrada = array(
                 'id_entrada' => $row['id_entrada'],
                 'imagemSrc' => $imagemSrc,
@@ -182,4 +183,97 @@ class ProdutoModel
 
         return $entradas;
     }
+
+    public function obterProdutos($barbeariaId)
+    {
+        $stmt = $this->conn->prepare("SELECT produtos.*, fornecedores.nome_fornecedo, fornecedores.id_fornecedo FROM produtos LEFT JOIN fornecedores ON produtos.id_fornecedor = fornecedores.id_fornecedo WHERE produtos.id_barbearia = :barbearia_id");
+        $stmt->bindParam(':barbearia_id', $barbeariaId);
+        $stmt->execute();
+
+        $produtos = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $formattedDate = date('Y-m-d', strtotime($row['cadastro']));
+            $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
+            $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
+
+            $estoque = $row['estoque'];
+            $alertaEstoque = $row['alerta_estoque'];
+
+            $produto = array(
+                'id_pro' => $row['id_pro'],
+                'imagemSrc' => $imagemSrc,
+                'nome_pro' => $row['nome_pro'],
+                'valor_compra' => $row['valor_compra'],
+                'valor_venda' => $row['valor_venda'],
+                'estoque' => $estoque,
+                'validade' => $row['validade'],
+                'alerta_estoque' => $alertaEstoque,
+                'data_cadastro' => $formattedDate,
+                'descricao' => $row['descricao'],
+                'id_fornecedor' => $row['id_fornecedo']
+            );
+
+            $produtos[] = $produto;
+        }
+
+        return $produtos;
+    }
+
+    public function obterProdutosEstoqueBaixo($barbeariaId) {
+       
+            $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE id_barbearia = :barbearia_id AND estoque < alerta_estoque");
+            $stmt->bindParam(':barbearia_id', $barbeariaId);
+            $stmt->execute();
+
+            $produtosEstoque = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+                $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
+                $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
+                
+                $produtoEstoque = [
+                    'id_pro' => $row['id_pro'],
+                    'nome_pro' => $row['nome_pro'],
+                    'valor_compra' => $row['valor_compra'],
+                    'valor_venda' => $row['valor_venda'],
+                    'estoque' => $row['estoque'],
+                    'validade' => $row['validade'],
+                    'alerta_estoque' => $row['alerta_estoque'],
+                    'data_cadastro' => date('Y-m-d', strtotime($row['cadastro'])),
+                    'imagemSrc' => $imagemSrc
+                ];
+
+                $produtosEstoque[] = $produtoEstoque;
+            }
+
+            return $produtosEstoque;
+    }
+
+    public function obterSaidas($barbeariaId) {
+       
+          $stmt = $this->conn->prepare("SELECT saidas.*, produtos.nome_pro, produtos.imagem FROM saidas LEFT JOIN produtos ON saidas.id_pro = produtos.id_pro WHERE saidas.id_barbearia = :barbearia_id");
+          $stmt->bindParam(':barbearia_id', $barbeariaId);
+          $stmt->execute();
+    
+          $saidas = [];
+          while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $formattedDate = date('Y-m-d', strtotime($row['data_saida']));
+            $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
+            $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
+    
+            $saida = [
+              'id_saida' => $row['id_saida'],
+              'nome_pro' => $row['nome_pro'],
+              'quantidade' => $row['quantidade'],
+              'motivo_saida' => $row['motivo_saida'],
+              'data_saida' => $formattedDate,
+              'imagemSrc' => $imagemSrc
+            ];
+    
+            $saidas[] = $saida;
+          }
+    
+          return $saidas;
+      }
 }

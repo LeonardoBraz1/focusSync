@@ -105,7 +105,7 @@ class UsuarioModel
         $stmt->bindParam(':barbearia_id', $id_barbearia);
         $stmt->execute();
     
-        $usuarios = array(); // Array para armazenar os dados dos usuários
+        $usuarios = array(); 
     
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -118,7 +118,7 @@ class UsuarioModel
                     'ativo' => $row['ativo'],
                     'senha' => $row['senha']
                 );
-                $usuarios[] = $usuario; // Adiciona o usuário ao array
+                $usuarios[] = $usuario; 
             }
         }
     

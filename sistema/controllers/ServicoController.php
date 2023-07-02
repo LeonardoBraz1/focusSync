@@ -25,7 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response = $servicoModel->inserirServico($nome_servico, $preco, $comissao, $tempo, $_SESSION["barbearia_id"]);
     
-    } else {
+    } elseif ($_POST['action'] === 'obterServicos') {
+
+        $servicos = $servicoModel->obterServicos($_SESSION["barbearia_id"]);
+        $response = json_encode($servicos);
+        
+    }  else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");
     }

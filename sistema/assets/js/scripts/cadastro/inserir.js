@@ -24,10 +24,6 @@ function inserirServico() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Serviço inserido com sucesso!");
         $("#modalSucesso").modal("show");
-
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
       } else {
         $("#textErro").text("Não foi possível inserir esse serviço");
         $("#modalErro").modal("show");
@@ -38,13 +34,9 @@ function inserirServico() {
       $("#modalErro").modal("show");
     },
   });
-
-  // Fechar a modal de inserção de funcionário
+  obterServicos();
   $("#modalInserirServico").modal("hide");
 }
-
-
-
 
 //    Cargo     //
 
@@ -66,10 +58,6 @@ function inserirCargo() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Cargo inserido com sucesso!");
         $("#modalSucesso").modal("show");
-
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
       } else {
         $("#textErro").text("Não foi possível inserir esse cargo");
         $("#modalErro").modal("show");
@@ -81,13 +69,9 @@ function inserirCargo() {
     },
   });
 
-  // Fechar a modal de inserção de funcionário
+  obterCargos();
   $("#modalInserirCargo").modal("hide");
 }
-
-
-
-
 
 //    Produto     //
 
@@ -105,7 +89,6 @@ function inserirProduto() {
   var descricao = $("#novoProdutoDesc").val();
   var imagem = $("#novoProdutoImg").attr("src");
   var id_fornecedo = $("#novoProdutoForne").val();
-
 
   if (imagem === "") {
     imagem = "../../assets/images/sem-foto.jpg";
@@ -131,10 +114,6 @@ function inserirProduto() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Produto inserido com sucesso!");
         $("#modalSucesso").modal("show");
-
-        $("#modalSucesso").on("hidden.bs.modal", function () {
-          location.reload(); // Recarrega a página
-        });
       } else {
         $("#textErro").text("Não foi possível inserir esse produto");
         $("#modalErro").modal("show");
@@ -145,20 +124,15 @@ function inserirProduto() {
       $("#modalErro").modal("show");
     },
   });
-
-  // Fechar a modal de inserção de funcionário
+  obterProdutos();
   $("#modalInserirProduto").modal("hide");
 }
-
-
-
-
 
 //   Saida Produto     //
 
 function SaidaProduto(id_pro, nome_pro) {
   window.saidaId = id_pro;
-  document.getElementById('modalNovoSaidaLabel').innerHTML = nome_pro;
+  document.getElementById("modalNovoSaidaLabel").innerHTML = nome_pro;
   $("#modalInserirSaida").modal("show");
 }
 
@@ -181,9 +155,10 @@ function inserirSaida() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Saida de Produto com sucesso!");
         $("#modalSucesso").modal("show");
-
-      } else if(response.status === "estoque_insuficiente") {
-        $("#textErro").text("Produto com estoque abaixo da quantidade de saída");
+      } else if (response.status === "estoque_insuficiente") {
+        $("#textErro").text(
+          "Produto com estoque abaixo da quantidade de saída"
+        );
         $("#modalErro").modal("show");
       } else {
         $("#textErro").text("Não foi possível fazer a saída desse produto");
@@ -195,21 +170,16 @@ function inserirSaida() {
       $("#modalErro").modal("show");
     },
   });
-
-  // Fechar a modal de inserção de funcionário
+  obterProdutos();
   $("#modalInserirSaida").modal("hide");
 }
-
-
-
-
 
 //   Entrada Produto     //
 
 function entradaProduto(id_pro, nome_pro, id_fornecedo) {
   window.entradaId = id_pro;
   window.fornecedorId = id_fornecedo;
-  document.getElementById('modalNovoEntradaLabel').innerHTML = nome_pro;
+  document.getElementById("modalNovoEntradaLabel").innerHTML = nome_pro;
   $("#modalInserirEntrada").modal("show");
 }
 
@@ -234,7 +204,6 @@ function inserirEntrada() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Entrada de Produto com sucesso!");
         $("#modalSucesso").modal("show");
-
       } else {
         $("#textErro").text("Não foi possível fazer a Entrada desse produto");
         $("#modalErro").modal("show");
@@ -245,7 +214,6 @@ function inserirEntrada() {
       $("#modalErro").modal("show");
     },
   });
-
-  // Fechar a modal de inserção de funcionário
+  obterProdutos();
   $("#modalInserirEntrada").modal("hide");
 }

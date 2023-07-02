@@ -62,4 +62,27 @@ class ServicoModel
 
         return $response;
     }
+
+    public function obterServicos($barbeariaId) {
+       
+            $stmt = $this->conn->prepare("SELECT * FROM servicos_barbearia WHERE id_barbearia = :barbearia_id");
+            $stmt->bindParam(':barbearia_id', $barbeariaId);
+            $stmt->execute();
+
+            $servicos = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $servico = [
+                    'id_servico' => $row['id_servico'],
+                    'nome_servico' => $row['nome_servico'],
+                    'preco' => $row['preco'],
+                    'comissao' => $row['comissao'],
+                    'tempo' => $row['tempo'],
+                    'data' => date('Y-m-d', strtotime($row['data']))
+                ];
+
+                $servicos[] = $servico;
+            }
+
+            return $servicos;
+    }
 }

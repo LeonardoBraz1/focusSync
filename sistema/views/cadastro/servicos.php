@@ -38,35 +38,8 @@ include('../../components/head.php');
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody">
-                                    <?php
-                                    try {
-                                        $stmt = $conn->prepare("SELECT * FROM servicos_barbearia WHERE id_barbearia = :barbearia_id");
-                                        $stmt->bindParam(':barbearia_id', $_SESSION["barbearia_id"]);
-                                        $stmt->execute();
-
-                                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                            $formattedDate = date('Y-m-d', strtotime($row['data']));
-                                            echo '<tr style="display: none;" class="tabela1load">
-                                                <td style="display: none;">' . $row['id_servico'] . '</td>
-                                                <td>' . $row['nome_servico'] . '</td>
-                                                <td>R$ ' . $row['preco'] . '</td>
-                                                <td>' . $row['comissao'] . '%</td>
-                                                <td>' . $row['tempo'] . ' Minutos</td>
-                                                <td>' . $formattedDate . '</td>
-                                                <td style="display: flex; justify-content: center; align-item: center; gap: 7px;">
-                                                    <label style="cursor: pointer;" for="btnEditarServico-' . $row['id_servico'] . '"><i title="Editar" class="icon fa fa-solid fa-edit fa-lg" style="color: #023ea7;"></i></label>
-                                                    <input style="display: none;" type="button" class="btnEditarServico1"  onclick="editarServico(' . $row['id_servico'] . ', \'' . $row['nome_servico'] . '\', \'' . $row['preco'] . '\', \'' . $row['comissao'] . '\', \'' . $row['tempo'] . '\')" id="btnEditarServico-' . $row['id_servico'] . '">
-                                                    <label style="cursor: pointer;" for="btnDeletarServico-' . $row['id_servico'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
-                                                    <input style="display: none;" type="button" onclick="deletarServico(' . $row['id_servico'] . ')" id="btnDeletarServico-' . $row['id_servico'] . '">
-                                                </td>
-                                            </tr>';
-                                        }
-                                    } catch (PDOException $e) {
-                                        echo "Erro:";
-                                    }
-                                    $conn = null;
-                                    ?>
+                                <tbody id="servicosTableBody">
+                                    
                                     </tbody>
                             </table>
                         </div>
@@ -95,6 +68,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/inserir.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/cadastro/tabelas/tabelaServico.js"></script>
     
 </body>
 

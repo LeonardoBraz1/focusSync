@@ -68,7 +68,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/pessoas/inserir.js"></script>
-    <script type="text/javascript" src="../../assets/js/scripts/pessoas/tabelas.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/pessoas/tabelas/tabelaFuncionarios.js"></script>
    
 </body>
 

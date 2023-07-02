@@ -47,6 +47,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $entradas = $produtoModel->obterEntradas($_SESSION["barbearia_id"]);
         $response = json_encode($entradas);
         
+    } elseif ($_POST['action'] === 'obterProdutos') {
+
+        $produtos = $produtoModel->obterProdutos($_SESSION["barbearia_id"]);
+        $response = json_encode($produtos);
+        
+    } elseif ($_POST['action'] === 'obterProdutosEstoqueBaixo') {
+
+        $produtosEstoque = $produtoModel->obterProdutosEstoqueBaixo($_SESSION["barbearia_id"]);
+        $response = json_encode($produtosEstoque);
+        
+    } elseif ($_POST['action'] === 'obterSaidas') {
+
+        $saidas = $produtoModel->obterSaidas($_SESSION["barbearia_id"]);
+        $response = json_encode($saidas);
+        
     } else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");
