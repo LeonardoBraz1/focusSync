@@ -10,41 +10,6 @@ class VendaModel
         $this->conn = Conexao::getInstance();
     }
 
-    public function deletarVenda($id)
-    {
-        $stmt = $this->conn->prepare("DELETE FROM usuarios WHERE id = :id");
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-            $response = array("status" => "sucesso");
-        } else {
-            $response = array("status" => "erro");
-        }
-
-        return $response;
-    }
-
-    public function inserirVenda($email, $nome, $senha, $id_nivel, $ativo, $id_barbearia)
-    {
-        $stmt = $this->conn->prepare("INSERT INTO usuarios (email, nome, senha, id_nivel, ativo, id_barbearia) VALUES (:email, :nome, :senha, :id_nivel, :ativo, :id_barbearia)");
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':senha', $senha);
-        $stmt->bindParam(':id_nivel', $id_nivel);
-        $stmt->bindParam(':ativo', $ativo);
-        $stmt->bindParam(':id_barbearia', $id_barbearia);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-            $response = array("status" => "sucesso");
-        } else {
-            $response = array("status" => "erro");
-        }
-
-        return $response;
-    }
-
     public function obterVendas($id_barbearia)
     {
         $stmt = $this->conn->prepare("SELECT vendas.*, produtos.nome_pro, produtos.imagem, produtos.valor_venda, usuarios.nome, clientes.nome_cliente FROM vendas LEFT JOIN produtos ON vendas.id_pro = produtos.id_pro LEFT JOIN usuarios ON vendas.id_usuario = usuarios.id LEFT JOIN clientes ON vendas.id_cliente = clientes.id_cliente WHERE vendas.id_barbearia = :barbearia_id");

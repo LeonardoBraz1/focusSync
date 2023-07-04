@@ -18,7 +18,7 @@ function obterVendas() {
             $("#sampleTable").DataTable().destroy();
             var vendas = JSON.parse(response);
             var vendasTableBody = $("#vendasTableBody");
-
+console.log(vendas, response);
             vendasTableBody.empty();
 
                 for (var i = 0; i < vendas.length; i++) {
@@ -45,7 +45,7 @@ function obterVendas() {
                     row.append(actions);
                     vendasTableBody.append(row);
                 }
-            console.log(vendas, response);
+            
             $("#sampleTable").DataTable();
         },
         error: function() {

@@ -52,8 +52,6 @@ include('../../components/head.php');
         </div>
     </main>
 
-    <?php include('../modals/modal-Cadastro.php'); ?>
-
     <!-- Essential javascripts for application to work-->
     <script src="../../assets/js/jquery-3.3.1.min.js"></script>
     <script src="../../assets/js/popper.min.js"></script>
