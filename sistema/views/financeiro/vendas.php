@@ -35,7 +35,7 @@ include('../../components/head.php');
                                         <th>Valor Total</th>
                                         <th>Cliente</th>
                                         <th>Data Venda</th>
-                                        <th>№ da Fatura</th>
+                                        <th>Nº da Fatura</th>
                                         <th>Status</th>
                                         <th>Acões</th>
                                     </tr>
@@ -50,6 +50,8 @@ include('../../components/head.php');
             </div>
         </div>
     </main>
+
+    <?php include('../modals/modal-financeiro.php'); ?>
 
     <!-- Essential javascripts for application to work-->
     <script src="../../assets/js/jquery-3.3.1.min.js"></script>
@@ -68,6 +70,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/inserir.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/verDados.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/tabelas/tabelaVendas.js"></script>
 </body>
 
