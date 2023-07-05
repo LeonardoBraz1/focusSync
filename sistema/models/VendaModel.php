@@ -26,7 +26,7 @@ class VendaModel
                 
                 $result .= '<tr>
                   <td style="display: none;">' . $row['id_venda'] . '</td>
-                  <td style="width: 150px;" ><img src="' . $imagemSrc . '" alt="Imagem do Produto" style="max-width: 30px;">' . $row['nome_pro'] . '</td>
+                  <td style="width: 150px;" ><img target="_blank" title="Clique para abrir o arquivo!" src="' . $imagemSrc . '" alt="Imagem do Produto" style="max-width: 30px;">' . $row['nome_pro'] . '</td>
                   <td>' . $row['valor_venda'] . '</td>
                   <td>' . $row['quantidade'] . '</td>
                   <td>' . $row['valor_total'] . '</td>
