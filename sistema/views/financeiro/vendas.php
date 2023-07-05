@@ -35,8 +35,7 @@ include('../../components/head.php');
                                         <th>Valor Total</th>
                                         <th>Cliente</th>
                                         <th>Data Venda</th>
-                                        <th>Data Pagamento</th>
-                                        <th>Fatura</th>
+                                        <th>№ da Fatura</th>
                                         <th>Status</th>
                                         <th>Acões</th>
                                     </tr>
