@@ -1,15 +1,14 @@
 //  Venda   //
 
-
 function deletarVenda(id_venda) {
     window.deletarVendaId = id_venda;
   
     $(".modal-titleVenda").text("Deletar Venda");
     $("#textDeletarVenda").text(
-      "Você tem certeza de que deseja deletar este venda?"
+      "Você tem certeza de que deseja deletar esta venda?"
     );
     $("#textDeletarVenda1").text(
-      "Esta ação não poderá ser desfeita e todos os dados associados a ele serão permanentemente removidos."
+      "Esta ação não poderá ser desfeita e todos os dados associados serão permanentemente removidos."
     );
     $("#modalDeletarVenda").modal("show");
   }

@@ -1,6 +1,7 @@
 function verVenda(
     id_venda,
     nome_pro,
+    nome_cliente,
     valor_venda,
     quantidade,
     valor_total,
@@ -9,11 +10,13 @@ function verVenda(
     numero_fatura,
     nome,
     forma_pagamento,
-    status
+    status,
+    imagemSrc 
   ) {
     // Preencher campos da modal
     $("#vendaId").text(id_venda);
     $("#nome_dados").text(nome_pro);
+    $("#nomeCli_dados").text(nome_cliente);
     $("#venda_dados").text(valor_venda);
     $("#quantidade_dados").text(quantidade);
     $("#total_dados").text(valor_total);
@@ -23,6 +26,7 @@ function verVenda(
     $("#nomeUser_dados").text(nome);
     $("#forPag_dados").text(forma_pagamento);
     $("#status_dados").text(status);
+    $("#img_mostrar").attr("src", imagemSrc );
   
     $("#modalVerVenda").modal("show");
   }
