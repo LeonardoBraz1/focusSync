@@ -73,16 +73,18 @@ class VendaModel
 
   public function inserirVenda($id_pro, $id_user, $id_cli, $quantidade, $venTotal, $dataPaga, $formapaga, $id_barbearia)
   {
-      $stmt = $this->conn->prepare("INSERT INTO vendas (id_pro, id_usuario, id_cliente, quantidade, valor_Total, data_Pagamento, forma_pagamento, id_barbearia) VALUES (:id_pro, :id_user, :id_cli, :quantidade, :venTotal, :dataPaga, :formapaga, :id_barbearia)");
-      $stmt->bindParam(':id_pro', $id_pro);
-      $stmt->bindParam(':id_user', $id_user);
-      $stmt->bindParam(':id_cli', $id_cli);
-      $stmt->bindParam(':quantidade', $quantidade);
-      $stmt->bindParam(':venTotal', $venTotal);
-      $stmt->bindParam(':dataPaga', $dataPaga);
-      $stmt->bindParam(':formapaga', $formapaga);
-      $stmt->bindParam(':id_barbearia', $id_barbearia);
-      $stmt->execute();
+
+    $dataPaga .= ' ' . date('H:i:s');
+    $stmt = $this->conn->prepare("INSERT INTO vendas (id_pro, id_usuario, id_cliente, quantidade, valor_Total, data_Pagamento, forma_pagamento, id_barbearia, status, numero_fatura) VALUES (:id_pro, :id_user, :id_cli, :quantidade, :venTotal, :dataPaga, :formapaga, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ", UUID())");
+    $stmt->bindParam(':id_pro', $id_pro);
+    $stmt->bindParam(':id_user', $id_user);
+    $stmt->bindParam(':id_cli', $id_cli);
+    $stmt->bindParam(':quantidade', $quantidade);
+    $stmt->bindParam(':venTotal', $venTotal);
+    $stmt->bindParam(':dataPaga', $dataPaga);
+    $stmt->bindParam(':formapaga', $formapaga);
+    $stmt->bindParam(':id_barbearia', $id_barbearia);
+    $stmt->execute();
 
       if ($stmt->rowCount() > 0) {
           $response = array("status" => "sucesso");

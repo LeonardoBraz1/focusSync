@@ -29,5 +29,14 @@ function verVenda(
     $("#img_mostrar").attr("src", imagemSrc );
   
     $("#modalVerVenda").modal("show");
+
+    $(document).ready(function() {
+      var status = $("#status_dados").text().trim();
+      if (status === "Pendente") {
+          $(".status-message").show();
+      } else {
+          $(".status-message").hide();
+      }
+  });
   }
   

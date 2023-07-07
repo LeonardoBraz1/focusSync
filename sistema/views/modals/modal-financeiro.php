@@ -127,38 +127,7 @@ foreach ($result as $row) {
     </div>
 </div>
 
-<script>
-    // Função para atualizar o valor do produto e a soma
-    function updateValues() {
-        var produtoSelecionado = document.getElementById("novaVendaPro");
-        var valorVenda = parseFloat(produtoSelecionado.options[produtoSelecionado.selectedIndex].getAttribute("data-valor"));
-        var quantidade = parseInt(document.getElementById("novaVendaQuant").value);
 
-        if (!isNaN(valorVenda)) {
-            document.getElementById("novaVendaVend").value = valorVenda.toFixed(2);
-
-            if (!isNaN(quantidade)) {
-                var valorTotal = valorVenda * quantidade;
-                document.getElementById("novaVendaTota").value = valorTotal.toFixed(2);
-            }
-        }
-    }
-
-    // Atualiza os valores iniciais ao carregar a página
-    window.onload = function() {
-        updateValues();
-    }
-
-    // Manipula o evento de alteração do produto
-    document.getElementById("novaVendaPro").onchange = function() {
-        updateValues();
-    }
-
-    // Manipula o evento de alteração da quantidade
-    document.getElementById("novaVendaQuant").oninput = function() {
-        updateValues();
-    }
-</script>
 
 
 
@@ -168,6 +137,7 @@ foreach ($result as $row) {
 <div class="modal fade" id="modalVerVenda" tabindex="-1" role="dialog" aria-labelledby="modalNovoEntradaLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <p id="status_message" class="status_message" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center; display: none;">A venda será automaticamente marcada como "Aprovada" na data prevista.</p>
             <div class="modal-header">
                 <h5 class="modal-title" id="nome_dados"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -319,3 +289,47 @@ foreach ($result as $row) {
             </div>
         </div>
     </div>
+
+
+
+    <script>
+        // Função para atualizar o valor do produto e a soma
+        function updateValues() {
+            var produtoSelecionado = document.getElementById("novaVendaPro");
+            var valorVenda = parseFloat(produtoSelecionado.options[produtoSelecionado.selectedIndex].getAttribute("data-valor"));
+            var quantidade = parseInt(document.getElementById("novaVendaQuant").value);
+
+            if (!isNaN(valorVenda)) {
+                document.getElementById("novaVendaVend").value = valorVenda.toFixed(2);
+
+                if (!isNaN(quantidade)) {
+                    var valorTotal = valorVenda * quantidade;
+                    document.getElementById("novaVendaTota").value = valorTotal.toFixed(2);
+                }
+            }
+        }
+
+        // Atualiza os valores iniciais ao carregar a página
+        window.onload = function() {
+            updateValues();
+        }
+
+        // Manipula o evento de alteração do produto
+        document.getElementById("novaVendaPro").onchange = function() {
+            updateValues();
+        }
+
+        // Manipula o evento de alteração da quantidade
+        document.getElementById("novaVendaQuant").oninput = function() {
+            updateValues();
+        }
+
+        $(document).ready(function() {
+            var status = $("#status_dados").text().trim();
+            if (status === "Pendente") {
+                $(".status-message").show();
+            } else {
+                $(".status-message").hide();
+            }
+        });
+    </script>

@@ -7,6 +7,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $vendaModel = new VendaModel();
 
     $id_venda = isset($_POST['id_venda']) ? $_POST['id_venda'] : '';
+    $id_pro = isset($_POST['id_pro']) ? $_POST['id_pro'] : '';
+    $id_user = isset($_POST['id_user']) ? $_POST['id_user'] : '';
+    $id_cli = isset($_POST['id_cli']) ? $_POST['id_cli'] : '';
+    $quantidade = isset($_POST['quantidade']) ? $_POST['quantidade'] : '';
+    $venTotal = isset($_POST['venTotal']) ? $_POST['venTotal'] : '';
+    $dataPaga = isset($_POST['dataPaga']) ? $_POST['dataPaga'] : '';
+    $Formapaga = isset($_POST['Formapaga']) ? $_POST['Formapaga'] : '';
     
     if ($_POST['action'] === 'obterVendas') {
 
