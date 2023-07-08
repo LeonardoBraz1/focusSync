@@ -1,6 +1,6 @@
 <?php
 require_once '../models/VendaModel.php';
-
+date_default_timezone_set('America/Sao_Paulo');
 @session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quantidade = isset($_POST['quantidade']) ? $_POST['quantidade'] : '';
     $venTotal = isset($_POST['venTotal']) ? $_POST['venTotal'] : '';
     $dataPaga = isset($_POST['dataPaga']) ? $_POST['dataPaga'] : '';
-    $Formapaga = isset($_POST['Formapaga']) ? $_POST['Formapaga'] : '';
+    $formapaga = isset($_POST['formapaga']) ? $_POST['formapaga'] : '';
+    $status = isset($_POST['status']) ? $_POST['status'] : '';
     
     if ($_POST['action'] === 'obterVendas') {
 
@@ -27,6 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($_POST['action'] === 'inserir') {
 
         $response = $vendaModel->inserirVenda($id_pro, $id_user, $id_cli, $quantidade, $venTotal, $dataPaga, $formapaga, $_SESSION["barbearia_id"]);
+
+    } elseif ($_POST['action'] === 'editarStatus') {
+
+        $response = $vendaModel->editarStatus($id_venda, $status);
 
     } else {
         // Ação desconhecida

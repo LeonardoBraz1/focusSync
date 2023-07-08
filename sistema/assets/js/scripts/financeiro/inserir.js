@@ -12,6 +12,7 @@ function btnInserirVenda() {
     var venTotal = $("#novaVendaTota").val();
     var dataPaga = $("#novaVendaPaga").val();
     var formapaga = $("#novaVendaFpaga").val();
+
     $.ajax({
       url: "../../controllers/VendaController.php",
       type: "POST",
@@ -28,11 +29,20 @@ function btnInserirVenda() {
       dataType: "json",
       success: function (response) {
         if (response.status === "sucesso") {
+
           $("#textSucesso").text("Venda inserido com sucesso!");
           $("#modalSucesso").modal("show");
+
+        } else if (response.status === "estoque_insuficiente"){
+
+          $("#textErro").text("Produto com estoque abaixo da quantidade de venda");
+          $("#modalErro").modal("show");
+
         } else {
+
           $("#textErro").text("Não foi possível inserir essa vemda");
           $("#modalErro").modal("show");
+
         }
       },
       error: function (xhr, status, error) {

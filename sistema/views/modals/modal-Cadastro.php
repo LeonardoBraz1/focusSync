@@ -539,7 +539,7 @@ foreach ($result as $row) {
 
     <script>
         $(document).ready(function() {
-            $("#editProdutoImg").attr("src", "../../assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
+            $("#editProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
         });
 
         // Atualizar a imagem quando um arquivo for selecionado
@@ -551,7 +551,7 @@ foreach ($result as $row) {
                 if (file) {
                     $("#editProdutoImg").attr("src", e.target.result);
                 } else {
-                    $("#editProdutoImg").attr("src", "../../assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
+                    $("#editProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
                 }
             };
 
@@ -559,7 +559,7 @@ foreach ($result as $row) {
         });
 
         $(document).ready(function() {
-            $("#novoProdutoImg").attr("src", "../../assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
+            $("#novoProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
         });
 
         // Atualizar a imagem quando um arquivo for selecionado
@@ -571,7 +571,7 @@ foreach ($result as $row) {
                 if (file) {
                     $("#novoProdutoImg").attr("src", e.target.result);
                 } else {
-                    $("#novoProdutoImg").attr("src", "../../assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
+                    $("#novoProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
                 }
             };
 

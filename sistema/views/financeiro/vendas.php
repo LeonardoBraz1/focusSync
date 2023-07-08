@@ -11,6 +11,29 @@ $conn = Conexao::getInstance();
 include('../../components/head.php');
 ?>
 
+<style>
+    .status-pendente {
+        background-color: blue;
+        color: #fafcff;
+    }
+
+    .status-aprovado {
+        background-color: #00EE76;
+    }
+
+    .status-cancelado {
+        background-color: red;
+        color: #fafcff;
+    }
+
+
+    .statusCor{
+        padding: 2px 10px;
+        font-weight: bold;
+        border-radius: 8px;
+    }
+</style>
+
 <body class="app sidebar-mini">
     <?php
     include('../../components/navbar.php');
@@ -42,8 +65,8 @@ include('../../components/head.php');
                                     </tr>
                                 </thead>
                                 <tbody id="vendasTableBody">
-                                    
-                                    </tbody>
+
+                                </tbody>
                             </table>
                         </div>
                     </div>

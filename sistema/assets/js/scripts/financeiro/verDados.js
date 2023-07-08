@@ -30,13 +30,15 @@ function verVenda(
   
     $("#modalVerVenda").modal("show");
 
-    $(document).ready(function() {
-      var status = $("#status_dados").text().trim();
-      if (status === "Pendente") {
-          $(".status-message").show();
-      } else {
-          $(".status-message").hide();
-      }
-  });
+
+
+    var status2 = $("#status_dados").text().trim();
+    var statusMessage = $('#status_message');
+
+    if (status2 === 'Pendente') {
+        statusMessage.removeClass('d-none');
+    } else {
+        statusMessage.addClass('d-none');
+    }
   }
   

@@ -76,8 +76,8 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novaVendaCliente">Cliente:</label>
-                            <select id="novaVendaCliente" class="form-control" placeholder="Selecionar">
-                                <option value="">Selecionar Cliente</option>
+                            <select id="novaVendaCliente" class="form-control" placeholder="Selecionar" required="">
+                                <option value=""></option>
                                 <?php
                                 foreach ($clientes as $cliente) {
                                     echo '<option value="' . $cliente['id_cliente'] . '">' . $cliente['nome_cliente'] . '</option>';
@@ -137,7 +137,7 @@ foreach ($result as $row) {
 <div class="modal fade" id="modalVerVenda" tabindex="-1" role="dialog" aria-labelledby="modalNovoEntradaLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <p id="status_message" class="status_message" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center; display: none;">A venda será automaticamente marcada como "Aprovada" na data prevista.</p>
+            <p id="status_message" class="status_message d-none" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center;">A venda será automaticamente marcada como "Aprovada" na data do pagamento.</p>
             <div class="modal-header">
                 <h5 class="modal-title" id="nome_dados"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -214,6 +214,40 @@ foreach ($result as $row) {
 
 
 
+<!-- Modal status -->
+<div class="modal fade" id="modalEditarStatus" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-weight: 400;" class="modal-title">Trocar Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="editStatusId" value="">
+            <div class="modal-body">
+                <div class="form-group col-md-6">
+                    <label for="novoStatus1">Status:</label>
+                    <div class="input-group">
+                        <select id="novoStatus1" class="form-control" placeholder="Selecionar">
+                            <option>Aprovada</option>
+                            <option>Pendente</option>
+                            <option>Cancelada</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoStatus()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 
 
@@ -238,9 +272,6 @@ foreach ($result as $row) {
         </div>
     </div>
 </div>
-
-
-
 
 
 
@@ -323,13 +354,4 @@ foreach ($result as $row) {
         document.getElementById("novaVendaQuant").oninput = function() {
             updateValues();
         }
-
-        $(document).ready(function() {
-            var status = $("#status_dados").text().trim();
-            if (status === "Pendente") {
-                $(".status-message").show();
-            } else {
-                $(".status-message").hide();
-            }
-        });
     </script>
