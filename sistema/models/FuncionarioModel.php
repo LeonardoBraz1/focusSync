@@ -234,14 +234,14 @@ class FuncionarioModel
         $stmt->bindParam(':barbearia_id', $id_barbearia);
         $stmt->execute();
 
-        $funcionarios = array(); 
+        $funcionarios = array();
 
         if ($stmt->rowCount() > 0) {
 
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $formattedDate = date('Y-m-d', strtotime($row['cadastro']));
-                $formattedPhone = '(' . substr($row['telefone'], 0, 2) . ') ' . substr($row['telefone'], 2, 5) . '-' . substr($row['telefone'], 7);               
+                $formattedPhone = '(' . substr($row['telefone'], 0, 2) . ') ' . substr($row['telefone'], 2, 5) . '-' . substr($row['telefone'], 7);
                 $message = "Olá, estou entrando em contato através da sua barbearia.";
                 $funcionario = array(
                     'id' => $row['id'],
@@ -265,5 +265,10 @@ class FuncionarioModel
         }
 
         return $funcionarios;
+    }
+
+    public function __destruct()
+    {
+        $this->conn = null;
     }
 }

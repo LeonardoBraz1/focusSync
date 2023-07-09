@@ -1,6 +1,5 @@
 <?php
 require_once 'conexao.php';
-
 class VendaModel
 {
   private $conn;
@@ -13,18 +12,19 @@ class VendaModel
   public function obterVendas($id_barbearia)
   {
 
-    function getStatusClass($status) {
+    function getStatusClass($status)
+    {
       switch ($status) {
-          case 'Pendente':
-              return 'status-pendente';
-          case 'Aprovada':
-              return 'status-aprovado';
-          case 'Cancelada':
-              return 'status-cancelado';
-          default:
-              return '';
+        case 'Pendente':
+          return 'status-pendente';
+        case 'Aprovada':
+          return 'status-aprovado';
+        case 'Cancelada':
+          return 'status-cancelado';
+        default:
+          return '';
       }
-  }
+    }
 
     $stmt = $this->conn->prepare("SELECT vendas.*, produtos.nome_pro, produtos.imagem, produtos.valor_venda, usuarios.nome, clientes.nome_cliente FROM vendas LEFT JOIN produtos ON vendas.id_pro = produtos.id_pro LEFT JOIN usuarios ON vendas.id_usuario = usuarios.id LEFT JOIN clientes ON vendas.id_cliente = clientes.id_cliente WHERE vendas.id_barbearia = :barbearia_id");
     $stmt->bindParam(':barbearia_id', $id_barbearia);
@@ -34,7 +34,7 @@ class VendaModel
 
     if ($stmt->rowCount() > 0) {
       while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $formattedDate = date('Y-m-d', strtotime($row['data_venda']));
+        $formattedDate = $row['data_venda'];
         $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
         $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
 
@@ -107,13 +107,13 @@ class VendaModel
         $stmtUpdateEstoque->bindParam(':id_pro', $id_pro);
         $stmtUpdateEstoque->execute();
 
-        if ($dataPaga != '') {
-          $dataPaga .= ' ' . date('H:i:s');
-        } else {
-          $dataPaga = '';
-        }
 
-        $stmt = $this->conn->prepare("INSERT INTO vendas (id_pro, id_usuario, id_cliente, quantidade, valor_Total, data_Pagamento, forma_pagamento, id_barbearia, status, numero_fatura) VALUES (:id_pro, :id_user, :id_cli, :quantidade, :venTotal, :dataPaga, :formapaga, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ", UUID())");
+        $stmtFatura = $this->conn->prepare("SELECT max(numero_fatura) FROM vendas");
+        $stmtFatura->execute();
+        $maiorFatura = $stmtFatura->fetchColumn();
+        $proximoNumeroFatura = $maiorFatura + 1;
+
+        $stmt = $this->conn->prepare("INSERT INTO vendas (id_pro, id_usuario, id_cliente, quantidade, valor_Total, data_Pagamento, forma_pagamento, id_barbearia, status, numero_fatura) VALUES (:id_pro, :id_user, :id_cli, :quantidade, :venTotal, :dataPaga, :formapaga, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ", " . $proximoNumeroFatura . ")");
         $stmt->bindParam(':id_pro', $id_pro);
         $stmt->bindParam(':id_user', $id_user);
         $stmt->bindParam(':id_cli', $id_cli);
@@ -139,13 +139,14 @@ class VendaModel
     }
     return $response;
   }
-  public function editarStatus($id_venda, $status){
+  public function editarStatus($id_venda, $status)
+  {
 
     $stmt = $this->conn->prepare("UPDATE vendas SET status = :status WHERE id_venda = :id_venda");
     $stmt->bindParam(':status', $status);
     $stmt->bindParam(':id_venda', $id_venda);
     $stmt->execute();
-    
+
     if ($stmt->rowCount() > 0) {
       $response = array("status" => "sucesso");
     } else {
@@ -155,4 +156,8 @@ class VendaModel
     return $response;
   }
 
+  public function __destruct()
+  {
+    $this->conn = null;
+  }
 }

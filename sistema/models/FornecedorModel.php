@@ -69,7 +69,8 @@ class FornecedorModel
         return $response;
     }
 
-    public function obterFornecedores($id_barbearia) {
+    public function obterFornecedores($id_barbearia)
+    {
         $stmt = $this->conn->prepare("SELECT * FROM fornecedores WHERE id_barbearia = :barbearia_id");
         $stmt->bindParam(':barbearia_id', $id_barbearia);
         $stmt->execute();
@@ -101,5 +102,10 @@ class FornecedorModel
         }
 
         return $fornecedores;
+    }
+
+    public function __destruct()
+    {
+        $this->conn = null;
     }
 }

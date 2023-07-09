@@ -27,7 +27,7 @@ include('../../components/head.php');
     }
 
 
-    .statusCor{
+    .statusCor {
         padding: 2px 10px;
         font-weight: bold;
         border-radius: 8px;
@@ -49,7 +49,7 @@ include('../../components/head.php');
                 <div class="tile">
                     <div class="tile-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-bordered" id="sampleTable">
+                            <table data-order='[[ 6, "desc" ]]' class="table table-hover table-bordered" id="sampleTable">
                                 <thead>
                                     <tr>
                                         <th style="display: none;">id</th>
@@ -88,14 +88,12 @@ include('../../components/head.php');
     <!-- Data table plugin-->
     <script type="text/javascript" src="../../assets/js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../../assets/js/plugins/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript">
-        $("#sampleTable").DataTable();
-    </script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/inserir.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/verDados.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/tabelas/tabelaVendas.js"></script>
+    
 </body>
 
 </html>

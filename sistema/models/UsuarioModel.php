@@ -104,9 +104,9 @@ class UsuarioModel
         $stmt = $this->conn->prepare("SELECT usuarios.*, niveis_usuarios.nome_nivel FROM usuarios INNER JOIN niveis_usuarios ON usuarios.id_nivel = niveis_usuarios.id_nivel WHERE usuarios.id_barbearia = :barbearia_id");
         $stmt->bindParam(':barbearia_id', $id_barbearia);
         $stmt->execute();
-    
-        $usuarios = array(); 
-    
+
+        $usuarios = array();
+
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $usuario = array(
@@ -118,10 +118,15 @@ class UsuarioModel
                     'ativo' => $row['ativo'],
                     'senha' => $row['senha']
                 );
-                $usuarios[] = $usuario; 
+                $usuarios[] = $usuario;
             }
         }
-    
-        return $usuarios; 
+
+        return $usuarios;
+    }
+
+    public function __destruct()
+    {
+        $this->conn = null;
     }
 }

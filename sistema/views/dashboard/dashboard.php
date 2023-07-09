@@ -9,7 +9,6 @@ $conn = Conexao::getInstance();
 
 include('../../components/head.php');
 ?>
-
 <link id="pagestyle" href="../../assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
 
 <body class="app sidebar-mini">
@@ -26,7 +25,7 @@ include('../../components/head.php');
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="icon icon-lg icon-shape bg-gradient-danger shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-              <img style="width: 40px; margin-top: 10px;" src="../../assets/images/contas.png" alt="">
+                <img style="width: 40px; margin-top: 10px;" src="../../assets/images/contas.png" alt="">
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Contas a Paga Hoje</p>
@@ -43,7 +42,7 @@ include('../../components/head.php');
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div style="background-color: #00FF7F;" class="icon icon-lg icon-shape  shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-              <img style="width: 40px; margin-top: 10px;" src="../../assets/images/faturamento.png" alt="">
+                <img style="width: 40px; margin-top: 10px;" src="../../assets/images/faturamento.png" alt="">
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">R$ Faturamento da Semana</p>
@@ -60,7 +59,7 @@ include('../../components/head.php');
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="icon icon-lg icon-shape bg-gradient-info shadow-success text-center border-radius-xl mt-n4 position-absolute">
-              <i class="fa fa-calendar fa-lg opacity-10" style="color: #000; font-size: 2.4em;"></i>
+                <i class="fa fa-calendar fa-lg opacity-10" style="color: #000; font-size: 2.4em;"></i>
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Agendamentos Dia</p>
@@ -77,7 +76,7 @@ include('../../components/head.php');
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="icon icon-lg icon-shape bg-gradient-danger shadow-info text-center border-radius-xl mt-n4 position-absolute">
-              <img style="width: 40px; margin-top: 10px;" src="../../assets/images/estoque-baixo.png" alt="">
+                <img style="width: 40px; margin-top: 10px;" src="../../assets/images/estoque-baixo.png" alt="">
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Produtos Estoque baixo</p>
@@ -92,6 +91,7 @@ include('../../components/head.php');
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-6" style="width: 100%;">
         <div class="tile">
@@ -102,77 +102,66 @@ include('../../components/head.php');
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-xl-4 col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-6">
+                <h3>$16,756</h3>
+                <h6 class="text-muted m-b-0">Visits<i class="fa fa-caret-down text-c-red m-l-10"></i></h6>
+              </div>
+              <div class="col-6">
+                <div id="seo-chart1" class="d-flex align-items-end"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-6">
+                <h3>49.54%</h3>
+                <h6 class="text-muted m-b-0">Bounce Rate<i class="fa fa-caret-up text-c-green m-l-10"></i></h6>
+              </div>
+              <div class="col-6">
+                <div id="seo-chart2" class="d-flex align-items-end"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-6">
+                <h3>1,62,564</h3>
+                <h6 class="text-muted m-b-0">Products<i class="fa fa-caret-down text-c-red m-l-10"></i></h6>
+              </div>
+              <div class="col-6">
+                <div id="seo-chart3" class="d-flex align-items-end"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
   <!-- Essential javascripts for application to work-->
   <script src="../../assets/js/jquery-3.3.1.min.js"></script>
   <script src="../../assets/js/popper.min.js"></script>
   <script src="../../assets/js/bootstrap.min.js"></script>
   <script src="../../assets/js/main.js"></script>
-  
+  <script src="../../assets/js/plugins/dashboard-main.js"></script>
+  <script src="../../assets/js/plugins/apexcharts.min.js"></script>
   <script src="../../assets/js/plugins/pace.min.js"></script>
   <!-- Page specific javascripts-->
   <script type="text/javascript" src="../../assets/js/plugins/chart.js"></script>
-  <script type="text/javascript">
-    var data = {
-      labels: ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"],
-      datasets: [{
-          label: "Serviços",
-          fillColor: "rgba(222,184,135, 0.3)",
-          strokeColor: "#DEB887",
-          pointColor: "#DEB887",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "#DEB887",
-          data: [100, 200, 130, 350, 100, 150, 200]
-        },
-        {
-          label: "Despesas",
-          fillColor: "rgba(	255, 56, 64,0.3)",
-          strokeColor: "rgba(	255, 56, 64)",
-          pointColor: "rgba(	255, 56, 64)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(	255, 56, 64)",
-          data: [20, 56, 79, 300, 90, 92, 99]
-        },
-        {
-          label: "Vendas",
-          fillColor: "rgba(36, 217, 179, 0.3)",
-          strokeColor: "#24d9b3",
-          pointColor: "#24d9b3",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "#24d9b3",
-          data: [80, 90, 90, 250, 150, 60, 70]
-        }
-      ]
-    };
-
-    var options = {
-      responsive: true,
-      scaleBeginAtZero: true,
-      scaleLabel: "<%= value%>",
-      scaleGridLineColor: "rgba(0,0,0,.05)",
-      scaleGridLineWidth: 1,
-      scaleShowHorizontalLines: true,
-      scaleShowVerticalLines: true,
-      bezierCurve: true,
-      bezierCurveTension: 0.4,
-      pointDot: true,
-      pointDotRadius: 4,
-      pointDotStrokeWidth: 1,
-      pointHitDetectionRadius: 20,
-      datasetStroke: true,
-      datasetStrokeWidth: 2,
-      datasetFill: true,
-      tooltipTemplate: "<%= datasetLabel %>: R$ <%= value %>",
-      multiTooltipTemplate: "<%= datasetLabel %>: R$ <%= value %>",
-      multiTooltipTemplate: "<%= datasetLabel %>: R$ <%= value %>"
-    };
-
-    var ctx = document.getElementById("lineChartDemo").getContext("2d");
-    var lineChart = new Chart(ctx).Line(data, options);
-  </script>
 </body>
 
 </html>

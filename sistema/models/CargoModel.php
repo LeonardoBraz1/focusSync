@@ -41,7 +41,8 @@ class CargoModel
         return $response;
     }
 
-    public function obterCargos($barbeariaId) {
+    public function obterCargos($barbeariaId)
+    {
         $stmt = $this->conn->prepare("SELECT * FROM niveis_usuarios WHERE id_barbearia = :barbearia_id");
         $stmt->bindParam(':barbearia_id', $barbeariaId);
         $stmt->execute();
@@ -59,5 +60,10 @@ class CargoModel
         }
 
         return $cargos;
+    }
+
+    public function __destruct()
+    {
+        $this->conn = null;
     }
 }

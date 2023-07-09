@@ -220,60 +220,67 @@ class ProdutoModel
         return $produtos;
     }
 
-    public function obterProdutosEstoqueBaixo($barbeariaId) {
-       
-            $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE id_barbearia = :barbearia_id AND estoque < alerta_estoque");
-            $stmt->bindParam(':barbearia_id', $barbeariaId);
-            $stmt->execute();
+    public function obterProdutosEstoqueBaixo($barbeariaId)
+    {
 
-            $produtosEstoque = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE id_barbearia = :barbearia_id AND estoque < alerta_estoque");
+        $stmt->bindParam(':barbearia_id', $barbeariaId);
+        $stmt->execute();
 
-                $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
-                $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
-                
-                $produtoEstoque = [
-                    'id_pro' => $row['id_pro'],
-                    'nome_pro' => $row['nome_pro'],
-                    'valor_compra' => $row['valor_compra'],
-                    'valor_venda' => $row['valor_venda'],
-                    'estoque' => $row['estoque'],
-                    'validade' => $row['validade'],
-                    'alerta_estoque' => $row['alerta_estoque'],
-                    'data_cadastro' => date('Y-m-d', strtotime($row['cadastro'])),
-                    'imagemSrc' => $imagemSrc
-                ];
+        $produtosEstoque = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-                $produtosEstoque[] = $produtoEstoque;
-            }
+            $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
+            $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
 
-            return $produtosEstoque;
+            $produtoEstoque = [
+                'id_pro' => $row['id_pro'],
+                'nome_pro' => $row['nome_pro'],
+                'valor_compra' => $row['valor_compra'],
+                'valor_venda' => $row['valor_venda'],
+                'estoque' => $row['estoque'],
+                'validade' => $row['validade'],
+                'alerta_estoque' => $row['alerta_estoque'],
+                'data_cadastro' => date('Y-m-d', strtotime($row['cadastro'])),
+                'imagemSrc' => $imagemSrc
+            ];
+
+            $produtosEstoque[] = $produtoEstoque;
+        }
+
+        return $produtosEstoque;
     }
 
-    public function obterSaidas($barbeariaId) {
-       
-          $stmt = $this->conn->prepare("SELECT saidas.*, produtos.nome_pro, produtos.imagem FROM saidas LEFT JOIN produtos ON saidas.id_pro = produtos.id_pro WHERE saidas.id_barbearia = :barbearia_id");
-          $stmt->bindParam(':barbearia_id', $barbeariaId);
-          $stmt->execute();
-    
-          $saidas = [];
-          while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    public function obterSaidas($barbeariaId)
+    {
+
+        $stmt = $this->conn->prepare("SELECT saidas.*, produtos.nome_pro, produtos.imagem FROM saidas LEFT JOIN produtos ON saidas.id_pro = produtos.id_pro WHERE saidas.id_barbearia = :barbearia_id");
+        $stmt->bindParam(':barbearia_id', $barbeariaId);
+        $stmt->execute();
+
+        $saidas = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $formattedDate = date('Y-m-d', strtotime($row['data_saida']));
             $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
             $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
-    
+
             $saida = [
-              'id_saida' => $row['id_saida'],
-              'nome_pro' => $row['nome_pro'],
-              'quantidade' => $row['quantidade'],
-              'motivo_saida' => $row['motivo_saida'],
-              'data_saida' => $formattedDate,
-              'imagemSrc' => $imagemSrc
+                'id_saida' => $row['id_saida'],
+                'nome_pro' => $row['nome_pro'],
+                'quantidade' => $row['quantidade'],
+                'motivo_saida' => $row['motivo_saida'],
+                'data_saida' => $formattedDate,
+                'imagemSrc' => $imagemSrc
             ];
-    
+
             $saidas[] = $saida;
-          }
-    
-          return $saidas;
-      }
+        }
+
+        return $saidas;
+    }
+
+    public function __destruct()
+    {
+        $this->conn = null;
+    }
 }

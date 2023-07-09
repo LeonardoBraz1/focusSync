@@ -61,7 +61,8 @@ class ClienteModel
         return $response;
     }
 
-    public function obterClientes($id_barbearia) {
+    public function obterClientes($id_barbearia)
+    {
         $stmt = $this->conn->prepare("SELECT * FROM clientes WHERE id_barbearia = :barbearia_id");
         $stmt->bindParam(':barbearia_id', $id_barbearia);
         $stmt->execute();
@@ -92,7 +93,8 @@ class ClienteModel
     }
 
 
-    public function obterClientesRetorno($barbeariaId) {
+    public function obterClientesRetorno($barbeariaId)
+    {
         $stmt = $this->conn->prepare("SELECT c.id_cliente, c.nome_cliente, c.telefone_cliente, c.cadastro, c.retorno, su.nome_servico AS ultimo_servico
                                       FROM clientes c
                                       LEFT JOIN (
@@ -137,5 +139,10 @@ class ClienteModel
         }
 
         return $clientesRetornos;
+    }
+    
+    public function __destruct()
+    {
+        $this->conn = null;
     }
 }
