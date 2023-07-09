@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dataPaga = isset($_POST['dataPaga']) ? $_POST['dataPaga'] : '';
     $formapaga = isset($_POST['formapaga']) ? $_POST['formapaga'] : '';
     $status = isset($_POST['status']) ? $_POST['status'] : '';
+
     
     if ($_POST['action'] === 'obterVendas') {
 

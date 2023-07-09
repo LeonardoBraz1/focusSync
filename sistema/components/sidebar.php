@@ -1,8 +1,8 @@
  <!-- Sidebar menu-->
  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" style="width: 30px;" src="../../assets/images/avatar.png" alt="User Image">
-        <div>
+      <div style="background-color: #333644; padding: 30px 5px; margin-top: -20px;" class="app-sidebar__user"><img class="app-sidebar__user-avatar" style="width: 40px;" src="../../assets/images/avatar.png" alt="User Image">
+        <div >
           <p class="app-sidebar__user-name"><?php echo $_SESSION["user_nome"]; ?></p>
           <p class="app-sidebar__user-designation"><?php echo $_SESSION["user_nivel_nome"]; ?></p>
         </div>

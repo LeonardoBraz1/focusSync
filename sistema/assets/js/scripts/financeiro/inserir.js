@@ -12,7 +12,6 @@ function btnInserirVenda() {
     var venTotal = $("#novaVendaTota").val();
     var dataPaga = $("#novaVendaPaga").val();
     var formapaga = $("#novaVendaFpaga").val();
-
     $.ajax({
       url: "../../controllers/VendaController.php",
       type: "POST",
@@ -46,6 +45,7 @@ function btnInserirVenda() {
         }
       },
       error: function (xhr, status, error) {
+        console.log(xhr, status, error);
         $("#textErro").text("Ao enviar os dados");
         $("#modalErro").modal("show");
       },

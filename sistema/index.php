@@ -44,7 +44,7 @@
           </div>
           <div class="back">
             <div id="forgot-password" class="box">
-              <h1><img style="width: 200px; margin-bottom: -30px;" src="assets/images/logo-login.png" alt="logoFocusSync"></h1>
+              <h1><img style="width: 300px; margin: 45px 0 30px 0;" src="assets/images/logo-login.png" alt="logoFocusSync"></h1>
               <h1 style="color: #fff;">Redefinir Senha</h1>
               <form method="post" action="controllers/redefinir_senha.php" onsubmit="return checkEmail()">
                 <input type="text" name="email"  required placeholder="Digite seu email" autocomplete="off">

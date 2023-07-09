@@ -1,13 +1,12 @@
 <?php
+
 date_default_timezone_set('America/Sao_Paulo');
 
 class ConexaoPool {
-    private static $pool = array();
+    private static $pool = [];
     private static $maxConnections = 25;
-    private static $minConnections = 7;
-    private static $inactiveTime = 10; 
-
-    private static $lastActiveTime = 0;
+    private static $minConnections = 5;
+    private static $inactiveTime = 10;
 
     private function __construct() {
         // Configurações de conexão com o banco de dados
@@ -18,51 +17,63 @@ class ConexaoPool {
 
         $dsn = "mysql:host=$host;dbname=$db;charset=utf8";
 
+        // Abre o número mínimo de conexões inicialmente
         for ($i = 0; $i < self::$minConnections; $i++) {
             try {
                 $conn = new PDO($dsn, $user, $pass);
-                self::$pool[] = array(
+                self::$pool[] = [
                     'connection' => $conn,
-                    'lastUsed' => time()
-                );
+                    'lastUsed' => time(),
+                    'isReserved' => false
+                ];
             } catch (PDOException $e) {
                 header("Location: ../views/erro.html");
+                exit;
             }
         }
     }
 
     public static function getConnection() {
-        if (count(self::$pool) === 0) {
-            self::createConnections();
+        static $instance = null;
+
+        if ($instance === null) {
+            $instance = new self();
         }
 
-        self::$lastActiveTime = time();
+        // Procura uma conexão disponível no pool
+        foreach (self::$pool as &$connectionInfo) {
+            if (!$connectionInfo['isReserved']) {
+                $connectionInfo['isReserved'] = true;
+                $connectionInfo['lastUsed'] = time();
+                return $connectionInfo['connection'];
+            }
+        }
 
-        $connectionInfo = array_pop(self::$pool);
-        $conn = $connectionInfo['connection'];
+        // Caso não haja conexões disponíveis, cria uma nova conexão
+        if (count(self::$pool) < self::$maxConnections) {
+            $conn = self::createConnection();
+            $conn['lastUsed'] = time();
+            $conn['isReserved'] = true;
+            self::$pool[] = $conn;
 
-        return $conn;
+            return $conn['connection'];
+        }
+
+        // Caso o pool já esteja no limite máximo de conexões
+        throw new Exception('Limite máximo de conexões atingido.');
     }
 
     public static function releaseConnection($conn) {
-        if (count(self::$pool) < self::$maxConnections) {
-            self::$pool[] = array(
-                'connection' => $conn,
-                'lastUsed' => time()
-            );
-        } else {
-            $conn = null;
-        }
-    }
-
-    private static function createConnections() {
-        for ($i = 0; $i < self::$maxConnections; $i++) {
-            self::$pool[] = self::createConnection();
+        foreach (self::$pool as &$connectionInfo) {
+            if ($connectionInfo['connection'] === $conn) {
+                $connectionInfo['isReserved'] = false;
+                $connectionInfo['lastUsed'] = time();
+                break;
+            }
         }
     }
 
     private static function createConnection() {
-        // Configurações de conexão com o banco de dados
         $host = 'focus10g1.c5ghkeidia9i.us-east-2.rds.amazonaws.com';
         $db = 'dbfocus10g';
         $user = 'admin';
@@ -72,28 +83,50 @@ class ConexaoPool {
 
         try {
             $conn = new PDO($dsn, $user, $pass);
-            return array(
+            return [
                 'connection' => $conn,
-                'lastUsed' => time()
-            );
+                'lastUsed' => time(),
+                'isReserved' => true
+            ];
         } catch (PDOException $e) {
             header("Location: ../views/erro.html");
+            exit;
         }
     }
 
     public static function checkInactiveConnections() {
         $currentTime = time();
 
-        foreach (self::$pool as $key => $connectionInfo) {
+        foreach (self::$pool as $key => &$connectionInfo) {
             $lastUsed = $connectionInfo['lastUsed'];
 
-            if (($currentTime - $lastUsed) >= self::$inactiveTime) {
+            if (($currentTime - $lastUsed) >= self::$inactiveTime && !$connectionInfo['isReserved']) {
                 $conn = $connectionInfo['connection'];
                 $conn = null;
 
                 unset(self::$pool[$key]);
             }
         }
+    }
+
+    public static function getPoolSize() {
+        return count(self::$pool);
+    }
+
+    public static function increaseMinConnections($amount) {
+        for ($i = 0; $i < $amount; $i++) {
+            try {
+                $conn = self::createConnection();
+                $conn['lastUsed'] = time();
+                $conn['isReserved'] = false;
+                self::$pool[] = $conn;
+            } catch (PDOException $e) {
+                header("Location: ../views/erro.html");
+                exit;
+            }
+        }
+
+        self::$minConnections += $amount;
     }
 }
 

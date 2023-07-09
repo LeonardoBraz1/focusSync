@@ -64,7 +64,6 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="novaVendaUser">Vendedor:</label>
                             <select id="novaVendaUser" class="form-control" placeholder="Selecionar">
-                                <option value="">Selecionar Vendedor</option>
                                 <?php
                                 foreach ($usuarios as $usuario) {
                                     echo '<option value="' . $usuario['id'] . '">' . $usuario['nome'] . '</option>';
@@ -76,10 +75,11 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novaVendaCliente">Cliente:</label>
-                            <select id="novaVendaCliente" class="form-control" placeholder="Selecionar" required="">
-                                <option value=""></option>
+                            <select id="novaVendaCliente" class="form-control" placeholder="Selecionar um cliente" name="cliente">
                                 <?php
+                                
                                 foreach ($clientes as $cliente) {
+                                    echo '<option value="">Selecionar</option>';
                                     echo '<option value="' . $cliente['id_cliente'] . '">' . $cliente['nome_cliente'] . '</option>';
                                 }
                                 ?>
@@ -93,7 +93,7 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novaVendaQuant">Quantidade:</label>
-                            <input type="number" class="form-control" id="novaVendaQuant" required placeholder="Digite a Quantidade Vendida">
+                            <input type="number" min="1" class="form-control" id="novaVendaQuant" required placeholder="Digite a Quantidade Vendida">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novaVendaTota">Valor Total:</label>
@@ -354,4 +354,6 @@ foreach ($result as $row) {
         document.getElementById("novaVendaQuant").oninput = function() {
             updateValues();
         }
+
+        $("#novaVendaPaga").mask("0000-00-00");
     </script>
