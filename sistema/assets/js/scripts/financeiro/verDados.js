@@ -41,4 +41,47 @@ function verVenda(
         statusMessage.addClass('d-none');
     }
   }
+
+
+
+  function verCompra(
+    id_compra,
+    nome_pro,
+    valor_unitario,
+    quantidade,
+    valor_total,
+    nome_fornecedo,
+    data_compra,
+    data_pagamento,
+    forma_pagamento,
+    status_pagamento,
+    imagemSrc 
+  ) {
+    // Preencher campos da modal
+    $("#compraId").text(id_compra);
+    $("#nome1_dados").text(nome_pro);
+    $("#valorUnit_dados").text(valor_unitario);
+    $("#quantidade1_dados").text(quantidade);
+    $("#total1_dados").text(valor_total);
+    $("#fornecedor_dados").text(nome_fornecedo);
+    $("#data_compra_dados").text(data_compra);
+    $("#data_pag1_dados").text(data_pagamento);
+    $("#forPag1_dados").text(forma_pagamento);
+    $("#status1_dados").text(status_pagamento);
+    $("#img1_mostrar").attr("src", imagemSrc );
+  
+    $("#modalVerCompra").modal("show");
+
+
+
+    var status3 = $("#status1_dados").text().trim();
+    var statusMessage1 = $('#status_messageCompra');
+
+    if (status3 === 'Pendente') {
+        statusMessage1.removeClass('d-none');
+    } else {
+        statusMessage1.addClass('d-none');
+    }
+  }
+  
   

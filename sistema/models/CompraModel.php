@@ -47,7 +47,7 @@ class CompraModel
                     <td><span class="' . getStatusClass($row['status_pagamento']) . ' statusCor">' . $row['status_pagamento'] . '</span></td>                  
                     <td style="display: flex; justify-content: center; align-items: center; gap: 7px;">
                     <label style="cursor: pointer;" for="btnVerCompra-' . $row['id_compra'] . '"><i title="Ver Dados" class="icon fa fa-eye fa-lg" style="color: #023ea7;"></i></label>
-                    <input style="display: none;" type="button" class="btnVerCompra"  onclick="verCompra(' . $row['id_compra'] . ', \'' . $row['nome_pro'] . '\', \'' . $row['nome_fornecedo'] . '\', \'' . $row['valor_unitario'] . '\', \'' . $row['quantidade'] . '\', \'' . $row['valor_total'] . '\', \'' . date('Y-m-d', strtotime($row['data_compra'])) . '\', \'' . $data_pagamento . '\', \'' . $row['status_pagamento'] . '\', \'' . $imagemSrc . '\')" id="btnVerCompra-' . $row['id_compra'] . '">
+                    <input style="display: none;" type="button" class="btnVerCompra"  onclick="verCompra(' . $row['id_compra'] . ', \'' . $row['nome_pro'] . '\', \'' . $row['valor_unitario'] . '\', \'' . $row['quantidade'] . '\', \'' . $row['valor_total'] . '\', \'' . $row['nome_fornecedo'] . '\', \'' . date('Y-m-d', strtotime($row['data_compra'])) . '\', \'' . $data_pagamento . '\', \'' . $row['forma_pagamento'] . '\', \'' . $row['status_pagamento'] . '\', \'' . $imagemSrc . '\')" id="btnVerCompra-' . $row['id_compra'] . '">
                     <label style="cursor: pointer;" for="btnDeletarCompra-' . $row['id_compra'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
                     <input style="display: none;" type="button" onclick="deletarCompra(' . $row['id_compra'] . ')" id="btnDeletarCompra-' . $row['id_compra'] . '">
                     <label style="cursor: pointer;" for="btnStatusP-' . $row['id_compra'] . '"><i title="Trocar Status" class="fa fa-check-square-o fa-lg" style="color: #bd0000;"></i></label>
@@ -61,11 +61,11 @@ class CompraModel
     }
 
 
-    public function deletarCompra($id_venda)
+    public function deletarCompra($id_compra)
     {
 
-        $stmt = $this->conn->prepare("DELETE FROM vendas WHERE id_venda = :id_venda");
-        $stmt->bindParam(':id_venda', $id_venda);
+        $stmt = $this->conn->prepare("DELETE FROM compras WHERE id_compra = :id_compra");
+        $stmt->bindParam(':id_compra', $id_compra);
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
@@ -77,7 +77,7 @@ class CompraModel
         return $response;
     }
 
-    public function inserirVenda($id_pro, $id_user, $id_cli, $quantidade, $venTotal, $dataPaga, $formapaga, $dataVenda, $id_barbearia)
+    public function inserirCompra($id_pro, $id_fornecedo, $valor_unitario, $quantidade, $venTotal, $dataPaga, $formapaga, $dataCompra, $id_barbearia, $status_pagamento)
     {
 
 
@@ -90,31 +90,25 @@ class CompraModel
             $rowEstoque = $stmtEstoque->fetch(PDO::FETCH_ASSOC);
             $estoqueAtual = $rowEstoque['estoque'];
 
-
-            if ($estoqueAtual >= $quantidade) {
                 // Atualiza o estoque do produto
-                $novoEstoque = $estoqueAtual - $quantidade;
+                $novoEstoque = $estoqueAtual + $quantidade;
                 $stmtUpdateEstoque = $this->conn->prepare("UPDATE produtos SET estoque = :novoEstoque WHERE id_pro = :id_pro");
                 $stmtUpdateEstoque->bindParam(':novoEstoque', $novoEstoque);
                 $stmtUpdateEstoque->bindParam(':id_pro', $id_pro);
                 $stmtUpdateEstoque->execute();
 
 
-                $stmtFatura = $this->conn->prepare("SELECT max(numero_fatura) FROM vendas");
-                $stmtFatura->execute();
-                $maiorFatura = $stmtFatura->fetchColumn();
-                $proximoNumeroFatura = $maiorFatura + 1;
-
-                $stmt = $this->conn->prepare("INSERT INTO vendas (id_pro, id_usuario, id_cliente, quantidade, valor_Total, data_Pagamento, forma_pagamento, data_venda, id_barbearia, status, numero_fatura) VALUES (:id_pro, :id_user, :id_cli, :quantidade, :venTotal, :dataPaga, :formapaga, :dataVenda, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ", " . $proximoNumeroFatura . ")");
+                $stmt = $this->conn->prepare("INSERT INTO compras (id_pro, id_fornecedor, valor_unitario, quantidade, valor_total, data_pagamento, forma_pagamento, data_compra, id_barbearia, status_pagamento) VALUES (:id_pro, :id_fornecedo, :valor_unitario, :quantidade, :venTotal, :dataPaga, :formapaga, :dataCompra, :id_barbearia, :status_pagamento)");
                 $stmt->bindParam(':id_pro', $id_pro);
-                $stmt->bindParam(':id_user', $id_user);
-                $stmt->bindParam(':id_cli', $id_cli);
+                $stmt->bindParam(':id_fornecedo', $id_fornecedo);
+                $stmt->bindParam(':valor_unitario', $valor_unitario);
                 $stmt->bindParam(':quantidade', $quantidade);
                 $stmt->bindParam(':venTotal', $venTotal);
                 $stmt->bindParam(':dataPaga', $dataPaga);
                 $stmt->bindParam(':formapaga', $formapaga);
-                $stmt->bindParam(':dataVenda', $dataVenda);
+                $stmt->bindParam(':datacompra', $dataCompra);
                 $stmt->bindParam(':id_barbearia', $id_barbearia);
+                $stmt->bindParam(':status_pagamento', $status_pagamento);
                 $stmt->execute();
 
                 if ($stmt->rowCount() > 0) {
@@ -122,21 +116,18 @@ class CompraModel
                 } else {
                     $response = array("status" => "erro");
                 }
-            } else {
-
-                $response = array("status" => "estoque_insuficiente");
-            }
         } else {
 
             $response = array("status" => "produto_nao_encontrado");
         }
         return $response;
     }
-    public function editarStatus($id_venda, $status, $dataPaga)
+
+    public function editarStatus($id_compra, $status_pagamento, $dataPaga)
     {
-        $stmt = $this->conn->prepare("UPDATE vendas SET status = :status, data_pagamento = :dataPaga  WHERE id_venda = :id_venda");
-        $stmt->bindParam(':status', $status);
-        $stmt->bindParam(':id_venda', $id_venda);
+        $stmt = $this->conn->prepare("UPDATE compras SET status_pagamento = :status_pagamento, data_pagamento = :dataPaga  WHERE id_compra = :id_compra");
+        $stmt->bindParam(':status_pagamento', $status_pagamento);
+        $stmt->bindParam(':id_compra', $id_compra);
         $stmt->bindParam(':dataPaga', $dataPaga);
         $stmt->execute();
 

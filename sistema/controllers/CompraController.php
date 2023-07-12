@@ -10,6 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $id_compra = isset($_POST['id_compra']) ? $_POST['id_compra'] : '';
     $id_pro = isset($_POST['id_pro']) ? $_POST['id_pro'] : '';
+    $status_pagamento = isset($_POST['status_pagamento']) ? $_POST['status_pagamento'] : '';
+    $id_fornecedo = isset($_POST['id_fornecedo']) ? $_POST['id_fornecedo'] : '';
+    $valor_unitario = isset($_POST['valor_unitario']) ? $_POST['valor_unitario'] : '';
+    $quantidade = isset($_POST['quantidade']) ? $_POST['quantidade'] : '';
+    $venTotal = isset($_POST['venTotal']) ? $_POST['venTotal'] : '';
+    $dataPaga = isset($_POST['dataPaga']) ? $_POST['dataPaga'] : '';
+    $formapaga = isset($_POST['formapaga']) ? $_POST['formapaga'] : '';
 
 
     if ($_POST['action'] === 'obterCompras') {
@@ -18,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo $compras;
     } elseif ($_POST['action'] === 'deletar') {
 
-        $response = $vendaModel->deletarVenda($id_venda);
+        $response = $compraModel->deletarCompra($id_compra);
     } elseif ($_POST['action'] === 'inserir') {
 
         if ($dataPaga === '') {
@@ -27,18 +34,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dataPaga .= ' ' . date('H:i:s');
         }
 
-        $dataVenda = date('Y-m-d H:i:s');
+        $dataCompra = date('Y-m-d H:i:s');
 
-        $response = $vendaModel->inserirVenda($id_pro, $id_user, $id_cli, $quantidade, $venTotal, $dataPaga, $formapaga, $dataVenda, $_SESSION["barbearia_id"]);
+        $status_pagamento = $dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Pago'";
+
+        $response = $compraModel->inserirCompra($id_pro, $id_fornecedo, $valor_unitario, $quantidade, $venTotal, $dataPaga, $formapaga, $dataCompra, $_SESSION["barbearia_id"], $status_pagamento);
     } elseif ($_POST['action'] === 'editarStatus') {
 
-        if ($status === 'Aprovada') {
+        if ($status_pagamento === 'Pago') {
             $dataPaga = date('Y-m-d H:i:s');
-        }elseif ($status === 'Cancelado'){
-            $dataPaga = NULL;
+        } else {
+            $dataPaga = null;
         }
 
-        $response = $vendaModel->editarStatus($id_venda, $status, $dataPaga);
+        $response = $compraModel->editarStatus($id_compra, $status_pagamento, $dataPaga);
     } else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");

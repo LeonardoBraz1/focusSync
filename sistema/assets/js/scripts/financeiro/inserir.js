@@ -54,3 +54,63 @@ function btnInserirVenda() {
     $("#modalInserirVenda").modal("hide");
   }
   
+
+
+
+
+
+
+//    compra   //
+
+function btnInserirCompra() {
+
+    $("#modalInserirCompra").modal("show");
+  }
+  
+  function inserirCompra() {
+    var id_pro = $("#novaCompraPro").val();
+    var id_fornecedo = $("#novaCompraFor").val();
+    var valor_unitario = $("#novaCompraUnit").val();
+    var quantidade = $("#novaCompraQuant1").val();
+    var venTotal = $("#novaCompraTota1").val();
+    var dataPaga = $("#novaCompraPaga1").val();
+    var formapaga = $("#novaCompraFpaga1").val();
+
+
+    $.ajax({
+      url: "../../controllers/CompraController.php",
+      type: "POST",
+      data: {
+        id_pro: id_pro,
+        id_fornecedo: id_fornecedo,
+        valor_unitario: valor_unitario,
+        quantidade: quantidade,
+        venTotal: venTotal,
+        dataPaga: dataPaga,
+        formapaga: formapaga,
+        action: "inserir",
+      },
+      dataType: "json",
+      success: function (response) {
+        console.log(response);
+        if (response.status === "sucesso") {
+
+          $("#textSucesso").text("Compra efetuada com sucesso!");
+          $("#modalSucesso").modal("show");
+
+        } else {
+
+          $("#textErro").text("Não foi possível efetuar essa Compra");
+          $("#modalErro").modal("show");
+
+        }
+      },
+      error: function (xhr, status, error) {
+        $("#textErro").text("Ao enviar os dados");
+        $("#modalErro").modal("show");
+      },
+    });
+    obterCompras();
+    $("#modalInserirCompra").modal("hide");
+  }
+  

@@ -34,6 +34,17 @@ $clientes = array();
 foreach ($result as $row) {
     $clientes[] = $row;
 }
+
+
+$query = $conn->prepare("SELECT * FROM fornecedores where id_barbearia = :id_barbearia");
+$query->bindParam(':id_barbearia', $_SESSION["barbearia_id"]);
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+$fornecedores = array();
+foreach ($result as $row) {
+    $fornecedores[] = $row;
+}
 ?>
 
 
@@ -129,13 +140,96 @@ foreach ($result as $row) {
 
 
 
-
-
-<!-- Modal  verVenda-->
-<div class="modal fade" id="modalVerVenda" tabindex="-1" role="dialog" aria-labelledby="modalNovoEntradaLabel" aria-hidden="true">
+<!-- Modal de inserir compra -->
+<div class="modal fade" id="modalInserirCompra" tabindex="-1" role="dialog" aria-labelledby="modalInserirCompraLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <p id="status_message" class="status_message d-none" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center;">A venda será automaticamente marcada como "Aprovada" na data do pagamento.</p>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalInserirCompraLabel">Inserir Compra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formInserirCompra" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novaCompraPro">Produtos:</label>
+                            <select id="novaCompraPro" class="form-control" placeholder="Selecionar">
+                                <?php
+                                foreach ($produtos as $produto) {
+                                    echo '<option value="' . $produto['id_pro'] . '">' . $produto['nome_pro'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novaCompraFor">Fornecedor:</label>
+                            <select id="novaCompraFor" class="form-control" placeholder="Selecionar">
+                                <?php
+                                foreach ($fornecedores as $fornecedor) {
+                                    echo '<option value="' . $fornecedor['id_fornecedo'] . '">' . $fornecedor['nome_fornecedo'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novaCompraUnit">Valor Unitário:</label>
+                            <input type="number" class="form-control" id="novaCompraUnit" placeholder="R$">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novaCompraQuant1">Quantidade:</label>
+                            <input type="number" min="1" class="form-control" id="novaCompraQuant1" required placeholder="Digite a Quantidade comprada">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novaCompraTota1">Valor Total:</label>
+                            <input type="number" class="form-control" id="novaCompraTota1" placeholder="R$" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novaCompraPaga1">Data Pagamento:</label>
+                            <input type="text" class="form-control" id="novaCompraPaga1" required placeholder="0000-00-00">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="novaCompraFpaga1">Forma Pagamento:</label>
+                        <div class="input-group">
+                            <select id="novaCompraFpaga1" class="form-control" placeholder="Selecionar">
+                                <option>Pix</option>
+                                <option>Dinheiro</option>
+                                <option>Cartão de Crédito</option>
+                                <option>Cartão de Débito</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirCompra()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal  ver venda-->
+<div class="modal fade" id="modalVerVenda" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <p id="status_message" class="status_message d-none" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center;">A Compra será automaticamente marcada como "Aprovada" na data do pagamento.</p>
             <div class="modal-header">
                 <h5 class="modal-title" id="nome_dados"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -210,6 +304,75 @@ foreach ($result as $row) {
 </div>
 
 
+<!-- Modal  vercompra-->
+<div class="modal fade" id="modalVerCompra" tabindex="-1" role="dialog" aria-labelledby="modalNovoEntradaLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <p id="status_messageCompra" class="status_message d-none" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center;">A venda será automaticamente marcada como "Pago" na data do pagamento.</p>
+            <div class="modal-header">
+                <h5 class="modal-title" id="nome1_dados"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="compraId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Valor Unitário: </b></span>
+                        <span id="valorUnit_dados"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Quantidade: </b></span>
+                        <span id="quantidade1_dados"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Valor Total: </b></span>
+                        <span id="total1_dados"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Fornecedor: </b></span>
+                        <span id="fornecedor_dados"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Data Compra: </b></span>
+                        <span id="data_compra_dados"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Data Pagamento: </b></span>
+                        <span id="data_pag1_dados"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Forma Pagamento: </b></span>
+                        <span id="forPag1_dados"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Status: </b></span>
+                        <span id="status1_dados"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <a>
+                            <img width="200px" id="img1_mostrar">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 <!-- Modal status -->
@@ -246,6 +409,39 @@ foreach ($result as $row) {
 
 
 
+<!-- Modal status compra -->
+<div class="modal fade" id="modalEditarStatusPagamento" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-weight: 400;" class="modal-title">Trocar Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="editStatusPagaId" value="">
+            <div class="modal-body">
+                <div class="form-group col-md-6">
+                    <label for="novoStatusPaga">Status:</label>
+                    <div class="input-group">
+                        <select id="novoStatusPaga" class="form-control" placeholder="Selecionar">
+                            <option>Pago</option>
+                            <option>Pendente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoStatusPaga()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 
 
@@ -266,6 +462,33 @@ foreach ($result as $row) {
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarVenda()">Deletar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal de deletar compra -->
+<div class="modal fade" id="modalDeletarCompra" tabindex="-1" role="dialog" aria-labelledby="modalDeletarCompraLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-weight: 400;" class="modal-titleCompra"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1em;" id="textDeletarCompra"></p>
+                <p style="font-size: 1.1em;" id="textDeletarCompra1"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarCompra()">Deletar</button>
             </div>
         </div>
     </div>

@@ -57,7 +57,7 @@ include('../../components/head.php');
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody id="camprasTableBody">
+                                <tbody id="comprasTableBody">
 
                                 </tbody>
                             </table>
