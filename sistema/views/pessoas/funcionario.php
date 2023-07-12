@@ -17,7 +17,7 @@ include('../../components/head.php');
     include('../../components/sidebar.php');
     ?>
     <main class="app-content">
-        <button onclick="btnInserirFuncionario()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><i style="margin-right: 5px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i> NOVO FUNCIONÁRIO</button>
+        <button onclick="btnInserirFuncionario()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><img style="width: 30px; margin-left: -10px; margin-right: 7px;" src="../../assets/images/icons/icon_funcionario.png"> NOVO FUNCIONÁRIO</button>
         <br>
         <br>
         <div class="row">

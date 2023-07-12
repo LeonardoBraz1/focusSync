@@ -49,7 +49,7 @@
               </a></li>
           </div>
         </div>
-        <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
+        <li class="app-notification__footer"><a href="#">Ver todas as notificações.</a></li>
       </ul>
     </li>
     <!-- User Menu-->

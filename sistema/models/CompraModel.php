@@ -90,32 +90,32 @@ class CompraModel
             $rowEstoque = $stmtEstoque->fetch(PDO::FETCH_ASSOC);
             $estoqueAtual = $rowEstoque['estoque'];
 
-                // Atualiza o estoque do produto
-                $novoEstoque = $estoqueAtual + $quantidade;
-                $stmtUpdateEstoque = $this->conn->prepare("UPDATE produtos SET estoque = :novoEstoque WHERE id_pro = :id_pro");
-                $stmtUpdateEstoque->bindParam(':novoEstoque', $novoEstoque);
-                $stmtUpdateEstoque->bindParam(':id_pro', $id_pro);
-                $stmtUpdateEstoque->execute();
+            // Atualiza o estoque do produto
+            $novoEstoque = $estoqueAtual + $quantidade;
+            $stmtUpdateEstoque = $this->conn->prepare("UPDATE produtos SET estoque = :novoEstoque WHERE id_pro = :id_pro");
+            $stmtUpdateEstoque->bindParam(':novoEstoque', $novoEstoque);
+            $stmtUpdateEstoque->bindParam(':id_pro', $id_pro);
+            $stmtUpdateEstoque->execute();
 
 
-                $stmt = $this->conn->prepare("INSERT INTO compras (id_pro, id_fornecedor, valor_unitario, quantidade, valor_total, data_pagamento, forma_pagamento, data_compra, id_barbearia, status_pagamento) VALUES (:id_pro, :id_fornecedo, :valor_unitario, :quantidade, :venTotal, :dataPaga, :formapaga, :dataCompra, :id_barbearia, :status_pagamento)");
-                $stmt->bindParam(':id_pro', $id_pro);
-                $stmt->bindParam(':id_fornecedo', $id_fornecedo);
-                $stmt->bindParam(':valor_unitario', $valor_unitario);
-                $stmt->bindParam(':quantidade', $quantidade);
-                $stmt->bindParam(':venTotal', $venTotal);
-                $stmt->bindParam(':dataPaga', $dataPaga);
-                $stmt->bindParam(':formapaga', $formapaga);
-                $stmt->bindParam(':datacompra', $dataCompra);
-                $stmt->bindParam(':id_barbearia', $id_barbearia);
-                $stmt->bindParam(':status_pagamento', $status_pagamento);
-                $stmt->execute();
+            $stmt = $this->conn->prepare("INSERT INTO compras (id_pro, id_fornecedor, valor_unitario, quantidade, valor_total, data_pagamento, forma_pagamento, data_compra, id_barbearia, status_pagamento) VALUES (:id_pro, :id_fornecedo, :valor_unitario, :quantidade, :venTotal, :dataPaga, :formapaga, :dataCompra, :id_barbearia, :status_pagamento)");
+            $stmt->bindParam(':id_pro', $id_pro);
+            $stmt->bindParam(':id_fornecedo', $id_fornecedo);
+            $stmt->bindParam(':valor_unitario', $valor_unitario);
+            $stmt->bindParam(':quantidade', $quantidade);
+            $stmt->bindParam(':venTotal', $venTotal);
+            $stmt->bindParam(':dataPaga', $dataPaga);
+            $stmt->bindParam(':formapaga', $formapaga);
+            $stmt->bindParam(':datacompra', $dataCompra);
+            $stmt->bindParam(':id_barbearia', $id_barbearia);
+            $stmt->bindParam(':status_pagamento', $status_pagamento);
+            $stmt->execute();
 
-                if ($stmt->rowCount() > 0) {
-                    $response = array("status" => "sucesso");
-                } else {
-                    $response = array("status" => "erro");
-                }
+            if ($stmt->rowCount() > 0) {
+                $response = array("status" => "sucesso");
+            } else {
+                $response = array("status" => "erro");
+            }
         } else {
 
             $response = array("status" => "produto_nao_encontrado");

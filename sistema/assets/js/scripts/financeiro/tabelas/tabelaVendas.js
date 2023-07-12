@@ -52,8 +52,10 @@ function formatDate(date) {
 
 function mostrarSpinner() {
   $("#loadingIndicator").show();
+  $("#loadingIndicator1").show();
 }
 
 function ocultarSpinner() {
   $("#loadingIndicator").hide();
+  $("#loadingIndicator1").hide();
 }
