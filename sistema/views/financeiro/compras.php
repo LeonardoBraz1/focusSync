@@ -17,25 +17,14 @@ include('../../components/head.php');
         color: #fafcff;
     }
 
-    .status-aprovado {
+    .status-pago {
         background-color: #00EE76;
     }
-
-    .status-cancelado {
-        background-color: red;
-        color: #fafcff;
-    }
-
 
     .statusCor {
         padding: 2px 10px;
         font-weight: bold;
         border-radius: 8px;
-    }
-
-    #loadingIndicator {
-        color: #0000CD;
-        font-size: 34px;
     }
 </style>
 
@@ -46,7 +35,7 @@ include('../../components/head.php');
     include('../../components/sidebar.php');
     ?>
     <main class="app-content">
-        <button onclick="btnInserirVenda()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><i style="margin-right: 5px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i> NOVA COMPRA</button>
+        <button onclick="btnInserirCompra()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><i style="margin-right: 5px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i> NOVA COMPRA</button>
         <br>
         <br>
         <div class="row">
@@ -59,12 +48,11 @@ include('../../components/head.php');
                                     <tr>
                                         <th style="display: none;">id</th>
                                         <th>Nome</th>
-                                        <th>Valor Compra</th>
+                                        <th>Valor Unitário</th>
                                         <th>Quantidade</th>
                                         <th>Valor Total</th>
-                                        <th>Cliente</th>
-                                        <th>Data Venda</th>
-                                        <th>Nº da Fatura</th>
+                                        <th>Fornecedor</th>
+                                        <th>Data Compra</th>
                                         <th>Status</th>
                                         <th>Acões</th>
                                     </tr>

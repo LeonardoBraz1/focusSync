@@ -4,9 +4,9 @@ $(document).ready(function () {
   
   function obterCompras() {
     $.ajax({
-      url: "../../controllers/ComprasController.php",
+      url: "../../controllers/CompraController.php",
       type: "POST",
-      data: { action: "obterCompras", startDate: startDate, endDate: endDate },
+      data: { action: "obterCompras" },
       dataType: "html",
       success: function (response) {
         $("#sampleTable").DataTable().destroy();
