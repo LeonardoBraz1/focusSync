@@ -32,6 +32,11 @@ include('../../components/head.php');
         font-weight: bold;
         border-radius: 8px;
     }
+
+    #loadingIndicator {
+        color: #0000CD;
+        font-size: 34px;
+    }
 </style>
 
 <body class="app sidebar-mini">
@@ -42,6 +47,15 @@ include('../../components/head.php');
     ?>
     <main class="app-content">
         <button onclick="btnInserirVenda()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><i style="margin-right: 5px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i> NOVA VENDA</button>
+        <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+            <div id="datePickerContainer" style="position: relative;">
+                <input id="startDate" style="border-radius: 6px;" type="date">
+                <input id="endDate" style="border-radius: 6px;" type="date">
+                <div id="loadingIndicator" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
         <br>
         <br>
         <div class="row">
@@ -49,7 +63,7 @@ include('../../components/head.php');
                 <div class="tile">
                     <div class="tile-body">
                         <div class="table-responsive">
-                            <table data-order='[[ 6, "desc" ]]' class="table table-hover table-bordered" id="sampleTable">
+                            <table data-order='[[ 0, "desc" ]]' class="table table-hover table-bordered" id="sampleTable">
                                 <thead>
                                     <tr>
                                         <th style="display: none;">id</th>
@@ -93,7 +107,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/inserir.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/verDados.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/tabelas/tabelaVendas.js"></script>
-    
+
 </body>
 
 </html>

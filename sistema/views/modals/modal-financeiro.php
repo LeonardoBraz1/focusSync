@@ -77,9 +77,7 @@ foreach ($result as $row) {
                             <label for="novaVendaCliente">Cliente:</label>
                             <select id="novaVendaCliente" class="form-control" placeholder="Selecionar um cliente" name="cliente">
                                 <?php
-                                
                                 foreach ($clientes as $cliente) {
-                                    echo '<option value="">Selecionar</option>';
                                     echo '<option value="' . $cliente['id_cliente'] . '">' . $cliente['nome_cliente'] . '</option>';
                                 }
                                 ?>

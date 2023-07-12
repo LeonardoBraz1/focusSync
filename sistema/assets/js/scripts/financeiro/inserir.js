@@ -29,7 +29,7 @@ function btnInserirVenda() {
       success: function (response) {
         if (response.status === "sucesso") {
 
-          $("#textSucesso").text("Venda inserido com sucesso!");
+          $("#textSucesso").text("Venda efetuada com sucesso!");
           $("#modalSucesso").modal("show");
 
         } else if (response.status === "estoque_insuficiente"){
@@ -39,7 +39,7 @@ function btnInserirVenda() {
 
         } else {
 
-          $("#textErro").text("Não foi possível inserir essa vemda");
+          $("#textErro").text("Não foi possível efetuar essa venda");
           $("#modalErro").modal("show");
 
         }

@@ -125,7 +125,7 @@ include('../../components/head.php');
             <div class="row align-items-center">
               <div class="col-6">
                 <h3>49.54%</h3>
-                <h6 class="text-muted m-b-0">Bounce Rate<i class="fa fa-caret-up text-c-green m-l-10"></i></h6>
+                <h6 class="text-muted m-b-0">Comissão<i class="text-c-green m-l-10"></i></h6>
               </div>
               <div class="col-6">
                 <div id="seo-chart2" class="d-flex align-items-end"></div>

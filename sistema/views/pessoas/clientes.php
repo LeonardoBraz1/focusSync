@@ -25,7 +25,7 @@ include('../../components/head.php');
                 <div class="tile">
                     <div class="tile-body">
                         <div class="table-responsive">
-                            <table id="sampleTable" class="table table-hover table-bordered">
+                            <table  data-order='[[ 0, "desc" ]]' id="sampleTable" class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
                                         <th style="display: none;">id</th>

@@ -1,6 +1,8 @@
 <?php
 require_once '../models/VendaModel.php';
+
 date_default_timezone_set('America/Sao_Paulo');
+
 @session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,32 +17,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dataPaga = isset($_POST['dataPaga']) ? $_POST['dataPaga'] : '';
     $formapaga = isset($_POST['formapaga']) ? $_POST['formapaga'] : '';
     $status = isset($_POST['status']) ? $_POST['status'] : '';
+    $startDate = isset($_POST['startDate']) ? $_POST['startDate'] : null;
+    $endDate = isset($_POST['endDate']) ? $_POST['endDate'] : null;
 
-    
+
     if ($_POST['action'] === 'obterVendas') {
 
-        $vendas = $vendaModel->obterVendas($_SESSION["barbearia_id"]);
+        $vendas = $vendaModel->obterVendas($startDate, $endDate, $_SESSION["barbearia_id"]);
         echo $vendas;
-
     } elseif ($_POST['action'] === 'deletar') {
 
         $response = $vendaModel->deletarVenda($id_venda);
-
     } elseif ($_POST['action'] === 'inserir') {
 
-        $response = $vendaModel->inserirVenda($id_pro, $id_user, $id_cli, $quantidade, $venTotal, $dataPaga, $formapaga, $_SESSION["barbearia_id"]);
+        if ($dataPaga === '') {
+            $dataPaga = NULL;
+        } else {
+            $dataPaga .= ' ' . date('H:i:s');
+        }
 
+        $dataVenda = date('Y-m-d H:i:s');
+
+        $response = $vendaModel->inserirVenda($id_pro, $id_user, $id_cli, $quantidade, $venTotal, $dataPaga, $formapaga, $dataVenda, $_SESSION["barbearia_id"]);
     } elseif ($_POST['action'] === 'editarStatus') {
 
-        $response = $vendaModel->editarStatus($id_venda, $status);
+        if ($status === 'Aprovada') {
+            $dataPaga = date('Y-m-d H:i:s');
+        }elseif ($status === 'Cancelado'){
+            $dataPaga = NULL;
+        }
 
+        $response = $vendaModel->editarStatus($id_venda, $status, $dataPaga);
     } else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");
     }
 
     echo json_encode($response);
-    
 } else {
     // Retorna uma resposta em caso de requisição inválida
     $response = array('error' => false, 'message' => 'Requisição inválida!');

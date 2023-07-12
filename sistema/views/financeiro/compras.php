@@ -1,4 +1,5 @@
 <?php
+
 @session_start();
 
 require_once('../../controllers/session.php');
@@ -10,6 +11,34 @@ $conn = Conexao::getInstance();
 include('../../components/head.php');
 ?>
 
+<style>
+    .status-pendente {
+        background-color: blue;
+        color: #fafcff;
+    }
+
+    .status-aprovado {
+        background-color: #00EE76;
+    }
+
+    .status-cancelado {
+        background-color: red;
+        color: #fafcff;
+    }
+
+
+    .statusCor {
+        padding: 2px 10px;
+        font-weight: bold;
+        border-radius: 8px;
+    }
+
+    #loadingIndicator {
+        color: #0000CD;
+        font-size: 34px;
+    }
+</style>
+
 <body class="app sidebar-mini">
     <?php
     include('../../components/navbar.php');
@@ -17,7 +46,7 @@ include('../../components/head.php');
     include('../../components/sidebar.php');
     ?>
     <main class="app-content">
-        <button onclick="btnInserirProduto()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><i style="margin-right: 5px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i> NOVO PRODUTO</button>
+        <button onclick="btnInserirVenda()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><i style="margin-right: 5px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i> NOVA COMPRA</button>
         <br>
         <br>
         <div class="row">
@@ -25,23 +54,24 @@ include('../../components/head.php');
                 <div class="tile">
                     <div class="tile-body">
                         <div class="table-responsive">
-                            <table  data-order='[[ 0, "desc" ]]' class="table table-hover table-bordered" id="sampleTable">
+                            <table data-order='[[ 0, "desc" ]]' class="table table-hover table-bordered" id="sampleTable">
                                 <thead>
                                     <tr>
                                         <th style="display: none;">id</th>
                                         <th>Nome</th>
                                         <th>Valor Compra</th>
-                                        <th>Valor Venda</th>
-                                        <th>Estoque</th>
-                                        <th>Validade</th>
-                                        <th>Alerta Estoque</th>
-                                        <th>Cadastro</th>
+                                        <th>Quantidade</th>
+                                        <th>Valor Total</th>
+                                        <th>Cliente</th>
+                                        <th>Data Venda</th>
+                                        <th>Nº da Fatura</th>
+                                        <th>Status</th>
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody id="produtosTableBody">
-                                    
-                                    </tbody>
+                                <tbody id="camprasTableBody">
+
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -50,7 +80,7 @@ include('../../components/head.php');
         </div>
     </main>
 
-    <?php include('../modals/modal-Cadastro.php'); ?>
+    <?php include('../modals/modal-financeiro.php'); ?>
 
     <!-- Essential javascripts for application to work-->
     <script src="../../assets/js/jquery-3.3.1.min.js"></script>
@@ -63,13 +93,12 @@ include('../../components/head.php');
     <!-- Data table plugin-->
     <script type="text/javascript" src="../../assets/js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../../assets/js/plugins/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript">
-        $("#sampleTable").DataTable();
-    </script>
-    <script type="text/javascript" src="../../assets/js/scripts/cadastro/editar.js"></script>
-    <script type="text/javascript" src="../../assets/js/scripts/cadastro/deletar.js"></script>
-    <script type="text/javascript" src="../../assets/js/scripts/cadastro/inserir.js"></script>
-    <script type="text/javascript" src="../../assets/js/scripts/cadastro/tabelas/tabelaProdutos.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/editar.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/deletar.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/inserir.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/verDados.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/tabelas/tabelaCompras.js"></script>
+
 </body>
 
 </html>
