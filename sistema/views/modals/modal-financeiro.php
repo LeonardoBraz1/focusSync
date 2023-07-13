@@ -181,29 +181,27 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novaCompraQuant1">Quantidade:</label>
-                            <input type="number" min="1" class="form-control" id="novaCompraQuant1" required placeholder="Digite a Quantidade comprada">
+                            <input type="number" min="1" class="form-control calculated-field" id="novaCompraQuant1" required placeholder="Digite a Quantidade comprada">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novaCompraTota1">Valor Total:</label>
-                            <input type="number" class="form-control" id="novaCompraTota1" placeholder="R$" readonly>
+                            <input type="text" class="form-control" id="novaCompraTota1" placeholder="R$" readonly>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novaCompraPaga1">Data Pagamento:</label>
                             <input type="text" class="form-control" id="novaCompraPaga1" required placeholder="0000-00-00">
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="novaCompraFpaga1">Forma Pagamento:</label>
-                        <div class="input-group">
-                            <select id="novaCompraFpaga1" class="form-control" placeholder="Selecionar">
-                                <option>Pix</option>
-                                <option>Dinheiro</option>
-                                <option>Cartão de Crédito</option>
-                                <option>Cartão de Débito</option>
-                            </select>
-                        </div>
+                    <label for="novaCompraFpaga1">Forma Pagamento:</label>
+                    <div class="input-group">
+                        <select id="novaCompraFpaga1" class="form-control" placeholder="Selecionar">
+                            <option>Pix</option>
+                            <option>Dinheiro</option>
+                            <option>Cartão de Crédito</option>
+                            <option>Cartão de Débito</option>
+                        </select>
                     </div>
                 </form>
             </div>
@@ -577,4 +575,19 @@ foreach ($result as $row) {
         }
 
         $("#novaVendaPaga").mask("0000-00-00");
+         // Obtém referências para os elementos do formulário
+  const valorUnitarioInput = document.getElementById('novaCompraUnit');
+  const quantidadeInput = document.getElementById('novaCompraQuant1');
+  const valorTotalInput = document.getElementById('novaCompraTota1');
+
+  // Adiciona um ouvinte de evento de input ao campo de quantidade
+  quantidadeInput.addEventListener('input', calcularValorTotal);
+
+  // Função para calcular o valor total e atualizar o campo correspondente
+  function calcularValorTotal() {
+    const valorUnitario = parseFloat(valorUnitarioInput.value);
+    const quantidade = parseFloat(quantidadeInput.value);
+    const valorTotal = valorUnitario * quantidade;
+    valorTotalInput.value = `R$ ${valorTotal.toFixed(2)}`;
+  }
     </script>
