@@ -50,12 +50,11 @@ function formatDate(date) {
   return year + "-" + month + "-" + day;
 }
 
+
 function mostrarSpinner() {
-  $("#loadingIndicator").show();
   $("#loadingIndicator1").show();
 }
 
 function ocultarSpinner() {
-  $("#loadingIndicator").hide();
   $("#loadingIndicator1").hide();
 }

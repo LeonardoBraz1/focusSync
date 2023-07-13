@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    mostrarSpinner();
     obterEntradas();
 });
     function obterEntradas() {
@@ -37,9 +38,21 @@ $(document).ready(function() {
 
                 
                 $("#sampleTable").DataTable();
+                ocultarSpinner();
             },
             error: function() {
+                ocultarSpinner();
                 alert("Ocorreu um erro ao obter as entradas.");
             },
         });
     }
+
+    
+function mostrarSpinner() {
+    $("#loadingIndicator7").show();
+  }
+  
+  function ocultarSpinner() {
+    $("#loadingIndicator7").hide();
+  }
+  

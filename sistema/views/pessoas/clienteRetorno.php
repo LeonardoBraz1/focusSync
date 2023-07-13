@@ -22,7 +22,7 @@ include('../../components/head.php');
                 <div class="tile">
                     <div class="tile-body">
                         <div class="table-responsive">
-                            <table  data-order='[[ 0, "desc" ]]' class="table table-hover table-bordered" id="sampleTable">
+                            <table data-order='[[ 0, "desc" ]]' class="table table-hover table-bordered" id="sampleTable">
                                 <thead>
                                     <tr>
                                         <th style="display: none;">id</th>
@@ -35,9 +35,20 @@ include('../../components/head.php');
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody id="clientesRetornosTableBody">
-                                    
-                                    </tbody>
+                                <tbody id="clientesRetornosTableBody" style="position: relative;">
+                                    <div id="loadingIndicator12" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                        <div id="preloader-active">
+                                            <div class="preloader d-flex align-items-center justify-content-center">
+                                                <div class="preloader-inner position-relative">
+                                                    <div style="background-color: #dfeaeb;" class="preloader-circle"></div>
+                                                    <div class="preloader-img pere-text">
+                                                        <img src="../../assets/images/logo-login.png" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </tbody>
                             </table>
                         </div>
                     </div>

@@ -421,6 +421,249 @@ foreach ($result as $row) {
 
 
 
+
+<!-- Modal  ver produto-->
+<div class="modal fade" id="modalVerProduto" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verProdutoNomeEsto"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verProdutoIdEsto" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Data Cadastro: </b></span>
+                        <span id="verProdutoCadasEsto"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Valor Venda: </b></span>
+                        <span id="verProdutoCompEsto"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Valor Venda: </b></span>
+                        <span id="verProdutoVendEsto"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Estoque: </b></span>
+                        <span id="verProdutoEstoEsto"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Validade: </b></span>
+                        <span id="verProdutoValiEsto"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Estoque Alerta: </b></span>
+                        <span id="verProdutoAlerEsto"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Descrição: </b></span>
+                        <span id="verProdutoDescEsto"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Fornecedor: </b></span>
+                        <span id="verProdutoForneEsto"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <a>
+                            <img width="200px" id="verProdutoImgEsto">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal  ver Alerta Estoque -->
+<div class="modal fade" id="modalVerProduto" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verProdutoNome"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verProdutoId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Data Cadastro: </b></span>
+                        <span id="verProdutoCadas"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Valor Venda: </b></span>
+                        <span id="verProdutoComp"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Valor Venda: </b></span>
+                        <span id="verProdutoVend"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Estoque: </b></span>
+                        <span id="verProdutoEsto"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Validade: </b></span>
+                        <span id="verProdutoVali"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Estoque Alerta: </b></span>
+                        <span id="verProdutoAler"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+
+                    <div class="col-md-6">
+                        <span><b>Fornecedor: </b></span>
+                        <span id="verProdutoForne"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Descrição: </b></span>
+                        <span id="verProdutoDesc"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <a>
+                            <img width="200px" id="verProdutoImg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal  ver servuço-->
+<div class="modal fade" id="modalVerServico" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verServicoNome"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verServicoId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Data Cadastro: </b></span>
+                        <span id="verServicData"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Preço: </b></span>
+                        <span id="verServicoPrec"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Comissão: </b></span>
+                        <span id="verServicoCom"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Tempo: </b></span>
+                        <span id="verServicoTemp"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <a>
+                            <img width="200px" id="verServicoImg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal  ver saida-->
+<div class="modal fade" id="modalVerSaida" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verSaidaNome"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verSaidaId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Quantidade: </b></span>
+                        <span id="verSaidaQuant"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Data Cadastro: </b></span>
+                        <span id="verSaidaDataS"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Motivo Saida: </b></span>
+                        <span id="verSaidaMoti"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <a>
+                            <img width="200px" id="verSaidaImg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
 <!-- Modal de deletar serviço -->
 <div class="modal fade" id="modalDeletarServico" tabindex="-1" role="dialog" aria-labelledby="modalDeletarServicoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -539,7 +782,7 @@ foreach ($result as $row) {
 
     <script>
         $(document).ready(function() {
-            $("#editProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
+            $("#editProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg");
         });
 
         // Atualizar a imagem quando um arquivo for selecionado
@@ -551,7 +794,7 @@ foreach ($result as $row) {
                 if (file) {
                     $("#editProdutoImg").attr("src", e.target.result);
                 } else {
-                    $("#editProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
+                    $("#editProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg");
                 }
             };
 
@@ -559,7 +802,7 @@ foreach ($result as $row) {
         });
 
         $(document).ready(function() {
-            $("#novoProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
+            $("#novoProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg");
         });
 
         // Atualizar a imagem quando um arquivo for selecionado
@@ -571,7 +814,7 @@ foreach ($result as $row) {
                 if (file) {
                     $("#novoProdutoImg").attr("src", e.target.result);
                 } else {
-                    $("#novoProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg"); // Substitua pelo caminho da sua imagem padrão
+                    $("#novoProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg");
                 }
             };
 

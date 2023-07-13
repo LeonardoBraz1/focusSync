@@ -61,7 +61,6 @@ function editarProduto(
   imagem,
   id_fornecedo
 ) {
-  // Preencher campos da modal
   $("#editProdutoId").val(id_pro);
   $("#editProdutoNome").val(nome_pro);
   $("#editProdutoComp").val(valor_compra);

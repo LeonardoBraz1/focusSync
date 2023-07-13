@@ -63,7 +63,6 @@ function btnInserirVenda() {
 //    compra   //
 
 function btnInserirCompra() {
-
     $("#modalInserirCompra").modal("show");
   }
   
