@@ -7,6 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    teste
+<?php
+$folderPath = 'sistema/assets/images/icons'; // Especifique o caminho da pasta
+
+$files = glob($folderPath . '/*'); // Obtém todos os arquivos e diretórios da pasta
+
+foreach ($files as $file) {
+    echo $file . "<br>"; // Exibe cada caminho de arquivo/diretório
+}
+?>
 </body>
 </html>

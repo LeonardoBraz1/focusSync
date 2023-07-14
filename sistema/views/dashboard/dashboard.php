@@ -152,6 +152,29 @@ include('../../components/head.php');
     </div>
 
   </main>
+
+
+
+  
+<div class="modal fade bottom-modal" id="cachePermissionModal" tabindex="-1" role="dialog" aria-labelledby="cachePermissionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cachePermissionModalLabel">Permissão para usar o cache</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Gostaríamos de habilitar o uso do cache para uma melhor experiência offline. Você aceita?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="cachePermissionButtonYes">Sim</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
   <!-- Essential javascripts for application to work-->
   <script src="../../assets/js/jquery-3.3.1.min.js"></script>
   <script src="../../assets/js/popper.min.js"></script>
