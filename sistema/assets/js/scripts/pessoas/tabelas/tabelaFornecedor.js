@@ -63,6 +63,34 @@ function obterFornecedores() {
             "'>"
         );
         actions.append(
+          "<label style='cursor: pointer;' for='btnVerForne-" +
+            fornecedor.id_fornecedo +
+            "'><i title='Ver Dados' class='icon fa fa-eye fa-lg' style='color: #023ea7;'></i></label>"
+        );
+        actions.append(
+          "<input style='display: none;' type='button' class='btnVerForne'  onclick='verFornecedor(" +
+            fornecedor.id_fornecedo +
+            ', "' +
+            fornecedor.nome_fornecedo +
+            '", "' +
+            fornecedor.email_fornecedo +
+            '", "' +
+            fornecedor.telefone_fornecedo +
+            '", "' +
+            fornecedor.pontuacao_fornecedo +
+            '", "' +
+            fornecedor.endereco_fornecedo +
+            '", "' +
+            fornecedor.cidade_fornecedo +
+            '", "' +
+            fornecedor.site_fornecedo +
+            '", "' +
+            fornecedor.data_cadastro +
+            "\")' id='btnVerForne-" +
+            fornecedor.id_fornecedo +
+            "'>"
+        );
+        actions.append(
           "<label style='cursor: pointer;' for='btnDeletarForne-" +
             fornecedor.id_fornecedo +
             "'><i title='Deletar' class='fa fa-solid fa-trash fa-lg' style='color: #bd0000;'></i></label>"

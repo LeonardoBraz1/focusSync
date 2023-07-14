@@ -77,7 +77,7 @@ class CompraModel
         return $response;
     }
 
-    public function inserirCompra($id_pro, $id_fornecedo, $valor_unitario, $quantidade, $venTotal, $dataPaga, $formapaga, $dataCompra, $id_barbearia, $status_pagamento)
+    public function inserirCompra($id_pro, $id_fornecedo, $valor_unitario, $quantidade, $venTotal, $dataPaga, $formapaga, $dataCompra, $id_barbearia)
     {
 
 
@@ -98,7 +98,7 @@ class CompraModel
             $stmtUpdateEstoque->execute();
 
 
-            $stmt = $this->conn->prepare("INSERT INTO compras (id_pro, id_fornecedor, valor_unitario, quantidade, valor_total, data_pagamento, forma_pagamento, data_compra, id_barbearia, status_pagamento) VALUES (:id_pro, :id_fornecedo, :valor_unitario, :quantidade, :venTotal, :dataPaga, :formapaga, :dataCompra, :id_barbearia, :status_pagamento)");
+            $stmt = $this->conn->prepare("INSERT INTO compras (id_pro, id_fornecedor, valor_unitario, quantidade, valor_total, data_pagamento, forma_pagamento, data_compra, id_barbearia, status_pagamento) VALUES (:id_pro, :id_fornecedo, :valor_unitario, :quantidade, :venTotal, :dataPaga, :formapaga, :dataCompra, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Pago'") . ")");
             $stmt->bindParam(':id_pro', $id_pro);
             $stmt->bindParam(':id_fornecedo', $id_fornecedo);
             $stmt->bindParam(':valor_unitario', $valor_unitario);
@@ -106,9 +106,8 @@ class CompraModel
             $stmt->bindParam(':venTotal', $venTotal);
             $stmt->bindParam(':dataPaga', $dataPaga);
             $stmt->bindParam(':formapaga', $formapaga);
-            $stmt->bindParam(':datacompra', $dataCompra);
+            $stmt->bindParam(':dataCompra', $dataCompra);
             $stmt->bindParam(':id_barbearia', $id_barbearia);
-            $stmt->bindParam(':status_pagamento', $status_pagamento);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {

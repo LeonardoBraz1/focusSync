@@ -31,6 +31,7 @@ include('../../components/head.php');
                                         <th>Motivo Entrada</th>
                                         <th>Fornecedor</th>
                                         <th>Data Entrada</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody id="entradasTableBody" style="position: relative;">
@@ -68,12 +69,11 @@ include('../../components/head.php');
     <!-- Data table plugin-->
     <script type="text/javascript" src="../../assets/js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../../assets/js/plugins/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript">
-        $("#sampleTable").DataTable();
-    </script>
+    
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/inserir.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/cadastro/verDados.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/cadastro/tabelas/tabelaEntradas.js"></script>
 </body>
 

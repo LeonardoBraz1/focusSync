@@ -427,73 +427,6 @@ foreach ($result as $row) {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="verProdutoNomeEsto"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <input type="hidden" id="verProdutoIdEsto" value="">
-            <div class="modal-body">
-                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
-                    <div class="col-md-6">
-                        <span><b>Data Cadastro: </b></span>
-                        <span id="verProdutoCadasEsto"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <span><b>Valor Venda: </b></span>
-                        <span id="verProdutoCompEsto"></span>
-                    </div>
-                </div>
-                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
-                    <div class="col-md-6">
-                        <span><b>Valor Venda: </b></span>
-                        <span id="verProdutoVendEsto"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <span><b>Estoque: </b></span>
-                        <span id="verProdutoEstoEsto"></span>
-                    </div>
-                </div>
-                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
-                    <div class="col-md-6">
-                        <span><b>Validade: </b></span>
-                        <span id="verProdutoValiEsto"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <span><b>Estoque Alerta: </b></span>
-                        <span id="verProdutoAlerEsto"></span>
-                    </div>
-                </div>
-                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
-                    <div class="col-md-6">
-                        <span><b>Descrição: </b></span>
-                        <span id="verProdutoDescEsto"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <span><b>Fornecedor: </b></span>
-                        <span id="verProdutoForneEsto"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12" align="center">
-                        <a>
-                            <img width="200px" id="verProdutoImgEsto">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal  ver Alerta Estoque -->
-<div class="modal fade" id="modalVerProduto" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
                 <h5 class="modal-title" id="verProdutoNome"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -507,7 +440,7 @@ foreach ($result as $row) {
                         <span id="verProdutoCadas"></span>
                     </div>
                     <div class="col-md-6">
-                        <span><b>Valor Venda: </b></span>
+                        <span><b>Valor Compra: </b></span>
                         <span id="verProdutoComp"></span>
                     </div>
                 </div>
@@ -532,20 +465,76 @@ foreach ($result as $row) {
                     </div>
                 </div>
                 <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
-
-                    <div class="col-md-6">
-                        <span><b>Fornecedor: </b></span>
-                        <span id="verProdutoForne"></span>
-                    </div>
                     <div class="col-md-6">
                         <span><b>Descrição: </b></span>
                         <span id="verProdutoDesc"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Fornecedor: </b></span>
+                        <span id="verProdutoForne"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12" align="center">
                         <a>
                             <img width="200px" id="verProdutoImg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal  ver Alerta Estoque -->
+<div class="modal fade" id="modalVerProdutoEsto" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verProdutoNomeEsto"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verProdutoIdEsto" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Data Cadastro: </b></span>
+                        <span id="verProdutoCadasEsto"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Valor Compra: </b></span>
+                        <span id="verProdutoCompEsto"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Valor Venda: </b></span>
+                        <span id="verProdutoVendEsto"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Estoque: </b></span>
+                        <span id="verProdutoEstoEsto"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Validade: </b></span>
+                        <span id="verProdutoValiEsto"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Estoque Alerta: </b></span>
+                        <span id="verProdutoAlerEsto"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <a>
+                            <img width="200px" id="verProdutoImgEsto">
                         </a>
                     </div>
                 </div>
@@ -646,6 +635,54 @@ foreach ($result as $row) {
                     <div class="col-md-12" align="center">
                         <a>
                             <img width="200px" id="verSaidaImg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal  ver entrada-->
+<div class="modal fade" id="modalVerEntrada" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verEntradaNome"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verEntradaId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Quantidade: </b></span>
+                        <span id="verEntradaQuant"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Data Cadastro: </b></span>
+                        <span id="verEntradaData"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Motivo Entrada: </b></span>
+                        <span id="verEntradaMoti"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <a>
+                            <img width="200px" id="verEntradaImg">
                         </a>
                     </div>
                 </div>

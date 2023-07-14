@@ -725,6 +725,224 @@ foreach ($result as $row) {
 
 
 
+<!-- Modal  ver usuario -->
+<div class="modal fade" id="modalVerUsuario" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verUsuarioNome"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verUsuarioId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Email: </b></span>
+                        <span id="verUsuarioEmail"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Cargo: </b></span>
+                        <span id="verUsuarioNivel"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Ativo: </b></span>
+                        <span id="verUsuarioAti"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Senha: </b></span>
+                        <span id="verUsuarioSenha"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal  ver funcionaro -->
+<div class="modal fade" id="modalVerFuncionario" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verFuncionarioNome"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verFuncionarioId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Email: </b></span>
+                        <span id="verFuncionarioEmail"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Cargo: </b></span>
+                        <span id="verFuncionarioNivel"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>CPF: </b></span>
+                        <span id="verFuncionarioCpf"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Comissão: </b></span>
+                        <span id="verFuncionarioCom"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Adendimento: </b></span>
+                        <span id="verFuncionarioAten"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Endereço: </b></span>
+                        <span id="verFuncionarioEnd"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Cidade: </b></span>
+                        <span id="verFuncionarioCid"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Tipo do Pix: </b></span>
+                        <span id="verFuncionarioTipo"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Pix: </b></span>
+                        <span id="verFuncionarioPix"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Data do Cadastro: </b></span>
+                        <span id="verFuncionarioCadas"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal  ver fornecedor -->
+<div class="modal fade" id="modalVerFornecedor" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verFornecedorNome"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verFornecedorId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Email: </b></span>
+                        <span id="verFornecedorEmail"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Telefone: </b></span>
+                        <span id="verFornecedorTel"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Pontuação: </b></span>
+                        <span id="verFornecedorPont"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Endereço: </b></span>
+                        <span id="verFornecedorEnd"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Cidade: </b></span>
+                        <span id="verFornecedorCid"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Site: </b></span>
+                        <span id="verFornecedorSit"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Data do Cadastro: </b></span>
+                        <span id="verFornecedorCadas"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal  ver Cliente -->
+<div class="modal fade" id="modalVerCliente" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verClienteNome"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verClienteId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Email: </b></span>
+                        <span id="verClienteEmail"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Telefone: </b></span>
+                        <span id="verClienteTel"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Data do Cadastro: </b></span>
+                        <span id="verClienteCadas"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Dias sem Retorno: </b></span>
+                        <span id="verClienteRetor"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 

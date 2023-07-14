@@ -57,6 +57,28 @@ function obterUsuarios() {
             "'>"
         );
         actions.append(
+          "<label style='cursor: pointer;' for='btnVerUsuario-" +
+            usuario.id +
+            "'><i title='Ver Dados' class='icon fa fa-eye fa-lg' style='color: #023ea7;'></i></label>"
+        );
+        actions.append(
+          "<input style='display: none;' type='button' onclick='verUsuario(" +
+            usuario.id +
+            ', "' +
+            usuario.nome +
+            '", "' +
+            usuario.email +
+            '", "' +
+            usuario.cargo +
+            '", "' +
+            usuario.ativo +
+            '", "' +
+            usuario.senha +
+            "\")' id='btnVerUsuario-" +
+            usuario.id +
+            "'>"
+        );
+        actions.append(
           "<label style='cursor: pointer;' for='btnDeletarUsuario-" +
             usuario.id +
             "'><i title='Deletar' class='fa fa-solid fa-trash fa-lg' style='color: #bd0000;'></i></label>"

@@ -27,7 +27,7 @@ class ConexaoPool {
                     'isReserved' => false
                 ];
             } catch (PDOException $e) {
-                header("Location: ../views/erro.html");
+                header("Location: ../erro.html");
                 exit;
             }
         }
@@ -89,7 +89,7 @@ class ConexaoPool {
                 'isReserved' => true
             ];
         } catch (PDOException $e) {
-            header("Location: ../views/erro.html");
+            header("Location: ../erro.html");
             exit;
         }
     }
@@ -121,7 +121,7 @@ class ConexaoPool {
                 $conn['isReserved'] = false;
                 self::$pool[] = $conn;
             } catch (PDOException $e) {
-                header("Location: ../views/erro.html");
+                header("Location: ../erro.html");
                 exit;
             }
         }

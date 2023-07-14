@@ -36,9 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $dataCompra = date('Y-m-d H:i:s');
 
-        $status_pagamento = $dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Pago'";
-
-        $response = $compraModel->inserirCompra($id_pro, $id_fornecedo, $valor_unitario, $quantidade, $venTotal, $dataPaga, $formapaga, $dataCompra, $_SESSION["barbearia_id"], $status_pagamento);
+        $response = $compraModel->inserirCompra($id_pro, $id_fornecedo, $valor_unitario, $quantidade, $venTotal, $dataPaga, $formapaga, $dataCompra, $_SESSION["barbearia_id"]);
     } elseif ($_POST['action'] === 'editarStatus') {
 
         if ($status_pagamento === 'Pago') {

@@ -51,10 +51,32 @@ function obterClientes() {
             '", "' +
             cliente.telefone_cliente +
             '", "' +
-            cliente.data_cadastro +
+            cliente.cadastro +
             '", "' +
             cliente.retorno +
             "\")' id='btnEditarClien-" +
+            cliente.id_cliente +
+            "'>"
+        );
+        actions.append(
+          "<label style='cursor: pointer;' for='btnVerClien-" +
+            cliente.id_cliente +
+            "'><i title='Ver Dados' class='icon fa fa-eye fa-lg' style='color: #023ea7;'></i></label>"
+        );
+        actions.append(
+          "<input style='display: none;' type='button' class='btnVerClien' onclick='verCliente(" +
+            cliente.id_cliente +
+            ', "' +
+            cliente.nome_cliente +
+            '", "' +
+            cliente.email_cliente +
+            '", "' +
+            cliente.telefone_cliente +
+            '", "' +
+            cliente.cadastro +
+            '", "' +
+            cliente.retorno +
+            "\")' id='btnVerClien-" +
             cliente.id_cliente +
             "'>"
         );
@@ -104,9 +126,9 @@ function obterClientes() {
 }
 
 function mostrarSpinner() {
-  $("#loadingIndicator2").show();
+  $("#loadingIndicator11").show();
 }
 
 function ocultarSpinner() {
-  $("#loadingIndicator2").hide();
+  $("#loadingIndicator11").hide();
 }

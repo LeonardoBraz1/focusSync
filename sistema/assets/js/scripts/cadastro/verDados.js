@@ -42,14 +42,14 @@ function verProduto(
 
 
     function verSaida(
-      id_pro,
+      id_saida,
       nome_pro,
       quantidade,
       motivo_saida,
       data_saida,
       imagem
       ) {
-        $("#verSaidaId").text(id_pro);
+        $("#verSaidaId").text(id_saida);
         $("#verSaidaNome").text(nome_pro);
         $("#verSaidaQuant").text(quantidade);
         $("#verSaidaMoti").text(motivo_saida);
@@ -82,5 +82,24 @@ function verProduto(
           $("#verProdutoAlerEsto").text(alerta_estoque);
           $("#verProdutoImgEsto").attr("src", imagem);
       
-          $("#modalVerProduto").modal("show");
+          $("#modalVerProdutoEsto").modal("show");
         }
+
+
+        function verEntrada(
+          id_entrada,
+          nome_produto,
+          quantidade,
+          motivo_entrada,
+          data_entrada,
+          imagem
+          ) {
+            $("#verEntradaId").text(id_entrada);
+            $("#verEntradaNome").text(nome_produto);
+            $("#verEntradaQuant").text(quantidade);
+            $("#verEntradaData").text(data_entrada);
+            $("#verEntradaMoti").text(motivo_entrada);
+            $("#verEntradaImg").attr("src", imagem);
+        
+            $("#modalVerEntrada").modal("show");
+          }

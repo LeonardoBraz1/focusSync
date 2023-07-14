@@ -1,6 +1,6 @@
 
 function editarUsuario(id, nome, email, id_nivel, ativo, senha) {
-  // Preencher campos da modal
+  
   $("#editUsuarioId").val(id);
   $("#editUsuarioEmail").val(email);
   $("#editUsuarioNome").val(nome);
@@ -8,12 +8,12 @@ function editarUsuario(id, nome, email, id_nivel, ativo, senha) {
   $("#editUsuarioAti").val(ativo);
   $("#editUsuarioSenha").val(senha);
 
-  // Abrir modal de edição
+ 
   $("#modalEditarUsuario").modal("show");
 }
 
 function salvarEdicaoUsuario() {
-  // Obter os dados da modal
+  
   var id = $("#editUsuarioId").val();
   var email = $("#editUsuarioEmail").val();
   var nome = $("#editUsuarioNome").val();
@@ -21,7 +21,7 @@ function salvarEdicaoUsuario() {
   var ativo = $("#editUsuarioAti").val();
   var senha = $("#editUsuarioSenha").val();
 
-  // Código AJAX para enviar os dados para o servidor
+  
   $.ajax({
     url: "../../controllers/UsuarioController.php",
     type: "POST",
@@ -62,7 +62,7 @@ function salvarEdicaoUsuario() {
 
 
 function editarFuncionario(id, nome, email, id_nivel, cpf, comissao, atendimento, endereco, cidade, tipoPix, pix) {
-  // Preencher campos da modal
+
   $("#editFuncionarioId").val(id);
   $("#editFuncionarioNome").val(nome);
   $("#editFuncionarioEmail").val(email);
@@ -75,12 +75,12 @@ function editarFuncionario(id, nome, email, id_nivel, cpf, comissao, atendimento
   $("#editFuncionarioTipo").val(tipoPix);
   $("#editFuncionarioPix").val(pix);
 
-  // Abrir modal de edição
+
   $("#modalEditarFuncionario").modal("show");
 }
 
 function salvarEdicaoFuncionario() {
-  // Obter os dados da modal
+
   var id = $("#editFuncionarioId").val();
   var nome = $("#editFuncionarioNome").val();
   var email = $("#editFuncionarioEmail").val();
@@ -93,7 +93,6 @@ function salvarEdicaoFuncionario() {
   var tipoPix = $("#editFuncionarioTipo").val();
   var pix = $("#editFuncionarioPix").val();
 
-  // Código AJAX para enviar os dados para o servidor
   $.ajax({
     url: "../../controllers/FuncionarioController.php",
     type: "POST",
@@ -137,7 +136,7 @@ function salvarEdicaoFuncionario() {
 
 
 function editarFornecedor(id_fornecedo, nome_fornecedo, email_fornecedo, telefone_fornecedo, pontuacao_fornecedo, endereco_fornecedo, cidade_fornecedo, site_fornecedo) {
-  // Preencher campos da modal
+ 
   $("#editFornecedorId").val(id_fornecedo);
   $("#editFornecedorNome").val(nome_fornecedo);
   $("#editFornecedorEmail").val(email_fornecedo);
@@ -147,12 +146,12 @@ function editarFornecedor(id_fornecedo, nome_fornecedo, email_fornecedo, telefon
   $("#editFornecedorCid").val(cidade_fornecedo);
   $("#editFornecedorSit").val(site_fornecedo);
 
-  // Abrir modal de edição
+
   $("#modalEditarFornecedor").modal("show");
 }
 
 function salvarEdicaoFornecedor() {
-  // Obter os dados da modal
+ 
   var id_fornecedo = $("#editFornecedorId").val();
   var nome_fornecedo = $("#editFornecedorNome").val();
   var email_fornecedo = $("#editFornecedorEmail").val();
@@ -162,7 +161,7 @@ function salvarEdicaoFornecedor() {
   var cidade_fornecedo = $("#editFornecedorCid").val();
   var site_fornecedo = $("#editFornecedorSit").val();
 
-  // Código AJAX para enviar os dados para o servidor
+ 
   $.ajax({
     url: "../../controllers/FornecedorController.php",
     type: "POST",
@@ -201,24 +200,24 @@ function salvarEdicaoFornecedor() {
 
 
 function editarCliente(id_cliente, nome_cliente, email_cliente, telefone_cliente) {
-  // Preencher campos da modal
+  
   $("#editClienteId").val(id_cliente);
   $("#editClienteNome").val(nome_cliente);
   $("#editClienteEmail").val(email_cliente);
   $("#editClienteTel").val(telefone_cliente);
 
-  // Abrir modal de edição
+ 
   $("#modalEditarCliente").modal("show");
 }
 
 function salvarEdicaoCliente() {
-  // Obter os dados da modal
+  
   var id_cliente = $("#editClienteId").val();
   var nome_cliente = $("#editClienteNome").val();
   var email_cliente = $("#editClienteEmail").val();
   var telefone_cliente = $("#editClienteTel").val();
 
-  // Código AJAX para enviar os dados para o servidor
+  
   $.ajax({
     url: "../../controllers/ClienteController.php",
     type: "POST",

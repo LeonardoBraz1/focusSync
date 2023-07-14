@@ -68,6 +68,40 @@ function obterFuncionarios() {
             "'>"
         );
         actions.append(
+          "<label style='cursor: pointer;' for='btnVerFunc-" +
+            funcionario.id +
+            "'><i title='Ver Dados' class='icon fa fa-eye fa-lg' style='color: #023ea7;'></i></label>"
+        );
+        actions.append(
+          "<input style='display: none;' type='button' onclick='verFuncionario(" +
+            funcionario.id +
+            ', "' +
+            funcionario.nome +
+            '", "' +
+            funcionario.email +
+            '", "' +
+            funcionario.id_nivel +
+            '", "' +
+            funcionario.cpf +
+            '", "' +
+            funcionario.comissao +
+            '", "' +
+            funcionario.atendimento +
+            '", "' +
+            funcionario.endereco +
+            '", "' +
+            funcionario.cidade +
+            '", "' +
+            funcionario.tipoPix +
+            '", "' +
+            funcionario.pix +
+            '", "' +
+            funcionario.cadastro +
+            "\")' id='btnVerFunc-" +
+            funcionario.id +
+            "'>"
+        );
+        actions.append(
           "<label style='cursor: pointer;' for='btnDeletarFunc-" +
             funcionario.id +
             "'><i title='Deletar' class='fa fa-solid fa-trash fa-lg' style='color: #bd0000;'></i></label>"

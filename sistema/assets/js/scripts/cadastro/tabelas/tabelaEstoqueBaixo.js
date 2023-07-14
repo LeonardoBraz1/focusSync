@@ -39,16 +39,46 @@ function obterProdutosEstoqueBaixo() {
         row.append("<td>" + produto.alerta_estoque + "</td>");
         row.append("<td>" + produto.data_cadastro + "</td>");
 
-        var actions = $("<td style='display: flex; justify-content: center; align-items: center; gap: 7px;'>");
-        actions.append("<label style='cursor: pointer;' for='btnVerProdutoEsto-" + produto.id_pro + "'><i title='Ver Dados' class='icon fa fa-eye fa-lg' style='color: #023ea7;'></i></label>");
-        actions.append("<input style='display: none;' type='button' class='btnVerProdutoEsto'  onclick='verProdutoEsto(" + produto.id_pro + ", \"" + produto.nome_pro + "\", \"" + produto.valor_compra + "\", \"" + produto.data_cadastro + "\", \"" + produto.valor_venda + "\", \"" + produto.estoque + "\", \"" + produto.validade + "\", \"" + produto.alerta_estoque + "\", \"" + produto.imagemSrc + "\")' id='btnVerProdutoEsto-" + produto.id_pro + "'>");
-      
+        var actions = $(
+          "<td style='display: flex; justify-content: center; align-items: center; gap: 7px;'>"
+        );
+        actions.append(
+          "<label style='cursor: pointer;' for='btnVerProdutoEsto-" +
+            produto.id_pro +
+            "'><i title='Ver Dados' class='icon fa fa-eye fa-lg' style='color: #023ea7;'></i></label>"
+        );
+        actions.append(
+          "<input style='display: none;' type='button' class='btnVerProdutoEsto'  onclick='verProdutoEsto(" +
+            produto.id_pro +
+            ', "' +
+            produto.nome_pro +
+            '", "' +
+            produto.data_cadastro +
+            '", "' +
+            produto.valor_compra +
+            '", "' +
+            produto.valor_venda +
+            '", "' +
+            produto.estoque +
+            '", "' +
+            produto.validade +
+            '", "' +
+            produto.alerta_estoque +
+            '", "' +
+            produto.imagemSrc +
+            "\")' id='btnVerProdutoEsto-" +
+            produto.id_pro +
+            "'>"
+        );
+
         row.append(actions);
         produtosEstoqueTableBody.append(row);
       }
-
+      
       $("#sampleTable").DataTable();
 
+      
+      console.log("cheguei aqui");
       ocultarSpinner();
     },
     error: function () {
@@ -59,9 +89,9 @@ function obterProdutosEstoqueBaixo() {
 }
 
 function mostrarSpinner() {
-  $("#loadingIndicator3").show();
+  $("#loadingIndicator13").show();
 }
 
 function ocultarSpinner() {
-  $("#loadingIndicator3").hide();
+  $("#loadingIndicator13").hide();
 }
