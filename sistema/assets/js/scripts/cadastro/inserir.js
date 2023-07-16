@@ -28,6 +28,7 @@ function inserirServico() {
         $("#textErro").text("Não foi possível inserir esse serviço");
         $("#modalErro").modal("show");
       }
+      obterServicos();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
@@ -62,6 +63,7 @@ function inserirCargo() {
         $("#textErro").text("Não foi possível inserir esse cargo");
         $("#modalErro").modal("show");
       }
+      obterCargos();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
@@ -114,6 +116,7 @@ function inserirProduto() {
         $("#textErro").text("Não foi possível inserir esse produto");
         $("#modalErro").modal("show");
       }
+      obterProdutos();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
@@ -160,6 +163,7 @@ function inserirSaida() {
         $("#textErro").text("Não foi possível fazer a saída desse produto");
         $("#modalErro").modal("show");
       }
+      obterProdutos();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
@@ -204,6 +208,7 @@ function inserirEntrada() {
         $("#textErro").text("Não foi possível fazer a Entrada desse produto");
         $("#modalErro").modal("show");
       }
+      obterProdutos();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");

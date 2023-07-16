@@ -168,7 +168,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="novaCompraFor">Fornecedor:</label>
                             <select id="novaCompraFor" class="form-control" name="id_fornecedo" placeholder="Selecionar">
-                                <option value="">Selecionar fornecedor</option>
+                                <option value="">Selecionar Fornecedor</option>
                                 <?php
                                 foreach ($fornecedores as $fornecedor) {
                                     echo '<option value="' . $fornecedor['id_fornecedo'] . '">' . $fornecedor['nome_fornecedo'] . '</option>';
@@ -180,11 +180,11 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novaCompraUnit">Valor Unitário:</label>
-                            <input type="number" class="form-control" id="novaCompraUnit" placeholder="R$">
+                            <input type="number" class="form-control" id="novaCompraUnit" placeholder="R$" oninput="calculateTotal()">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novaCompraQuant1">Quantidade:</label>
-                            <input type="number" min="1" class="form-control" id="novaCompraQuant1" required placeholder="Digite a Quantidade comprada">
+                            <input type="number" min="1" class="form-control" id="novaCompraQuant1" required placeholder="Digite a Quantidade comprada" oninput="calculateTotal()">
                         </div>
                     </div>
                     <div class="form-row">
@@ -197,16 +197,14 @@ foreach ($result as $row) {
                             <input type="text" class="form-control" id="novaCompraPaga1" required placeholder="0000-00-00">
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="novaCompraFpaga1">Forma Pagamento:</label>
-                        <div class="input-group">
-                            <select id="novaCompraFpaga1" class="form-control" placeholder="Selecionar">
-                                <option>Pix</option>
-                                <option>Dinheiro</option>
-                                <option>Cartão de Crédito</option>
-                                <option>Cartão de Débito</option>
-                            </select>
-                        </div>
+                    <label for="novaCompraFpaga1">Forma Pagamento:</label>
+                    <div class="input-group">
+                        <select id="novaCompraFpaga1" class="form-control" placeholder="Selecionar">
+                            <option>Pix</option>
+                            <option>Dinheiro</option>
+                            <option>Cartão de Crédito</option>
+                            <option>Cartão de Débito</option>
+                        </select>
                     </div>
                 </form>
             </div>
@@ -610,4 +608,18 @@ foreach ($result as $row) {
         }
 
         $("#novaVendaPaga").mask("0000-00-00");
+
+
+
+        function calculateTotal() {
+            var unitValue = parseFloat(document.getElementById('novaCompraUnit').value);
+            var quantity = parseInt(document.getElementById('novaCompraQuant1').value);
+            var total = unitValue * quantity;
+
+            if (!isNaN(total)) {
+                document.getElementById('novaCompraTota1').value = total.toFixed(2);
+            } else {
+                document.getElementById('novaCompraTota1').value = '';
+            }
+        }
     </script>

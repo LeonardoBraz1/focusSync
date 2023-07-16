@@ -43,7 +43,7 @@ include('../../components/head.php');
 
 
     <main class="app-content">
-        <button onclick="btnInserirConta()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><img style="width: 30px; margin-left: -10px; margin-right: 7px;" src="../../assets/images/icons/icon_venda.png" alt="icon compra"> NOVA CONTA</button>
+        <button onclick="btnInserirContaR()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><img style="width: 30px; margin-left: -10px; margin-right: 7px;" src="../../assets/images/icons/icon_venda.png" alt="icon compra"> NOVA CONTA</button>
         <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0 -13px 0;">
             <input id="startDate1" style="border-radius: 6px;" type="date">
             <input id="endDate1" style="border-radius: 6px;" type="date">
@@ -62,14 +62,13 @@ include('../../components/head.php');
                                         <th>Descrição</th>
                                         <th>Valor</th>
                                         <th>Data do Pagamento</th>
-                                        <th>Fornecedor</th>
-                                        <th>Usuário</th>
+                                        <th>Cliente</th>
                                         <th>Cadastro</th>
                                         <th>Status</th>
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody id="ContasAPagarTableBody" style="position: relative;">
+                                <tbody id="ContasAReceberTableBody" style="position: relative;">
                                     <div id="loadingIndicator14" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                                         <div id="preloader-active">
                                             <div class="preloader d-flex align-items-center justify-content-center">
@@ -107,7 +106,7 @@ include('../../components/head.php');
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/inserir.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/verDados.js"></script>
-    <script type="text/javascript" src="../../assets/js/scripts/financeiro/tabelas/tabelaContasAPagar.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/tabelas/tabelaContasAReceber.js"></script>
 
 </body>
 

@@ -37,6 +37,7 @@ function salvarEdicaoServico() {
         $("#textErro").text("Não foi possivel editar esse serviço");
         $("#modalErro").modal("show");
       }
+      obterServicos();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
@@ -114,6 +115,7 @@ function salvarEdicaoProduto() {
         $("#textErro").text("Não foi possível editar esse produto");
         $("#modalErro").modal("show");
       }
+      obterProdutos();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");

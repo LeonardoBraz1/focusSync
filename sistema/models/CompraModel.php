@@ -117,7 +117,7 @@ class CompraModel
 
 
             if ($stmt->rowCount() > 0) {
-
+                // codigo abaixo inseri na tabela contas a pagar a compra
                 $dataConta = date('Y-m-d H:i:s');
 
                 $stmtNomePro = $this->conn->prepare("SELECT nome_pro FROM produtos WHERE id_pro = :id_pro");
@@ -127,7 +127,7 @@ class CompraModel
                 $rowNomePro = $stmtNomePro->fetch(PDO::FETCH_ASSOC);
                 $nomePro = $rowNomePro['nome_pro'];
 
-                $nomePro1 = 'Compra - ' . $nomePro;
+                $nomePro1 = 'Compra - (' . $quantidade . ') ' . $nomePro;
 
                 $stmtContasAPagar = $this->conn->prepare("INSERT INTO contas_a_pagar (descricao, id_fornecedor, valor, data_pagamento, data_conta, id_compra, id_barbearia, status) VALUES (:nomePro1, :id_fornecedo, :venTotal, :dataPaga, :dataConta, :id_compra, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ")");
                 $stmtContasAPagar->bindParam(':nomePro1', $nomePro1);
@@ -160,11 +160,9 @@ class CompraModel
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
-
+            // sempre que modificar o status da compra serar também modificado na tabela contas a pagar
             $stmtProcuraIdCompra = $this->conn->prepare("SELECT id_compra FROM contas_a_pagar WHERE id_compra = :id_compra");
-            $stmtProcuraIdCompra->bindParam(':status_pagamento', $status_pagamento);
             $stmtProcuraIdCompra->bindParam(':id_compra', $id_compra);
-            $stmtProcuraIdCompra->bindParam(':dataPaga', $dataPaga);
             $stmtProcuraIdCompra->execute();
 
             if ($stmtProcuraIdCompra->rowCount() > 0) {

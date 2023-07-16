@@ -122,11 +122,11 @@ function inserirUsuario() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Usuário inserido com sucesso!");
         $("#modalSucesso").modal("show");
-
       } else {
         $("#textErro").text("Não foi possível inserir esse usuário");
         $("#modalErro").modal("show");
       }
+      obterUsuarios();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
@@ -134,7 +134,7 @@ function inserirUsuario() {
     },
   });
 
-        obterUsuarios();
+  obterUsuarios();
   // Fechar a modal de inserção de usuário
   $("#modalInserirUsuario").modal("hide");
 }
@@ -272,11 +272,11 @@ function inserirFuncionario() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Funcionário inserido com sucesso!");
         $("#modalSucesso").modal("show");
-
       } else {
         $("#textErro").text("Não foi possível inserir esse funcionário");
         $("#modalErro").modal("show");
       }
+      obterFuncionarios();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
@@ -284,7 +284,7 @@ function inserirFuncionario() {
     },
   });
 
-        obterFuncionarios();
+  obterFuncionarios();
   // Fechar a modal de inserção de funcionário
   $("#modalInserirFuncionario").modal("hide");
 }
@@ -519,11 +519,11 @@ function inserirFornecedor() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Fornecedor inserido com sucesso!");
         $("#modalSucesso").modal("show");
-
       } else {
         $("#textErro").text("Não foi possível inserir esse fornecedor");
         $("#modalErro").modal("show");
       }
+      obterFornecedores();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
@@ -531,7 +531,7 @@ function inserirFornecedor() {
     },
   });
 
-        obterFornecedores();
+  obterFornecedores();
   $("#modalInserirFornecedor").modal("hide");
 }
 
@@ -545,7 +545,7 @@ function inserirCliente() {
   var nome_cliente = $("#novoClienteNome").val();
   var email_cliente = $("#novoClienteEmail").val();
   var telefone_cliente = $("#novoClienteTel").val();
-  
+
   $.ajax({
     url: "../../controllers/ClienteController.php",
     type: "POST",
@@ -560,11 +560,11 @@ function inserirCliente() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Cliente inserido com sucesso!");
         $("#modalSucesso").modal("show");
-        
       } else {
         $("#textErro").text("Não foi possível inserir esse cliente");
         $("#modalErro").modal("show");
       }
+      obterClientes();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");

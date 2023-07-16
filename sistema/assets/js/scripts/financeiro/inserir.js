@@ -39,6 +39,7 @@ function inserirVenda() {
         $("#textErro").text("Não foi possível efetuar essa venda");
         $("#modalErro").modal("show");
       }
+      obterVendas();
     },
     error: function (xhr, status, error) {
       console.log(xhr, status, error);
@@ -84,10 +85,12 @@ function inserirCompra() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Compra efetuada com sucesso!");
         $("#modalSucesso").modal("show");
+       
       } else {
         $("#textErro").text("Não foi possível efetuar essa Compra");
         $("#modalErro").modal("show");
-      }
+      } 
+      obterCompras();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");

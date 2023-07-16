@@ -1,6 +1,6 @@
 <?php
 require_once 'conexao.php';
-class ContasAPagarModel
+class ContasAReceberModel
 {
   private $conn;
 
@@ -9,7 +9,7 @@ class ContasAPagarModel
     $this->conn = Conexao::getInstance();
   }
 
-  public function obterContas($startDate1, $endDate1, $id_barbearia)
+  public function obterContasReceber($startDate1, $endDate1, $id_barbearia)
   {
       function getStatusClass($status)
       {
@@ -29,11 +29,11 @@ class ContasAPagarModel
          // Adiciona 1 dia ao endDate
          $endDate1 = date('Y-m-d', strtotime($endDate1 . ' +1 day'));
          
-          $stmt = $this->conn->prepare("SELECT contas_a_pagar.*, usuarios.nome, fornecedores.nome_fornecedo FROM contas_a_pagar LEFT JOIN usuarios ON contas_a_pagar.id_usuario = usuarios.id LEFT JOIN fornecedores ON contas_a_pagar.id_fornecedor = fornecedores.id_fornecedo WHERE contas_a_pagar.id_barbearia = :barbearia_id AND contas_a_pagar.data_conta >= :startDate1 AND contas_a_pagar.data_conta <= :endDate1");
+          $stmt = $this->conn->prepare("SELECT contas_a_receber.*, clientes.nome_cliente FROM contas_a_receber LEFT JOIN clientes ON contas_a_receber.id_cliente = clientes.id_cliente WHERE contas_a_receber.id_barbearia = :barbearia_id AND contas_a_receber.data_cadastro >= :startDate1 AND contas_a_receber.data_cadastro <= :endDate1");
           $stmt->bindParam(':startDate1', $startDate1);
           $stmt->bindParam(':endDate1', $endDate1);
       } else {
-          $stmt = $this->conn->prepare("SELECT contas_a_pagar.*, usuarios.nome, fornecedores.nome_fornecedo FROM contas_a_pagar LEFT JOIN usuarios ON contas_a_pagar.id_usuario = usuarios.id LEFT JOIN fornecedores ON contas_a_pagar.id_fornecedor = fornecedores.id_fornecedo  WHERE contas_a_pagar.id_barbearia = :barbearia_id");
+          $stmt = $this->conn->prepare("SELECT contas_a_receber.*, clientes.nome_cliente FROM contas_a_receber LEFT JOIN clientes ON contas_a_receber.id_cliente = clientes.id_cliente  WHERE contas_a_receber.id_barbearia = :barbearia_id");
       }
   
       $stmt->bindParam(':barbearia_id', $id_barbearia);
@@ -43,25 +43,24 @@ class ContasAPagarModel
   
       if ($stmt->rowCount() > 0) {
           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-              $formattedDate = date('Y-m-d', strtotime($row['data_conta']));
+              $formattedDate = date('Y-m-d', strtotime($row['data_cadastro']));
               $data_pagamento = $row['data_pagamento'] ? date('Y-m-d', strtotime($row['data_pagamento'])) : '';
             
               $result .= '<tr>
-                    <td style="display: none; font: 1em sans-serif;">' . $row['id_conta'] . '</td>
+                    <td style="display: none; font: 1em sans-serif;">' . $row['id_receber'] . '</td>
                     <td ><i class="fa fa-dot-circle-o fa-lg" aria-hidden="true"></i> ' . $row['descricao'] . '</td>
                     <td>R$ ' . $row['valor'] . '</td>
                     <td>' . $data_pagamento . '</td>
-                    <td>' . $row['nome_fornecedo'] . '</td>
-                    <td>' . $row['nome'] . '</td>
+                    <td>' . $row['nome_cliente'] . '</td>
                     <td>' . $formattedDate . '</td>
                     <td><span class="' . getStatusClass($row['status']) . ' statusCor">' . $row['status'] . '</span></td>                  
                     <td style="display: flex; justify-content: center; align-items: center; gap: 7px;">
-                    <label style="cursor: pointer;" for="btnVerConta-' . $row['id_conta'] . '"><i title="Ver Dados" class="icon fa fa-eye fa-lg" style="color: #023ea7;"></i></label>
-                    <input style="display: none;" type="button" class="btnVerConta"  onclick="verConta(' . $row['id_conta'] . ', \'' . $row['descricao'] . '\', \'' . $row['valor'] . '\', \'' .  $data_pagamento  . '\', \'' . $row['nome_fornecedo'] . '\', \'' . $row['nome'] . '\', \'' . date('Y-m-d', strtotime($row['data_conta'])) . '\', \'' . $row['status'] . '\')" id="btnVerConta-' . $row['id_conta'] . '">
-                    <label style="cursor: pointer;" for="btnDeletarConta-' . $row['id_conta'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
-                    <input style="display: none;" type="button" onclick="deletarConta(' . $row['id_conta'] . ')" id="btnDeletarConta-' . $row['id_conta'] . '">
-                    <label style="cursor: pointer;" for="btnStatus-' . $row['id_conta'] . '"><i title="Trocar Status" class="fa fa-check-square-o fa-lg" style="color: #bd0000;"></i></label>
-                    <input style="display: none;" type="button" onclick="statusConta(' . $row['id_conta'] . ', \'' . $row['status'] . '\')" id="btnStatus-' . $row['id_conta'] . '">
+                    <label style="cursor: pointer;" for="btnVerReceber-' . $row['id_receber'] . '"><i title="Ver Dados" class="icon fa fa-eye fa-lg" style="color: #023ea7;"></i></label>
+                    <input style="display: none;" type="button" class="btnVerReceber"  onclick="verReceber(' . $row['id_receber'] . ', \'' . $row['descricao'] . '\', \'' . $row['valor'] . '\', \'' .  $data_pagamento  . '\', \'' . $row['nome_cliente'] . '\', \'' . date('Y-m-d', strtotime($row['data_cadastro'])) . '\', \'' . $row['status'] . '\')" id="btnVerReceber-' . $row['id_receber'] . '">
+                    <label style="cursor: pointer;" for="btnDeletarReceber-' . $row['id_receber'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
+                    <input style="display: none;" type="button" onclick="deletarReceber(' . $row['id_receber'] . ')" id="btnDeletarReceber-' . $row['id_receber'] . '">
+                    <label style="cursor: pointer;" for="btnStatus-' . $row['id_receber'] . '"><i title="Trocar Status" class="fa fa-check-square-o fa-lg" style="color: #bd0000;"></i></label>
+                    <input style="display: none;" type="button" onclick="statusReceber(' . $row['id_receber'] . ', \'' . $row['status'] . '\')" id="btnStatus-' . $row['id_receber'] . '">
                     </td>
                   </tr>';
           }

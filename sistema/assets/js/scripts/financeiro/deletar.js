@@ -31,6 +31,7 @@ function deletarVenda(id_venda) {
           $("#textErro").text("Não foi possivel deletar esse venda");
           $("#modalErro").modal("show");
         }
+        obterVendas();
       },
       error: function (xhr, status, error) {
         $("#textErro").text("Ao enviar os dados");
@@ -78,6 +79,7 @@ function deletarCompra(id_compra) {
           $("#textErro").text("Não foi possivel deletar esse compra");
           $("#modalErro").modal("show");
         }
+        obterCompras();
       },
       error: function (xhr, status, error) {
         $("#textErro").text("Ao enviar os dados");

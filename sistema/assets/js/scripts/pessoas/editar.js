@@ -1,6 +1,4 @@
-
 function editarUsuario(id, nome, email, id_nivel, ativo, senha) {
-  
   $("#editUsuarioId").val(id);
   $("#editUsuarioEmail").val(email);
   $("#editUsuarioNome").val(nome);
@@ -8,12 +6,10 @@ function editarUsuario(id, nome, email, id_nivel, ativo, senha) {
   $("#editUsuarioAti").val(ativo);
   $("#editUsuarioSenha").val(senha);
 
- 
   $("#modalEditarUsuario").modal("show");
 }
 
 function salvarEdicaoUsuario() {
-  
   var id = $("#editUsuarioId").val();
   var email = $("#editUsuarioEmail").val();
   var nome = $("#editUsuarioNome").val();
@@ -21,7 +17,6 @@ function salvarEdicaoUsuario() {
   var ativo = $("#editUsuarioAti").val();
   var senha = $("#editUsuarioSenha").val();
 
-  
   $.ajax({
     url: "../../controllers/UsuarioController.php",
     type: "POST",
@@ -39,30 +34,34 @@ function salvarEdicaoUsuario() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Usuário editado com sucesso!");
         $("#modalSucesso").modal("show");
-
-          obterUsuarios();
-        
       } else {
         $("#textErro").text("Não foi possivel editar esse Usuário");
         $("#modalErro").modal("show");
       }
+      obterUsuarios();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
       $("#modalErro").modal("show");
     },
   });
+  obterUsuarios();
   $("#modalEditarUsuario").modal("hide");
 }
 
-
-
-
-
-
-
-function editarFuncionario(id, nome, email, id_nivel, cpf, comissao, atendimento, endereco, cidade, tipoPix, pix) {
-
+function editarFuncionario(
+  id,
+  nome,
+  email,
+  id_nivel,
+  cpf,
+  comissao,
+  atendimento,
+  endereco,
+  cidade,
+  tipoPix,
+  pix
+) {
   $("#editFuncionarioId").val(id);
   $("#editFuncionarioNome").val(nome);
   $("#editFuncionarioEmail").val(email);
@@ -75,12 +74,10 @@ function editarFuncionario(id, nome, email, id_nivel, cpf, comissao, atendimento
   $("#editFuncionarioTipo").val(tipoPix);
   $("#editFuncionarioPix").val(pix);
 
-
   $("#modalEditarFuncionario").modal("show");
 }
 
 function salvarEdicaoFuncionario() {
-
   var id = $("#editFuncionarioId").val();
   var nome = $("#editFuncionarioNome").val();
   var email = $("#editFuncionarioEmail").val();
@@ -115,28 +112,32 @@ function salvarEdicaoFuncionario() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Funcionário editado com sucesso!");
         $("#modalSucesso").modal("show");
-
-        obterFuncionarios();
       } else {
         $("#textErro").text("Não foi possivel editar esse Funcionário");
         $("#modalErro").modal("show");
       }
+      obterFuncionarios();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
       $("#modalErro").modal("show");
     },
   });
+
+  obterFuncionarios();
   $("#modalEditarFuncionario").modal("hide");
 }
 
-
-
-
-
-
-function editarFornecedor(id_fornecedo, nome_fornecedo, email_fornecedo, telefone_fornecedo, pontuacao_fornecedo, endereco_fornecedo, cidade_fornecedo, site_fornecedo) {
- 
+function editarFornecedor(
+  id_fornecedo,
+  nome_fornecedo,
+  email_fornecedo,
+  telefone_fornecedo,
+  pontuacao_fornecedo,
+  endereco_fornecedo,
+  cidade_fornecedo,
+  site_fornecedo
+) {
   $("#editFornecedorId").val(id_fornecedo);
   $("#editFornecedorNome").val(nome_fornecedo);
   $("#editFornecedorEmail").val(email_fornecedo);
@@ -146,12 +147,10 @@ function editarFornecedor(id_fornecedo, nome_fornecedo, email_fornecedo, telefon
   $("#editFornecedorCid").val(cidade_fornecedo);
   $("#editFornecedorSit").val(site_fornecedo);
 
-
   $("#modalEditarFornecedor").modal("show");
 }
 
 function salvarEdicaoFornecedor() {
- 
   var id_fornecedo = $("#editFornecedorId").val();
   var nome_fornecedo = $("#editFornecedorNome").val();
   var email_fornecedo = $("#editFornecedorEmail").val();
@@ -161,7 +160,6 @@ function salvarEdicaoFornecedor() {
   var cidade_fornecedo = $("#editFornecedorCid").val();
   var site_fornecedo = $("#editFornecedorSit").val();
 
- 
   $.ajax({
     url: "../../controllers/FornecedorController.php",
     type: "POST",
@@ -181,43 +179,41 @@ function salvarEdicaoFornecedor() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Fornecedor editado com sucesso!");
         $("#modalSucesso").modal("show");
-
-        obterFornecedores();
       } else {
         $("#textErro").text("Não foi possivel editar esse Fornecedor");
         $("#modalErro").modal("show");
       }
+      obterFornecedores();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
       $("#modalErro").modal("show");
     },
   });
+  obterFornecedores();
   $("#modalEditarFornecedor").modal("hide");
 }
 
-
-
-
-function editarCliente(id_cliente, nome_cliente, email_cliente, telefone_cliente) {
-  
+function editarCliente(
+  id_cliente,
+  nome_cliente,
+  email_cliente,
+  telefone_cliente
+) {
   $("#editClienteId").val(id_cliente);
   $("#editClienteNome").val(nome_cliente);
   $("#editClienteEmail").val(email_cliente);
   $("#editClienteTel").val(telefone_cliente);
 
- 
   $("#modalEditarCliente").modal("show");
 }
 
 function salvarEdicaoCliente() {
-  
   var id_cliente = $("#editClienteId").val();
   var nome_cliente = $("#editClienteNome").val();
   var email_cliente = $("#editClienteEmail").val();
   var telefone_cliente = $("#editClienteTel").val();
 
-  
   $.ajax({
     url: "../../controllers/ClienteController.php",
     type: "POST",
@@ -233,18 +229,17 @@ function salvarEdicaoCliente() {
       if (response.status === "sucesso") {
         $("#textSucesso").text("Cliente editado com sucesso!");
         $("#modalSucesso").modal("show");
-
-        obterClientes();
       } else {
         $("#textErro").text("Não foi possivel editar esse Cliente");
         $("#modalErro").modal("show");
       }
+      obterClientes();
     },
     error: function (xhr, status, error) {
       $("#textErro").text("Ao enviar os dados");
       $("#modalErro").modal("show");
     },
   });
+  obterClientes();
   $("#modalEditarCliente").modal("hide");
 }
-

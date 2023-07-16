@@ -31,6 +31,7 @@ function statusVenda(
           $("#textErro").text("Não foi possível editar esse status");
           $("#modalErro").modal("show");
         }
+        obterVendas();
       },
       error: function (xhr, status, error) {
         $("#textErro").text("Ao enviar os dados");
@@ -70,12 +71,13 @@ function statusCompra(
         if (response.status === "sucesso") {
           $("#textSucesso").text("Status editado com sucesso!");
           $("#modalSucesso").modal("show");
-  
+
           
         } else {
           $("#textErro").text("Não foi possível editar esse status");
           $("#modalErro").modal("show");
         }
+        obterCompras();
       },
       error: function (xhr, status, error) {
         $("#textErro").text("Ao enviar os dados");

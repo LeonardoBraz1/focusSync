@@ -31,6 +31,7 @@ function deletarServico(id_servico) {
           $("#textErro").text("Não foi possivel deletar esse serviço");
           $("#modalErro").modal("show");
         }
+        obterServicos();
       },
       error: function (xhr, status, error) {
         $("#textErro").text("Ao enviar os dados");
@@ -78,6 +79,7 @@ function deletarCargo(id_nivel) {
           $("#textErro").text("Não foi possivel deletar esse cargo");
           $("#modalErro").modal("show");
         }
+        obterCargos();
       },
       error: function (xhr, status, error) {
         $("#textErro").text("Ao enviar os dados");
@@ -123,6 +125,7 @@ function deletarCargo(id_nivel) {
           $("#textErro").text("Não foi possivel deletar esse produto");
           $("#modalErro").modal("show");
         }
+        obterProdutos();
       },
       error: function (xhr, status, error) {
         $("#textErro").text("Ao enviar os dados");
