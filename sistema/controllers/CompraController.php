@@ -36,10 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $dataCompra = date('Y-m-d H:i:s');
 
+        if($id_fornecedo === ''){
+            $id_fornecedo = NULL;
+        }
+
         $response = $compraModel->inserirCompra($id_pro, $id_fornecedo, $valor_unitario, $quantidade, $venTotal, $dataPaga, $formapaga, $dataCompra, $_SESSION["barbearia_id"]);
     } elseif ($_POST['action'] === 'editarStatus') {
 
-        if ($status_pagamento === 'Pago') {
+        if ($status_pagamento === 'Aprovada') {
             $dataPaga = date('Y-m-d H:i:s');
         } else {
             $dataPaga = null;

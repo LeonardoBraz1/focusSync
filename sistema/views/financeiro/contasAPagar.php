@@ -12,12 +12,12 @@ include('../../components/head.php');
 ?>
 
 <style>
-   .status-pendente {
+    .status-pendente {
         background-color: blue;
         color: #fafcff;
     }
 
-    .status-aprovado {
+    .status-paga {
         background-color: #00EE76;
     }
 
@@ -40,8 +40,14 @@ include('../../components/head.php');
 
     include('../../components/sidebar.php');
     ?>
+
+
     <main class="app-content">
-        <button onclick="btnInserirCompra()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><img style="width: 30px; margin-left: -10px; margin-right: 7px;" src="../../assets/images/icons/icon_compra.png" alt="icon compra"> NOVA COMPRA</button>
+        <button onclick="btnInserirVenda()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><img style="width: 30px; margin-left: -10px; margin-right: 7px;" src="../../assets/images/icons/icon_venda.png" alt="icon compra"> NOVA VENDA</button>
+        <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0 -13px 0;">
+                <input id="startDate1" style="border-radius: 6px;" type="date">
+                <input id="endDate1" style="border-radius: 6px;" type="date">
+        </div>
         <br>
         <br>
         <div class="row">
@@ -54,17 +60,18 @@ include('../../components/head.php');
                                     <tr>
                                         <th style="display: none;">id</th>
                                         <th>Nome</th>
-                                        <th>Valor Unitário</th>
+                                        <th>Valor Compra</th>
                                         <th>Quantidade</th>
                                         <th>Valor Total</th>
-                                        <th>Fornecedor</th>
-                                        <th>Data Compra</th>
+                                        <th>Cliente</th>
+                                        <th>Data Venda</th>
+                                        <th>Nº da Fatura</th>
                                         <th>Status</th>
                                         <th>Acões</th>
                                     </tr>
                                 </thead>
-                                <tbody id="comprasTableBody" style="position: relative;">
-                                    <div id="loadingIndicator2" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                <tbody id="vendasTableBody" style="position: relative;">
+                                    <div id="loadingIndicator14" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                                         <div id="preloader-active">
                                             <div class="preloader d-flex align-items-center justify-content-center">
                                                 <div class="preloader-inner position-relative">
@@ -92,17 +99,16 @@ include('../../components/head.php');
     <script src="../../assets/js/popper.min.js"></script>
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
     <script src="../../assets/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <!-- Data table plugin-->
+
     <script type="text/javascript" src="../../assets/js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../../assets/js/plugins/dataTables.bootstrap.min.js"></script>
+
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/editar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/deletar.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/inserir.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/verDados.js"></script>
-    <script type="text/javascript" src="../../assets/js/scripts/financeiro/tabelas/tabelaCompras.js"></script>
+    <script type="text/javascript" src="../../assets/js/scripts/financeiro/tabelas/tabelaVendas.js"></script>
 
 </body>
 

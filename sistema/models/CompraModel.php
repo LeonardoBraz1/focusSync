@@ -16,11 +16,14 @@ class CompraModel
             switch ($status) {
                 case 'Pendente':
                     return 'status-pendente';
-                case 'Pago':
-                    return 'status-pago';
+                case 'Aprovada':
+                    return 'status-aprovado';
+                case 'Cancelada':
+                    return 'status-cancelado';
                 default:
                     return '';
             }
+            
         }
 
         $stmt = $this->conn->prepare("SELECT compras.*, produtos.nome_pro, produtos.imagem, fornecedores.nome_fornecedo FROM compras LEFT JOIN produtos ON compras.id_pro = produtos.id_pro LEFT JOIN fornecedores ON compras.id_fornecedor = fornecedores.id_fornecedo WHERE compras.id_barbearia = :barbearia_id");
@@ -98,7 +101,7 @@ class CompraModel
             $stmtUpdateEstoque->execute();
 
 
-            $stmt = $this->conn->prepare("INSERT INTO compras (id_pro, id_fornecedor, valor_unitario, quantidade, valor_total, data_pagamento, forma_pagamento, data_compra, id_barbearia, status_pagamento) VALUES (:id_pro, :id_fornecedo, :valor_unitario, :quantidade, :venTotal, :dataPaga, :formapaga, :dataCompra, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Pago'") . ")");
+            $stmt = $this->conn->prepare("INSERT INTO compras (id_pro, id_fornecedor, valor_unitario, quantidade, valor_total, data_pagamento, forma_pagamento, data_compra, id_barbearia, status_pagamento) VALUES (:id_pro, :id_fornecedo, :valor_unitario, :quantidade, :venTotal, :dataPaga, :formapaga, :dataCompra, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ")");
             $stmt->bindParam(':id_pro', $id_pro);
             $stmt->bindParam(':id_fornecedo', $id_fornecedo);
             $stmt->bindParam(':valor_unitario', $valor_unitario);
@@ -109,8 +112,34 @@ class CompraModel
             $stmt->bindParam(':dataCompra', $dataCompra);
             $stmt->bindParam(':id_barbearia', $id_barbearia);
             $stmt->execute();
+            $id_compra = $this->conn->lastInsertId();
+
+
 
             if ($stmt->rowCount() > 0) {
+
+                $dataConta = date('Y-m-d H:i:s');
+
+                $stmtNomePro = $this->conn->prepare("SELECT nome_pro FROM produtos WHERE id_pro = :id_pro");
+                $stmtNomePro->bindParam(':id_pro', $id_pro);
+                $stmtNomePro->execute();
+
+                $rowNomePro = $stmtNomePro->fetch(PDO::FETCH_ASSOC);
+                $nomePro = $rowNomePro['nome_pro'];
+
+                $nomePro1 = 'Compra - ' . $nomePro;
+
+                $stmtContasAPagar = $this->conn->prepare("INSERT INTO contas_a_pagar (descricao, id_fornecedor, valor, data_pagamento, data_conta, id_compra, id_barbearia, status) VALUES (:nomePro1, :id_fornecedo, :venTotal, :dataPaga, :dataConta, :id_compra, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ")");
+                $stmtContasAPagar->bindParam(':nomePro1', $nomePro1);
+                $stmtContasAPagar->bindParam(':id_fornecedo', $id_fornecedo);
+                $stmtContasAPagar->bindParam(':venTotal', $venTotal);
+                $stmtContasAPagar->bindParam(':dataPaga', $dataPaga);
+                $stmtContasAPagar->bindParam(':dataConta', $dataConta);
+                $stmtContasAPagar->bindParam(':id_compra', $id_compra);
+                $stmtContasAPagar->bindParam(':id_barbearia', $id_barbearia);
+                $stmtContasAPagar->execute();
+
+
                 $response = array("status" => "sucesso");
             } else {
                 $response = array("status" => "erro");
@@ -131,6 +160,23 @@ class CompraModel
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
+
+            $stmtProcuraIdCompra = $this->conn->prepare("SELECT id_compra FROM contas_a_pagar WHERE id_compra = :id_compra");
+            $stmtProcuraIdCompra->bindParam(':status_pagamento', $status_pagamento);
+            $stmtProcuraIdCompra->bindParam(':id_compra', $id_compra);
+            $stmtProcuraIdCompra->bindParam(':dataPaga', $dataPaga);
+            $stmtProcuraIdCompra->execute();
+
+            if ($stmtProcuraIdCompra->rowCount() > 0) {
+
+                $stmtUpdateStatus = $this->conn->prepare("UPDATE contas_a_pagar SET status = :status_pagamento, data_pagamento = :dataPaga  WHERE id_compra = :id_compra");
+                $stmtUpdateStatus->bindParam(':status_pagamento', $status_pagamento);
+                $stmtUpdateStatus->bindParam(':id_compra', $id_compra);
+                $stmtUpdateStatus->bindParam(':dataPaga', $dataPaga);
+                $stmtUpdateStatus->execute();
+            }
+
+
             $response = array("status" => "sucesso");
         } else {
             $response = array("status" => "erro");

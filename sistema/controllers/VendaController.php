@@ -38,6 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $dataVenda = date('Y-m-d H:i:s');
 
+        if($id_user === ''){
+            $id_user = NULL;
+        }
+
+        if($id_cli === ''){
+            $id_cli = NULL;
+        }
+
         $response = $vendaModel->inserirVenda($id_pro, $id_user, $id_cli, $quantidade, $venTotal, $dataPaga, $formapaga, $dataVenda, $_SESSION["barbearia_id"]);
     } elseif ($_POST['action'] === 'editarStatus') {
 

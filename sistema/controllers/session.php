@@ -8,7 +8,7 @@ if (isset($_SESSION["user_id"])) {
    
 } else {
     // Redirecionar se a sessão do usuário não estiver ativa
-    header("Location: ../");
+    header("Location: ../../");
     exit();
 }
 ?>

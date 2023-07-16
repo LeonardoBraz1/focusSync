@@ -224,7 +224,6 @@ th {
 
 label {
   display: inline-block;
-  margin-bottom: 0.5rem;
 }
 
 button {
@@ -16725,4 +16724,9 @@ be a descendant of the grid when it is being dragged.
 
 .user .user-settings label {
   color: #666;
+}
+
+
+b, strong {
+  font-size: 1.2em;
 }

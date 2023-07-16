@@ -75,6 +75,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="novaVendaUser">Vendedor:</label>
                             <select id="novaVendaUser" class="form-control" placeholder="Selecionar">
+                                <option value="">Selecionar Vendedor</option>
                                 <?php
                                 foreach ($usuarios as $usuario) {
                                     echo '<option value="' . $usuario['id'] . '">' . $usuario['nome'] . '</option>';
@@ -87,6 +88,7 @@ foreach ($result as $row) {
                         <div class="form-group col-md-6">
                             <label for="novaVendaCliente">Cliente:</label>
                             <select id="novaVendaCliente" class="form-control" placeholder="Selecionar um cliente" name="cliente">
+                                <option value="">Selecionar Cliente</option>
                                 <?php
                                 foreach ($clientes as $cliente) {
                                     echo '<option value="' . $cliente['id_cliente'] . '">' . $cliente['nome_cliente'] . '</option>';
@@ -155,7 +157,7 @@ foreach ($result as $row) {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="novaCompraPro">Produtos:</label>
-                            <select id="novaCompraPro" class="form-control" placeholder="Selecionar">
+                            <select id="novaCompraPro" class="form-control" name="Id_pro" placeholder="Selecionar">
                                 <?php
                                 foreach ($produtos as $produto) {
                                     echo '<option value="' . $produto['id_pro'] . '">' . $produto['nome_pro'] . '</option>';
@@ -165,7 +167,8 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="novaCompraFor">Fornecedor:</label>
-                            <select id="novaCompraFor" class="form-control" placeholder="Selecionar">
+                            <select id="novaCompraFor" class="form-control" name="id_fornecedo" placeholder="Selecionar">
+                                <option value="">Selecionar fornecedor</option>
                                 <?php
                                 foreach ($fornecedores as $fornecedor) {
                                     echo '<option value="' . $fornecedor['id_fornecedo'] . '">' . $fornecedor['nome_fornecedo'] . '</option>';
@@ -377,7 +380,7 @@ foreach ($result as $row) {
 
 
 
-
+<!-- modal cache -->
 <div class="modal fade bottom-modal" id="cachePermissionModal" tabindex="-1" role="dialog" aria-labelledby="cachePermissionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -454,8 +457,9 @@ foreach ($result as $row) {
                     <label for="novoStatusPaga">Status:</label>
                     <div class="input-group">
                         <select id="novoStatusPaga" class="form-control" placeholder="Selecionar">
-                            <option>Pago</option>
+                            <option>Aprovada</option>
                             <option>Pendente</option>
+                            <option>Cancelada</option>
                         </select>
                     </div>
                 </div>

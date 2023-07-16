@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Inclua a referência ao arquivo do Service Worker -->
+    <!-- Inclua a referência ao arquivo do Service Worker
     <script>
         $(document).ready(function() {
             $('#cachePermissionButtonYes').click(function() {
@@ -62,5 +62,5 @@
     header('Cache-Control: max-age=' . $cacheDuration);
 
     header('Expires: ' . $expires);
-    ?>
+    ?> -->
 </head>
