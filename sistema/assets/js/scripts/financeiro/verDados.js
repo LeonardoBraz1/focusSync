@@ -84,4 +84,31 @@ function verVenda(
     }
   }
   
+
+
+  function verContasAReceber(
+    id_receber, descricao, valor, data_pagamento, nome_cliente, data_cadastro, status
+  ) {
+    // Preencher campos da modal
+    $("#verContasRId").text(id_receber);
+    $("#verContasRNome").text(descricao);
+    $("#verContasRValor").text(valor);
+    $("#verContasRDataP").text(data_pagamento);
+    $("#verContasRNomeClie").text(nome_cliente);
+    $("#verContasRDataCadas").text(data_cadastro);
+    $("#verContasRStatus").text(status);
+  
+    $("#modalVerContasR").modal("show");
+
+
+
+    var status3 = $("#verContasRStatus").text().trim();
+    var statusMessage1 = $('#status_messageReceber');
+
+    if (status3 === 'Pendente') {
+        statusMessage1.removeClass('d-none');
+    } else {
+        statusMessage1.addClass('d-none');
+    }
+  }
   

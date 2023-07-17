@@ -56,9 +56,9 @@ class ContasAReceberModel
                     <td><span class="' . getStatusClass($row['status']) . ' statusCor">' . $row['status'] . '</span></td>                  
                     <td style="display: flex; justify-content: center; align-items: center; gap: 7px;">
                     <label style="cursor: pointer;" for="btnVerReceber-' . $row['id_receber'] . '"><i title="Ver Dados" class="icon fa fa-eye fa-lg" style="color: #023ea7;"></i></label>
-                    <input style="display: none;" type="button" class="btnVerReceber"  onclick="verReceber(' . $row['id_receber'] . ', \'' . $row['descricao'] . '\', \'' . $row['valor'] . '\', \'' .  $data_pagamento  . '\', \'' . $row['nome_cliente'] . '\', \'' . date('Y-m-d', strtotime($row['data_cadastro'])) . '\', \'' . $row['status'] . '\')" id="btnVerReceber-' . $row['id_receber'] . '">
+                    <input style="display: none;" type="button" class="btnVerReceber"  onclick="verContasAReceber(' . $row['id_receber'] . ', \'' . $row['descricao'] . '\', \'' . $row['valor'] . '\', \'' .  $data_pagamento  . '\', \'' . $row['nome_cliente'] . '\', \'' . date('Y-m-d', strtotime($row['data_cadastro'])) . '\', \'' . $row['status'] . '\')" id="btnVerReceber-' . $row['id_receber'] . '">
                     <label style="cursor: pointer;" for="btnDeletarReceber-' . $row['id_receber'] . '"><i title="Deletar" class="fa fa-solid fa-trash fa-lg" style="color: #bd0000;"></i></label>
-                    <input style="display: none;" type="button" onclick="deletarReceber(' . $row['id_receber'] . ')" id="btnDeletarReceber-' . $row['id_receber'] . '">
+                    <input style="display: none;" type="button" onclick="deletarContaReceber(' . $row['id_receber'] . ')" id="btnDeletarReceber-' . $row['id_receber'] . '">
                     <label style="cursor: pointer;" for="btnStatus-' . $row['id_receber'] . '"><i title="Trocar Status" class="fa fa-check-square-o fa-lg" style="color: #bd0000;"></i></label>
                     <input style="display: none;" type="button" onclick="statusReceber(' . $row['id_receber'] . ', \'' . $row['status'] . '\')" id="btnStatus-' . $row['id_receber'] . '">
                     </td>
@@ -70,11 +70,11 @@ class ContasAReceberModel
   }
   
 
-  public function deletarVenda($id_venda)
+  public function deletarContaReceber($id_receber)
   {
 
-    $stmt = $this->conn->prepare("DELETE FROM vendas WHERE id_venda = :id_venda");
-    $stmt->bindParam(':id_venda', $id_venda);
+    $stmt = $this->conn->prepare("DELETE FROM contas_a_receber WHERE id_receber = :id_receber");
+    $stmt->bindParam(':id_receber', $id_receber);
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
@@ -141,21 +141,36 @@ class ContasAReceberModel
     }
     return $response;
   }
-  public function editarStatus($id_venda, $status, $dataPaga)
+  public function editarStatusReceber($id_receber, $status, $dataPaga)
   {
-    $stmt = $this->conn->prepare("UPDATE vendas SET status = :status, data_pagamento = :dataPaga  WHERE id_venda = :id_venda");
-    $stmt->bindParam(':status', $status);
-    $stmt->bindParam(':id_venda', $id_venda);
-    $stmt->bindParam(':dataPaga', $dataPaga);
-    $stmt->execute();
+      $stmt = $this->conn->prepare("UPDATE contas_a_receber SET status = :status, data_pagamento = :dataPaga  WHERE id_receber = :id_receber");
+      $stmt->bindParam(':status', $status);
+      $stmt->bindParam(':id_receber', $id_receber);
+      $stmt->bindParam(':dataPaga', $dataPaga);
+      $stmt->execute();
 
-    if ($stmt->rowCount() > 0) {
-      $response = array("status" => "sucesso");
-    } else {
-      $response = array("status" => "erro");
-    }
+      if ($stmt->rowCount() > 0) {
+          // // sempre que modificar o status da compra serar também modificado na tabela contas a pagar
+          // $stmtProcuraIdCompra = $this->conn->prepare("SELECT id_compra FROM contas_a_pagar WHERE id_compra = :id_compra");
+          // $stmtProcuraIdCompra->bindParam(':id_compra', $id_compra);
+          // $stmtProcuraIdCompra->execute();
 
-    return $response;
+          // if ($stmtProcuraIdCompra->rowCount() > 0) {
+
+          //     $stmtUpdateStatus = $this->conn->prepare("UPDATE compra SET status = :status_pagamento, data_pagamento = :dataPaga  WHERE id_compra = :id_compra");
+          //     $stmtUpdateStatus->bindParam(':status_pagamento', $status_pagamento);
+          //     $stmtUpdateStatus->bindParam(':id_compra', $id_compra);
+          //     $stmtUpdateStatus->bindParam(':dataPaga', $dataPaga);
+          //     $stmtUpdateStatus->execute();
+          // }
+
+
+          $response = array("status" => "sucesso");
+      } else {
+          $response = array("status" => "erro");
+      }
+
+      return $response;
   }
 
   public function __destruct()

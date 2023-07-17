@@ -309,7 +309,7 @@ foreach ($result as $row) {
 <div class="modal fade" id="modalVerCompra" tabindex="-1" role="dialog" aria-labelledby="modalNovoEntradaLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <p id="status_messageCompra" class="status_message d-none" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center;">A venda será automaticamente marcada como "Pago" na data do pagamento.</p>
+            <p id="status_messageCompra" class="status_message d-none" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center;">A venda será automaticamente marcada como "Aprovada" na data do pagamento.</p>
             <div class="modal-header">
                 <h5 class="modal-title" id="nome1_dados"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -373,6 +373,57 @@ foreach ($result as $row) {
     </div>
 </div>
 
+
+
+
+
+
+<!-- Modal  ver contas a receber-->
+<div class="modal fade" id="modalVerContasR" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p id="status_messageReceber" class="status_message d-none" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center;">A venda será automaticamente marcada como "Aprovada" na data do pagamento.</p>
+                <h5 class="modal-title" id="verContasRNome"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verContasRId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Valor: </b></span>
+                        <span id="verContasRValor"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Data do Pagamento: </b></span>
+                        <span id="verContasRDataP"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Cliente: </b></span>
+                        <span id="verContasRNomeClie"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Data do Cadastro: </b></span>
+                        <span id="verContasRDataCadas"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Status: </b></span>
+                        <span id="verContasRStatus"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -472,6 +523,39 @@ foreach ($result as $row) {
 
 
 
+<!-- Modal status compra -->
+<div class="modal fade" id="modalEditarStatusPagamento1" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-weight: 400;" class="modal-title">Trocar Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="editStatusPagaId1" value="">
+            <div class="modal-body">
+                <div class="form-group col-md-6">
+                    <label for="novoStatusPaga1">Status:</label>
+                    <div class="input-group">
+                        <select id="novoStatusPaga1" class="form-control" placeholder="Selecionar">
+                            <option>Aprovada</option>
+                            <option>Pendente</option>
+                            <option>Cancelada</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoStatusPaga1()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 
@@ -520,6 +604,34 @@ foreach ($result as $row) {
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarCompra()">Deletar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- Modal de deletar Conta a receber -->
+<div class="modal fade" id="modalDeletarContaAReceber" tabindex="-1" role="dialog" aria-labelledby="modalDeletarReceberLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-weight: 400;" class="modal-titleReceber"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1em;" id="textDeletarReceber"></p>
+                <p style="font-size: 1.1em;" id="textDeletarReceber1"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarReceber()">Deletar</button>
             </div>
         </div>
     </div>

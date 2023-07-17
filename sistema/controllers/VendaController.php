@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($status === 'Aprovada') {
             $dataPaga = date('Y-m-d H:i:s');
-        }elseif ($status === 'Cancelado'){
+        }elseif ($status === 'Cancelada'){
             $dataPaga = NULL;
         }
 

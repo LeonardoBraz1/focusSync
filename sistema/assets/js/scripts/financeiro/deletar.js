@@ -89,3 +89,52 @@ function deletarCompra(id_compra) {
     obterCompras();
     $("#modalDeletarCompra").modal("hide");
   }
+
+
+
+
+
+
+//  contas a receber  //
+
+function deletarContaReceber(id_receber) {
+    window.deletarReceberId = id_receber;
+  
+    $(".modal-titleReceber").text("Deletar Conta");
+    $("#textDeletarReceber").text(
+      "Você tem certeza de que deseja deletar esta conta?"
+    );
+    $("#textDeletarReceber1").text(
+      "Esta ação não poderá ser desfeita e todos os dados associados serão permanentemente removidos."
+    );
+    $("#modalDeletarContaAReceber").modal("show");
+  }
+  
+  function btnDeletarReceber() {
+  
+    var id_receber = window.deletarCompraId;
+  
+    $.ajax({
+      url: "../../controllers/ContasAReceberController.php",
+      type: "POST",
+      data: { id_receber: id_receber, action: 'deletar' },
+      dataType: "json",
+      success: function (response) {
+        if (response.status === "sucesso") {
+          $("#textSucesso").text("Conta deletada com sucesso!");
+          $("#modalSucesso").modal("show");
+  
+        } else {
+          $("#textErro").text("Não foi possivel deletar esse conta");
+          $("#modalErro").modal("show");
+        }
+        obterContasReceber();
+      },
+      error: function (xhr, status, error) {
+        $("#textErro").text("Ao enviar os dados");
+        $("#modalErro").modal("show");
+      },
+    });
+    obterContasReceber();
+    $("#modalDeletarContaAReceber").modal("hide");
+  }

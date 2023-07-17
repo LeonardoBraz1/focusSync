@@ -8,7 +8,7 @@ date_default_timezone_set('America/Sao_Paulo');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contaRModel = new ContasAReceberModel();
 
-    $id_venda = isset($_POST['id_venda']) ? $_POST['id_venda'] : '';
+    $id_receber = isset($_POST['id_receber']) ? $_POST['id_receber'] : '';
     $id_pro = isset($_POST['id_pro']) ? $_POST['id_pro'] : '';
     $id_user = isset($_POST['id_user']) ? $_POST['id_user'] : '';
     $id_cli = isset($_POST['id_cli']) ? $_POST['id_cli'] : '';
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo $contasR;
     } elseif ($_POST['action'] === 'deletar') {
 
-        $response = $vendaModel->deletarVenda($id_venda);
+        $response = $contaRModel->deletarContaReceber($id_receber);
     } elseif ($_POST['action'] === 'inserir') {
 
         if ($dataPaga === '') {
@@ -51,11 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($status === 'Aprovada') {
             $dataPaga = date('Y-m-d H:i:s');
-        }elseif ($status === 'Cancelado'){
+        }elseif ($status === 'Cancelada'){
             $dataPaga = NULL;
         }
 
-        $response = $vendaModel->editarStatus($id_venda, $status, $dataPaga);
+        $response = $contaRModel->editarStatusReceber($id_receber, $status, $dataPaga);
     } else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");

@@ -23,13 +23,13 @@ function obterContasReceber() {
   var endDate1 = $('input[type="date"]').eq(1).val();
 
   $.ajax({
-    url: "../../controllers/ContasAPagarController.php",
+    url: "../../controllers/ContasAReceberController.php",
     type: "POST",
     data: { action: "obterContasReceber", startDate1: startDate1, endDate1: endDate1 },
     dataType: "html",
     success: function (response) {
       $("#sampleTable").DataTable().destroy();
-      $("#ContasAReceberTableBody").html(response);
+      $("#contasAReceberTableBody").html(response);
 
       $("#sampleTable").DataTable();
 

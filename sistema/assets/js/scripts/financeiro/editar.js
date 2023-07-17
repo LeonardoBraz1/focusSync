@@ -88,3 +88,51 @@ function statusCompra(
     $("#modalEditarStatusPagamento").modal("hide");
   }
   
+
+
+
+
+//   status pagamento  contas a receber //
+
+function statusReceber(
+    id_receber, status
+  ) {
+    $("#editStatusPagaId1").val(id_receber);
+    $("#novoStatusPaga1").val(status);
+    $("#modalEditarStatusPagamento1").modal("show");
+  }
+  
+  function salvarEdicaoStatusPaga1() {
+    var id_receber = $("#editStatusPagaId1").val();
+    var status = $("#novoStatusPaga1").val();
+  
+    $.ajax({
+      url: "../../controllers/ContasAReceberController.php",
+      type: "POST",
+      data: {
+        id_receber: id_receber,
+        status: status,
+        action: "editarStatus",
+      },
+      dataType: "json",
+      success: function (response) {
+        if (response.status === "sucesso") {
+          $("#textSucesso").text("Status editado com sucesso!");
+          $("#modalSucesso").modal("show");
+
+          
+        } else {
+          $("#textErro").text("Não foi possível editar esse status");
+          $("#modalErro").modal("show");
+        }
+        obterContasReceber();
+      },
+      error: function (xhr, status, error) {
+        $("#textErro").text("Ao enviar os dados");
+        $("#modalErro").modal("show");
+      },
+    });
+    obterContasReceber();
+    $("#modalEditarStatusPagamento1").modal("hide");
+  }
+  
