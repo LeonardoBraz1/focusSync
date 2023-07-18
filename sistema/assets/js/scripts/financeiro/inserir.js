@@ -81,7 +81,6 @@ function inserirCompra() {
     },
     dataType: "json",
     success: function (response) {
-      console.log(response);
       if (response.status === "sucesso") {
         $("#textSucesso").text("Compra efetuada com sucesso!");
         $("#modalSucesso").modal("show");
@@ -99,4 +98,101 @@ function inserirCompra() {
   });
   obterCompras();
   $("#modalInserirCompra").modal("hide");
+}
+
+
+
+
+
+
+
+//    conta a receber   //
+
+function btnInserirContaAPagar() {
+  $("#modalInserirContaAPagar").modal("show");
+}
+
+function inserirContaAPagar() {
+  var descricao = $("#novaPagarDesc").val();
+  var valor = $("#novaPagarValor").val();
+  var dataPaga = $("#novaPagarPaga").val();
+  var id_fornecedo = $("#novaPagarFor").val();
+  var id_usuario = $("#novaPagarUser").val();
+
+  $.ajax({
+    url: "../../controllers/ContasAPagarController.php",
+    type: "POST",
+    data: {
+      descricao: descricao,
+      id_fornecedo: id_fornecedo,
+      id_usuario: id_usuario,
+      valor: valor,
+      dataPaga: dataPaga,
+      action: "inserir",
+    },
+    dataType: "json",
+    success: function (response) {
+      if (response.status === "sucesso") {
+        $("#textSucesso").text("Conta inserida com sucesso!");
+        $("#modalSucesso").modal("show");
+       
+      } else {
+        $("#textErro").text("Não foi possível inserir essa conta");
+        $("#modalErro").modal("show");
+      } 
+      obterContas();
+    },
+    error: function (xhr, status, error) {
+      $("#textErro").text("Ao enviar os dados");
+      $("#modalErro").modal("show");
+    },
+  });
+  obterContas();
+  $("#modalInserirContaAPagar").modal("hide");
+}
+
+
+
+
+//    conta a receber   //
+
+function btnInserirContaAReceber() {
+  $("#modalInserirContaAReceber").modal("show");
+}
+
+function inserirContaAReceber() {
+  var descricao = $("#novaReceberDesc").val();
+  var id_cliente = $("#novaReceberClie").val();
+  var valor = $("#novaReceberValor").val();
+  var dataPaga = $("#novaReceberPaga").val();
+
+  $.ajax({
+    url: "../../controllers/ContasAReceberController.php",
+    type: "POST",
+    data: {
+      descricao: descricao,
+      id_cliente: id_cliente,
+      valor: valor,
+      dataPaga: dataPaga,
+      action: "inserir",
+    },
+    dataType: "json",
+    success: function (response) {
+      if (response.status === "sucesso") {
+        $("#textSucesso").text("Conta inserida com sucesso!");
+        $("#modalSucesso").modal("show");
+       
+      } else {
+        $("#textErro").text("Não foi possível inserir essa conta");
+        $("#modalErro").modal("show");
+      } 
+      obterContasReceber();
+    },
+    error: function (xhr, status, error) {
+      $("#textErro").text("Ao enviar os dados");
+      $("#modalErro").modal("show");
+    },
+  });
+  obterContasReceber();
+  $("#modalInserirContaAReceber").modal("hide");
 }

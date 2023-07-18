@@ -43,7 +43,7 @@ include('../../components/head.php');
 
 
     <main class="app-content">
-        <button onclick="btnInserirConta()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><img style="width: 30px; margin-left: -10px; margin-right: 7px;" src="../../assets/images/icons/icon_venda.png" alt="icon compra"> NOVA CONTA</button>
+        <button onclick="btnInserirContaAPagar()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><img style="width: 30px; margin-left: -10px; margin-right: 7px;" src="../../assets/images/icons/icon_venda.png" alt="icon compra"> NOVA CONTA</button>
         <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0 -13px 0;">
             <input id="startDate1" style="border-radius: 6px;" type="date">
             <input id="endDate1" style="border-radius: 6px;" type="date">
@@ -63,7 +63,7 @@ include('../../components/head.php');
                                         <th>Valor</th>
                                         <th>Data do Pagamento</th>
                                         <th>Fornecedor</th>
-                                        <th>Usuário</th>
+                                        <th>Funcionário</th>
                                         <th>Cadastro</th>
                                         <th>Status</th>
                                         <th>Acões</th>

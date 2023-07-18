@@ -8,14 +8,12 @@ date_default_timezone_set('America/Sao_Paulo');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contaModel = new ContasAPagarModel();
 
-    $id_venda = isset($_POST['id_venda']) ? $_POST['id_venda'] : '';
-    $id_pro = isset($_POST['id_pro']) ? $_POST['id_pro'] : '';
-    $id_user = isset($_POST['id_user']) ? $_POST['id_user'] : '';
-    $id_cli = isset($_POST['id_cli']) ? $_POST['id_cli'] : '';
-    $quantidade = isset($_POST['quantidade']) ? $_POST['quantidade'] : '';
-    $venTotal = isset($_POST['venTotal']) ? $_POST['venTotal'] : '';
+    $id_conta = isset($_POST['id_conta']) ? $_POST['id_conta'] : '';
+    $id_usuario = isset($_POST['id_usuario']) ? $_POST['id_usuario'] : '';
+    $id_fornecedo = isset($_POST['id_fornecedo']) ? $_POST['id_fornecedo'] : '';
+    $valor = isset($_POST['valor']) ? $_POST['valor'] : '';
+    $descricao = isset($_POST['descricao']) ? $_POST['descricao'] : '';
     $dataPaga = isset($_POST['dataPaga']) ? $_POST['dataPaga'] : '';
-    $formapaga = isset($_POST['formapaga']) ? $_POST['formapaga'] : '';
     $status = isset($_POST['status']) ? $_POST['status'] : '';
     $startDate1 = isset($_POST['startDate1']) ? $_POST['startDate1'] : null;
     $endDate1 = isset($_POST['endDate1']) ? $_POST['endDate1'] : null;
@@ -27,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo $contas;
     } elseif ($_POST['action'] === 'deletar') {
 
-        $response = $vendaModel->deletarVenda($id_venda);
+        $response = $contaModel->deletarContaAPagar($id_conta);
     } elseif ($_POST['action'] === 'inserir') {
 
         if ($dataPaga === '') {
@@ -36,26 +34,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dataPaga .= ' ' . date('H:i:s');
         }
 
-        $dataVenda = date('Y-m-d H:i:s');
+        $data_conta = date('Y-m-d H:i:s');
 
-        if($id_user === ''){
-            $id_user = NULL;
+        if($id_usuario === ''){
+            $id_usuario = NULL;
         }
 
-        if($id_cli === ''){
-            $id_cli = NULL;
+        if($id_fornecedo === ''){
+            $id_fornecedo = NULL;
         }
 
-        $response = $vendaModel->inserirVenda($id_pro, $id_user, $id_cli, $quantidade, $venTotal, $dataPaga, $formapaga, $dataVenda, $_SESSION["barbearia_id"]);
+        $response = $contaModel->inserirContaAPagar($descricao, $id_fornecedo, $id_usuario, $valor, $dataPaga, $data_conta, $_SESSION["barbearia_id"]);
     } elseif ($_POST['action'] === 'editarStatus') {
 
         if ($status === 'Aprovada') {
             $dataPaga = date('Y-m-d H:i:s');
-        }elseif ($status === 'Cancelado'){
+        }else {
             $dataPaga = NULL;
         }
 
-        $response = $vendaModel->editarStatus($id_venda, $status, $dataPaga);
+        $response = $contaModel->editarStatus($id_conta, $status, $dataPaga);
     } else {
         // Ação desconhecida
         $response = array("status" => "erro", "message" => "Ação desconhecida.");

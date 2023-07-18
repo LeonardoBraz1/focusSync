@@ -92,6 +92,58 @@ function statusCompra(
 
 
 
+//   status pagamento  contas a pagar //
+
+function statusPagar(
+    id_conta, status
+  ) {
+    $("#editStatusPagaId2").val(id_conta);
+    $("#novoStatusPaga2").val(status);
+    $("#modalEditarStatusPagamento2").modal("show");
+  }
+  
+  function salvarEdicaoStatusPaga2() {
+    var id_conta = $("#editStatusPagaId2").val();
+    var status = $("#novoStatusPaga2").val();
+  
+    $.ajax({
+      url: "../../controllers/ContasAPagarController.php",
+      type: "POST",
+      data: {
+        id_conta: id_conta,
+        status: status,
+        action: "editarStatus",
+      },
+      dataType: "json",
+      success: function (response) {
+        if (response.status === "sucesso") {
+          $("#textSucesso").text("Status editado com sucesso!");
+          $("#modalSucesso").modal("show");
+
+          
+        } else {
+          $("#textErro").text("Não foi possível editar esse status");
+          $("#modalErro").modal("show");
+        }
+        obterContas();
+      },
+      error: function (xhr, status, error) {
+        $("#textErro").text("Ao enviar os dados");
+        $("#modalErro").modal("show");
+      },
+    });
+    obterContas();
+    $("#modalEditarStatusPagamento2").modal("hide");
+  }
+  
+
+
+
+
+
+
+
+
 //   status pagamento  contas a receber //
 
 function statusReceber(

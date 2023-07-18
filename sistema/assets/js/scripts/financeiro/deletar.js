@@ -95,6 +95,56 @@ function deletarCompra(id_compra) {
 
 
 
+//  contas a pagar  //
+
+function deletarContaPagar(id_conta) {
+    window.deletarContaId = id_conta;
+  
+    $(".modal-titlePagar").text("Deletar Conta");
+    $("#textDeletarPagar").text(
+      "Você tem certeza de que deseja deletar esta conta?"
+    );
+    $("#textDeletarPagar1").text(
+      "Esta ação não poderá ser desfeita e todos os dados associados serão permanentemente removidos."
+    );
+    $("#modalDeletarContaAPagar").modal("show");
+  }
+  
+  function btnDeletarContaAPagar() {
+  
+    var id_conta = window.deletarContaId;
+  
+    $.ajax({
+      url: "../../controllers/ContasAPagarController.php",
+      type: "POST",
+      data: { id_conta: id_conta, action: 'deletar' },
+      dataType: "json",
+      success: function (response) {
+        if (response.status === "sucesso") {
+          $("#textSucesso").text("Conta deletada com sucesso!");
+          $("#modalSucesso").modal("show");
+  
+        } else {
+          $("#textErro").text("Não foi possivel deletar esse conta");
+          $("#modalErro").modal("show");
+        }
+        obterContas();
+      },
+      error: function (xhr, status, error) {
+        $("#textErro").text("Ao enviar os dados");
+        $("#modalErro").modal("show");
+      },
+    });
+    obterContas();
+    $("#modalDeletarContaAPagar").modal("hide");
+  }
+
+
+
+
+
+
+
 //  contas a receber  //
 
 function deletarContaReceber(id_receber) {

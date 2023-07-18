@@ -11,42 +11,42 @@ class ContasAReceberModel
 
   public function obterContasReceber($startDate1, $endDate1, $id_barbearia)
   {
-      function getStatusClass($status)
-      {
-          switch ($status) {
-              case 'Pendente':
-                  return 'status-pendente';
-              case 'Aprovada':
-                  return 'status-aprovada';
-              case 'Cancelada':
-                  return 'status-cancelada';
-              default:
-                  return '';
-          }
+    function getStatusClass($status)
+    {
+      switch ($status) {
+        case 'Pendente':
+          return 'status-pendente';
+        case 'Aprovada':
+          return 'status-aprovada';
+        case 'Cancelada':
+          return 'status-cancelada';
+        default:
+          return '';
       }
-  
-      if ($startDate1 && $endDate1) {
-         // Adiciona 1 dia ao endDate
-         $endDate1 = date('Y-m-d', strtotime($endDate1 . ' +1 day'));
-         
-          $stmt = $this->conn->prepare("SELECT contas_a_receber.*, clientes.nome_cliente FROM contas_a_receber LEFT JOIN clientes ON contas_a_receber.id_cliente = clientes.id_cliente WHERE contas_a_receber.id_barbearia = :barbearia_id AND contas_a_receber.data_cadastro >= :startDate1 AND contas_a_receber.data_cadastro <= :endDate1");
-          $stmt->bindParam(':startDate1', $startDate1);
-          $stmt->bindParam(':endDate1', $endDate1);
-      } else {
-          $stmt = $this->conn->prepare("SELECT contas_a_receber.*, clientes.nome_cliente FROM contas_a_receber LEFT JOIN clientes ON contas_a_receber.id_cliente = clientes.id_cliente  WHERE contas_a_receber.id_barbearia = :barbearia_id");
-      }
-  
-      $stmt->bindParam(':barbearia_id', $id_barbearia);
-      $stmt->execute();
-  
-      $result = '';
-  
-      if ($stmt->rowCount() > 0) {
-          while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-              $formattedDate = date('Y-m-d', strtotime($row['data_cadastro']));
-              $data_pagamento = $row['data_pagamento'] ? date('Y-m-d', strtotime($row['data_pagamento'])) : '';
-            
-              $result .= '<tr>
+    }
+
+    if ($startDate1 && $endDate1) {
+      // Adiciona 1 dia ao endDate
+      $endDate1 = date('Y-m-d', strtotime($endDate1 . ' +1 day'));
+
+      $stmt = $this->conn->prepare("SELECT contas_a_receber.*, clientes.nome_cliente FROM contas_a_receber LEFT JOIN clientes ON contas_a_receber.id_cliente = clientes.id_cliente WHERE contas_a_receber.id_barbearia = :barbearia_id AND contas_a_receber.data_cadastro >= :startDate1 AND contas_a_receber.data_cadastro <= :endDate1");
+      $stmt->bindParam(':startDate1', $startDate1);
+      $stmt->bindParam(':endDate1', $endDate1);
+    } else {
+      $stmt = $this->conn->prepare("SELECT contas_a_receber.*, clientes.nome_cliente FROM contas_a_receber LEFT JOIN clientes ON contas_a_receber.id_cliente = clientes.id_cliente  WHERE contas_a_receber.id_barbearia = :barbearia_id");
+    }
+
+    $stmt->bindParam(':barbearia_id', $id_barbearia);
+    $stmt->execute();
+
+    $result = '';
+
+    if ($stmt->rowCount() > 0) {
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $formattedDate = date('Y-m-d', strtotime($row['data_cadastro']));
+        $data_pagamento = $row['data_pagamento'] ? date('Y-m-d', strtotime($row['data_pagamento'])) : '';
+
+        $result .= '<tr>
                     <td style="display: none; font: 1em sans-serif;">' . $row['id_receber'] . '</td>
                     <td ><i class="fa fa-dot-circle-o fa-lg" aria-hidden="true"></i> ' . $row['descricao'] . '</td>
                     <td>R$ ' . $row['valor'] . '</td>
@@ -63,12 +63,12 @@ class ContasAReceberModel
                     <input style="display: none;" type="button" onclick="statusReceber(' . $row['id_receber'] . ', \'' . $row['status'] . '\')" id="btnStatus-' . $row['id_receber'] . '">
                     </td>
                   </tr>';
-          }
       }
-  
-      return $result;
+    }
+
+    return $result;
   }
-  
+
 
   public function deletarContaReceber($id_receber)
   {
@@ -86,91 +86,67 @@ class ContasAReceberModel
     return $response;
   }
 
-  public function inserirVenda($id_pro, $id_user, $id_cli, $quantidade, $venTotal, $dataPaga, $formapaga, $dataVenda, $id_barbearia)
+  public function inserirContaAReceber($descricao, $id_cli, $valor, $dataPaga, $data_cadastro, $id_barbearia)
   {
 
 
-    // Consulta o estoque atual do produto
-    $stmtEstoque = $this->conn->prepare("SELECT estoque FROM produtos WHERE id_pro = :id_pro");
-    $stmtEstoque->bindParam(':id_pro', $id_pro);
-    $stmtEstoque->execute();
-
-    if ($stmtEstoque->rowCount() > 0) {
-      $rowEstoque = $stmtEstoque->fetch(PDO::FETCH_ASSOC);
-      $estoqueAtual = $rowEstoque['estoque'];
 
 
-      if ($estoqueAtual >= $quantidade) {
-        // Atualiza o estoque do produto
-        $novoEstoque = $estoqueAtual - $quantidade;
-        $stmtUpdateEstoque = $this->conn->prepare("UPDATE produtos SET estoque = :novoEstoque WHERE id_pro = :id_pro");
-        $stmtUpdateEstoque->bindParam(':novoEstoque', $novoEstoque);
-        $stmtUpdateEstoque->bindParam(':id_pro', $id_pro);
-        $stmtUpdateEstoque->execute();
+    $stmt = $this->conn->prepare("INSERT INTO contas_a_receber (descricao, id_cliente, valor, data_Pagamento, data_cadastro, id_barbearia, status) VALUES (:descricao, :id_cli, :valor, :dataPaga, :data_cadastro, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ")");
+    $stmt->bindParam(':descricao', $descricao);
+    $stmt->bindParam(':id_cli', $id_cli);
+    $stmt->bindParam(':valor', $valor);
+    $stmt->bindParam(':dataPaga', $dataPaga);
+    $stmt->bindParam(':data_cadastro', $data_cadastro);
+    $stmt->bindParam(':id_barbearia', $id_barbearia);
+    $stmt->execute();
 
-
-        $stmtFatura = $this->conn->prepare("SELECT max(numero_fatura) FROM vendas");
-        $stmtFatura->execute();
-        $maiorFatura = $stmtFatura->fetchColumn();
-        $proximoNumeroFatura = $maiorFatura + 1;
-
-        $stmt = $this->conn->prepare("INSERT INTO vendas (id_pro, id_usuario, id_cliente, quantidade, valor_Total, data_Pagamento, forma_pagamento, data_venda, id_barbearia, status, numero_fatura) VALUES (:id_pro, :id_user, :id_cli, :quantidade, :venTotal, :dataPaga, :formapaga, :dataVenda, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ", " . $proximoNumeroFatura . ")");
-        $stmt->bindParam(':id_pro', $id_pro);
-        $stmt->bindParam(':id_user', $id_user);
-        $stmt->bindParam(':id_cli', $id_cli);
-        $stmt->bindParam(':quantidade', $quantidade);
-        $stmt->bindParam(':venTotal', $venTotal);
-        $stmt->bindParam(':dataPaga', $dataPaga);
-        $stmt->bindParam(':formapaga', $formapaga);
-        $stmt->bindParam(':dataVenda', $dataVenda);
-        $stmt->bindParam(':id_barbearia', $id_barbearia);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-          $response = array("status" => "sucesso");
-        } else {
-          $response = array("status" => "erro");
-        }
-      } else {
-
-        $response = array("status" => "estoque_insuficiente");
-      }
+    if ($stmt->rowCount() > 0) {
+      $response = array("status" => "sucesso");
     } else {
-
-      $response = array("status" => "produto_nao_encontrado");
+      $response = array("status" => "erro");
     }
+
     return $response;
   }
   public function editarStatusReceber($id_receber, $status, $dataPaga)
   {
-      $stmt = $this->conn->prepare("UPDATE contas_a_receber SET status = :status, data_pagamento = :dataPaga  WHERE id_receber = :id_receber");
-      $stmt->bindParam(':status', $status);
-      $stmt->bindParam(':id_receber', $id_receber);
-      $stmt->bindParam(':dataPaga', $dataPaga);
-      $stmt->execute();
+    $stmt = $this->conn->prepare("UPDATE contas_a_receber SET status = :status, data_pagamento = :dataPaga  WHERE id_receber = :id_receber");
+    $stmt->bindParam(':status', $status);
+    $stmt->bindParam(':id_receber', $id_receber);
+    $stmt->bindParam(':dataPaga', $dataPaga);
+    $stmt->execute();
 
-      if ($stmt->rowCount() > 0) {
-          // // sempre que modificar o status da compra serar também modificado na tabela contas a pagar
-          // $stmtProcuraIdCompra = $this->conn->prepare("SELECT id_compra FROM contas_a_pagar WHERE id_compra = :id_compra");
-          // $stmtProcuraIdCompra->bindParam(':id_compra', $id_compra);
-          // $stmtProcuraIdCompra->execute();
+    if ($stmt->rowCount() > 0) {
 
-          // if ($stmtProcuraIdCompra->rowCount() > 0) {
-
-          //     $stmtUpdateStatus = $this->conn->prepare("UPDATE compra SET status = :status_pagamento, data_pagamento = :dataPaga  WHERE id_compra = :id_compra");
-          //     $stmtUpdateStatus->bindParam(':status_pagamento', $status_pagamento);
-          //     $stmtUpdateStatus->bindParam(':id_compra', $id_compra);
-          //     $stmtUpdateStatus->bindParam(':dataPaga', $dataPaga);
-          //     $stmtUpdateStatus->execute();
-          // }
+      $stmtProcuraIdVenda = $this->conn->prepare("SELECT id_venda FROM contas_a_receber where id_receber = :id_receber");
+      $stmtProcuraIdVenda->bindParam(':id_receber', $id_receber);
+      $stmtProcuraIdVenda->execute();
+      $rowProcuraIdVenda = $stmtProcuraIdVenda->fetch(PDO::FETCH_ASSOC);
+      $id_venda = $rowProcuraIdVenda['id_venda'];
 
 
-          $response = array("status" => "sucesso");
-      } else {
-          $response = array("status" => "erro");
+      $stmtProcuraIdVenda = $this->conn->prepare("SELECT id_venda FROM vendas WHERE id_venda = :id_venda");
+      $stmtProcuraIdVenda->bindParam(':id_venda', $id_venda);
+      $stmtProcuraIdVenda->execute();
+
+
+      if ($stmtProcuraIdVenda->rowCount() > 0) {
+
+        $stmtUpdateStatus = $this->conn->prepare("UPDATE vendas SET status = :status, data_pagamento = :dataPaga  WHERE id_venda = :id_venda");
+        $stmtUpdateStatus->bindParam(':status', $status);
+        $stmtUpdateStatus->bindParam(':id_venda', $id_venda);
+        $stmtUpdateStatus->bindParam(':dataPaga', $dataPaga);
+        $stmtUpdateStatus->execute();
       }
 
-      return $response;
+
+      $response = array("status" => "sucesso");
+    } else {
+      $response = array("status" => "erro");
+    }
+
+    return $response;
   }
 
   public function __destruct()

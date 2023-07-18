@@ -11,44 +11,44 @@ class VendaModel
 
   public function obterVendas($startDate, $endDate, $id_barbearia)
   {
-      function getStatusClass($status)
-      {
-          switch ($status) {
-              case 'Pendente':
-                  return 'status-pendente';
-              case 'Aprovada':
-                  return 'status-aprovado';
-              case 'Cancelada':
-                  return 'status-cancelado';
-              default:
-                  return '';
-          }
+    function getStatusClass($status)
+    {
+      switch ($status) {
+        case 'Pendente':
+          return 'status-pendente';
+        case 'Aprovada':
+          return 'status-aprovado';
+        case 'Cancelada':
+          return 'status-cancelado';
+        default:
+          return '';
       }
-  
-      if ($startDate && $endDate) {
-         // Adicione 1 dia ao endDate
-         $endDate = date('Y-m-d', strtotime($endDate . ' +1 day'));
-         
-          $stmt = $this->conn->prepare("SELECT vendas.*, produtos.nome_pro, produtos.imagem, produtos.valor_venda, usuarios.nome, clientes.nome_cliente FROM vendas LEFT JOIN produtos ON vendas.id_pro = produtos.id_pro LEFT JOIN usuarios ON vendas.id_usuario = usuarios.id LEFT JOIN clientes ON vendas.id_cliente = clientes.id_cliente WHERE vendas.id_barbearia = :barbearia_id AND vendas.data_venda >= :startDate AND vendas.data_venda <= :endDate");
-          $stmt->bindParam(':startDate', $startDate);
-          $stmt->bindParam(':endDate', $endDate);
-      } else {
-          $stmt = $this->conn->prepare("SELECT vendas.*, produtos.nome_pro, produtos.imagem, produtos.valor_venda, usuarios.nome, clientes.nome_cliente FROM vendas LEFT JOIN produtos ON vendas.id_pro = produtos.id_pro LEFT JOIN usuarios ON vendas.id_usuario = usuarios.id LEFT JOIN clientes ON vendas.id_cliente = clientes.id_cliente WHERE vendas.id_barbearia = :barbearia_id");
-      }
-  
-      $stmt->bindParam(':barbearia_id', $id_barbearia);
-      $stmt->execute();
-  
-      $result = '';
-  
-      if ($stmt->rowCount() > 0) {
-          while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-              $formattedDate = date('Y-m-d', strtotime($row['data_venda']));
-              $data_pagamento = $row['data_pagamento'] ? date('Y-m-d', strtotime($row['data_pagamento'])) : '';
-              $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
-              $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
-  
-              $result .= '<tr>
+    }
+
+    if ($startDate && $endDate) {
+      // Adicione 1 dia ao endDate
+      $endDate = date('Y-m-d', strtotime($endDate . ' +1 day'));
+
+      $stmt = $this->conn->prepare("SELECT vendas.*, produtos.nome_pro, produtos.imagem, produtos.valor_venda, usuarios.nome, clientes.nome_cliente FROM vendas LEFT JOIN produtos ON vendas.id_pro = produtos.id_pro LEFT JOIN usuarios ON vendas.id_usuario = usuarios.id LEFT JOIN clientes ON vendas.id_cliente = clientes.id_cliente WHERE vendas.id_barbearia = :barbearia_id AND vendas.data_venda >= :startDate AND vendas.data_venda <= :endDate");
+      $stmt->bindParam(':startDate', $startDate);
+      $stmt->bindParam(':endDate', $endDate);
+    } else {
+      $stmt = $this->conn->prepare("SELECT vendas.*, produtos.nome_pro, produtos.imagem, produtos.valor_venda, usuarios.nome, clientes.nome_cliente FROM vendas LEFT JOIN produtos ON vendas.id_pro = produtos.id_pro LEFT JOIN usuarios ON vendas.id_usuario = usuarios.id LEFT JOIN clientes ON vendas.id_cliente = clientes.id_cliente WHERE vendas.id_barbearia = :barbearia_id");
+    }
+
+    $stmt->bindParam(':barbearia_id', $id_barbearia);
+    $stmt->execute();
+
+    $result = '';
+
+    if ($stmt->rowCount() > 0) {
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $formattedDate = date('Y-m-d', strtotime($row['data_venda']));
+        $data_pagamento = $row['data_pagamento'] ? date('Y-m-d', strtotime($row['data_pagamento'])) : '';
+        $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
+        $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
+
+        $result .= '<tr>
                     <td style="display: none;">' . $row['id_venda'] . '</td>
                     <td style="width: 150px;" ><img src="' . $imagemSrc . '" alt="Imagem do Produto" style="max-width: 30px;">' . $row['nome_pro'] . '</td>
                     <td>' . $row['valor_venda'] . '</td>
@@ -67,12 +67,12 @@ class VendaModel
                     <input style="display: none;" type="button" onclick="statusVenda(' . $row['id_venda'] . ', \'' . $row['status'] . '\')" id="btnStatus-' . $row['id_venda'] . '">
                     </td>
                   </tr>';
-          }
       }
-  
-      return $result;
+    }
+
+    return $result;
   }
-  
+
 
   public function deletarVenda($id_venda)
   {
@@ -129,8 +129,32 @@ class VendaModel
         $stmt->bindParam(':dataVenda', $dataVenda);
         $stmt->bindParam(':id_barbearia', $id_barbearia);
         $stmt->execute();
+        $id_venda = $this->conn->lastInsertId();
 
         if ($stmt->rowCount() > 0) {
+
+          // codigo abaixo inseri na tabela contas a receber a venda
+          $dataConta = date('Y-m-d H:i:s');
+
+          $stmtNomePro = $this->conn->prepare("SELECT nome_pro FROM produtos WHERE id_pro = :id_pro");
+          $stmtNomePro->bindParam(':id_pro', $id_pro);
+          $stmtNomePro->execute();
+
+          $rowNomePro = $stmtNomePro->fetch(PDO::FETCH_ASSOC);
+          $nomePro = $rowNomePro['nome_pro'];
+
+          $nomePro1 = 'Venda - (' . $quantidade . ') ' . $nomePro;
+
+          $stmtContasAReceber = $this->conn->prepare("INSERT INTO contas_a_receber (descricao, id_cliente, valor, data_pagamento, data_cadastro, id_venda, id_barbearia, status) VALUES (:nomePro1, :id_cliente, :valor, :dataPaga, :dataConta, :id_venda, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ")");
+          $stmtContasAReceber->bindParam(':nomePro1', $nomePro1);
+          $stmtContasAReceber->bindParam(':id_cliente', $id_cli);
+          $stmtContasAReceber->bindParam(':valor', $venTotal);
+          $stmtContasAReceber->bindParam(':dataPaga', $dataPaga);
+          $stmtContasAReceber->bindParam(':dataConta', $dataConta);
+          $stmtContasAReceber->bindParam(':id_venda', $id_venda);
+          $stmtContasAReceber->bindParam(':id_barbearia', $id_barbearia);
+          $stmtContasAReceber->execute();
+
           $response = array("status" => "sucesso");
         } else {
           $response = array("status" => "erro");
@@ -154,6 +178,23 @@ class VendaModel
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
+
+      // sempre que modificar o status da venda serar também modificado na tabela contas a receber
+      $stmtProcuraIdReceber = $this->conn->prepare("SELECT id_venda FROM contas_a_receber WHERE id_venda = :id_venda");
+      $stmtProcuraIdReceber->bindParam(':id_venda', $id_venda);
+      $stmtProcuraIdReceber->execute();
+
+      if ($stmtProcuraIdReceber->rowCount() > 0) {
+
+        $stmtUpdateStatus = $this->conn->prepare("UPDATE contas_a_receber SET status = :status, data_pagamento = :dataPaga  WHERE id_venda = :id_venda");
+        $stmtUpdateStatus->bindParam(':status', $status);
+        $stmtUpdateStatus->bindParam(':id_venda', $id_venda);
+        $stmtUpdateStatus->bindParam(':dataPaga', $dataPaga);
+        $stmtUpdateStatus->execute();
+      }
+
+
+
       $response = array("status" => "sucesso");
     } else {
       $response = array("status" => "erro");

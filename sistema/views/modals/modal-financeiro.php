@@ -47,7 +47,8 @@ foreach ($result as $row) {
 }
 ?>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 
 <!-- Modal de inserir venda -->
 <div class="modal fade" id="modalInserirVenda" tabindex="-1" role="dialog" aria-labelledby="modalInserirVendaLabel" aria-hidden="true">
@@ -222,6 +223,125 @@ foreach ($result as $row) {
 
 
 
+<!-- Modal de inserir conta a pagar -->
+<div class="modal fade" id="modalInserirContaAPagar" tabindex="-1" role="dialog" aria-labelledby="modalInserirPagarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalInserirPagarLabel">Inserir Conta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formInserirPagar" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novaPagarDesc">Descrição:</label>
+                            <input type="text" class="form-control" id="novaPagarDesc" placeholder="exemplo: Aluguel">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novaPagarUser">Funcionário:</label>
+                            <select id="novaPagarUser" class="form-control" placeholder="Selecionar">
+                                <option value="">Selecionar Vendedor</option>
+                                <?php
+                                foreach ($usuarios as $usuario) {
+                                    echo '<option value="' . $usuario['id'] . '">' . $usuario['nome'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novaPagarFor">Fornecedor:</label>
+                            <select id="novaPagarFor" class="form-control" name="id_fornecedo" placeholder="Selecionar">
+                                <option value="">Selecionar Fornecedor</option>
+                                <?php
+                                foreach ($fornecedores as $fornecedor) {
+                                    echo '<option value="' . $fornecedor['id_fornecedo'] . '">' . $fornecedor['nome_fornecedo'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novaPagarValor">Valor:</label>
+                            <input type="number" class="form-control" id="novaPagarValor" placeholder="R$">
+                        </div>
+                    </div>
+                    <label for="novaPagarPaga">Data do Pagamento:</label>
+                    <input type="text" class="form-control" id="novaPagarPaga" required placeholder="0000-00-00">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirContaAPagar()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- Modal de inserir conta a receber -->
+<div class="modal fade" id="modalInserirContaAReceber" tabindex="-1" role="dialog" aria-labelledby="modalInserirReceberLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalInserirReceberLabel">Inserir Conta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formInserirReceber" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novaReceberDesc">Descrição:</label>
+                            <input type="text" class="form-control" id="novaReceberDesc" placeholder="exemplo: Aluguel">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novaReceberClie">Cliente:</label>
+                            <select id="novaReceberClie" class="form-control" name="id_cliente" placeholder="Selecionar">
+                                <option value="">Selecionar Cliente</option>
+                                <?php
+                                foreach ($clientes as $cliente) {
+                                    echo '<option value="' . $cliente['id_cliente'] . '">' . $cliente['nome_cliente'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="novaReceberValor">Valor:</label>
+                            <input type="number" class="form-control" id="novaReceberValor" placeholder="R$">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="novaReceberPaga">Data do Pagamento:</label>
+                            <input type="text" class="form-control" id="novaReceberPaga" required placeholder="0000-00-00">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirContaAReceber()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 
 
 
@@ -275,7 +395,7 @@ foreach ($result as $row) {
                         <span id="nFatura_dados"></span>
                     </div>
                     <div class="col-md-6">
-                        <span><b>Nome Usuário: </b></span>
+                        <span><b>Funcionário: </b></span>
                         <span id="nomeUser_dados"></span>
                     </div>
                 </div>
@@ -378,12 +498,71 @@ foreach ($result as $row) {
 
 
 
+<!-- Modal  ver contas a Pagar-->
+<div class="modal fade" id="modalVerContasP" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <p id="status_messagePagar" class="status_message d-none" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center;">A conta será automaticamente marcada como "Aprovada" na data do pagamento.</p>
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="verContasPNome"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verContasPId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Data do Pagamento: </b></span>
+                        <span id="verContasPDataP"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Valor: </b></span>
+                        <span id="verContasPValor"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Fornecedor: </b></span>
+                        <span id="verContasPNomeFor"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Data do Cadastro: </b></span>
+                        <span id="verContasPDataCadas"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Funcionário: </b></span>
+                        <span id="verContasPNomeUser"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Status: </b></span>
+                        <span id="verContasPStatus"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <!-- Modal  ver contas a receber-->
 <div class="modal fade" id="modalVerContasR" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <p id="status_messageReceber" class="status_message d-none" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center;">A conta será automaticamente marcada como "Aprovada" na data do pagamento.</p>
+
             <div class="modal-header">
-                <p id="status_messageReceber" class="status_message d-none" style="margin-bottom: -15px; background-color: indianred; color: #fff; text-align: center;">A venda será automaticamente marcada como "Aprovada" na data do pagamento.</p>
                 <h5 class="modal-title" id="verContasRNome"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -393,12 +572,12 @@ foreach ($result as $row) {
             <div class="modal-body">
                 <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
                     <div class="col-md-6">
-                        <span><b>Valor: </b></span>
-                        <span id="verContasRValor"></span>
-                    </div>
-                    <div class="col-md-6">
                         <span><b>Data do Pagamento: </b></span>
                         <span id="verContasRDataP"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Valor: </b></span>
+                        <span id="verContasRValor"></span>
                     </div>
                 </div>
                 <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
@@ -557,6 +736,40 @@ foreach ($result as $row) {
 
 
 
+<!-- Modal status compra -->
+<div class="modal fade" id="modalEditarStatusPagamento2" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-weight: 400;" class="modal-title">Trocar Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="editStatusPagaId2" value="">
+            <div class="modal-body">
+                <div class="form-group col-md-6">
+                    <label for="novoStatusPaga2">Status:</label>
+                    <div class="input-group">
+                        <select id="novoStatusPaga2" class="form-control" placeholder="Selecionar">
+                            <option>Aprovada</option>
+                            <option>Pendente</option>
+                            <option>Cancelada</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoStatusPaga2()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 
 
@@ -611,6 +824,31 @@ foreach ($result as $row) {
 
 
 
+
+
+
+
+<!-- Modal de deletar Conta a pagar -->
+<div class="modal fade" id="modalDeletarContaAPagar" tabindex="-1" role="dialog" aria-labelledby="modalDeletarPagarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="font-weight: 400;" class="modal-titlePagar"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1em;" id="textDeletarPagar"></p>
+                <p style="font-size: 1.1em;" id="textDeletarPagar1"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarContaAPagar()">Deletar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -719,7 +957,7 @@ foreach ($result as $row) {
             updateValues();
         }
 
-        $("#novaVendaPaga").mask("0000-00-00");
+        $("#novaVendaPaga, #novaReceberPaga, #novaCompraPaga1, #novaPagarPaga").mask("0000-00-00");
 
 
 

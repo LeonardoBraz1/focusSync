@@ -9,13 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contaRModel = new ContasAReceberModel();
 
     $id_receber = isset($_POST['id_receber']) ? $_POST['id_receber'] : '';
-    $id_pro = isset($_POST['id_pro']) ? $_POST['id_pro'] : '';
-    $id_user = isset($_POST['id_user']) ? $_POST['id_user'] : '';
+    $descricao = isset($_POST['descricao']) ? $_POST['descricao'] : '';
     $id_cli = isset($_POST['id_cli']) ? $_POST['id_cli'] : '';
-    $quantidade = isset($_POST['quantidade']) ? $_POST['quantidade'] : '';
-    $venTotal = isset($_POST['venTotal']) ? $_POST['venTotal'] : '';
+    $valor = isset($_POST['valor']) ? $_POST['valor'] : '';
     $dataPaga = isset($_POST['dataPaga']) ? $_POST['dataPaga'] : '';
-    $formapaga = isset($_POST['formapaga']) ? $_POST['formapaga'] : '';
+    $data_cadastro = isset($_POST['data_cadastro']) ? $_POST['data_cadastro'] : '';
     $status = isset($_POST['status']) ? $_POST['status'] : '';
     $startDate1 = isset($_POST['startDate1']) ? $_POST['startDate1'] : null;
     $endDate1 = isset($_POST['endDate1']) ? $_POST['endDate1'] : null;
@@ -36,22 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dataPaga .= ' ' . date('H:i:s');
         }
 
-        $dataVenda = date('Y-m-d H:i:s');
-
-        if($id_user === ''){
-            $id_user = NULL;
-        }
+        $data_cadastro = date('Y-m-d H:i:s');
 
         if($id_cli === ''){
             $id_cli = NULL;
         }
 
-        $response = $vendaModel->inserirVenda($id_pro, $id_user, $id_cli, $quantidade, $venTotal, $dataPaga, $formapaga, $dataVenda, $_SESSION["barbearia_id"]);
+        $response = $contaRModel->inserirContaAReceber($descricao, $id_cli, $valor, $dataPaga, $data_cadastro, $_SESSION["barbearia_id"]);
     } elseif ($_POST['action'] === 'editarStatus') {
 
         if ($status === 'Aprovada') {
             $dataPaga = date('Y-m-d H:i:s');
-        }elseif ($status === 'Cancelada'){
+        }else {
             $dataPaga = NULL;
         }
 
