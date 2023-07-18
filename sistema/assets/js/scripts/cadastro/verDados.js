@@ -8,8 +8,7 @@ function verProduto(
   validade,
   alerta_estoque,
   descricao,
-  imagem,
-  id_fornecedo
+  imagem
   ) {
     $("#verProdutoId").text(id_pro);
     $("#verProdutoNome").text(nome_pro);
@@ -20,7 +19,6 @@ function verProduto(
     $("#verProdutoVali").text(validade);
     $("#verProdutoAler").text(alerta_estoque);
     $("#verProdutoDesc").text(descricao);
-    $("#verProdutoForne").text(id_fornecedo);
     $("#verProdutoImg").attr("src", imagem);
 
     $("#modalVerProduto").modal("show");

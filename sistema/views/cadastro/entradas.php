@@ -29,7 +29,6 @@ include('../../components/head.php');
                                         <th>Nome</th>
                                         <th>Quantidade</th>
                                         <th>Motivo Entrada</th>
-                                        <th>Fornecedor</th>
                                         <th>Data Entrada</th>
                                         <th>Ações</th>
                                     </tr>

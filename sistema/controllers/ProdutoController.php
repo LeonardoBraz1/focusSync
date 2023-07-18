@@ -17,14 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $descricao = isset($_POST['descricao']) ? $_POST['descricao'] : '';
     $quantidade = isset($_POST['quantidade']) ? $_POST['quantidade'] : '';
     $motivo = isset($_POST['motivo']) ? $_POST['motivo'] : '';
-    $id_fornecedo = isset($_POST['id_fornecedo']) ? $_POST['id_fornecedo'] : '';
 
 
     
     // Verifica qual ação está sendo realizada
     if ($_POST['action'] === 'editar') {
 
-        $response = $produtoModel->editarProduto($id_pro, $nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_fornecedo);
+        $response = $produtoModel->editarProduto($id_pro, $nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem);
     
     } elseif ($_POST['action'] === 'deletar') {
 
@@ -32,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } elseif ($_POST['action'] === 'inserir') {
 
-        $response = $produtoModel->inserirProduto($nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_fornecedo, $_SESSION["barbearia_id"]);
+        $response = $produtoModel->inserirProduto($nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $_SESSION["barbearia_id"]);
     
     } elseif ($_POST['action'] === 'inserirSaida') {
 
@@ -40,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     } elseif ($_POST['action'] === 'inserirEntrada') {
 
-        $response = $produtoModel->inserirEntrada($id_pro, $quantidade, $motivo, $id_fornecedo, $_SESSION["barbearia_id"]);
+        $response = $produtoModel->inserirEntrada($id_pro, $quantidade, $motivo, $_SESSION["barbearia_id"]);
     
     } elseif ($_POST['action'] === 'obterEntradas') {
 

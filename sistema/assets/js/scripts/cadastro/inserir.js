@@ -90,7 +90,6 @@ function inserirProduto() {
   var alerta_estoque = $("#novoProdutoAler").val();
   var descricao = $("#novoProdutoDesc").val();
   var imagem = $("#novoProdutoImg").attr("src");
-  var id_fornecedo = $("#novoProdutoForne").val();
 
   $.ajax({
     url: "../../controllers/ProdutoController.php",
@@ -104,7 +103,6 @@ function inserirProduto() {
       alerta_estoque: alerta_estoque,
       descricao: descricao,
       imagem: imagem,
-      id_fornecedo: id_fornecedo,
       action: "inserir",
     },
     dataType: "json",
@@ -176,9 +174,8 @@ function inserirSaida() {
 
 //   Entrada Produto     //
 
-function entradaProduto(id_pro, nome_pro, id_fornecedo) {
+function entradaProduto(id_pro, nome_pro) {
   window.entradaId = id_pro;
-  window.fornecedorId = id_fornecedo;
   document.getElementById("modalNovoEntradaLabel").innerHTML = nome_pro;
   $("#modalInserirEntrada").modal("show");
 }
@@ -188,7 +185,6 @@ function inserirEntrada() {
   var motivo = $("#novoEntradaMoti").val();
 
   var id_pro = window.entradaId;
-  var id_fornecedo = window.fornecedorId;
   $.ajax({
     url: "../../controllers/ProdutoController.php",
     type: "POST",
@@ -196,7 +192,6 @@ function inserirEntrada() {
       quantidade: quantidade,
       motivo: motivo,
       id_pro: id_pro,
-      id_fornecedo: id_fornecedo,
       action: "inserirEntrada",
     },
     dataType: "json",

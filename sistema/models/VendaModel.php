@@ -133,7 +133,45 @@ class VendaModel
 
         if ($stmt->rowCount() > 0) {
 
-          // codigo abaixo inseri na tabela contas a receber a venda
+          // Obter a porcentagem de comissão para o usuário
+          $stmtComissao = $this->conn->prepare("SELECT comissao FROM usuarios WHERE id = :id_user");
+          $stmtComissao->bindParam(':id_user', $id_user);
+          $stmtComissao->execute();
+
+          if ($stmtComissao->rowCount() > 0) {
+
+            $rowComissao = $stmtComissao->fetch(PDO::FETCH_ASSOC);
+            $porcentagemComissao = $rowComissao['comissao'];
+
+            // Verificar se a porcentagemComissao não está vazia e contém o símbolo '%'
+            if (!empty($porcentagemComissao) && strpos($porcentagemComissao, '%') !== false) {
+
+              $porcentagemComissao = floatval(str_replace('%', '', $porcentagemComissao));
+
+
+              $valorComissao = $venTotal * ($porcentagemComissao / 100);
+              $valorRestanteReceber = $venTotal - $valorComissao;
+
+
+              // $stmtContasAPagar = $this->conn->prepare("INSERT INTO contas_a_pagar (descricao, id_usuario, valor, data_cadastro, id_venda, id_barbearia, status) VALUES (:descricao, :id_user, :valor, :dataCadastro, :id_venda, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ")");
+              // $stmtContasAPagar->bindParam(':descricao', $nomePro1);
+              // $stmtContasAPagar->bindParam(':id_user', $id_user);
+              // $stmtContasAPagar->bindParam(':valor', $valorComissao);
+              // $stmtContasAPagar->bindParam(':dataCadastro', $dataConta);
+              // $stmtContasAPagar->bindParam(':id_venda', $id_venda);
+              // $stmtContasAPagar->bindParam(':id_barbearia', $id_barbearia);
+              // $stmtContasAPagar->execute();
+              
+            } else {
+              $valorComissao = 0;
+            }
+          } else {
+            $valorComissao = 0;
+          }
+
+          $valorRestanteReceber = $venTotal - $valorComissao;
+
+
           $dataConta = date('Y-m-d H:i:s');
 
           $stmtNomePro = $this->conn->prepare("SELECT nome_pro FROM produtos WHERE id_pro = :id_pro");
@@ -148,7 +186,7 @@ class VendaModel
           $stmtContasAReceber = $this->conn->prepare("INSERT INTO contas_a_receber (descricao, id_cliente, valor, data_pagamento, data_cadastro, id_venda, id_barbearia, status) VALUES (:nomePro1, :id_cliente, :valor, :dataPaga, :dataConta, :id_venda, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ")");
           $stmtContasAReceber->bindParam(':nomePro1', $nomePro1);
           $stmtContasAReceber->bindParam(':id_cliente', $id_cli);
-          $stmtContasAReceber->bindParam(':valor', $venTotal);
+          $stmtContasAReceber->bindParam(':valor', $valorRestanteReceber);
           $stmtContasAReceber->bindParam(':dataPaga', $dataPaga);
           $stmtContasAReceber->bindParam(':dataConta', $dataConta);
           $stmtContasAReceber->bindParam(':id_venda', $id_venda);

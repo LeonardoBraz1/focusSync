@@ -38,7 +38,6 @@ function obterEntradas() {
         );
         row.append("<td>" + entrada.quantidade + "</td>");
         row.append("<td>" + entrada.motivo_entrada + "</td>");
-        row.append("<td>" + entrada.nome_fornecedor + "</td>");
         row.append("<td>" + entrada.data_entrada + "</td>");
 
         var actions = $(

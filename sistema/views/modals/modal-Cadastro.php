@@ -119,17 +119,15 @@ foreach ($result as $row) {
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="editProdutoEsto">Estoque:</label>
                             <input type="number" min="0" max="999999" step="1" class="form-control" id="editProdutoEsto" required placeholder="Quantidade">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="editProdutoVali">Validade:</label>
                             <input type="text" class="form-control" id="editProdutoVali" required placeholder="0000-00-00">
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="editProdutoAler">Alerta Estoque:</label>
                             <div class="input-group">
                                 <input type="number" min="0" max="999999" step="1" class="form-control" id="editProdutoAler" required placeholder="Quantidade">
@@ -137,16 +135,6 @@ foreach ($result as $row) {
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Digite a quantidade desejada para receber um alerta quando o estoque ficar abaixo desse valor.">!</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="editProdutoForne">Fornecedores:</label>
-                            <select id="editProdutoForne" class="form-control" placeholder="=Selecionar">
-                                <?php
-                                foreach ($fornecedores as $fornecedor) {
-                                    echo '<option value="' . $fornecedor['id_fornecedo'] . '">' . $fornecedor['nome_fornecedo'] . '</option>';
-                                }
-                                ?>
-                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -258,17 +246,15 @@ foreach ($result as $row) {
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="novoProdutoEsto">Estoque:</label>
                             <input type="number" min="0" max="999999" step="1" class="form-control" id="novoProdutoEsto" required placeholder="Quantidade">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="novoProdutoVali">Validade:</label>
                             <input type="text" class="form-control" id="novoProdutoVali" required placeholder="0000-00-00">
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="novoProdutoAler">Alerta Estoque:</label>
                             <div class="input-group">
                                 <input type="number" min="0" max="999999" step="1" class="form-control" id="novoProdutoAler" required placeholder="Quantidade">
@@ -276,16 +262,6 @@ foreach ($result as $row) {
                                     <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Digite a quantidade desejada para receber um alerta quando o estoque ficar abaixo desse valor.">!</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="novoProdutoForne">Fornecedores:</label>
-                            <select id="novoProdutoForne" class="form-control" placeholder="Selecionar">
-                                <?php
-                                foreach ($fornecedores as $fornecedor) {
-                                    echo '<option value="' . $fornecedor['id_fornecedo'] . '">' . $fornecedor['nome_fornecedo'] . '</option>';
-                                }
-                                ?>
-                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -468,10 +444,6 @@ foreach ($result as $row) {
                     <div class="col-md-6">
                         <span><b>Descrição: </b></span>
                         <span id="verProdutoDesc"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <span><b>Fornecedor: </b></span>
-                        <span id="verProdutoForne"></span>
                     </div>
                 </div>
                 <div class="row">

@@ -10,9 +10,9 @@ class ProdutoModel
         $this->conn = Conexao::getInstance();
     }
 
-    public function editarProduto($id_pro, $nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_fornecedo)
+    public function editarProduto($id_pro, $nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem)
     {
-        $stmt = $this->conn->prepare("UPDATE produtos SET nome_pro = :nome_pro, valor_compra = :valor_compra, valor_venda = :valor_venda, estoque = :estoque, validade = :validade, alerta_estoque = :alerta_estoque, descricao = :descricao, imagem = :imagem, id_fornecedor = :id_fornecedo  WHERE id_pro = :id_pro");
+        $stmt = $this->conn->prepare("UPDATE produtos SET nome_pro = :nome_pro, valor_compra = :valor_compra, valor_venda = :valor_venda, estoque = :estoque, validade = :validade, alerta_estoque = :alerta_estoque, descricao = :descricao, imagem = :imagem WHERE id_pro = :id_pro");
         $stmt->bindParam(':nome_pro', $nome_pro);
         $stmt->bindParam(':valor_compra', $valor_compra);
         $stmt->bindParam(':valor_venda', $valor_venda);
@@ -21,7 +21,6 @@ class ProdutoModel
         $stmt->bindParam(':alerta_estoque', $alerta_estoque);
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
-        $stmt->bindParam(':id_fornecedo', $id_fornecedo);
         $stmt->bindParam(':id_pro', $id_pro);
         $stmt->execute();
 
@@ -49,9 +48,9 @@ class ProdutoModel
         return $response;
     }
 
-    public function inserirProduto($nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_fornecedo, $id_barbearia)
+    public function inserirProduto($nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_barbearia)
     {
-        $stmt = $this->conn->prepare("INSERT INTO produtos (nome_pro, valor_compra, valor_venda, estoque, validade, alerta_estoque, descricao, imagem, id_fornecedor, id_barbearia) VALUES (:nome_pro, :valor_compra, :valor_venda, :estoque, :validade, :alerta_estoque, :descricao, :imagem, :id_fornecedo, :id_barbearia)");
+        $stmt = $this->conn->prepare("INSERT INTO produtos (nome_pro, valor_compra, valor_venda, estoque, validade, alerta_estoque, descricao, imagem, id_barbearia) VALUES (:nome_pro, :valor_compra, :valor_venda, :estoque, :validade, :alerta_estoque, :descricao, :imagem, :id_barbearia)");
         $stmt->bindParam(':nome_pro', $nome_pro);
         $stmt->bindParam(':valor_compra', $valor_compra);
         $stmt->bindParam(':valor_venda', $valor_venda);
@@ -60,7 +59,6 @@ class ProdutoModel
         $stmt->bindParam(':alerta_estoque', $alerta_estoque);
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
-        $stmt->bindParam(':id_fornecedo', $id_fornecedo);
         $stmt->bindParam(':id_barbearia', $id_barbearia);
         $stmt->execute();
 
@@ -117,7 +115,7 @@ class ProdutoModel
         return $response;
     }
 
-    public function inserirEntrada($id_pro, $quantidade, $motivo, $id_fornecedo, $id_barbearia)
+    public function inserirEntrada($id_pro, $quantidade, $motivo, $id_barbearia)
     {
         // Consulta o estoque atual do produto
         $stmtEstoque = $this->conn->prepare("SELECT estoque FROM produtos WHERE id_pro = :id_pro");
@@ -136,11 +134,10 @@ class ProdutoModel
             $stmtUpdateEstoque->execute();
 
             // Insere a saída na tabela de "Saídas"
-            $stmt = $this->conn->prepare("INSERT INTO entradas (id_pro, quantidade, motivo_entrada, id_fornecedo, id_barbearia) VALUES (:id_pro, :quantidade, :motivo, :id_fornecedo, :id_barbearia)");
+            $stmt = $this->conn->prepare("INSERT INTO entradas (id_pro, quantidade, motivo_entrada, id_barbearia) VALUES (:id_pro, :quantidade, :motivo, :id_barbearia)");
             $stmt->bindParam(':id_pro', $id_pro);
             $stmt->bindParam(':quantidade', $quantidade);
             $stmt->bindParam(':motivo', $motivo);
-            $stmt->bindParam(':id_fornecedo', $id_fornecedo);
             $stmt->bindParam(':id_barbearia', $id_barbearia);
             $stmt->execute();
 
@@ -158,7 +155,7 @@ class ProdutoModel
 
     public function obterEntradas($id_barbearia)
     {
-        $stmt = $this->conn->prepare("SELECT produtos.*, fornecedores.nome_fornecedo, entradas.* FROM produtos LEFT JOIN fornecedores ON produtos.id_fornecedor = fornecedores.id_fornecedo LEFT JOIN entradas ON produtos.id_pro = entradas.id_pro WHERE entradas.id_barbearia = :barbearia_id");
+        $stmt = $this->conn->prepare("SELECT produtos.*, entradas.* FROM produtos LEFT JOIN entradas ON produtos.id_pro = entradas.id_pro WHERE entradas.id_barbearia = :barbearia_id");
         $stmt->bindParam(':barbearia_id', $id_barbearia);
         $stmt->execute();
 
@@ -174,7 +171,6 @@ class ProdutoModel
                 'nome_produto' => $row['nome_pro'],
                 'quantidade' => $row['quantidade'],
                 'motivo_entrada' => $row['motivo_entrada'],
-                'nome_fornecedor' => $row['nome_fornecedo'],
                 'data_entrada' => date('Y-m-d', strtotime($row['data_entrada']))
             );
 
@@ -186,7 +182,7 @@ class ProdutoModel
 
     public function obterProdutos($barbeariaId)
     {
-        $stmt = $this->conn->prepare("SELECT produtos.*, fornecedores.nome_fornecedo, fornecedores.id_fornecedo FROM produtos LEFT JOIN fornecedores ON produtos.id_fornecedor = fornecedores.id_fornecedo WHERE produtos.id_barbearia = :barbearia_id");
+        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE produtos.id_barbearia = :barbearia_id");
         $stmt->bindParam(':barbearia_id', $barbeariaId);
         $stmt->execute();
 
@@ -210,8 +206,7 @@ class ProdutoModel
                 'validade' => $row['validade'],
                 'alerta_estoque' => $alertaEstoque,
                 'data_cadastro' => $formattedDate,
-                'descricao' => $row['descricao'],
-                'id_fornecedor' => $row['id_fornecedo']
+                'descricao' => $row['descricao']
             );
 
             $produtos[] = $produto;
