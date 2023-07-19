@@ -553,6 +553,55 @@ foreach ($result as $row) {
 
 
 
+<!-- Modal  ver comissão-->
+<div class="modal fade" id="modalVerComissao" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="verComissaoCNome"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="verComissaoCId" value="">
+            <div class="modal-body">
+                <div class="row" style="border-bottom: 1px solid #cac7c7;  margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Data do Pagamento: </b></span>
+                        <span id="verComissaoCDataP"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Valor: </b></span>
+                        <span id="verComissaoCValor"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Funcionário: </b></span>
+                        <span id="verComissaoCNomeUser"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <span><b>Status: </b></span>
+                        <span id="verComissaoCStatus"></span>
+                    </div>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
+                    <div class="col-md-6">
+                        <span><b>Data do Cadastro: </b></span>
+                        <span id="verComissaoCDataCadas"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 
 

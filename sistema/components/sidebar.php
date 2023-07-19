@@ -34,8 +34,7 @@
             <li class="submenu" id="submenuCargo" data-permissao="permissao_submenuCargo"><a class="treeview-item" href="../financeiro/compras.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Compras</a></li>
             <li class="submenu" id="submenuProduto" data-permissao="permissao_submenuProduto"><a class="treeview-item" href="../financeiro/contasAPagar.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Contas à Pagar</a></li>
             <li class="submenu" id="submenuSaida" data-permissao="permissao_submenuSaida"><a class="treeview-item" href="../financeiro/contasAReceber.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Contas à Receber</a></li>
-            <li class="submenu" id="submenuEntrada" data-permissao="permissao_submenuEntrada"><a class="treeview-item" href="../cadastro/entradas.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Entrada de Produtos</a></li>
-            <li class="submenu" id="submenuEstoqueBaixo" data-permissao="permissao_submenuEstoqueBaixo"><a class="treeview-item" href="../cadastro/estoqueBaixo.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Estoque Baixo</a></li>
+            <li class="submenu" id="submenuEntrada" data-permissao="permissao_submenuEntrada"><a class="treeview-item" href="../financeiro/comissao.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Comissões</a></li>
           </ul>
         </li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 13px;" class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Forms</span><i class="treeview-indicator fa fa-angle-right"></i></a>

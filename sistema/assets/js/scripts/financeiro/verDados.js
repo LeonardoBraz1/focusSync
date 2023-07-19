@@ -138,3 +138,26 @@ function verContasAPagar(
     statusMessage1.addClass("d-none");
   }
 }
+
+
+
+
+function verComissao(
+  id_conta,
+  descricao,
+  valor,
+  data_pagamento,
+  nome_usuario,
+  data_conta,
+  status
+) {
+  $("#verComissaoCId").text(id_conta);
+  $("#verComissaoCNome").text(descricao);
+  $("#verComissaoCValor").text(valor);
+  $("#verComissaoCDataP").text(data_pagamento);
+  $("#verComissaoCNomeUser").text(nome_usuario);
+  $("#verComissaoCDataCadas").text(data_conta);
+  $("#verComissaoCStatus").text(status);
+
+  $("#modalVerComissao").modal("show");
+}

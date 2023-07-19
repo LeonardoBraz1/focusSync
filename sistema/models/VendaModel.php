@@ -133,53 +133,51 @@ class VendaModel
 
         if ($stmt->rowCount() > 0) {
 
-          // Obter a porcentagem de comissão para o usuário
-          $stmtComissao = $this->conn->prepare("SELECT comissao FROM usuarios WHERE id = :id_user");
-          $stmtComissao->bindParam(':id_user', $id_user);
-          $stmtComissao->execute();
+          $dataConta = date('Y-m-d H:i:s');
 
-          if ($stmtComissao->rowCount() > 0) {
+          $stmtNomePro = $this->conn->prepare("SELECT nome_pro, comissao FROM produtos WHERE id_pro = :id_pro");
+          $stmtNomePro->bindParam(':id_pro', $id_pro);
+          $stmtNomePro->execute();
 
-            $rowComissao = $stmtComissao->fetch(PDO::FETCH_ASSOC);
-            $porcentagemComissao = $rowComissao['comissao'];
-
-            // Verificar se a porcentagemComissao não está vazia e contém o símbolo '%'
-            if (!empty($porcentagemComissao) && strpos($porcentagemComissao, '%') !== false) {
-
-              $porcentagemComissao = floatval(str_replace('%', '', $porcentagemComissao));
+          $rowNomePro = $stmtNomePro->fetch(PDO::FETCH_ASSOC);
+          $nomePro = $rowNomePro['nome_pro'];
 
 
-              $valorComissao = $venTotal * ($porcentagemComissao / 100);
-              $valorRestanteReceber = $venTotal - $valorComissao;
+          $stmtBuscaUsuario = $this->conn->prepare("SELECT id FROM usuarios WHERE id = :id_user");
+          $stmtBuscaUsuario->bindParam(':id_user', $id_user);
+          $stmtBuscaUsuario->execute();
+
+          if ($stmtBuscaUsuario->rowCount() > 0) {
+            
+              $porcentagemComissao = $rowNomePro['comissao'];
+
+              // Verificar se a porcentagemComissao não está vazia e contém o símbolo '%'
+              if (!empty($porcentagemComissao) && strpos($porcentagemComissao, '%') !== false) {
+
+                $porcentagemComissao = floatval(str_replace('%', '', $porcentagemComissao));
 
 
-              // $stmtContasAPagar = $this->conn->prepare("INSERT INTO contas_a_pagar (descricao, id_usuario, valor, data_cadastro, id_venda, id_barbearia, status) VALUES (:descricao, :id_user, :valor, :dataCadastro, :id_venda, :id_barbearia, " . ($dataPaga === null || $dataPaga > date('Y-m-d H:i:s') ? "'Pendente'" : "'Aprovada'") . ")");
-              // $stmtContasAPagar->bindParam(':descricao', $nomePro1);
-              // $stmtContasAPagar->bindParam(':id_user', $id_user);
-              // $stmtContasAPagar->bindParam(':valor', $valorComissao);
-              // $stmtContasAPagar->bindParam(':dataCadastro', $dataConta);
-              // $stmtContasAPagar->bindParam(':id_venda', $id_venda);
-              // $stmtContasAPagar->bindParam(':id_barbearia', $id_barbearia);
-              // $stmtContasAPagar->execute();
-              
-            } else {
-              $valorComissao = 0;
-            }
+                $valorComissao = $venTotal * ($porcentagemComissao / 100);
+                $valorRestanteReceber = $venTotal - $valorComissao;
+
+                $nomePro2 = 'Comissão - (' . $quantidade . ') ' . $nomePro;
+
+                $stmtContasAPagar = $this->conn->prepare("INSERT INTO contas_a_pagar (descricao, id_usuario, valor, data_conta, id_barbearia) VALUES (:descricao, :id_user, :valor, :dataConta, :id_barbearia");
+                $stmtContasAPagar->bindParam(':descricao', $nomePro2);
+                $stmtContasAPagar->bindParam(':id_user', $id_user);
+                $stmtContasAPagar->bindParam(':valor', $valorComissao);
+                $stmtContasAPagar->bindParam(':dataConta', $dataConta);
+                $stmtContasAPagar->bindParam(':id_barbearia', $id_barbearia);
+                $stmtContasAPagar->execute();
+              } else {
+                $valorComissao = 0;
+              }
           } else {
             $valorComissao = 0;
           }
 
           $valorRestanteReceber = $venTotal - $valorComissao;
 
-
-          $dataConta = date('Y-m-d H:i:s');
-
-          $stmtNomePro = $this->conn->prepare("SELECT nome_pro FROM produtos WHERE id_pro = :id_pro");
-          $stmtNomePro->bindParam(':id_pro', $id_pro);
-          $stmtNomePro->execute();
-
-          $rowNomePro = $stmtNomePro->fetch(PDO::FETCH_ASSOC);
-          $nomePro = $rowNomePro['nome_pro'];
 
           $nomePro1 = 'Venda - (' . $quantidade . ') ' . $nomePro;
 

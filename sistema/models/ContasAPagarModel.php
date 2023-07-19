@@ -46,15 +46,13 @@ class ContasAPagarModel
         $formattedDate = date('Y-m-d', strtotime($row['data_conta']));
         $data_pagamento = $row['data_pagamento'] ? date('Y-m-d', strtotime($row['data_pagamento'])) : '';
 
-        $comissao = '-' . $row['comissao'];
-
         $result .= '<tr>
                     <td style="display: none; font: 1em sans-serif;">' . $row['id_conta'] . '</td>
                     <td ><i class="fa fa-dot-circle-o fa-lg" aria-hidden="true"></i> ' . $row['descricao'] . '</td>
                     <td>R$ ' . $row['valor'] . '</td>
                     <td>' . $data_pagamento . '</td>
                     <td>' . $row['nome_fornecedo'] . '</td>
-                    <td>' . $row['nome'] . ' ' . $comissao . '</td>
+                    <td>' . $row['nome'] . '</td>
                     <td>' . $formattedDate . '</td>
                     <td><span class="' . getStatusClass($row['status']) . ' statusCor">' . $row['status'] . '</span></td>                  
                     <td style="display: flex; justify-content: center; align-items: center; gap: 7px;">
