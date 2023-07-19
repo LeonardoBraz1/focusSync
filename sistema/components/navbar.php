@@ -16,7 +16,7 @@
    <!-- Navbar Right Menu-->
    <ul class="app-nav" style="display: flex; justify-content: end; align-items: center; gap: 20px;">
      <li class="dropdown">
-       <a class="nav-link app-nav__item me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+       <a class=" dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
        <i class="fa fa-bell-o fa-lg" style="color: #fff;"></i>
          <span class="badge rounded-pill badge-notification bg-danger">1</span>
        </a>
@@ -67,7 +67,7 @@
      </li>
 
      <li class="dropdown">
-       <a class="nav-link app-nav__item me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+       <a class="dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
          <i class="fa fa-user fa-lg" style="color: #fff;"></i>
          <span class="badge rounded-pill badge-notification bg-danger">1</span>
        </a>

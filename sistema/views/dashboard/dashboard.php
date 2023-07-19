@@ -102,48 +102,49 @@ include('../../components/head.php');
         </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-xl-4 col-md-12">
-        <div class="card">
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col-6">
-                <h3>$16,756</h3>
-                <h6 class="text-muted m-b-0">Visits<i class="fa fa-caret-down text-c-red m-l-10"></i></h6>
-              </div>
-              <div class="col-6">
-                <div id="seo-chart1" class="d-flex align-items-end"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col-6">
-                <h3>49.54%</h3>
-                <h6 class="text-muted m-b-0">Comissão<i class="text-c-green m-l-10"></i></h6>
-              </div>
-              <div class="col-6">
-                <div id="seo-chart2" class="d-flex align-items-end"></div>
+    <div class="py-4">
+      <div class="row">
+        <div class="col-xl-4 col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-6">
+                  <h3>$16,756</h3>
+                  <h6 class="text-muted m-b-0">Visits<i class="fa fa-caret-down text-c-red m-l-10"></i></h6>
+                </div>
+                <div class="col-6">
+                  <div id="seo-chart1" class="d-flex align-items-end"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-xl-4 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col-6">
-                <h3>1,62,564</h3>
-                <h6 class="text-muted m-b-0">Products<i class="fa fa-caret-down text-c-red m-l-10"></i></h6>
+        <div class="col-xl-4 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-6">
+                  <h3>49.54%</h3>
+                  <h6 class="text-muted m-b-0">Comissão<i class="text-c-green m-l-10"></i></h6>
+                </div>
+                <div class="col-6">
+                  <div id="seo-chart2" class="d-flex align-items-end"></div>
+                </div>
               </div>
-              <div class="col-6">
-                <div id="seo-chart3" class="d-flex align-items-end"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-6">
+                  <h3>1,62,564</h3>
+                  <h6 class="text-muted m-b-0">Products<i class="fa fa-caret-down text-c-red m-l-10"></i></h6>
+                </div>
+                <div class="col-6">
+                  <div id="seo-chart3" class="d-flex align-items-end"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -155,26 +156,27 @@ include('../../components/head.php');
 
 
 
-  
-<div class="modal fade bottom-modal" id="cachePermissionModal" tabindex="-1" role="dialog" aria-labelledby="cachePermissionModalLabel" aria-hidden="true">
+
+  <div class="modal fade bottom-modal" id="cachePermissionModal" tabindex="-1" role="dialog" aria-labelledby="cachePermissionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cachePermissionModalLabel">Permissão para usar o cache</h5>
-                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Gostaríamos de habilitar o uso do cache para uma melhor experiência offline. Você aceita?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="cachePermissionButtonYes">Sim</button>
-                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Não</button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cachePermissionModalLabel">Permissão para usar o cache</h5>
+          <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+          Gostaríamos de habilitar o uso do cache para uma melhor experiência offline. Você aceita?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="cachePermissionButtonYes">Sim</button>
+          <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Não</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div> 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
   <!-- Essential javascripts for application to work-->
   <script src="../../assets/js/jquery-3.3.1.min.js"></script>
   <script src="../../assets/js/popper.min.js"></script>
@@ -185,7 +187,7 @@ include('../../components/head.php');
   <script src="../../assets/js/plugins/pace.min.js"></script>
   <!-- Page specific javascripts-->
   <script type="text/javascript" src="../../assets/js/plugins/chart.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+ 
 </body>
 
 </html>
