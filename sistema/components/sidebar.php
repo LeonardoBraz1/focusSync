@@ -18,7 +18,7 @@
             <li class="submenu" id="submenuClientesRetorno" data-permissao="permissao_submenuClientesRetorno"><a class="treeview-item" href="../pessoas/clienteRetorno.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Clientes Retorno</a></li>
           </ul>
         </li>
-        <li id="menucadastro" data-permissao="permissao_menucadastro" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 23px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i><span class="app-menu__label"> Cadastro</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li id="menucadastro" data-permissao="permissao_menucadastro" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 23px;" class="icon fa fa-plus fa-lg" style="color: #fafcff;"></i><span class="app-menu__label"> Cadastros</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li class="submenu" id="submenuServico" data-permissao="permissao_submenuServico"><a class="treeview-item" href="../cadastro/servicos.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Serviços</a></li>
             <li class="submenu" id="submenuCargo" data-permissao="permissao_submenuCargo"><a class="treeview-item" href="../cadastro/Cargos.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Cargos</a></li>
@@ -31,24 +31,16 @@
         <li id="menuFinanceiro" data-permissao="permissao_menuFinanceiro" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 23px;" class="fa fa-bar-chart fa-sm" style="color: #ffffff;"></i><span class="app-menu__label"> Financeiro</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li class="submenu" id="submenuVendas" data-permissao="permissao_submenuVendas"><a class="treeview-item" href="../financeiro/vendas.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Vendas</a></li>
-            <li class="submenu" id="submenuCargo" data-permissao="permissao_submenuCargo"><a class="treeview-item" href="../financeiro/compras.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Compras</a></li>
-            <li class="submenu" id="submenuProduto" data-permissao="permissao_submenuProduto"><a class="treeview-item" href="../financeiro/contasAPagar.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Contas à Pagar</a></li>
-            <li class="submenu" id="submenuSaida" data-permissao="permissao_submenuSaida"><a class="treeview-item" href="../financeiro/contasAReceber.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Contas à Receber</a></li>
-            <li class="submenu" id="submenuEntrada" data-permissao="permissao_submenuEntrada"><a class="treeview-item" href="../financeiro/comissao.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Comissões</a></li>
+            <li class="submenu" id="submenuCompras" data-permissao="permissao_submenuCompras"><a class="treeview-item" href="../financeiro/compras.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Compras</a></li>
+            <li class="submenu" id="submenuContasAPagar" data-permissao="permissao_submenuContasAPagar"><a class="treeview-item" href="../financeiro/contasAPagar.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Contas à Pagar</a></li>
+            <li class="submenu" id="submenuContasAReceber" data-permissao="permissao_submenuContasAReceber"><a class="treeview-item" href="../financeiro/contasAReceber.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Contas à Receber</a></li>
+            <li class="submenu" id="submenuComissao" data-permissao="permissao_submenuComissao"><a class="treeview-item" href="../financeiro/comissao.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Comissões</a></li>
           </ul>
         </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 13px;" class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Forms</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li id="menuAgendamento" data-permissao="permissao_menuAgendamento" class="treeview menu"><a class="app-menu__item" href="#" data-toggle="treeview"><i style="margin-right: 23px;" class="fa fa-bar-chart fa-sm" style="color: #ffffff;"></i><span class="app-menu__label"> Agendamentos</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form Components</a></li>
-            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i> Custom Components</a></li>
-            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
-            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i> Form Notifications</a></li>
-          </ul>
-        </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tables</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i> Basic Tables</a></li>
-            <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i> Data Tables</a></li>
+            <li class="submenu" id="submenuVendas" data-permissao="permissao_submenuVendas"><a class="treeview-item" href="../agendamento/agenda.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Ver Agenda</a></li>
+            <li class="submenu" id="submenuCargo" data-permissao="permissao_submenuCargo"><a class="treeview-item" href="../agendamento/agendamento.php"><i style="margin-right: 10px;" class="icon fa fa-angle-right"></i> Agendar</a></li>
           </ul>
         </li>
       </ul>

@@ -161,7 +161,7 @@ include('../../components/head.php');
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="cachePermissionModalLabel">Permissão para usar o cache</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -170,7 +170,7 @@ include('../../components/head.php');
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="cachePermissionButtonYes">Sim</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Não</button>
             </div>
         </div>
     </div>
@@ -185,6 +185,7 @@ include('../../components/head.php');
   <script src="../../assets/js/plugins/pace.min.js"></script>
   <!-- Page specific javascripts-->
   <script type="text/javascript" src="../../assets/js/plugins/chart.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
 </body>
 
 </html>

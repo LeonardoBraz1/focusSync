@@ -100,7 +100,7 @@ include('../../components/head.php');
 
     <script type="text/javascript" src="../../assets/js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../../assets/js/plugins/dataTables.bootstrap.min.js"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/verDados.js"></script>
     <script type="text/javascript" src="../../assets/js/scripts/financeiro/tabelas/tabelaComissao.js"></script>
 

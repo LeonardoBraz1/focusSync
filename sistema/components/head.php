@@ -3,7 +3,7 @@
 
 <head>
     <!-- Open Graph Meta-->
-    <title><?php echo $_SESSION["barbearia_nome"]; ?></title>
+    <title>teste</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="../../assets/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="../../assets/MDB5-STANDARD/css/mdb.min.css" rel="stylesheet" />
+    
     <!-- Inclua a referência ao arquivo do Service Worker
     <script>
         $(document).ready(function() {

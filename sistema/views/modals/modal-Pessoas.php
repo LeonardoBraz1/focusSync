@@ -55,7 +55,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalEditarUsuarioLabel">Editar Usuário</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -105,7 +105,7 @@ foreach ($result as $row) {
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoUsuario()">Salvar</button>
             </div>
         </div>
@@ -123,7 +123,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalEditarFuncionarioLabel">Editar Funcionário</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -209,7 +209,7 @@ foreach ($result as $row) {
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoFuncionario()">Salvar</button>
             </div>
         </div>
@@ -222,7 +222,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalEditarFornecedorLabel">Editar Funcionário</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -276,7 +276,7 @@ foreach ($result as $row) {
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoFornecedor()">Salvar</button>
             </div>
         </div>
@@ -295,7 +295,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalEditarClienteLabel">Editar Cliente</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -320,7 +320,7 @@ foreach ($result as $row) {
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoCliente()">Salvar</button>
             </div>
         </div>
@@ -340,7 +340,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalInserirUsuarioLabel">Inserir Novo Usuário</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -391,7 +391,7 @@ foreach ($result as $row) {
             </div>
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" id="submit-button-user" onclick="inserirUsuario()">Salvar</button>
             </div>
         </div>
@@ -410,7 +410,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalInserirFuncionarioLabel">Inserir Novo Funcionário</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -497,7 +497,7 @@ foreach ($result as $row) {
             </div>
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" id="submit-button-funcionario" onclick="inserirFuncionario()">Salvar</button>
             </div>
         </div>
@@ -514,7 +514,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalInserirDiaSemanaLabel">Inserir Novo Dia da Semana</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -569,7 +569,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalInserirServLabel">Definir Novo serviço</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -621,7 +621,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalInserirFornecedorLabel">Inserir Fornecedor</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -671,7 +671,7 @@ foreach ($result as $row) {
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirFornecedor()">Salvar</button>
             </div>
         </div>
@@ -690,7 +690,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalInserirClienteLabel">Inserir Cliente</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -715,7 +715,7 @@ foreach ($result as $row) {
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="inserirCliente()">Salvar</button>
             </div>
         </div>
@@ -731,7 +731,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="verUsuarioNome"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -759,7 +759,7 @@ foreach ($result as $row) {
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
@@ -776,7 +776,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="verFuncionarioNome"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -834,7 +834,7 @@ foreach ($result as $row) {
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
@@ -848,7 +848,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="verFornecedorNome"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -892,7 +892,7 @@ foreach ($result as $row) {
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
@@ -907,7 +907,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="verClienteNome"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -935,7 +935,7 @@ foreach ($result as $row) {
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
@@ -952,7 +952,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="cachePermissionModalLabel">Permissão para usar o cache</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -961,7 +961,7 @@ foreach ($result as $row) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="cachePermissionButtonYes">Sim</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Não</button>
             </div>
         </div>
     </div>
@@ -980,7 +980,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-weight: 400;" class="modal-title1"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -989,7 +989,7 @@ foreach ($result as $row) {
                 <p style="font-size: 1.1em;" id="textDeletar1"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarUsuario()">Deletar</button>
             </div>
         </div>
@@ -1004,7 +1004,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-weight: 400;" class="modal-titleF"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -1013,7 +1013,7 @@ foreach ($result as $row) {
                 <p style="font-size: 1.1em;" id="textDeletarF1"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarFuncionario()">Deletar</button>
             </div>
         </div>
@@ -1030,7 +1030,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-weight: 400;" class="modal-titleForn"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -1039,7 +1039,7 @@ foreach ($result as $row) {
                 <p style="font-size: 1.1em;" id="textDeletarForn1"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarFornecedor()">Deletar</button>
             </div>
         </div>
@@ -1057,7 +1057,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-weight: 400;" class="modal-titleClien"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -1066,7 +1066,7 @@ foreach ($result as $row) {
                 <p style="font-size: 1.1em;" id="textDeletarClien1"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
                 <button type="button" style="background-color: red; color: #fff;" class="btn" onclick="btnDeletarCliente()">Deletar</button>
             </div>
         </div>
@@ -1083,7 +1083,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-weight: 400;" class="modal-title">SUCESSO</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -1091,7 +1091,7 @@ foreach ($result as $row) {
                 <p style="font-size: 1.1em;" id="textSucesso"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">OK</button>
             </div>
         </div>
     </div>
@@ -1106,7 +1106,7 @@ foreach ($result as $row) {
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-weight: 400;" class="modal-title">ERRO</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -1114,7 +1114,7 @@ foreach ($result as $row) {
                 <p style="font-size: 1.1em;" id="textErro"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">OK</button>
             </div>
         </div>
     </div>

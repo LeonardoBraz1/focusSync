@@ -45,8 +45,8 @@ include('../../components/head.php');
     <main class="app-content">
         <button onclick="btnInserirVenda()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><img style="width: 30px; margin-left: -10px; margin-right: 7px;" src="../../assets/images/icons/icon_venda.png" alt="icon compra"> NOVA VENDA</button>
         <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0 -13px 0;">
-                <input id="startDate" style="border-radius: 6px;" type="date">
-                <input id="endDate" style="border-radius: 6px;" type="date">
+            <input id="startDate" style="border-radius: 6px;" type="date">
+            <input id="endDate" style="border-radius: 6px;" type="date">
         </div>
         <br>
         <br>
@@ -94,13 +94,14 @@ include('../../components/head.php');
     </main>
 
     <?php include('../modals/modal-financeiro.php'); ?>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
     <!-- Essential javascripts for application to work-->
     <script src="../../assets/js/jquery-3.3.1.min.js"></script>
     <script src="../../assets/js/popper.min.js"></script>
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/plugins/pace.min.js"></script>
+
 
     <script type="text/javascript" src="../../assets/js/plugins/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../../assets/js/plugins/dataTables.bootstrap.min.js"></script>
