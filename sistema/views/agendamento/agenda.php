@@ -40,56 +40,118 @@ include('../../components/head.php');
 
     include('../../components/sidebar.php');
     ?>
+    <link rel="stylesheet" href="css/style.css">
 
-
-    <main class="app-content">
-        <button onclick="btnInserirAgendamento()" style="background-color: #337ab7; border: #337ab7; border-radius: 5px; color: #fff; padding: 7px 18px;"><img style="width: 30px; margin-left: -10px; margin-right: 7px;" src="../../assets/images/icons/icon_venda.png" alt="icon compra"> NOVA AGENDAMENTO</button>
-        <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0 -13px 0;">
-            <input id="startDate1" style="border-radius: 6px;" type="date">
-            <input id="endDate1" style="border-radius: 6px;" type="date">
-        </div>
-        <br>
-        <br>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="tile">
-                    <div class="tile-body">
-                        <div class="table-responsive">
-                            <table data-order='[[ 0, "desc" ]]' class="table table-hover table-bordered" id="sampleTable">
+    <main class="app-content" style="display: flex;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="elegant-calencar d-md-flex">
+                        <div class="wrap-header d-flex align-items-center img" style="background-image: url(bg.jpg);">
+                            <p id="reset">HOJE</p>
+                            <div id="header" class="p-0">
+                                <!-- <div class="pre-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left"></i></div> -->
+                                <div class="head-info">
+                                    <div class="head-month"></div>
+                                    <div class="head-day"></div>
+                                </div>
+                                <!-- <div class="next-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-right"></i></div> -->
+                            </div>
+                        </div>
+                        <div class="calendar-wrap">
+                            <div class="w-100 button-wrap">
+                                <div class="pre-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left"></i></div>
+                                <div class="next-button d-flex align-items-center justify-content-center"><i class="fa fa-chevron-right"></i></div>
+                            </div>
+                            <table id="calendar">
                                 <thead>
                                     <tr>
-                                        <th style="display: none;">id</th>
-                                        <th>Descrição</th>
-                                        <th>Valor</th>
-                                        <th>Data do Pagamento</th>
-                                        <th>Fornecedor</th>
-                                        <th>Funcionário</th>
-                                        <th>Cadastro</th>
-                                        <th>Status</th>
-                                        <th>Acões</th>
+                                        <th>Dom</th>
+                                        <th>Seg</th>
+                                        <th>Ter</th>
+                                        <th>Qua</th>
+                                        <th>Qui</th>
+                                        <th>Sex</th>
+                                        <th>Sáb</th>
                                     </tr>
                                 </thead>
-                                <tbody id="ContasAPagarTableBody" style="position: relative;">
-                                    <div id="loadingIndicator18" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                                        <div id="preloader-active">
-                                            <div class="preloader d-flex align-items-center justify-content-center">
-                                                <div class="preloader-inner position-relative">
-                                                    <div style="background-color: #dfeaeb;" class="preloader-circle"></div>
-                                                    <div class="preloader-img pere-text">
-                                                        <img src="../../assets/images/logo-login.png" alt="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
+
+        </div>
+        <div class="row col-md-8">
+            <div class="col-md-10">
+                <div class="tile">
+                    <div class="tile-body">
+                        <div class="table-responsive">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
+
+
 
     <!-- CREATE TABLE agenda (
     id_agenda INT AUTO_INCREMENT PRIMARY KEY,
@@ -107,7 +169,7 @@ include('../../components/head.php');
 ); -->
 
     <?php include('../modals/modal-financeiro.php'); ?>
-
+    <script src="js/main.js"></script>
     <!-- Essential javascripts for application to work-->
     <script src="../../assets/js/jquery-3.3.1.min.js"></script>
     <script src="../../assets/js/popper.min.js"></script>
