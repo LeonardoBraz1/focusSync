@@ -10,14 +10,15 @@ class UsuarioModel
         $this->conn = Conexao::getInstance();
     }
 
-    public function editarUsuario($id, $email, $nome, $senha, $id_nivel, $ativo)
+    public function editarUsuario($id, $email, $nome, $senha, $id_nivel, $ativo, $imagem)
     {
-        $stmt = $this->conn->prepare("UPDATE usuarios SET email = :email, nome = :nome, senha = :senha, id_nivel = :id_nivel, ativo = :ativo WHERE id = :id");
+        $stmt = $this->conn->prepare("UPDATE usuarios SET email = :email, nome = :nome, senha = :senha, id_nivel = :id_nivel, ativo = :ativo, imagem = :imagem WHERE id = :id");
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':senha', $senha);
         $stmt->bindParam(':id_nivel', $id_nivel);
         $stmt->bindParam(':ativo', $ativo);
+        $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
@@ -45,14 +46,15 @@ class UsuarioModel
         return $response;
     }
 
-    public function inserirUsuario($email, $nome, $senha, $id_nivel, $ativo, $id_barbearia)
+    public function inserirUsuario($email, $nome, $senha, $id_nivel, $ativo, $imagem, $id_barbearia)
     {
-        $stmt = $this->conn->prepare("INSERT INTO usuarios (email, nome, senha, id_nivel, ativo, id_barbearia) VALUES (:email, :nome, :senha, :id_nivel, :ativo, :id_barbearia)");
+        $stmt = $this->conn->prepare("INSERT INTO usuarios (email, nome, senha, id_nivel, ativo,  imagem, id_barbearia) VALUES (:email, :nome, :senha, :id_nivel, :ativo,  :imagem, :id_barbearia)");
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':senha', $senha);
         $stmt->bindParam(':id_nivel', $id_nivel);
         $stmt->bindParam(':ativo', $ativo);
+        $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
         $stmt->bindParam(':id_barbearia', $id_barbearia);
         $stmt->execute();
 
@@ -109,9 +111,13 @@ class UsuarioModel
 
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
+                $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
+
                 $usuario = array(
                     'id' => $row['id'],
                     'nome' => $row['nome'],
+                    'imagemSrc' => $imagemSrc,
                     'email' => $row['email'],
                     'cargo' => $row['nome_nivel'],
                     'id_nivel' => $row['id_nivel'],

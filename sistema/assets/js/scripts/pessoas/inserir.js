@@ -105,6 +105,7 @@ function inserirUsuario() {
   var id_nivel = $("#novoUsuarioNivel").val();
   var ativo = $("#novoUsuarioAti").val();
   var senha = $("#novoUsuarioSenha").val();
+  var imagem = $("#novoUsuarioImg").attr("src");
 
   $.ajax({
     url: "../../controllers/UsuarioController.php",
@@ -115,6 +116,7 @@ function inserirUsuario() {
       id_nivel: id_nivel,
       ativo: ativo,
       senha: senha,
+      imagem: imagem,
       action: "inserir",
     },
     dataType: "json",
@@ -250,6 +252,7 @@ function inserirFuncionario() {
   var cidade = $("#novoFuncionarioCid").val();
   var tipoPix = $("#novoFuncionarioTipo").val();
   var pix = $("#novoFuncionarioPix").val();
+  var imagem = $("#novoFuncionarioImg").attr("src");
 
   $.ajax({
     url: "../../controllers/FuncionarioController.php",
@@ -265,6 +268,7 @@ function inserirFuncionario() {
       cidade: cidade,
       tipoPix: tipoPix,
       pix: pix,
+      imagem: imagem,
       action: "inserir",
     },
     dataType: "json",

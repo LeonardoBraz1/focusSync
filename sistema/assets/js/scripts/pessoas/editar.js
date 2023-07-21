@@ -1,10 +1,11 @@
-function editarUsuario(id, nome, email, id_nivel, ativo, senha) {
+function editarUsuario(id, nome, email, id_nivel, ativo, senha, imagem) {
   $("#editUsuarioId").val(id);
   $("#editUsuarioEmail").val(email);
   $("#editUsuarioNome").val(nome);
   $("#editUsuarioNivel").val(id_nivel);
   $("#editUsuarioAti").val(ativo);
   $("#editUsuarioSenha").val(senha);
+  $("#editUsuarioImg").attr("src", imagem);
 
   $("#modalEditarUsuario").modal("show");
 }
@@ -16,6 +17,7 @@ function salvarEdicaoUsuario() {
   var id_nivel = $("#editUsuarioNivel").val();
   var ativo = $("#editUsuarioAti").val();
   var senha = $("#editUsuarioSenha").val();
+  var imagem = $("#editUsuarioImg").attr("src", imagem);
 
   $.ajax({
     url: "../../controllers/UsuarioController.php",
@@ -27,6 +29,7 @@ function salvarEdicaoUsuario() {
       id_nivel: id_nivel,
       ativo: ativo,
       senha: senha,
+      imagem: imagem,
       action: "editar",
     },
     dataType: "json",
@@ -60,7 +63,8 @@ function editarFuncionario(
   endereco,
   cidade,
   tipoPix,
-  pix
+  pix,
+  imagem
 ) {
   $("#editFuncionarioId").val(id);
   $("#editFuncionarioNome").val(nome);
@@ -73,6 +77,7 @@ function editarFuncionario(
   $("#editFuncionarioCid").val(cidade);
   $("#editFuncionarioTipo").val(tipoPix);
   $("#editFuncionarioPix").val(pix);
+  $("#editFuncionarioImg").attr("src", imagem);
 
   $("#modalEditarFuncionario").modal("show");
 }
@@ -89,6 +94,7 @@ function salvarEdicaoFuncionario() {
   var cidade = $("#editFuncionarioCid").val();
   var tipoPix = $("#editFuncionarioTipo").val();
   var pix = $("#editFuncionarioPix").val();
+  var imagem = $("#editFuncionarioImg").attr("src");
 
   $.ajax({
     url: "../../controllers/FuncionarioController.php",
@@ -105,6 +111,7 @@ function salvarEdicaoFuncionario() {
       cidade: cidade,
       tipoPix: tipoPix,
       pix: pix,
+      imagem: imagem,
       action: "editar",
     },
     dataType: "json",

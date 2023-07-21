@@ -64,13 +64,20 @@ foreach ($result as $row) {
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="editServicoCom">Comissão: (%)</label>
-                            <input type="text" class="form-control" id="editServicoCom" required placeholder="100%">
-                        </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label for="editServicoTemp">Tempo:</label>
                             <input type="number" min="0" max="100" step="1" class="form-control" id="editServicoTemp" required placeholder="30 Minutos">
+                        </div>
+                    </div>
+
+                    <div class="form-row" style="gap: 50px;">
+                        <div class="form-group">
+                            <label for="editServicoImg">Imagem:</label>
+                            <input type="file" class="form-control" id="customFile" accept="image/*" id="editServicoImgInput" />
+
+                        </div>
+                        <div class="form-group">
+                            <img id="editServicoImg" src="" alt="Imagem do Produto" style="max-width: 120px;">
                         </div>
                     </div>
                 </form>
@@ -118,49 +125,55 @@ foreach ($result as $row) {
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="editProdutoEsto">Estoque:</label>
-                            <input type="number" min="0" max="999999" step="1" class="form-control" id="editProdutoEsto" required placeholder="Quantidade">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="editProdutoVali">Validade:</label>
-                            <input type="text" class="form-control" id="editProdutoVali" required placeholder="0000-00-00">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="editProdutoAler">Alerta Estoque:</label>
-                            <div class="input-group">
-                                <input type="number" min="0" max="999999" step="1" class="form-control" id="editProdutoAler" required placeholder="Quantidade">
-                                <div class="input-group-append">
-                                    <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Digite a quantidade desejada para receber um alerta quando o estoque ficar abaixo desse valor.">!</span>
-                                </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="editProdutoEsto">Estoque:</label>
+                        <input type="number" min="0" max="999999" step="1" class="form-control" id="editProdutoEsto" required placeholder="Quantidade">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="editProdutoVali">Validade:</label>
+                        <input type="text" class="form-control" id="editProdutoVali" required placeholder="0000-00-00">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="editProdutoAler">Alerta Estoque:</label>
+                        <div class="input-group">
+                            <input type="number" min="0" max="999999" step="1" class="form-control" id="editProdutoAler" required placeholder="Quantidade">
+                            <div class="input-group-append">
+                                <span style="cursor: pointer;" class="input-group-text tooltip-trigger" data-toggle="tooltip" data-placement="left" title="" data-original-title="Digite a quantidade desejada para receber um alerta quando o estoque ficar abaixo desse valor.">!</span>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label style=" display: flex; " for="editProdutoDesc">Descrição <p style="font-size: 0.9em; margin-left: 5px;"> (Até 255 Caracteres)</p></label>
-                        <input type="text" max="255" class="form-control" id="editProdutoDesc" required placeholder="Descrição do Produto">
-                    </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label style=" display: flex; " for="editProdutoComi">Comissão:</label>
+                    <input type="text" max="255" class="form-control" id="editProdutoComi" required placeholder="20%">
+                </div>
+                <div class="form-group col-md-6">
+                    <label style=" display: flex; " for="editProdutoDesc">Descrição <p style="font-size: 0.9em; margin-left: 5px;"> (Até 255 Caracteres):</p></label>
+                    <input type="text" max="255" class="form-control" id="editProdutoDesc" required placeholder="Descrição do Produto">
+                </div>
+            </div>
 
 
-                    <div class="form-row" style="gap: 50px;">
-                        <div class="form-group">
-                            <label for="editProdutoImg">Imagem:</label>
-                            <input type="file" class="form-control" id="customFile" accept="image/*" id="editProdutoImgInput"/>
-                            
-                        </div>
-                        <div class="form-group">
-                            <img id="editProdutoImg" src="" alt="Imagem do Produto" style="max-width: 120px;">
-                        </div>
-                    </div>
-                </form>
+            <div class="form-row" style="gap: 50px;">
+                <div class="form-group">
+                    <label for="editProdutoImg">Imagem:</label>
+                    <input type="file" class="form-control" id="customFile" accept="image/*" id="editProdutoImgInput" />
+
+                </div>
+                <div class="form-group">
+                    <img id="editProdutoImg" src="" alt="Imagem do Produto" style="max-width: 120px;">
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
-                <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoProduto()">Salvar</button>
-            </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Fechar</button>
+            <button type="button" style="background-color: blue; color: #fff;" class="btn" onclick="salvarEdicaoProduto()">Salvar</button>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -194,13 +207,18 @@ foreach ($result as $row) {
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="novoServicoCom">Comissão: (%)</label>
-                            <input type="text" class="form-control" id="novoServicoCom" required placeholder="100%">
-                        </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label for="novoServicoTemp">Tempo:</label>
                             <input type="number" min="0" max="1000" step="1" class="form-control" id="novoServicoTemp" required placeholder="30 Minutos">
+                        </div>
+                    </div>
+                    <div class="form-row" style="gap: 50px;">
+                        <div class="form-group">
+                            <label for="novoServicoImg">Imagem:</label>
+                            <input type="file" class="form-control-file" accept="image/*" id="novoServicoImgInput">
+                        </div>
+                        <div class="form-group">
+                            <img id="novoServicoImg" src="" alt="Imagem do Produto" style="max-width: 120px;">
                         </div>
                     </div>
                 </form>
@@ -265,9 +283,15 @@ foreach ($result as $row) {
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label style=" display: flex; " for="novoProdutoDesc">Descrição <p style="font-size: 0.9em; margin-left: 5px;"> (Até 255 Caracteres)</p></label>
-                        <input type="text" max="255" class="form-control" id="novoProdutoDesc" required placeholder="Descrição do Produto">
+                    <div class="form-row">
+                        <div class="form-group col-md-6"">
+                            <label style=" display: flex; " for=" novoProdutoComi">Comissão:</label>
+                            <input type="text" max="255" class="form-control" id="novoProdutoComi" required placeholder="13%">
+                        </div>
+                        <div class="form-group col-md-6"">
+                            <label style=" display: flex; " for=" novoProdutoDesc">Descrição <p style="font-size: 0.9em; margin-left: 5px;"> (Até 255 Caracteres):</p></label>
+                            <input type="text" max="255" class="form-control" id="novoProdutoDesc" required placeholder="Descrição do Produto">
+                        </div>
                     </div>
 
 
@@ -443,6 +467,10 @@ foreach ($result as $row) {
                 </div>
                 <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
                     <div class="col-md-6">
+                        <span><b>Comissão: </b></span>
+                        <span id="verProdutoComi"></span>
+                    </div>
+                    <div class="col-md-6">
                         <span><b>Descrição: </b></span>
                         <span id="verProdutoDesc"></span>
                     </div>
@@ -544,7 +572,7 @@ foreach ($result as $row) {
 
 
 
-<!-- Modal  ver servuço-->
+<!-- Modal  ver serviço-->
 <div class="modal fade" id="modalVerServico" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -568,12 +596,15 @@ foreach ($result as $row) {
                 </div>
                 <div class="row" style="border-bottom: 1px solid #cac7c7; margin-bottom: 10px;">
                     <div class="col-md-6">
-                        <span><b>Comissão: </b></span>
-                        <span id="verServicoCom"></span>
-                    </div>
-                    <div class="col-md-6">
                         <span><b>Tempo: </b></span>
                         <span id="verServicoTemp"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <a>
+                            <img width="200px" id="verServicoImg">
+                        </a>
                     </div>
                 </div>
                 <div class="row">
@@ -811,6 +842,9 @@ foreach ($result as $row) {
     </div>
 
     <script>
+
+        
+        // Produto
         $(document).ready(function() {
             $("#editProdutoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg");
         });
@@ -851,8 +885,52 @@ foreach ($result as $row) {
             reader.readAsDataURL(file);
         });
 
+
+        // Serviço
+
+
+        $(document).ready(function() {
+            $("#editServicoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg");
+        });
+
+        // Atualizar a imagem quando um arquivo for selecionado
+        $("#editServicoImgInput").on("change", function(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                if (file) {
+                    $("#editServicoImg").attr("src", e.target.result);
+                } else {
+                    $("#editServicoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg");
+                }
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        $(document).ready(function() {
+            $("#novoServicoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg");
+        });
+
+        // Atualizar a imagem quando um arquivo for selecionado
+        $("#novoServicoImgInput").on("change", function(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                if (file) {
+                    $("#novoServicoImg").attr("src", e.target.result);
+                } else {
+                    $("#novoServicoImg").attr("src", "http://localhost/focusSync/sistema/assets/images/sem-foto.jpg");
+                }
+            };
+
+            reader.readAsDataURL(file);
+        });
+
         $("#editProdutoVali, #novoProdutoVali").mask("0000-00-00");
-        $("#novoServicoCom, #editServicoCom").on("input", function() {
+        $("#novoProdutoComi, #editProdutoComi").on("input", function() {
             var value = parseFloat($(this).val());
             var position = $(this).get(0).selectionStart;
             if (!isNaN(value)) {

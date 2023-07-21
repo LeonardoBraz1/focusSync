@@ -10,9 +10,9 @@ class FuncionarioModel
         $this->conn = Conexao::getInstance();
     }
 
-    public function editarFuncionario($id, $nome, $email, $id_nivel, $cpf, $comissao, $atendimento, $endereco, $cidade, $tipoPix, $pix)
+    public function editarFuncionario($id, $nome, $email, $id_nivel, $cpf, $comissao, $atendimento, $endereco, $cidade, $tipoPix, $pix, $imagem)
     {
-        $stmt = $this->conn->prepare("UPDATE usuarios SET nome = :nome, email = :email, id_nivel = :id_nivel, cpf = :cpf, comissao = :comissao, atendimento = :atendimento, endereco = :endereco, cidade = :cidade, tipoPix = :tipoPix, pix = :pix WHERE id = :id");
+        $stmt = $this->conn->prepare("UPDATE usuarios SET nome = :nome, email = :email, id_nivel = :id_nivel, cpf = :cpf, comissao = :comissao, atendimento = :atendimento, endereco = :endereco, cidade = :cidade, tipoPix = :tipoPix, pix = :pix, imagem = :imagem WHERE id = :id");
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':id_nivel', $id_nivel);
@@ -23,6 +23,7 @@ class FuncionarioModel
         $stmt->bindParam(':cidade', $cidade);
         $stmt->bindParam(':tipoPix', $tipoPix);
         $stmt->bindParam(':pix', $pix);
+        $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
@@ -50,9 +51,9 @@ class FuncionarioModel
         return $response;
     }
 
-    public function inserirFuncionario($nome, $email, $id_nivel, $cpf, $comissao, $atendimento, $endereco, $cidade, $tipoPix, $pix, $id_barbearia)
+    public function inserirFuncionario($nome, $email, $id_nivel, $cpf, $comissao, $atendimento, $endereco, $cidade, $tipoPix, $pix, $imagem, $id_barbearia)
     {
-        $stmt = $this->conn->prepare("INSERT INTO usuarios (nome, email, id_nivel, cpf, comissao, atendimento, endereco, cidade, tipoPix, pix, id_barbearia) VALUES (:nome, :email, :id_nivel, :cpf, :comissao, :atendimento, :endereco, :cidade, :tipoPix, :pix, :id_barbearia)");
+        $stmt = $this->conn->prepare("INSERT INTO usuarios (nome, email, id_nivel, cpf, comissao, atendimento, endereco, cidade, tipoPix, pix, imagem, id_barbearia) VALUES (:nome, :email, :id_nivel, :cpf, :comissao, :atendimento, :endereco, :cidade, :tipoPix, :pix, :imagem :id_barbearia)");
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':id_nivel', $id_nivel);
@@ -63,6 +64,7 @@ class FuncionarioModel
         $stmt->bindParam(':cidade', $cidade);
         $stmt->bindParam(':tipoPix', $tipoPix);
         $stmt->bindParam(':pix', $pix);
+        $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
         $stmt->bindParam(':id_barbearia', $id_barbearia);
         $stmt->execute();
 
@@ -242,10 +244,14 @@ class FuncionarioModel
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $formattedDate = date('Y-m-d', strtotime($row['cadastro']));
                 $formattedPhone = '(' . substr($row['telefone'], 0, 2) . ') ' . substr($row['telefone'], 2, 5) . '-' . substr($row['telefone'], 7);
+                $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
+                $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
+
                 $message = "Olá, estou entrando em contato através da sua barbearia.";
                 $funcionario = array(
                     'id' => $row['id'],
                     'nome' => $row['nome'],
+                    'imagemSrc' => $imagemSrc,
                     'email' => $row['email'],
                     'cargo' => $row['nome_nivel'],
                     'id_nivel' => $row['id_nivel'],

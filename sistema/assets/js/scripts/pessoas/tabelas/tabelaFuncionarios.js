@@ -25,7 +25,7 @@ function obterFuncionarios() {
         var row = $("<tr>");
 
         row.append("<td style='display: none;'>" + funcionario.id + "</td>");
-        row.append("<td>" + funcionario.nome + "</td>");
+        row.append("<td><img src='" + funcionario.imagemSrc + "' alt='Imagem do Funcionário' style='max-width: 30px;'>" + funcionario.nome + "</td>");
         row.append("<td>" + funcionario.email + "</td>");
         row.append("<td>" + funcionario.cargo + "</td>");
         row.append("<td>" + funcionario.cpf + "</td>");
@@ -63,6 +63,8 @@ function obterFuncionarios() {
             funcionario.tipoPix +
             '", "' +
             funcionario.pix +
+            '", "' +
+            funcionario.imagemSrc +
             "\")' id='btnEditarFunc-" +
             funcionario.id +
             "'>"
@@ -97,6 +99,8 @@ function obterFuncionarios() {
             funcionario.pix +
             '", "' +
             funcionario.cadastro +
+            '", "' +
+            funcionario.imagemSrc +
             "\")' id='btnVerFunc-" +
             funcionario.id +
             "'>"

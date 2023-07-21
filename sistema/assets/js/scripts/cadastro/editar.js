@@ -1,10 +1,10 @@
-function editarServico(id_servico, nome_servico, preco, comissao, tempo) {
+function editarServico(id_servico, nome_servico, preco, tempo, imagem) {
  
   $("#editServicoId").val(id_servico);
   $("#editServicoNome").val(nome_servico);
   $("#editServicoPrec").val(preco);
-  $("#editServicoCom").val(comissao);
   $("#editServicoTemp").val(tempo);
+  $("#editServicoImg").attr("src", imagem);
 
   $("#modalEditarServico").modal("show");
 }
@@ -13,8 +13,8 @@ function salvarEdicaoServico() {
   var id_servico = $("#editServicoId").val();
   var nome_servico = $("#editServicoNome").val();
   var preco = $("#editServicoPrec").val();
-  var comissao = $("#editServicoCom").val();
   var tempo = $("#editServicoTemp").val();
+  var imagem = $("#editServicoImg").attr("src");
 
   $.ajax({
     url: "../../controllers/ServicoController.php",
@@ -23,8 +23,8 @@ function salvarEdicaoServico() {
       id_servico: id_servico,
       nome_servico: nome_servico,
       preco: preco,
-      comissao: comissao,
       tempo: tempo,
+      imagem: imagem,
       action: "editar",
     },
     dataType: "json",
@@ -58,6 +58,7 @@ function editarProduto(
   estoque,
   validade,
   alerta_estoque,
+  comissao,
   descricao,
   imagem
 ) {
@@ -68,6 +69,7 @@ function editarProduto(
   $("#editProdutoEsto").val(estoque);
   $("#editProdutoVali").val(validade);
   $("#editProdutoAler").val(alerta_estoque);
+  $("#editProdutoComissao").val(comissao);
   $("#editProdutoDesc").val(descricao);
   $("#editProdutoImg").attr("src", imagem);
 
@@ -82,6 +84,7 @@ function salvarEdicaoProduto() {
   var estoque = $("#editProdutoEsto").val();
   var validade = $("#editProdutoVali").val();
   var alerta_estoque = $("#editProdutoAler").val();
+  var comissao = $("#editProdutoComi").val();
   var descricao = $("#editProdutoDesc").val();
   var imagem = $("#editProdutoImg").attr("src");
 
@@ -96,6 +99,7 @@ function salvarEdicaoProduto() {
       estoque: estoque,
       validade: validade,
       alerta_estoque: alerta_estoque,
+      comissao: comissao,
       descricao: descricao,
       imagem: imagem,
       action: "editar",

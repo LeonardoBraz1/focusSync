@@ -7,6 +7,7 @@ function verProduto(
   estoque,
   validade,
   alerta_estoque,
+  comissao,
   descricao,
   imagem
   ) {
@@ -18,6 +19,7 @@ function verProduto(
     $("#verProdutoEsto").text(estoque);
     $("#verProdutoVali").text(validade);
     $("#verProdutoAler").text(alerta_estoque);
+    $("#verProdutoComi").text(comissao);
     $("#verProdutoDesc").text(descricao);
     $("#verProdutoImg").attr("src", imagem);
 
@@ -26,14 +28,14 @@ function verProduto(
 
 
 
-  function verServico(id_servico, nome_servico, data, preco, comissao, tempo
+  function verServico(id_servico, nome_servico, data, preco, tempo, imagem
     ) {
       $("#verServicoId").text(id_servico);
       $("#verServicoNome").text(nome_servico);
       $("#verServicData").text(data);
       $("#verServicoPrec").text("R$ " + preco);
-      $("#verServicoCom").text(comissao);
       $("#verServicoTemp").text(tempo + " Minutos");
+      $("#verServicoImg").attr("src", imagem);
 
       $("#modalVerServico").modal("show");
     }

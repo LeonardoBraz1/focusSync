@@ -9,13 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_servico = isset($_POST['id_servico']) ? $_POST['id_servico'] : '';
     $nome_servico = isset($_POST['nome_servico']) ? $_POST['nome_servico'] : '';
     $preco = isset($_POST['preco']) ? $_POST['preco'] : '';
-    $comissao = isset($_POST['comissao']) ? $_POST['comissao'] : '';
     $tempo = isset($_POST['tempo']) ? $_POST['tempo'] : '';
+    $imagem = isset($_POST['imagem']) ? file_get_contents($_POST['imagem']) : '';
 
     // Verifica qual ação está sendo realizada
     if ($_POST['action'] === 'editar') {
 
-        $response = $servicoModel->editarServico($id_servico, $nome_servico, $preco, $comissao, $tempo);
+        $response = $servicoModel->editarServico($id_servico, $nome_servico, $preco, $tempo, $imagem);
 
     } elseif ($_POST['action'] === 'deletar') {
 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } elseif ($_POST['action'] === 'inserir') {
 
-        $response = $servicoModel->inserirServico($nome_servico, $preco, $comissao, $tempo, $_SESSION["barbearia_id"]);
+        $response = $servicoModel->inserirServico($nome_servico, $preco, $tempo, $imagem, $_SESSION["barbearia_id"]);
     
     } elseif ($_POST['action'] === 'obterServicos') {
 

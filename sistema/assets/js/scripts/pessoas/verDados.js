@@ -1,17 +1,18 @@
-function verUsuario(id, nome, email, nome_nivel, ativo, senha) {
+function verUsuario(id, nome, email, nome_nivel, ativo, senha, imagem) {
   $("#verUsuarioId").text(id);
   $("#verUsuarioEmail").text(email);
   $("#verUsuarioNome").text(nome);
   $("#verUsuarioNivel").text(nome_nivel);
   $("#verUsuarioAti").text(ativo);
   $("#verUsuarioSenha").text(senha);
+  $("#verUsuarioImg").attr("src", imagem);
 
   $("#modalVerUsuario").modal("show");
 }
 
 
 
-function verFuncionario(id, nome, email, id_nivel, cpf, comissao, atendimento, endereco, cidade, tipoPix, pix, cadastro) {
+function verFuncionario(id, nome, email, id_nivel, cpf, comissao, atendimento, endereco, cidade, tipoPix, pix, cadastro, imagem) {
   $("#verFuncionarioId").text(id);
   $("#verFuncionarioNome").text(nome);
   $("#verFuncionarioEmail").text(email);
@@ -24,6 +25,7 @@ function verFuncionario(id, nome, email, id_nivel, cpf, comissao, atendimento, e
   $("#verFuncionarioTipo").text(tipoPix);
   $("#verFuncionarioPix").text(pix);
   $("#verFuncionarioCadas").text(cadastro);
+  $("#verUsuarioImg").attr("src", imagem);
 
   $("#modalVerFuncionario").modal("show");
 }

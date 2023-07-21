@@ -10,13 +10,13 @@ class ServicoModel
         $this->conn = Conexao::getInstance();
     }
 
-    public function editarServico($id_servico, $nome_servico, $preco, $comissao, $tempo)
+    public function editarServico($id_servico, $nome_servico, $preco, $tempo, $imagem)
     {
-        $stmt = $this->conn->prepare("UPDATE servicos_barbearia SET nome_servico = :nome_servico, preco = :preco, comissao = :comissao, tempo = :tempo WHERE id_servico = :id_servico");
+        $stmt = $this->conn->prepare("UPDATE servicos_barbearia SET nome_servico = :nome_servico, preco = :preco, tempo = :tempo, imagem = :imagem WHERE id_servico = :id_servico");
         $stmt->bindParam(':nome_servico', $nome_servico);
         $stmt->bindParam(':preco', $preco);
-        $stmt->bindParam(':comissao', $comissao);
         $stmt->bindParam(':tempo', $tempo);
+        $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
         $stmt->bindParam(':id_servico', $id_servico);
         $stmt->execute();
 
@@ -44,13 +44,13 @@ class ServicoModel
         return $response;
     }
 
-    public function inserirServico($nome_servico, $preco, $comissao, $tempo, $id_barbearia)
+    public function inserirServico($nome_servico, $preco, $tempo, $imagem, $id_barbearia)
     {
-        $stmt = $this->conn->prepare("INSERT INTO servicos_barbearia (nome_servico, preco, comissao, tempo, id_barbearia) VALUES (:nome_servico, :preco, :comissao, :tempo, :id_barbearia)");
+        $stmt = $this->conn->prepare("INSERT INTO servicos_barbearia (nome_servico, preco, tempo,  imagem, id_barbearia) VALUES (:nome_servico, :preco, :tempo,  :imagem, :id_barbearia)");
         $stmt->bindParam(':nome_servico', $nome_servico);
         $stmt->bindParam(':preco', $preco);
-        $stmt->bindParam(':comissao', $comissao);
         $stmt->bindParam(':tempo', $tempo);
+        $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
         $stmt->bindParam(':id_barbearia', $id_barbearia);
         $stmt->execute();
 
@@ -72,12 +72,15 @@ class ServicoModel
 
         $servicos = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $imagemBase64 = isset($row['imagem']) ? base64_encode($row['imagem']) : '';
+            $imagemSrc = $imagemBase64 !== '' ? 'data:image/jpeg;base64,' . $imagemBase64 : '../../assets/images/sem-foto.jpg';
+            
             $servico = [
                 'id_servico' => $row['id_servico'],
                 'nome_servico' => $row['nome_servico'],
                 'preco' => $row['preco'],
-                'comissao' => $row['comissao'],
                 'tempo' => $row['tempo'],
+                'imagemSrc' => $imagemSrc,
                 'data' => date('Y-m-d', strtotime($row['data']))
             ];
 

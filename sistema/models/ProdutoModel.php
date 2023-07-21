@@ -10,15 +10,16 @@ class ProdutoModel
         $this->conn = Conexao::getInstance();
     }
 
-    public function editarProduto($id_pro, $nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem)
+    public function editarProduto($id_pro, $nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $comissao, $descricao, $imagem)
     {
-        $stmt = $this->conn->prepare("UPDATE produtos SET nome_pro = :nome_pro, valor_compra = :valor_compra, valor_venda = :valor_venda, estoque = :estoque, validade = :validade, alerta_estoque = :alerta_estoque, descricao = :descricao, imagem = :imagem WHERE id_pro = :id_pro");
+        $stmt = $this->conn->prepare("UPDATE produtos SET nome_pro = :nome_pro, valor_compra = :valor_compra, valor_venda = :valor_venda, estoque = :estoque, validade = :validade, alerta_estoque = :alerta_estoque, comissao = :comissao, descricao = :descricao, imagem = :imagem WHERE id_pro = :id_pro");
         $stmt->bindParam(':nome_pro', $nome_pro);
         $stmt->bindParam(':valor_compra', $valor_compra);
         $stmt->bindParam(':valor_venda', $valor_venda);
         $stmt->bindParam(':estoque', $estoque);
         $stmt->bindParam(':validade', $validade);
         $stmt->bindParam(':alerta_estoque', $alerta_estoque);
+        $stmt->bindParam(':comissao', $comissao);
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
         $stmt->bindParam(':id_pro', $id_pro);
@@ -48,15 +49,16 @@ class ProdutoModel
         return $response;
     }
 
-    public function inserirProduto($nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $descricao, $imagem, $id_barbearia)
+    public function inserirProduto($nome_pro, $valor_compra, $valor_venda, $estoque, $validade, $alerta_estoque, $comissao, $descricao, $imagem, $id_barbearia)
     {
-        $stmt = $this->conn->prepare("INSERT INTO produtos (nome_pro, valor_compra, valor_venda, estoque, validade, alerta_estoque, descricao, imagem, id_barbearia) VALUES (:nome_pro, :valor_compra, :valor_venda, :estoque, :validade, :alerta_estoque, :descricao, :imagem, :id_barbearia)");
+        $stmt = $this->conn->prepare("INSERT INTO produtos (nome_pro, valor_compra, valor_venda, estoque, validade, alerta_estoque, comissao, descricao, imagem, id_barbearia) VALUES (:nome_pro, :valor_compra, :valor_venda, :estoque, :validade, :alerta_estoque, comisao, :descricao, :imagem, :id_barbearia)");
         $stmt->bindParam(':nome_pro', $nome_pro);
         $stmt->bindParam(':valor_compra', $valor_compra);
         $stmt->bindParam(':valor_venda', $valor_venda);
         $stmt->bindParam(':estoque', $estoque);
         $stmt->bindParam(':validade', $validade);
         $stmt->bindParam(':alerta_estoque', $alerta_estoque);
+        $stmt->bindParam(':comissao', $comissao);
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':imagem', $imagem, PDO::PARAM_LOB);
         $stmt->bindParam(':id_barbearia', $id_barbearia);
@@ -205,6 +207,7 @@ class ProdutoModel
                 'estoque' => $estoque,
                 'validade' => $row['validade'],
                 'alerta_estoque' => $alertaEstoque,
+                'comissao' => $row['comissao'],
                 'data_cadastro' => $formattedDate,
                 'descricao' => $row['descricao']
             );

@@ -7,16 +7,16 @@ function btnInserirServico() {
 function inserirServico() {
   var nome_servico = $("#novoServicoNome").val();
   var preco = $("#novoServicoPrec").val();
-  var comissao = $("#novoServicoCom").val();
   var tempo = $("#novoServicoTemp").val();
+  var imagem = $("#novoServicoImg").attr("src");
   $.ajax({
     url: "../../controllers/ServicoController.php",
     type: "POST",
     data: {
       nome_servico: nome_servico,
       preco: preco,
-      comissao: comissao,
       tempo: tempo,
+      imagem: imagem,
       action: "inserir",
     },
     dataType: "json",
@@ -88,6 +88,7 @@ function inserirProduto() {
   var estoque = $("#novoProdutoEsto").val();
   var validade = $("#novoProdutoVali").val();
   var alerta_estoque = $("#novoProdutoAler").val();
+  var comissao = $("#novoProdutoComi").val();
   var descricao = $("#novoProdutoDesc").val();
   var imagem = $("#novoProdutoImg").attr("src");
 
@@ -101,6 +102,7 @@ function inserirProduto() {
       estoque: estoque,
       validade: validade,
       alerta_estoque: alerta_estoque,
+      comissao: comissao,
       descricao: descricao,
       imagem: imagem,
       action: "inserir",

@@ -21,16 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_dia = isset($_POST['id_dia']) ? $_POST['id_dia'] : '';
     $serv = isset($_POST['serv']) ? $_POST['serv'] : '';
     $id_servico = isset($_POST['id_servico']) ? $_POST['id_servico'] : '';
+    $imagem = isset($_POST['imagem']) ? file_get_contents($_POST['imagem']) : '';
     
     // Verifica qual ação está sendo realizada
     if ($_POST['action'] === 'editar') {
-        $response = $funcionarioModel->editarFuncionario($id, $nome, $email, $id_nivel, $cpf, $comissao, $atendimento, $endereco, $cidade, $tipoPix, $pix);
+        $response = $funcionarioModel->editarFuncionario($id, $nome, $email, $id_nivel, $cpf, $comissao, $atendimento, $endereco, $cidade, $tipoPix, $pix, $imagem);
     } elseif ($_POST['action'] === 'deletar') {
 
         $response = $funcionarioModel->deletarFuncionario($id);
     } elseif ($_POST['action'] === 'inserir') {
 
-        $response = $funcionarioModel->inserirFuncionario($nome, $email, $id_nivel, $cpf, $comissao, $atendimento, $endereco, $cidade, $tipoPix, $pix, $_SESSION["barbearia_id"]);
+        $response = $funcionarioModel->inserirFuncionario($nome, $email, $id_nivel, $cpf, $comissao, $atendimento, $endereco, $cidade, $tipoPix, $pix, $imagem, $_SESSION["barbearia_id"]);
     } elseif ($_POST['action'] === 'validarNome') {
 
         $response = $funcionarioModel->validarNome($nome);

@@ -12,11 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
     $id_nivel = isset($_POST['id_nivel']) ? $_POST['id_nivel'] : '';
     $ativo = isset($_POST['ativo']) ? $_POST['ativo'] : '';
+    $imagem = isset($_POST['imagem']) ? file_get_contents($_POST['imagem']) : '';
 
     // Verifica qual ação está sendo realizada
     if ($_POST['action'] === 'editar') {
 
-        $response = $usuarioModel->editarUsuario($id, $email, $nome, $senha, $id_nivel, $ativo);
+        $response = $usuarioModel->editarUsuario($id, $email, $nome, $senha, $id_nivel, $ativo, $imagem);
 
     } elseif ($_POST['action'] === 'deletar') {
 
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } elseif ($_POST['action'] === 'inserir') {
 
-        $response = $usuarioModel->inserirUsuario($email, $nome, $senha, $id_nivel, $ativo, $_SESSION["barbearia_id"]);
+        $response = $usuarioModel->inserirUsuario($email, $nome, $senha, $id_nivel, $ativo, $imagem, $_SESSION["barbearia_id"]);
     
     } elseif ($_POST['action'] === 'validarNome') {
 

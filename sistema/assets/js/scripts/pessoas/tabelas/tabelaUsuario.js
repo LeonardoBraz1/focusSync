@@ -25,7 +25,7 @@ function obterUsuarios() {
         var row = $("<tr>");
 
         row.append("<td style='display: none;'>" + usuario.id + "</td>");
-        row.append("<td>" + usuario.nome + "</td>");
+        row.append("<td><img src='" + usuario.imagemSrc + "' alt='Imagem do Usuário' style='max-width: 30px;'>" + usuario.nome + "</td>");
         row.append("<td>" + usuario.email + "</td>");
         row.append("<td>" + usuario.cargo + "</td>");
         row.append("<td>" + usuario.ativo + "</td>");
@@ -52,6 +52,8 @@ function obterUsuarios() {
             usuario.ativo +
             '", "' +
             usuario.senha +
+            '", "' +
+            usuario.imagemSrc +
             "\")' id='btnEditarUsuario-" +
             usuario.id +
             "'>"
@@ -74,6 +76,8 @@ function obterUsuarios() {
             usuario.ativo +
             '", "' +
             usuario.senha +
+            '", "' +
+            usuario.imagemSrc +
             "\")' id='btnVerUsuario-" +
             usuario.id +
             "'>"

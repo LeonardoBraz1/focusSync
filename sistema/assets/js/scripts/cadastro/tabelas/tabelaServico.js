@@ -28,9 +28,14 @@ function obterServicos() {
         row.append(
           "<td style='display: none;'>" + servico.id_servico + "</td>"
         );
-        row.append("<td>" + servico.nome_servico + "</td>");
+        row.append(
+          "<td><img src='" +
+            servico.imagemSrc +
+            "' alt='Imagem do serviço' style='max-width: 30px;'>" +
+            servico.nome_servico +
+            "</td>"
+        );
         row.append("<td>R$ " + servico.preco + "</td>");
-        row.append("<td>" + servico.comissao + "</td>");
         row.append("<td>" + servico.tempo + " Minutos</td>");
         row.append("<td>" + servico.data + "</td>");
 
@@ -50,9 +55,9 @@ function obterServicos() {
             '", "' +
             servico.preco +
             '", "' +
-            servico.comissao +
-            '", "' +
             servico.tempo +
+            '", "' +
+            servico.imagemSrc +
             "\")' id='btnEditarServico-" +
             servico.id_servico +
             "'>"
@@ -71,8 +76,6 @@ function obterServicos() {
             servico.data +
             '", "' +
             servico.preco +
-            '", "' +
-            servico.comissao +
             '", "' +
             servico.tempo +
             "\")' id='btnVerServico-" +

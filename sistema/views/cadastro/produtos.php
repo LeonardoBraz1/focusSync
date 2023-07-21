@@ -35,6 +35,7 @@ include('../../components/head.php');
                                         <th>Estoque</th>
                                         <th>Validade</th>
                                         <th>Alerta Estoque</th>
+                                        <th>Comissão</th>
                                         <th>Cadastro</th>
                                         <th>Acões</th>
                                     </tr>
